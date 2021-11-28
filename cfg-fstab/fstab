@@ -1,0 +1,61 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda1
+UUID=c9c0d29e-039d-4548-a3e2-b7e1f31ae949   /           ext4        rw,relatime 0 1
+
+# /dev/sda3
+UUID=30b01b4f-eb73-4182-ac72-f2c124180a24   /home       ext4        rw,relatime 0 2
+
+# /dev/sda2
+UUID=cc934b1d-4964-4cd6-9bb3-deb36c5d472b   none        swap        defaults    0 0
+
+# /dev/sdb2
+#UUID=cf0d7e81-4543-4e0d-9865-6f4a9628d5c2       /home/nnnn/kaddy       ext4        rw,relatime             0   0
+
+#UUID=1db0d597-d7d1-4aa7-834e-f2b9e3fa568d  /home/nnnn/mount/ext4-1     ext4        nofail,rw,auto,user,exec        0   0
+
+# fat32
+#UUID=7DD4-CA8A                 /home/nnnn/mount/vfat-1     auto        nofail,user,exec,uid=1000,gid=100,umask=000 0   0
+
+# [rw,user SEEMS TO BE VIABLE. (ACCORDING TO CHRIS TITUS)]
+# --------------------------------------------------------------------------------------------,
+# First unmount the usb drive of choice and then do these one by one                          |
+# (https://ubuntuforums.org/showthread.php?t=2341133):                                        |
+#                                                                                             |
+# sudo mkdir              /home/nnnn/mount/<dir>                                              |
+# sudo mount /dev/sda*    /home/nnnn/mount/<dir>                                              |
+# sudo chmod -R a+rwx,o-w /home/nnnn/mount/<dir>                                              |
+# sudo chown -R nnnn:nnnn /home/nnnn/mount/<dir>                                              |
+# --------------------------------------------------------------------------------------------|
+# https://ubuntuforums.org/showthread.php?t=1490708)                                          |
+# For NTFS, FAT32, or FAT16 partitions, use dmask=027,fmask=137.                              |
+# If using dmask=000,fmask=111, all your files will be executable.                            |
+#                                                                                             |
+# NTFS partitions                                                                             |
+# /dev/XYZ                                                                                    |
+# UUID=***  /mnt/***    ntfs-3g auto,users,uid=1000,gid=100,dmask=027,fmask=137,ut f8 0 0     |
+#                                                                                             |
+# NTFS partitions for various locales, use $ locale -a                                        |
+# UUID=***  /mnt/***    ntfs-3g defaults,locale=en_US.utf8 0 0                                |
+#                                                                                             |
+# FAT32 and FAT32 partitions                                                                  |
+# /dev/XYZ                                                                                    |
+# UUID=***  /mnt/***    vfat defaults,user,exec,uid=1000,gid=100,umask=000 0 0                |
+#                                                                                             |
+# /dev/XYZ                                                                                    |
+# UUID=***  /mnt/***    vfat defaults,user,dmask=027,fmask=137 0 0                            |
+#                                                                                             |
+# HFS+ in Mac OS X                                                                            |
+# /dev/XYZ                                                                                    |
+# UUID=***  /mnt/***    rw,exec,auto,users 0 0                                                |
+# --------------------------------------------------------------------------------------------'
+#
+# /dev/sdc                                                                 /mnt/sandisk  auto  nosuid,nodev,nofail,x-gvfs-show  0  0
+# /dev/sdc1                                                                /mnt/sandisk  auto  nosuid,nodev,nofail,x-gvfs-show  0  0
+# /dev/disk/by-id/usb-SanDisk_Ultra_USB_3.0_4C530001041227110061-0:0       /mnt/sandisk  auto  nosuid,nodev,nofail,x-gvfs-show  0  0
+# /dev/disk/by-id/usb-SanDisk_Ultra_USB_3.0_4C530001041227110061-0:0-part1 /mnt/sandisk  auto  nosuid,nodev,nofail,x-gvfs-show  0  0
+# UUID=cbdd5d42-f961-40af-8e37-a8107f0736f0                                /mnt/sandisk  auto  nosuid,nodev,nofail,x-gvfs-show  0  0
+#
+# nofail: Devices that are listed and not present will result in an error unless the nofail option is used. 

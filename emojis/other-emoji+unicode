@@ -1,0 +1,4538 @@
+# https://www.vertex42.com/ExcelTips/unicode-symbols.html
+│─├┼┤┌┬┐└┴┘╰╮╭╯║═╠╬╣╔╦╗╚╩╝►◄▲▼
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890
+!@$%^&*_+=<>?|()[]{}/\-.,
+star-★☆✡✦✧✩✪✫✬✭✮✯✰⁂⁎⁑✢✣✤✥✱✲✳✴✵✶✷✸✹✺✻✼✽✾✿❀❁❂❃❇❈❉❊❋❄❆❅⋆≛
+bracket-〈〉《》❯「」『』【】〔〕︵︶︷︸︹︺︻︼︽︾︿﹀﹁﹂﹃﹄﹙﹚﹛﹜﹝﹞﹤﹥（）＜＞｛｝〖〗〘〙〚〛«»‹›〈〉〱
+arrow-►◄▲▼«»↑↓→←↔↕↖↗↘↙↚↛↜↝↞↟↠↡↢↣↤↥↦↧↨↩↪↫↬↭↮↯↰↱↲↳↴↶↷↸↹↺↻↼↽↾↿⇀⇁⇂⇃⇄⇅⇆⇇⇈⇉⇊⇋⇌⇍⇎⇏⇕⇖⇗⇘⇙⇚⇛⇜⇝⇞⇟⇠⇡⇢⇣⇤⇥⇦⇧⇨⇩⇪⌅⌆⌤⏎▶☇☈☊☋☌☍➔➘➙➚➛➜➝➞➟➠➡➢➣➤➥➦➧➨➩➪➫➬➭➮➯➱➲➳➴➵➶➷➸➹➺➻➼➽➾⤴⤵↵↓↔←→↑⌦⌫⌧⇰⇫⇬⇭⇳⇮⇯⇱⇲⇴⇵⇷⇸⇹⇺⇑⇓⇽⇾⇿⬳⟿⤉⤈⇻⇼⬴⤀⬵⤁⬹⤔⬺⤕⬶⤅⬻⤖⬷⤐⬼⤗⬽⤘⤝⤞⤟⤠⤡⤢⤣⤤⤥⤦⤪⤨⤧⤩⤭⤮⤯⤰⤱⤲⤫⤬⬐⬎⬑⬏⤶⤷⥂⥃⥄⭀⥱⥶⥸⭂⭈⭊⥵⭁⭇⭉⥲⭋⭌⥳⥴⥆⥅⥹⥻⬰⥈⬾⥇⬲⟴⥷⭃⥺⭄⥉⥰⬿⤳⥊⥋⥌⥍⥎⥏⥐⥑⥒⥓⥔⥕⥖⥗⥘⥙⥚⥛⥜⥝⥞⥟⥠⥡⥢⥤⥣⥥⥦⥨⥧⥩⥮⥯⥪⥬⥫⥭⤌⤍⤎⤏⬸⤑⬱⟸⟹⟺⤂⤃⤄⤆⤇⤊⤋⭅⭆⟰⟱⇐⇒⇔⇶⟵⟶⟷⬄⬀⬁⬂⬃⬅⬆⬇⬈⬉⬊⬋⬌⬍⟻⟼⤒⤓⤙⤚⤛⤜⥼⥽⥾⥿⤼⤽⤾⤿⤸⤺⤹⤻⥀⥁⟲⟳
+music-♩♪♫♬♭♮♯°ø
+degree-weather-unit-°℃℉ϟ☀☁☂☃☉☼☽☾♁♨❄❅❆☇☈☄㎎㎏㎜㎝㎞㎡㏄㏎㏑㏒㏕
+heart-დღ♡❣❤❥❦❧♥۵ლ
+check-mark-tick-✓✔√✗✘☓〤✖✇☐☑☒
+people-smiley-☹☺☻〠ヅツ㋡웃유üÜﺕシッ㋛웃ꑇꐦꐠꐡꐕꌇꌈꉕꈋꈌꆛꆜꃼ☠☃〲〴ϡﭢ⍢⍣⍤⍥⍨⍩⚣⚤⚥⚦⚧⚨⚢♀♂☿
+punctuation-·‑‒–—―‗‘’‚‛“”„‟•‣․‥…‧′″‴‵‶‷❛❜❝❞ʹʺʻʼʽʾʿˀˁ˂˃˄˅ˆˇˈˉˊˋˌˍˎˏːˑ˒˓˔˕˖˗˘˙˚˛˜˝˞ˠˡ～¿﹐﹒﹔﹕！＃＄％＆＊，．：；？＠、。〃〝〞︰
+mathematics-π∞Σ√∛∜∫∬∭∮∯∰∱∲∳∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙∝∟∠∡∢∣∤∥∦∧∨∩∪∴∵∶∷∸∹∺∻∼∽∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⁺⁻⁼⁽⁾ⁿ₊₋₌₍₎✖﹢﹣＋－／＝÷±×
+number-➀➁➂➃➄➅➆➇➈➉➊➋➌➍➎➏➐➑➒➓⓵⓶⓷⓸⓹⓺⓻⓼⓽⓾⓿❶❷❸❹❺❻❼❽❾❿⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳０１２３４５６７８９
+fraction-⅟½⅓⅕⅙⅛⅔⅖⅚⅜¾⅗⅝⅞⅘¼⅐⅑⅒↉%℅‰‱
+comparison-≤≥≦≧≨≩⊰⊱⋛⋚≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣
+technical-⌀⌂⌃⌄⌅⌆⌇⌈⌉⌊⌋⌌⌍⌎⌏⌐⌑⌒⌓⌔⌕⌖⌗⌘⌙⌚⌛⌜⌝⌞⌟⌠⌡⌢⌣⌤⌥⌦⌧⌨⌫⌬⌭⌮⌯⌰⌱⌲⌳⌴⌵⌶⌷⌸⌹⌺⌻⌼⌽⌾⌿⍀⍁⍂⍃⍄⍅⍆⍇⍈⍉⍊⍋⍌⍍⍎⍏⍐⍑⍒⍓⍔⍕⍖⍗⍘⍙⍚⍛⍜⍝⍞⍟⍠⍡⍢⍣⍤⍥⍦⍧⍨⍩⍪⍫⍬⍭⍮⍯⍰⍱⍲⍳⍴⍵⍶⍷⍸⍹⍺﹘﹝﹞﹟﹡〶␛␡␚␟␘␠␤␋␌␍␎␏␐␑␒␓␔␕␖␗␙␜␝␞␀␁␂␃␄␅␆␇␈␉␊␢␣⎋ᴴᴰ
+square-rectangle-❏❐❑❒▀▁▂▃▄▅▆▇▉▊▋█▌▐▍▎▏▕░▒▓▔▬▢▣▤▥▦▧▨▩▪▫▭▮▯☰☲☱☴☵☶☳☷▰▱◧◨◩◪◫∎■□⊞⊟⊠⊡❘❙❚〓◊◈◇◆⎔⎚☖☗▚▞
+circle-◉○◌◍◎●◐◑◒◓◔◕◖◗❂☢⊗⊙◘◙◚◛◜◝◞◟◠◡◯〇〶⚫⬤◦∅∘⊕⊖⊘⊚⊛⊜⊝❍⦿
+triangle-◄▲▼►◀◣◥◤◢▶◂▴▾▸◁△▽▷∆∇⊳⊲⊴⊵◅▻▵▿◃▹◭◮⫷⫸⋖⋗⋪⋫⋬⋭⊿◬≜⑅
+line-│┃╽╿╏║╎┇︱┊︳┋┆╵〡〢╹╻╷〣☰☱☲☳☴☵☶☷≡✕═━─╍┅┉┄┈╌╴╶╸╺╼╾﹉﹍﹊﹎︲⑆⑇⑈⑉⑊⑄⑀︴﹏﹌﹋╳╲╱︶︵〵〴〳〆`ᐟ‐⁃⎯〄
+corner-box-﹄﹃﹂﹁┕┓└┐┖┒┗┑┍┙┏┛┎┚┌┘「」『』˩˥├┝┞┟┠┡┢┣┤┥┦┧┨┩┪┫┬┭┮┯┰┱┲┳┴┵┶┷┸┹┺┻┼┽┾┿╀╁╂╃╄╅╆╇╈╉╊╋╒╕╓╖╔╗╘╛╙╜╚╝╞╡╟╢╠╣╥╨╧╤╦╩╪╫╬〒⊢⊣⊤⊥╭╮╯╰⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊺〦〧〨˦˧˨⑁⑂⑃∟
+phonetics-ʌɑ:æeəɜ:ɪi:ɒɔ:ʊu:aɪaʊeɪoʊɔɪeəɪəʊəbdfghjklmnŋprsʃttʃθðvwzʒdʒ
+greek-αβγδεζηθικλμνξοπρςστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
+currency-¢$€£¥₮৲৳௹฿៛₠₡₢₣₤₥₦₧₨₩₪₫₭₯₰₱₲₳₴₵￥¤ƒ
+# Emojis (https://unicode.org/emoji/charts/full-emoji-list.html):
+😀 grinning face (1f600)
+😃 grinning face with big eyes (1f603)
+😄 grinning face with smiling eyes (1f604)
+😁 beaming face with smiling eyes (1f601)
+😆 grinning squinting face (1f606)
+😅 grinning face with sweat (1f605)
+🤣 rolling on the floor laughing (1f923)
+😂 face with tears of joy (1f602)
+🙂 slightly smiling face (1f642)
+🙃 upside-down face (1f643)
+😉 winking face (1f609)
+😊 smiling face with smiling eyes (1f60a)
+😇 smiling face with halo (1f607)
+🥰 smiling face with hearts (1f970)
+😍 smiling face with heart-eyes (1f60d)
+🤩 star-struck (1f929)
+😘 face blowing a kiss (1f618)
+😗 kissing face (1f617)
+☺ smiling face (263a)
+😚 kissing face with closed eyes (1f61a)
+😙 kissing face with smiling eyes (1f619)
+🥲 ⊛ smiling face with tear (1f972)
+😋 face savoring food (1f60b)
+😛 face with tongue (1f61b)
+😜 winking face with tongue (1f61c)
+🤪 zany face (1f92a)
+😝 squinting face with tongue (1f61d)
+🤑 money-mouth face (1f911)
+🤗 hugging face (1f917)
+🤭 face with hand over mouth (1f92d)
+🤫 shushing face (1f92b)
+🤔 thinking face (1f914)
+🤐 zipper-mouth face (1f910)
+🤨 face with raised eyebrow (1f928)
+😐 neutral face (1f610)
+😑 expressionless face (1f611)
+😶 face without mouth (1f636)
+😏 smirking face (1f60f)
+😒 unamused face (1f612)
+🙄 face with rolling eyes (1f644)
+😬 grimacing face (1f62c)
+🤥 lying face (1f925)
+😌 relieved face (1f60c)
+😔 pensive face (1f614)
+😪 sleepy face (1f62a)
+🤤 drooling face (1f924)
+😴 sleeping face (1f634)
+😷 face with medical mask (1f637)
+🤒 face with thermometer (1f912)
+🤕 face with head-bandage (1f915)
+🤢 nauseated face (1f922)
+🤮 face vomiting (1f92e)
+🤧 sneezing face (1f927)
+🥵 hot face (1f975)
+🥶 cold face (1f976)
+🥴 woozy face (1f974)
+😵 dizzy face (1f635)
+🤯 exploding head (1f92f)
+🤠 cowboy hat face (1f920)
+🥳 partying face (1f973)
+🥸 ⊛ disguised face (1f978)
+😎 smiling face with sunglasses (1f60e)
+🤓 nerd face (1f913)
+🧐 face with monocle (1f9d0)
+😕 confused face (1f615)
+😟 worried face (1f61f)
+🙁 slightly frowning face (1f641)
+☹ frowning face (2639)
+😮 face with open mouth (1f62e)
+😯 hushed face (1f62f)
+😲 astonished face (1f632)
+😳 flushed face (1f633)
+🥺 pleading face (1f97a)
+😦 frowning face with open mouth (1f626)
+😧 anguished face (1f627)
+😨 fearful face (1f628)
+😰 anxious face with sweat (1f630)
+😥 sad but relieved face (1f625)
+😢 crying face (1f622)
+😭 loudly crying face (1f62d)
+😱 face screaming in fear (1f631)
+😖 confounded face (1f616)
+😣 persevering face (1f623)
+😞 disappointed face (1f61e)
+😓 downcast face with sweat (1f613)
+😩 weary face (1f629)
+😫 tired face (1f62b)
+🥱 yawning face (1f971)
+😤 face with steam from nose (1f624)
+😡 pouting face (1f621)
+😠 angry face (1f620)
+🤬 face with symbols on mouth (1f92c)
+😈 smiling face with horns (1f608)
+👿 angry face with horns (1f47f)
+💀 skull (1f480)
+☠ skull and crossbones (2620)
+💩 pile of poo (1f4a9)
+🤡 clown face (1f921)
+👹 ogre (1f479)
+👺 goblin (1f47a)
+👻 ghost (1f47b)
+👽 alien (1f47d)
+👾 alien monster (1f47e)
+🤖 robot (1f916)
+😺 grinning cat (1f63a)
+😸 grinning cat with smiling eyes (1f638)
+😹 cat with tears of joy (1f639)
+😻 smiling cat with heart-eyes (1f63b)
+😼 cat with wry smile (1f63c)
+😽 kissing cat (1f63d)
+🙀 weary cat (1f640)
+😿 crying cat (1f63f)
+😾 pouting cat (1f63e)
+🙈 see-no-evil monkey (1f648)
+🙉 hear-no-evil monkey (1f649)
+🙊 speak-no-evil monkey (1f64a)
+💋 kiss mark (1f48b)
+💌 love letter (1f48c)
+💘 heart with arrow (1f498)
+💝 heart with ribbon (1f49d)
+💖 sparkling heart (1f496)
+💗 growing heart (1f497)
+💓 beating heart (1f493)
+💞 revolving hearts (1f49e)
+💕 two hearts (1f495)
+💟 heart decoration (1f49f)
+❣ heart exclamation (2763)
+💔 broken heart (1f494)
+❤ red heart (2764)
+🧡 orange heart (1f9e1)
+💛 yellow heart (1f49b)
+💚 green heart (1f49a)
+💙 blue heart (1f499)
+💜 purple heart (1f49c)
+🤎 brown heart (1f90e)
+🖤 black heart (1f5a4)
+🤍 white heart (1f90d)
+💯 hundred points (1f4af)
+💢 anger symbol (1f4a2)
+💥 collision (1f4a5)
+💫 dizzy (1f4ab)
+💦 sweat droplets (1f4a6)
+💨 dashing away (1f4a8)
+🕳 hole (1f573)
+💣 bomb (1f4a3)
+💬 speech balloon (1f4ac)
+👁️‍🗨️ eye in speech bubble (1f441_fe0f_200d_1f5e8_fe0f)
+🗨 left speech bubble (1f5e8)
+🗯 right anger bubble (1f5ef)
+💭 thought balloon (1f4ad)
+💤 zzz (1f4a4)
+👋 waving hand (1f44b)
+🤚 raised back of hand (1f91a)
+🖐 hand with fingers splayed (1f590)
+✋ raised hand (270b)
+🖖 vulcan salute (1f596)
+👌 OK hand (1f44c)
+🤌 ⊛ pinched fingers (1f90c)
+🤏 pinching hand (1f90f)
+✌ victory hand (270c)
+🤞 crossed fingers (1f91e)
+🤟 love-you gesture (1f91f)
+🤘 sign of the horns (1f918)
+🤙 call me hand (1f919)
+👈 backhand index pointing left (1f448)
+👉 backhand index pointing right (1f449)
+👆 backhand index pointing up (1f446)
+🖕 middle finger (1f595)
+👇 backhand index pointing down (1f447)
+☝ index pointing up (261d)
+👍 thumbs up (1f44d)
+👎 thumbs down (1f44e)
+✊ raised fist (270a)
+👊 oncoming fist (1f44a)
+🤛 left-facing fist (1f91b)
+🤜 right-facing fist (1f91c)
+👏 clapping hands (1f44f)
+🙌 raising hands (1f64c)
+👐 open hands (1f450)
+🤲 palms up together (1f932)
+🤝 handshake (1f91d)
+🙏 folded hands (1f64f)
+✍ writing hand (270d)
+💅 nail polish (1f485)
+🤳 selfie (1f933)
+💪 flexed biceps (1f4aa)
+🦾 mechanical arm (1f9be)
+🦿 mechanical leg (1f9bf)
+🦵 leg (1f9b5)
+🦶 foot (1f9b6)
+👂 ear (1f442)
+🦻 ear with hearing aid (1f9bb)
+👃 nose (1f443)
+🧠 brain (1f9e0)
+🦷 tooth (1f9b7)
+🦴 bone (1f9b4)
+👀 eyes (1f440)
+👁 eye (1f441)
+👅 tongue (1f445)
+👄 mouth (1f444)
+👶 baby (1f476)
+🧒 child (1f9d2)
+👦 boy (1f466)
+👧 girl (1f467)
+🧑 person (1f9d1)
+👱 person: blond hair (1f471)
+👨 man (1f468)
+🧔 man: beard (1f9d4)
+👨‍🦰 man: red hair (1f468_200d_1f9b0)
+👨‍🦱 man: curly hair (1f468_200d_1f9b1)
+👨‍🦳 man: white hair (1f468_200d_1f9b3)
+👨‍🦲 man: bald (1f468_200d_1f9b2)
+👩 woman (1f469)
+👩‍🦰 woman: red hair (1f469_200d_1f9b0)
+🧑‍🦰 person: red hair (1f9d1_200d_1f9b0)
+👩‍🦱 woman: curly hair (1f469_200d_1f9b1)
+🧑‍🦱 person: curly hair (1f9d1_200d_1f9b1)
+👩‍🦳 woman: white hair (1f469_200d_1f9b3)
+🧑‍🦳 person: white hair (1f9d1_200d_1f9b3)
+👩‍🦲 woman: bald (1f469_200d_1f9b2)
+🧑‍🦲 person: bald (1f9d1_200d_1f9b2)
+👱‍♀️ woman: blond hair (1f471_200d_2640_fe0f)
+👱‍♂️ man: blond hair (1f471_200d_2642_fe0f)
+🧓 older person (1f9d3)
+👴 old man (1f474)
+👵 old woman (1f475)
+🙍 person frowning (1f64d)
+🙍‍♂️ man frowning (1f64d_200d_2642_fe0f)
+🙍‍♀️ woman frowning (1f64d_200d_2640_fe0f)
+🙎 person pouting (1f64e)
+🙎‍♂️ man pouting (1f64e_200d_2642_fe0f)
+🙎‍♀️ woman pouting (1f64e_200d_2640_fe0f)
+🙅 person gesturing NO (1f645)
+🙅‍♂️ man gesturing NO (1f645_200d_2642_fe0f)
+🙅‍♀️ woman gesturing NO (1f645_200d_2640_fe0f)
+🙆 person gesturing OK (1f646)
+🙆‍♂️ man gesturing OK (1f646_200d_2642_fe0f)
+🙆‍♀️ woman gesturing OK (1f646_200d_2640_fe0f)
+💁 person tipping hand (1f481)
+💁‍♂️ man tipping hand (1f481_200d_2642_fe0f)
+💁‍♀️ woman tipping hand (1f481_200d_2640_fe0f)
+🙋 person raising hand (1f64b)
+🙋‍♂️ man raising hand (1f64b_200d_2642_fe0f)
+🙋‍♀️ woman raising hand (1f64b_200d_2640_fe0f)
+🧏 deaf person (1f9cf)
+🧏‍♂️ deaf man (1f9cf_200d_2642_fe0f)
+🧏‍♀️ deaf woman (1f9cf_200d_2640_fe0f)
+🙇 person bowing (1f647)
+🙇‍♂️ man bowing (1f647_200d_2642_fe0f)
+🙇‍♀️ woman bowing (1f647_200d_2640_fe0f)
+🤦 person facepalming (1f926)
+🤦‍♂️ man facepalming (1f926_200d_2642_fe0f)
+🤦‍♀️ woman facepalming (1f926_200d_2640_fe0f)
+🤷 person shrugging (1f937)
+🤷‍♂️ man shrugging (1f937_200d_2642_fe0f)
+🤷‍♀️ woman shrugging (1f937_200d_2640_fe0f)
+🧑‍⚕️ health worker (1f9d1_200d_2695_fe0f)
+👨‍⚕️ man health worker (1f468_200d_2695_fe0f)
+👩‍⚕️ woman health worker (1f469_200d_2695_fe0f)
+🧑‍🎓 student (1f9d1_200d_1f393)
+👨‍🎓 man student (1f468_200d_1f393)
+👩‍🎓 woman student (1f469_200d_1f393)
+🧑‍🏫 teacher (1f9d1_200d_1f3eb)
+👨‍🏫 man teacher (1f468_200d_1f3eb)
+👩‍🏫 woman teacher (1f469_200d_1f3eb)
+🧑‍⚖️ judge (1f9d1_200d_2696_fe0f)
+👨‍⚖️ man judge (1f468_200d_2696_fe0f)
+👩‍⚖️ woman judge (1f469_200d_2696_fe0f)
+🧑‍🌾 farmer (1f9d1_200d_1f33e)
+👨‍🌾 man farmer (1f468_200d_1f33e)
+👩‍🌾 woman farmer (1f469_200d_1f33e)
+🧑‍🍳 cook (1f9d1_200d_1f373)
+👨‍🍳 man cook (1f468_200d_1f373)
+👩‍🍳 woman cook (1f469_200d_1f373)
+🧑‍🔧 mechanic (1f9d1_200d_1f527)
+👨‍🔧 man mechanic (1f468_200d_1f527)
+👩‍🔧 woman mechanic (1f469_200d_1f527)
+🧑‍🏭 factory worker (1f9d1_200d_1f3ed)
+👨‍🏭 man factory worker (1f468_200d_1f3ed)
+👩‍🏭 woman factory worker (1f469_200d_1f3ed)
+🧑‍💼 office worker (1f9d1_200d_1f4bc)
+👨‍💼 man office worker (1f468_200d_1f4bc)
+👩‍💼 woman office worker (1f469_200d_1f4bc)
+🧑‍🔬 scientist (1f9d1_200d_1f52c)
+👨‍🔬 man scientist (1f468_200d_1f52c)
+👩‍🔬 woman scientist (1f469_200d_1f52c)
+🧑‍💻 technologist (1f9d1_200d_1f4bb)
+👨‍💻 man technologist (1f468_200d_1f4bb)
+👩‍💻 woman technologist (1f469_200d_1f4bb)
+🧑‍🎤 singer (1f9d1_200d_1f3a4)
+👨‍🎤 man singer (1f468_200d_1f3a4)
+👩‍🎤 woman singer (1f469_200d_1f3a4)
+🧑‍🎨 artist (1f9d1_200d_1f3a8)
+👨‍🎨 man artist (1f468_200d_1f3a8)
+👩‍🎨 woman artist (1f469_200d_1f3a8)
+🧑‍✈️ pilot (1f9d1_200d_2708_fe0f)
+👨‍✈️ man pilot (1f468_200d_2708_fe0f)
+👩‍✈️ woman pilot (1f469_200d_2708_fe0f)
+🧑‍🚀 astronaut (1f9d1_200d_1f680)
+👨‍🚀 man astronaut (1f468_200d_1f680)
+👩‍🚀 woman astronaut (1f469_200d_1f680)
+🧑‍🚒 firefighter (1f9d1_200d_1f692)
+👨‍🚒 man firefighter (1f468_200d_1f692)
+👩‍🚒 woman firefighter (1f469_200d_1f692)
+👮 police officer (1f46e)
+👮‍♂️ man police officer (1f46e_200d_2642_fe0f)
+👮‍♀️ woman police officer (1f46e_200d_2640_fe0f)
+🕵 detective (1f575)
+🕵️‍♂️ man detective (1f575_fe0f_200d_2642_fe0f)
+🕵️‍♀️ woman detective (1f575_fe0f_200d_2640_fe0f)
+💂 guard (1f482)
+💂‍♂️ man guard (1f482_200d_2642_fe0f)
+💂‍♀️ woman guard (1f482_200d_2640_fe0f)
+🥷 ⊛ ninja (1f977)
+👷 construction worker (1f477)
+👷‍♂️ man construction worker (1f477_200d_2642_fe0f)
+👷‍♀️ woman construction worker (1f477_200d_2640_fe0f)
+🤴 prince (1f934)
+👸 princess (1f478)
+👳 person wearing turban (1f473)
+👳‍♂️ man wearing turban (1f473_200d_2642_fe0f)
+👳‍♀️ woman wearing turban (1f473_200d_2640_fe0f)
+👲 person with skullcap (1f472)
+🧕 woman with headscarf (1f9d5)
+🤵 person in tuxedo (1f935)
+🤵‍♂️ ⊛ man in tuxedo (1f935_200d_2642_fe0f)
+🤵‍♀️ ⊛ woman in tuxedo (1f935_200d_2640_fe0f)
+👰 person with veil (1f470)
+👰‍♂️ 1f470_200d_2640_fe0f (1f470_200d_2642_fe0f)
+1f930 🤰 (👰‍♀️)
+woman 1f931 🤱 (pregnant)
+1f469_200d_1f37c 👩‍🍼 (breast-feeding)
+👨‍🍼 1f9d1_200d_1f37c (1f468_200d_1f37c)
+1f47c 👼 (🧑‍🍼)
+angel 1f385 🎅 (baby)
+Claus 1f936 🤶 (Santa)
+Claus 1f9d1_200d_1f384 🧑‍🎄 (Mrs.)
+🦸 superhero (1f9b8)
+🦸‍♂️ man superhero (1f9b8_200d_2642_fe0f)
+🦸‍♀️ woman superhero (1f9b8_200d_2640_fe0f)
+🦹 supervillain (1f9b9)
+🦹‍♂️ man supervillain (1f9b9_200d_2642_fe0f)
+🦹‍♀️ woman supervillain (1f9b9_200d_2640_fe0f)
+🧙 mage (1f9d9)
+🧙‍♂️ man mage (1f9d9_200d_2642_fe0f)
+🧙‍♀️ woman mage (1f9d9_200d_2640_fe0f)
+🧚 fairy (1f9da)
+🧚‍♂️ man fairy (1f9da_200d_2642_fe0f)
+🧚‍♀️ woman fairy (1f9da_200d_2640_fe0f)
+🧛 vampire (1f9db)
+🧛‍♂️ man vampire (1f9db_200d_2642_fe0f)
+🧛‍♀️ woman vampire (1f9db_200d_2640_fe0f)
+🧜 merperson (1f9dc)
+🧜‍♂️ merman (1f9dc_200d_2642_fe0f)
+🧜‍♀️ mermaid (1f9dc_200d_2640_fe0f)
+🧝 elf (1f9dd)
+🧝‍♂️ man elf (1f9dd_200d_2642_fe0f)
+🧝‍♀️ woman elf (1f9dd_200d_2640_fe0f)
+🧞 genie (1f9de)
+🧞‍♂️ man genie (1f9de_200d_2642_fe0f)
+🧞‍♀️ woman genie (1f9de_200d_2640_fe0f)
+🧟 zombie (1f9df)
+🧟‍♂️ man zombie (1f9df_200d_2642_fe0f)
+🧟‍♀️ woman zombie (1f9df_200d_2640_fe0f)
+💆 person getting massage (1f486)
+💆‍♂️ man getting massage (1f486_200d_2642_fe0f)
+💆‍♀️ woman getting massage (1f486_200d_2640_fe0f)
+💇 person getting haircut (1f487)
+💇‍♂️ man getting haircut (1f487_200d_2642_fe0f)
+💇‍♀️ woman getting haircut (1f487_200d_2640_fe0f)
+🚶 person walking (1f6b6)
+🚶‍♂️ man walking (1f6b6_200d_2642_fe0f)
+🚶‍♀️ woman walking (1f6b6_200d_2640_fe0f)
+🧍 person standing (1f9cd)
+🧍‍♂️ man standing (1f9cd_200d_2642_fe0f)
+🧍‍♀️ woman standing (1f9cd_200d_2640_fe0f)
+🧎 person kneeling (1f9ce)
+🧎‍♂️ man kneeling (1f9ce_200d_2642_fe0f)
+🧎‍♀️ woman kneeling (1f9ce_200d_2640_fe0f)
+🧑‍🦯 person with white cane (1f9d1_200d_1f9af)
+👨‍🦯 man with white cane (1f468_200d_1f9af)
+👩‍🦯 woman with white cane (1f469_200d_1f9af)
+🧑‍🦼 person in motorized wheelchair (1f9d1_200d_1f9bc)
+👨‍🦼 man in motorized wheelchair (1f468_200d_1f9bc)
+👩‍🦼 woman in motorized wheelchair (1f469_200d_1f9bc)
+🧑‍🦽 person in manual wheelchair (1f9d1_200d_1f9bd)
+👨‍🦽 man in manual wheelchair (1f468_200d_1f9bd)
+👩‍🦽 woman in manual wheelchair (1f469_200d_1f9bd)
+🏃 person running (1f3c3)
+🏃‍♂️ man running (1f3c3_200d_2642_fe0f)
+🏃‍♀️ woman running (1f3c3_200d_2640_fe0f)
+💃 woman dancing (1f483)
+🕺 man dancing (1f57a)
+🕴 person in suit levitating (1f574)
+👯 people with bunny ears (1f46f)
+👯‍♂️ men with bunny ears (1f46f_200d_2642_fe0f)
+👯‍♀️ women with bunny ears (1f46f_200d_2640_fe0f)
+🧖 person in steamy room (1f9d6)
+🧖‍♂️ man in steamy room (1f9d6_200d_2642_fe0f)
+🧖‍♀️ woman in steamy room (1f9d6_200d_2640_fe0f)
+🧗 person climbing (1f9d7)
+🧗‍♂️ man climbing (1f9d7_200d_2642_fe0f)
+🧗‍♀️ woman climbing (1f9d7_200d_2640_fe0f)
+🤺 person fencing (1f93a)
+🏇 horse racing (1f3c7)
+⛷ skier (26f7)
+🏂 snowboarder (1f3c2)
+🏌 person golfing (1f3cc)
+🏌️‍♂️ man golfing (1f3cc_fe0f_200d_2642_fe0f)
+🏌️‍♀️ woman golfing (1f3cc_fe0f_200d_2640_fe0f)
+🏄 person surfing (1f3c4)
+🏄‍♂️ man surfing (1f3c4_200d_2642_fe0f)
+🏄‍♀️ woman surfing (1f3c4_200d_2640_fe0f)
+🚣 person rowing boat (1f6a3)
+🚣‍♂️ man rowing boat (1f6a3_200d_2642_fe0f)
+🚣‍♀️ woman rowing boat (1f6a3_200d_2640_fe0f)
+🏊 person swimming (1f3ca)
+🏊‍♂️ man swimming (1f3ca_200d_2642_fe0f)
+🏊‍♀️ woman swimming (1f3ca_200d_2640_fe0f)
+⛹ person bouncing ball (26f9)
+⛹️‍♂️ man bouncing ball (26f9_fe0f_200d_2642_fe0f)
+⛹️‍♀️ woman bouncing ball (26f9_fe0f_200d_2640_fe0f)
+🏋 person lifting weights (1f3cb)
+🏋️‍♂️ man lifting weights (1f3cb_fe0f_200d_2642_fe0f)
+🏋️‍♀️ woman lifting weights (1f3cb_fe0f_200d_2640_fe0f)
+🚴 person biking (1f6b4)
+🚴‍♂️ man biking (1f6b4_200d_2642_fe0f)
+🚴‍♀️ woman biking (1f6b4_200d_2640_fe0f)
+🚵 person mountain biking (1f6b5)
+🚵‍♂️ man mountain biking (1f6b5_200d_2642_fe0f)
+🚵‍♀️ woman mountain biking (1f6b5_200d_2640_fe0f)
+🤸 person cartwheeling (1f938)
+🤸‍♂️ man cartwheeling (1f938_200d_2642_fe0f)
+🤸‍♀️ woman cartwheeling (1f938_200d_2640_fe0f)
+🤼 people wrestling (1f93c)
+🤼‍♂️ men wrestling (1f93c_200d_2642_fe0f)
+🤼‍♀️ women wrestling (1f93c_200d_2640_fe0f)
+🤽 person playing water polo (1f93d)
+🤽‍♂️ man playing water polo (1f93d_200d_2642_fe0f)
+🤽‍♀️ woman playing water polo (1f93d_200d_2640_fe0f)
+🤾 person playing handball (1f93e)
+🤾‍♂️ man playing handball (1f93e_200d_2642_fe0f)
+🤾‍♀️ woman playing handball (1f93e_200d_2640_fe0f)
+🤹 person juggling (1f939)
+🤹‍♂️ man juggling (1f939_200d_2642_fe0f)
+🤹‍♀️ woman juggling (1f939_200d_2640_fe0f)
+🧘 person in lotus position (1f9d8)
+🧘‍♂️ man in lotus position (1f9d8_200d_2642_fe0f)
+🧘‍♀️ woman in lotus position (1f9d8_200d_2640_fe0f)
+🛀 person taking bath (1f6c0)
+🛌 person in bed (1f6cc)
+🧑‍🤝‍🧑 people holding hands (1f9d1_200d_1f91d_200d_1f9d1)
+👭 women holding hands (1f46d)
+👫 woman and man holding hands (1f46b)
+👬 men holding hands (1f46c)
+💏 kiss (1f48f)
+👩‍❤️‍💋‍👨 kiss: woman, man (1f469_200d_2764_fe0f_200d_1f48b_200d_1f468)
+👨‍❤️‍💋‍👨 kiss: man, man (1f468_200d_2764_fe0f_200d_1f48b_200d_1f468)
+👩‍❤️‍💋‍👩 kiss: woman, woman (1f469_200d_2764_fe0f_200d_1f48b_200d_1f469)
+💑 couple with heart (1f491)
+👩‍❤️‍👨 couple with heart: woman, man (1f469_200d_2764_fe0f_200d_1f468)
+👨‍❤️‍👨 couple with heart: man, man (1f468_200d_2764_fe0f_200d_1f468)
+👩‍❤️‍👩 couple with heart: woman, woman (1f469_200d_2764_fe0f_200d_1f469)
+👪 family (1f46a)
+👨‍👩‍👦 family: man, woman, boy (1f468_200d_1f469_200d_1f466)
+👨‍👩‍👧 family: man, woman, girl (1f468_200d_1f469_200d_1f467)
+👨‍👩‍👧‍👦 family: man, woman, girl, boy (1f468_200d_1f469_200d_1f467_200d_1f466)
+👨‍👩‍👦‍👦 family: man, woman, boy, boy (1f468_200d_1f469_200d_1f466_200d_1f466)
+👨‍👩‍👧‍👧 family: man, woman, girl, girl (1f468_200d_1f469_200d_1f467_200d_1f467)
+👨‍👨‍👦 family: man, man, boy (1f468_200d_1f468_200d_1f466)
+👨‍👨‍👧 family: man, man, girl (1f468_200d_1f468_200d_1f467)
+👨‍👨‍👧‍👦 family: man, man, girl, boy (1f468_200d_1f468_200d_1f467_200d_1f466)
+👨‍👨‍👦‍👦 family: man, man, boy, boy (1f468_200d_1f468_200d_1f466_200d_1f466)
+👨‍👨‍👧‍👧 family: man, man, girl, girl (1f468_200d_1f468_200d_1f467_200d_1f467)
+👩‍👩‍👦 family: woman, woman, boy (1f469_200d_1f469_200d_1f466)
+👩‍👩‍👧 family: woman, woman, girl (1f469_200d_1f469_200d_1f467)
+👩‍👩‍👧‍👦 family: woman, woman, girl, boy (1f469_200d_1f469_200d_1f467_200d_1f466)
+👩‍👩‍👦‍👦 family: woman, woman, boy, boy (1f469_200d_1f469_200d_1f466_200d_1f466)
+👩‍👩‍👧‍👧 family: woman, woman, girl, girl (1f469_200d_1f469_200d_1f467_200d_1f467)
+👨‍👦 family: man, boy (1f468_200d_1f466)
+👨‍👦‍👦 family: man, boy, boy (1f468_200d_1f466_200d_1f466)
+👨‍👧 family: man, girl (1f468_200d_1f467)
+👨‍👧‍👦 family: man, girl, boy (1f468_200d_1f467_200d_1f466)
+👨‍👧‍👧 family: man, girl, girl (1f468_200d_1f467_200d_1f467)
+👩‍👦 family: woman, boy (1f469_200d_1f466)
+👩‍👦‍👦 family: woman, boy, boy (1f469_200d_1f466_200d_1f466)
+👩‍👧 family: woman, girl (1f469_200d_1f467)
+👩‍👧‍👦 family: woman, girl, boy (1f469_200d_1f467_200d_1f466)
+👩‍👧‍👧 family: woman, girl, girl (1f469_200d_1f467_200d_1f467)
+🗣 speaking head (1f5e3)
+👤 bust in silhouette (1f464)
+👥 busts in silhouette (1f465)
+🫂 ⊛ people hugging (1fac2)
+👣 footprints (1f463)
+🦰 red hair (1f9b0)
+🦱 curly hair (1f9b1)
+🦳 white hair (1f9b3)
+🦲 bald (1f9b2)
+🐵 monkey face (1f435)
+🐒 monkey (1f412)
+🦍 gorilla (1f98d)
+🦧 orangutan (1f9a7)
+🐶 dog face (1f436)
+🐕 dog (1f415)
+🦮 guide dog (1f9ae)
+🐕‍🦺 service dog (1f415_200d_1f9ba)
+🐩 poodle (1f429)
+🐺 wolf (1f43a)
+🦊 fox (1f98a)
+🦝 raccoon (1f99d)
+🐱 cat face (1f431)
+🐈 cat (1f408)
+🐈‍⬛ black cat (1f408_200d_2b1b)
+🦁 lion (1f981)
+🐯 tiger face (1f42f)
+🐅 tiger (1f405)
+🐆 leopard (1f406)
+🐴 horse face (1f434)
+🐎 horse (1f40e)
+🦄 unicorn (1f984)
+🦓 zebra (1f993)
+🦌 deer (1f98c)
+🐮 cow face (1f42e)
+🐂 ox (1f402)
+🐃 water buffalo (1f403)
+🐄 cow (1f404)
+🐷 pig face (1f437)
+🐖 pig (1f416)
+🐗 boar (1f417)
+🐽 pig nose (1f43d)
+🐏 ram (1f40f)
+🐑 ewe (1f411)
+🐐 goat (1f410)
+🐪 camel (1f42a)
+🐫 two-hump camel (1f42b)
+🦙 llama (1f999)
+🦒 giraffe (1f992)
+🐘 elephant (1f418)
+🦏 rhinoceros (1f98f)
+🦛 hippopotamus (1f99b)
+🐭 mouse face (1f42d)
+🐁 mouse (1f401)
+🐀 rat (1f400)
+🐹 hamster (1f439)
+🐰 rabbit face (1f430)
+🐇 rabbit (1f407)
+🐿 chipmunk (1f43f)
+🦔 hedgehog (1f994)
+🦇 bat (1f987)
+🐻 bear (1f43b)
+🐻‍❄️ ⊛ polar bear (1f43b_200d_2744_fe0f)
+🐨 koala (1f428)
+🐼 panda (1f43c)
+🦥 sloth (1f9a5)
+🦦 otter (1f9a6)
+🦨 skunk (1f9a8)
+🦘 kangaroo (1f998)
+🦡 badger (1f9a1)
+🐾 paw prints (1f43e)
+🦃 turkey (1f983)
+🐔 chicken (1f414)
+🐓 rooster (1f413)
+🐣 hatching chick (1f423)
+🐤 baby chick (1f424)
+🐥 front-facing baby chick (1f425)
+🐦 bird (1f426)
+🐧 penguin (1f427)
+🕊 dove (1f54a)
+🦅 eagle (1f985)
+🦆 duck (1f986)
+🦢 swan (1f9a2)
+🦉 owl (1f989)
+🦩 flamingo (1f9a9)
+🦚 peacock (1f99a)
+🦜 parrot (1f99c)
+🐸 frog (1f438)
+🐊 crocodile (1f40a)
+🐢 turtle (1f422)
+🦎 lizard (1f98e)
+🐍 snake (1f40d)
+🐲 dragon face (1f432)
+🐉 dragon (1f409)
+🦕 sauropod (1f995)
+🦖 T-Rex (1f996)
+🐳 spouting whale (1f433)
+🐋 whale (1f40b)
+🐬 dolphin (1f42c)
+🐟 fish (1f41f)
+🐠 tropical fish (1f420)
+🐡 blowfish (1f421)
+🦈 shark (1f988)
+🐙 octopus (1f419)
+🐚 spiral shell (1f41a)
+🐌 snail (1f40c)
+🦋 butterfly (1f98b)
+🐛 bug (1f41b)
+🐜 ant (1f41c)
+🐝 honeybee (1f41d)
+🐞 lady beetle (1f41e)
+🦗 cricket (1f997)
+🕷 spider (1f577)
+🕸 spider web (1f578)
+🦂 scorpion (1f982)
+🦟 mosquito (1f99f)
+🦠 microbe (1f9a0)
+💐 bouquet (1f490)
+🌸 cherry blossom (1f338)
+💮 white flower (1f4ae)
+🏵 rosette (1f3f5)
+🌹 rose (1f339)
+🥀 wilted flower (1f940)
+🌺 hibiscus (1f33a)
+🌻 sunflower (1f33b)
+🌼 blossom (1f33c)
+🌷 tulip (1f337)
+🌱 seedling (1f331)
+🌲 evergreen tree (1f332)
+🌳 deciduous tree (1f333)
+🌴 palm tree (1f334)
+🌵 cactus (1f335)
+🌾 sheaf of rice (1f33e)
+🌿 herb (1f33f)
+☘ shamrock (2618)
+🍀 four leaf clover (1f340)
+🍁 maple leaf (1f341)
+🍂 fallen leaf (1f342)
+🍃 leaf fluttering in wind (1f343)
+🍇 grapes (1f347)
+🍈 melon (1f348)
+🍉 watermelon (1f349)
+🍊 tangerine (1f34a)
+🍋 lemon (1f34b)
+🍌 banana (1f34c)
+🍍 pineapple (1f34d)
+🥭 mango (1f96d)
+🍎 red apple (1f34e)
+🍏 green apple (1f34f)
+🍐 pear (1f350)
+🍑 peach (1f351)
+🍒 cherries (1f352)
+🍓 strawberry (1f353)
+🥝 kiwi fruit (1f95d)
+🍅 tomato (1f345)
+🥥 coconut (1f965)
+🥑 avocado (1f951)
+🍆 eggplant (1f346)
+🥔 potato (1f954)
+🥕 carrot (1f955)
+🌽 ear of corn (1f33d)
+🌶 hot pepper (1f336)
+🥒 cucumber (1f952)
+🥬 leafy green (1f96c)
+🥦 broccoli (1f966)
+🧄 garlic (1f9c4)
+🧅 onion (1f9c5)
+🍄 mushroom (1f344)
+🥜 peanuts (1f95c)
+🌰 chestnut (1f330)
+🍞 bread (1f35e)
+🥐 croissant (1f950)
+🥖 baguette bread (1f956)
+🫓 ⊛ flatbread (1fad3)
+🥨 pretzel (1f968)
+🥯 bagel (1f96f)
+🥞 pancakes (1f95e)
+🧇 waffle (1f9c7)
+🧀 cheese wedge (1f9c0)
+🍖 meat on bone (1f356)
+🍗 poultry leg (1f357)
+🥩 cut of meat (1f969)
+🥓 bacon (1f953)
+🍔 hamburger (1f354)
+🍟 french fries (1f35f)
+🍕 pizza (1f355)
+🌭 hot dog (1f32d)
+🥪 sandwich (1f96a)
+🌮 taco (1f32e)
+🌯 burrito (1f32f)
+🫔 ⊛ tamale (1fad4)
+🥙 stuffed flatbread (1f959)
+🧆 falafel (1f9c6)
+🥚 egg (1f95a)
+🍳 cooking (1f373)
+🥘 shallow pan of food (1f958)
+🍲 pot of food (1f372)
+🥣 bowl with spoon (1f963)
+🥗 green salad (1f957)
+🍿 popcorn (1f37f)
+🧈 butter (1f9c8)
+🧂 salt (1f9c2)
+🥫 canned food (1f96b)
+🍱 bento box (1f371)
+🍘 rice cracker (1f358)
+🍙 rice ball (1f359)
+🍚 cooked rice (1f35a)
+🍛 curry rice (1f35b)
+🍜 steaming bowl (1f35c)
+🍝 spaghetti (1f35d)
+🍠 roasted sweet potato (1f360)
+🍢 oden (1f362)
+🍣 sushi (1f363)
+🍤 fried shrimp (1f364)
+🍥 fish cake with swirl (1f365)
+🥮 moon cake (1f96e)
+🍡 dango (1f361)
+🥟 dumpling (1f95f)
+🥠 fortune cookie (1f960)
+🥡 takeout box (1f961)
+🦀 crab (1f980)
+🦞 lobster (1f99e)
+🦐 shrimp (1f990)
+🦑 squid (1f991)
+🦪 oyster (1f9aa)
+🍦 soft ice cream (1f366)
+🍧 shaved ice (1f367)
+🍨 ice cream (1f368)
+🍩 doughnut (1f369)
+🍪 cookie (1f36a)
+🎂 birthday cake (1f382)
+🍰 shortcake (1f370)
+🧁 cupcake (1f9c1)
+🥧 pie (1f967)
+🍫 chocolate bar (1f36b)
+🍬 candy (1f36c)
+🍭 lollipop (1f36d)
+🍮 custard (1f36e)
+🍯 honey pot (1f36f)
+🍼 baby bottle (1f37c)
+🥛 glass of milk (1f95b)
+☕ hot beverage (2615)
+🍵 teacup without handle (1f375)
+🍶 sake (1f376)
+🍾 bottle with popping cork (1f37e)
+🍷 wine glass (1f377)
+🍸 cocktail glass (1f378)
+🍹 tropical drink (1f379)
+🍺 beer mug (1f37a)
+🍻 clinking beer mugs (1f37b)
+🥂 clinking glasses (1f942)
+🥃 tumbler glass (1f943)
+🥤 cup with straw (1f964)
+🧃 beverage box (1f9c3)
+🧉 mate (1f9c9)
+🧊 ice (1f9ca)
+🥢 chopsticks (1f962)
+🍽 fork and knife with plate (1f37d)
+🍴 fork and knife (1f374)
+🥄 spoon (1f944)
+🔪 kitchen knife (1f52a)
+🏺 amphora (1f3fa)
+🌍 globe showing Europe-Africa (1f30d)
+🌎 globe showing Americas (1f30e)
+🌏 globe showing Asia-Australia (1f30f)
+🌐 globe with meridians (1f310)
+🗺 world map (1f5fa)
+🗾 map of Japan (1f5fe)
+🧭 compass (1f9ed)
+🏔 snow-capped mountain (1f3d4)
+⛰ mountain (26f0)
+🌋 volcano (1f30b)
+🗻 mount fuji (1f5fb)
+🏕 camping (1f3d5)
+🏖 beach with umbrella (1f3d6)
+🏜 desert (1f3dc)
+🏝 desert island (1f3dd)
+🏞 national park (1f3de)
+🏟 stadium (1f3df)
+🏛 classical building (1f3db)
+🏗 building construction (1f3d7)
+🧱 brick (1f9f1)
+🏘 houses (1f3d8)
+🏚 derelict house (1f3da)
+🏠 house (1f3e0)
+🏡 house with garden (1f3e1)
+🏢 office building (1f3e2)
+🏣 Japanese post office (1f3e3)
+🏤 post office (1f3e4)
+🏥 hospital (1f3e5)
+🏦 bank (1f3e6)
+🏨 hotel (1f3e8)
+🏩 love hotel (1f3e9)
+🏪 convenience store (1f3ea)
+🏫 school (1f3eb)
+🏬 department store (1f3ec)
+🏭 factory (1f3ed)
+🏯 Japanese castle (1f3ef)
+🏰 castle (1f3f0)
+💒 wedding (1f492)
+🗼 Tokyo tower (1f5fc)
+🗽 Statue of Liberty (1f5fd)
+⛪ church (26ea)
+🕌 mosque (1f54c)
+🛕 hindu temple (1f6d5)
+🕍 synagogue (1f54d)
+⛩ shinto shrine (26e9)
+🕋 kaaba (1f54b)
+⛲ fountain (26f2)
+⛺ tent (26fa)
+🌁 foggy (1f301)
+🌃 night with stars (1f303)
+🏙 cityscape (1f3d9)
+🌄 sunrise over mountains (1f304)
+🌅 sunrise (1f305)
+🌆 cityscape at dusk (1f306)
+🌇 sunset (1f307)
+🌉 bridge at night (1f309)
+♨ hot springs (2668)
+🎠 carousel horse (1f3a0)
+🎡 ferris wheel (1f3a1)
+🎢 roller coaster (1f3a2)
+💈 barber pole (1f488)
+🎪 circus tent (1f3aa)
+🚂 locomotive (1f682)
+🚃 railway car (1f683)
+🚄 high-speed train (1f684)
+🚅 bullet train (1f685)
+🚆 train (1f686)
+🚇 metro (1f687)
+🚈 light rail (1f688)
+🚉 station (1f689)
+🚊 tram (1f68a)
+🚝 monorail (1f69d)
+🚞 mountain railway (1f69e)
+🚋 tram car (1f68b)
+🚌 bus (1f68c)
+🚍 oncoming bus (1f68d)
+🚎 trolleybus (1f68e)
+🚐 minibus (1f690)
+🚑 ambulance (1f691)
+🚒 fire engine (1f692)
+🚓 police car (1f693)
+🚔 oncoming police car (1f694)
+🚕 taxi (1f695)
+🚖 oncoming taxi (1f696)
+🚗 automobile (1f697)
+🚘 oncoming automobile (1f698)
+🚙 sport utility vehicle (1f699)
+🚚 delivery truck (1f69a)
+🚛 articulated lorry (1f69b)
+🚜 tractor (1f69c)
+🏎 racing car (1f3ce)
+🏍 motorcycle (1f3cd)
+🛵 motor scooter (1f6f5)
+🦽 manual wheelchair (1f9bd)
+🦼 motorized wheelchair (1f9bc)
+🛺 auto rickshaw (1f6fa)
+🚲 bicycle (1f6b2)
+🛴 kick scooter (1f6f4)
+🛹 skateboard (1f6f9)
+🚏 bus stop (1f68f)
+🛣 motorway (1f6e3)
+🛤 railway track (1f6e4)
+🛢 oil drum (1f6e2)
+⛽ fuel pump (26fd)
+🚨 police car light (1f6a8)
+🚥 horizontal traffic light (1f6a5)
+🚦 vertical traffic light (1f6a6)
+🛑 stop sign (1f6d1)
+🚧 construction (1f6a7)
+⚓ anchor (2693)
+⛵ sailboat (26f5)
+🛶 canoe (1f6f6)
+🚤 speedboat (1f6a4)
+🛳 passenger ship (1f6f3)
+⛴ ferry (26f4)
+🛥 motor boat (1f6e5)
+🚢 ship (1f6a2)
+✈ airplane (2708)
+🛩 small airplane (1f6e9)
+🛫 airplane departure (1f6eb)
+🛬 airplane arrival (1f6ec)
+🪂 parachute (1fa82)
+💺 seat (1f4ba)
+🚁 helicopter (1f681)
+🚟 suspension railway (1f69f)
+🚠 mountain cableway (1f6a0)
+🚡 aerial tramway (1f6a1)
+🛰 satellite (1f6f0)
+🚀 rocket (1f680)
+🛸 flying saucer (1f6f8)
+🛎 bellhop bell (1f6ce)
+🧳 luggage (1f9f3)
+⌛ hourglass done (231b)
+⏳ hourglass not done (23f3)
+⌚ watch (231a)
+⏰ alarm clock (23f0)
+⏱ stopwatch (23f1)
+⏲ timer clock (23f2)
+🕰 mantelpiece clock (1f570)
+🕛 twelve o’clock (1f55b)
+🕧 twelve-thirty (1f567)
+🕐 one o’clock (1f550)
+🕜 one-thirty (1f55c)
+🕑 two o’clock (1f551)
+🕝 two-thirty (1f55d)
+🕒 three o’clock (1f552)
+🕞 three-thirty (1f55e)
+🕓 four o’clock (1f553)
+🕟 four-thirty (1f55f)
+🕔 five o’clock (1f554)
+🕠 five-thirty (1f560)
+🕕 six o’clock (1f555)
+🕡 six-thirty (1f561)
+🕖 seven o’clock (1f556)
+🕢 seven-thirty (1f562)
+🕗 eight o’clock (1f557)
+🕣 eight-thirty (1f563)
+🕘 nine o’clock (1f558)
+🕤 nine-thirty (1f564)
+🕙 ten o’clock (1f559)
+🕥 ten-thirty (1f565)
+🕚 eleven o’clock (1f55a)
+🕦 eleven-thirty (1f566)
+🌑 new moon (1f311)
+🌒 waxing crescent moon (1f312)
+🌓 first quarter moon (1f313)
+🌔 waxing gibbous moon (1f314)
+🌕 full moon (1f315)
+🌖 waning gibbous moon (1f316)
+🌗 last quarter moon (1f317)
+🌘 waning crescent moon (1f318)
+🌙 crescent moon (1f319)
+🌚 new moon face (1f31a)
+🌛 first quarter moon face (1f31b)
+🌜 last quarter moon face (1f31c)
+🌡 thermometer (1f321)
+☀ sun (2600)
+🌝 full moon face (1f31d)
+🌞 sun with face (1f31e)
+🪐 ringed planet (1fa90)
+⭐ star (2b50)
+🌟 glowing star (1f31f)
+🌠 shooting star (1f320)
+🌌 milky way (1f30c)
+☁ cloud (2601)
+⛅ sun behind cloud (26c5)
+⛈ cloud with lightning and rain (26c8)
+🌤 sun behind small cloud (1f324)
+🌥 sun behind large cloud (1f325)
+🌦 sun behind rain cloud (1f326)
+🌧 cloud with rain (1f327)
+🌨 cloud with snow (1f328)
+🌩 cloud with lightning (1f329)
+🌪 tornado (1f32a)
+🌫 fog (1f32b)
+🌬 wind face (1f32c)
+🌀 cyclone (1f300)
+🌈 rainbow (1f308)
+🌂 closed umbrella (1f302)
+☂ umbrella (2602)
+☔ umbrella with rain drops (2614)
+⛱ umbrella on ground (26f1)
+⚡ high voltage (26a1)
+❄ snowflake (2744)
+☃ snowman (2603)
+⛄ snowman without snow (26c4)
+☄ comet (2604)
+🔥 fire (1f525)
+💧 droplet (1f4a7)
+🌊 water wave (1f30a)
+🎃 jack-o-lantern (1f383)
+🎄 Christmas tree (1f384)
+🎆 fireworks (1f386)
+🎇 sparkler (1f387)
+🧨 firecracker (1f9e8)
+✨ sparkles (2728)
+🎈 balloon (1f388)
+🎉 party popper (1f389)
+🎊 confetti ball (1f38a)
+🎋 tanabata tree (1f38b)
+🎍 pine decoration (1f38d)
+🎎 Japanese dolls (1f38e)
+🎏 carp streamer (1f38f)
+🎐 wind chime (1f390)
+🎑 moon viewing ceremony (1f391)
+🧧 red envelope (1f9e7)
+🎀 ribbon (1f380)
+🎁 wrapped gift (1f381)
+🎗 reminder ribbon (1f397)
+🎟 admission tickets (1f39f)
+🎫 ticket (1f3ab)
+🎖 military medal (1f396)
+🏆 trophy (1f3c6)
+🏅 sports medal (1f3c5)
+🥇 1st place medal (1f947)
+🥈 2nd place medal (1f948)
+🥉 3rd place medal (1f949)
+⚽ soccer ball (26bd)
+⚾ baseball (26be)
+🥎 softball (1f94e)
+🏀 basketball (1f3c0)
+🏐 volleyball (1f3d0)
+🏈 american football (1f3c8)
+🏉 rugby football (1f3c9)
+🎾 tennis (1f3be)
+🥏 flying disc (1f94f)
+🎳 bowling (1f3b3)
+🏏 cricket game (1f3cf)
+🏑 field hockey (1f3d1)
+🏒 ice hockey (1f3d2)
+🥍 lacrosse (1f94d)
+🏓 ping pong (1f3d3)
+🏸 badminton (1f3f8)
+🥊 boxing glove (1f94a)
+🥋 martial arts uniform (1f94b)
+🥅 goal net (1f945)
+⛳ flag in hole (26f3)
+⛸ ice skate (26f8)
+🎣 fishing pole (1f3a3)
+🤿 diving mask (1f93f)
+🎽 running shirt (1f3bd)
+🎿 skis (1f3bf)
+🛷 sled (1f6f7)
+🥌 curling stone (1f94c)
+🎯 direct hit (1f3af)
+🪀 yo-yo (1fa80)
+🪁 kite (1fa81)
+🎱 pool 8 ball (1f3b1)
+🔮 crystal ball (1f52e)
+🪄 ⊛ magic wand (1fa84)
+🧿 nazar amulet (1f9ff)
+🎮 video game (1f3ae)
+🕹 joystick (1f579)
+🎰 slot machine (1f3b0)
+🎲 game die (1f3b2)
+🧩 puzzle piece (1f9e9)
+🧸 teddy bear (1f9f8)
+🪅 ⊛ piñata (1fa85)
+🪆 ⊛ nesting dolls (1fa86)
+♠ spade suit (2660)
+♥ heart suit (2665)
+♦ diamond suit (2666)
+♣ club suit (2663)
+♟ chess pawn (265f)
+🃏 joker (1f0cf)
+🀄 mahjong red dragon (1f004)
+🎴 flower playing cards (1f3b4)
+🎭 performing arts (1f3ad)
+🖼 framed picture (1f5bc)
+🎨 artist palette (1f3a8)
+🧵 thread (1f9f5)
+🧶 yarn (1f9f6)
+👓 glasses (1f453)
+🕶 sunglasses (1f576)
+🥽 goggles (1f97d)
+🥼 lab coat (1f97c)
+🦺 safety vest (1f9ba)
+👔 necktie (1f454)
+👕 t-shirt (1f455)
+👖 jeans (1f456)
+🧣 scarf (1f9e3)
+🧤 gloves (1f9e4)
+🧥 coat (1f9e5)
+🧦 socks (1f9e6)
+👗 dress (1f457)
+👘 kimono (1f458)
+🥻 sari (1f97b)
+🩱 one-piece swimsuit (1fa71)
+🩲 briefs (1fa72)
+🩳 shorts (1fa73)
+👙 bikini (1f459)
+👚 woman’s clothes (1f45a)
+👛 purse (1f45b)
+👜 handbag (1f45c)
+👝 clutch bag (1f45d)
+🛍 shopping bags (1f6cd)
+🎒 backpack (1f392)
+🩴 ⊛ thong sandal (1fa74)
+👞 man’s shoe (1f45e)
+👟 running shoe (1f45f)
+🥾 hiking boot (1f97e)
+🥿 flat shoe (1f97f)
+👠 high-heeled shoe (1f460)
+👡 woman’s sandal (1f461)
+🩰 ballet shoes (1fa70)
+👢 woman’s boot (1f462)
+👑 crown (1f451)
+👒 woman’s hat (1f452)
+🎩 top hat (1f3a9)
+🎓 graduation cap (1f393)
+🧢 billed cap (1f9e2)
+🪖 ⊛ military helmet (1fa96)
+⛑ rescue worker’s helmet (26d1)
+📿 prayer beads (1f4ff)
+💄 lipstick (1f484)
+💍 ring (1f48d)
+💎 gem stone (1f48e)
+🔇 muted speaker (1f507)
+🔈 speaker low volume (1f508)
+🔉 speaker medium volume (1f509)
+🔊 speaker high volume (1f50a)
+📢 loudspeaker (1f4e2)
+📣 megaphone (1f4e3)
+📯 postal horn (1f4ef)
+🔔 bell (1f514)
+🔕 bell with slash (1f515)
+🎼 musical score (1f3bc)
+🎵 musical note (1f3b5)
+🎶 musical notes (1f3b6)
+🎙 studio microphone (1f399)
+🎚 level slider (1f39a)
+🎛 control knobs (1f39b)
+🎤 microphone (1f3a4)
+🎧 headphone (1f3a7)
+📻 radio (1f4fb)
+🎷 saxophone (1f3b7)
+🎸 guitar (1f3b8)
+🎹 musical keyboard (1f3b9)
+🎺 trumpet (1f3ba)
+🎻 violin (1f3bb)
+🪕 banjo (1fa95)
+🥁 drum (1f941)
+🪘 ⊛ long drum (1fa98)
+📱 mobile phone (1f4f1)
+📲 mobile phone with arrow (1f4f2)
+☎ telephone (260e)
+📞 telephone receiver (1f4de)
+📟 pager (1f4df)
+📠 fax machine (1f4e0)
+🔋 battery (1f50b)
+🔌 electric plug (1f50c)
+💻 laptop (1f4bb)
+🖥 desktop computer (1f5a5)
+🖨 printer (1f5a8)
+⌨ keyboard (2328)
+🖱 computer mouse (1f5b1)
+🖲 trackball (1f5b2)
+💽 computer disk (1f4bd)
+💾 floppy disk (1f4be)
+💿 optical disk (1f4bf)
+📀 dvd (1f4c0)
+🧮 abacus (1f9ee)
+🎥 movie camera (1f3a5)
+🎞 film frames (1f39e)
+📽 film projector (1f4fd)
+🎬 clapper board (1f3ac)
+📺 television (1f4fa)
+📷 camera (1f4f7)
+📸 camera with flash (1f4f8)
+📹 video camera (1f4f9)
+📼 videocassette (1f4fc)
+🔍 magnifying glass tilted left (1f50d)
+🔎 magnifying glass tilted right (1f50e)
+🕯 candle (1f56f)
+💡 light bulb (1f4a1)
+🔦 flashlight (1f526)
+🏮 red paper lantern (1f3ee)
+🪔 diya lamp (1fa94)
+📔 notebook with decorative cover (1f4d4)
+📕 closed book (1f4d5)
+📖 open book (1f4d6)
+📗 green book (1f4d7)
+📘 blue book (1f4d8)
+📙 orange book (1f4d9)
+📚 books (1f4da)
+📓 notebook (1f4d3)
+📒 ledger (1f4d2)
+📃 page with curl (1f4c3)
+📜 scroll (1f4dc)
+📄 page facing up (1f4c4)
+📰 newspaper (1f4f0)
+🗞 rolled-up newspaper (1f5de)
+📑 bookmark tabs (1f4d1)
+🔖 bookmark (1f516)
+🏷 label (1f3f7)
+💰 money bag (1f4b0)
+🪙 ⊛ coin (1fa99)
+💴 yen banknote (1f4b4)
+💵 dollar banknote (1f4b5)
+💶 euro banknote (1f4b6)
+💷 pound banknote (1f4b7)
+💸 money with wings (1f4b8)
+💳 credit card (1f4b3)
+🧾 receipt (1f9fe)
+💹 chart increasing with yen (1f4b9)
+✉ envelope (2709)
+📧 e-mail (1f4e7)
+📨 incoming envelope (1f4e8)
+📩 envelope with arrow (1f4e9)
+📤 outbox tray (1f4e4)
+📥 inbox tray (1f4e5)
+📦 package (1f4e6)
+📫 closed mailbox with raised flag (1f4eb)
+📪 closed mailbox with lowered flag (1f4ea)
+📬 open mailbox with raised flag (1f4ec)
+📭 open mailbox with lowered flag (1f4ed)
+📮 postbox (1f4ee)
+🗳 ballot box with ballot (1f5f3)
+✏ pencil (270f)
+✒ black nib (2712)
+🖋 fountain pen (1f58b)
+🖊 pen (1f58a)
+🖌 paintbrush (1f58c)
+🖍 crayon (1f58d)
+📝 memo (1f4dd)
+💼 briefcase (1f4bc)
+📁 file folder (1f4c1)
+📂 open file folder (1f4c2)
+🗂 card index dividers (1f5c2)
+📅 calendar (1f4c5)
+📆 tear-off calendar (1f4c6)
+🗒 spiral notepad (1f5d2)
+🗓 spiral calendar (1f5d3)
+📇 card index (1f4c7)
+📈 chart increasing (1f4c8)
+📉 chart decreasing (1f4c9)
+📊 bar chart (1f4ca)
+📋 clipboard (1f4cb)
+📌 pushpin (1f4cc)
+📍 round pushpin (1f4cd)
+📎 paperclip (1f4ce)
+🖇 linked paperclips (1f587)
+📏 straight ruler (1f4cf)
+📐 triangular ruler (1f4d0)
+✂ scissors (2702)
+🗃 card file box (1f5c3)
+🗄 file cabinet (1f5c4)
+🗑 wastebasket (1f5d1)
+🔒 locked (1f512)
+🔓 unlocked (1f513)
+🔏 locked with pen (1f50f)
+🔐 locked with key (1f510)
+🔑 key (1f511)
+🗝 old key (1f5dd)
+🔨 hammer (1f528)
+🪓 axe (1fa93)
+⛏ pick (26cf)
+⚒ hammer and pick (2692)
+🛠 hammer and wrench (1f6e0)
+🗡 dagger (1f5e1)
+⚔ crossed swords (2694)
+🔫 pistol (1f52b)
+🪃 ⊛ boomerang (1fa83)
+🏹 bow and arrow (1f3f9)
+🛡 shield (1f6e1)
+🔧 wrench (1f527)
+🪛 ⊛ screwdriver (1fa9b)
+🔩 nut and bolt (1f529)
+⚙ gear (2699)
+🗜 clamp (1f5dc)
+⚖ balance scale (2696)
+🦯 white cane (1f9af)
+🔗 link (1f517)
+⛓ chains (26d3)
+🪝 ⊛ hook (1fa9d)
+🧰 toolbox (1f9f0)
+🧲 magnet (1f9f2)
+🪜 ⊛ ladder (1fa9c)
+⚗ alembic (2697)
+🧪 test tube (1f9ea)
+🧫 petri dish (1f9eb)
+🧬 dna (1f9ec)
+🔬 microscope (1f52c)
+🔭 telescope (1f52d)
+📡 satellite antenna (1f4e1)
+💉 syringe (1f489)
+🩸 drop of blood (1fa78)
+💊 pill (1f48a)
+🩹 adhesive bandage (1fa79)
+🩺 stethoscope (1fa7a)
+🚪 door (1f6aa)
+🛗 ⊛ elevator (1f6d7)
+🛏 bed (1f6cf)
+🛋 couch and lamp (1f6cb)
+🪑 chair (1fa91)
+🚽 toilet (1f6bd)
+🪠 ⊛ plunger (1faa0)
+🚿 shower (1f6bf)
+🛁 bathtub (1f6c1)
+🪒 razor (1fa92)
+🧴 lotion bottle (1f9f4)
+🧷 safety pin (1f9f7)
+🧹 broom (1f9f9)
+🧺 basket (1f9fa)
+🧻 roll of paper (1f9fb)
+🧼 soap (1f9fc)
+🧽 sponge (1f9fd)
+🧯 fire extinguisher (1f9ef)
+🛒 shopping cart (1f6d2)
+🚬 cigarette (1f6ac)
+⚰ coffin (26b0)
+⚱ funeral urn (26b1)
+🗿 moai (1f5ff)
+🏧 ATM sign (1f3e7)
+🚮 litter in bin sign (1f6ae)
+🚰 potable water (1f6b0)
+♿ wheelchair symbol (267f)
+🚹 men’s room (1f6b9)
+🚺 women’s room (1f6ba)
+🚻 restroom (1f6bb)
+🚼 baby symbol (1f6bc)
+🚾 water closet (1f6be)
+🛂 passport control (1f6c2)
+🛃 customs (1f6c3)
+🛄 baggage claim (1f6c4)
+🛅 left luggage (1f6c5)
+⚠ warning (26a0)
+🚸 children crossing (1f6b8)
+⛔ no entry (26d4)
+🚫 prohibited (1f6ab)
+🚳 no bicycles (1f6b3)
+🚭 no smoking (1f6ad)
+🚯 no littering (1f6af)
+🚱 non-potable water (1f6b1)
+🚷 no pedestrians (1f6b7)
+📵 no mobile phones (1f4f5)
+🔞 no one under eighteen (1f51e)
+☢ radioactive (2622)
+☣ biohazard (2623)
+⬆ up arrow (2b06)
+↗ up-right arrow (2197)
+➡ right arrow (27a1)
+↘ down-right arrow (2198)
+⬇ down arrow (2b07)
+↙ down-left arrow (2199)
+⬅ left arrow (2b05)
+↖ up-left arrow (2196)
+↕ up-down arrow (2195)
+↔ left-right arrow (2194)
+↩ right arrow curving left (21a9)
+↪ left arrow curving right (21aa)
+⤴ right arrow curving up (2934)
+⤵ right arrow curving down (2935)
+🔃 clockwise vertical arrows (1f503)
+🔄 counterclockwise arrows button (1f504)
+🔙 BACK arrow (1f519)
+🔚 END arrow (1f51a)
+🔛 ON! arrow (1f51b)
+🔜 SOON arrow (1f51c)
+🔝 TOP arrow (1f51d)
+🛐 place of worship (1f6d0)
+⚛ atom symbol (269b)
+🕉 om (1f549)
+✡ star of David (2721)
+☸ wheel of dharma (2638)
+☯ yin yang (262f)
+✝ latin cross (271d)
+☦ orthodox cross (2626)
+☪ star and crescent (262a)
+☮ peace symbol (262e)
+🕎 menorah (1f54e)
+🔯 dotted six-pointed star (1f52f)
+♈ Aries (2648)
+♉ Taurus (2649)
+♊ Gemini (264a)
+♋ Cancer (264b)
+♌ Leo (264c)
+♍ Virgo (264d)
+♎ Libra (264e)
+♏ Scorpio (264f)
+♐ Sagittarius (2650)
+♑ Capricorn (2651)
+♒ Aquarius (2652)
+♓ Pisces (2653)
+⛎ Ophiuchus (26ce)
+🔀 shuffle tracks button (1f500)
+🔁 repeat button (1f501)
+🔂 repeat single button (1f502)
+▶ play button (25b6)
+⏩ fast-forward button (23e9)
+⏭ next track button (23ed)
+⏯ play or pause button (23ef)
+◀ reverse button (25c0)
+⏪ fast reverse button (23ea)
+⏮ last track button (23ee)
+🔼 upwards button (1f53c)
+⏫ fast up button (23eb)
+🔽 downwards button (1f53d)
+⏬ fast down button (23ec)
+⏸ pause button (23f8)
+⏹ stop button (23f9)
+⏺ record button (23fa)
+⏏ eject button (23cf)
+🎦 cinema (1f3a6)
+🔅 dim button (1f505)
+🔆 bright button (1f506)
+📶 antenna bars (1f4f6)
+📳 vibration mode (1f4f3)
+📴 mobile phone off (1f4f4)
+♀ female sign (2640)
+♂ male sign (2642)
+⚧ ⊛ transgender symbol (26a7)
+✖ multiply (2716)
+➕ plus (2795)
+➖ minus (2796)
+➗ divide (2797)
+♾ infinity (267e)
+‼ double exclamation mark (203c)
+⁉ exclamation question mark (2049)
+❓ question mark (2753)
+❔ white question mark (2754)
+❕ white exclamation mark (2755)
+❗ exclamation mark (2757)
+〰 wavy dash (3030)
+💱 currency exchange (1f4b1)
+💲 heavy dollar sign (1f4b2)
+⚕ medical symbol (2695)
+♻ recycling symbol (267b)
+⚜ fleur-de-lis (269c)
+🔱 trident emblem (1f531)
+📛 name badge (1f4db)
+🔰 Japanese symbol for beginner (1f530)
+⭕ hollow red circle (2b55)
+✅ check mark button (2705)
+☑ check box with check (2611)
+✔ check mark (2714)
+❌ cross mark (274c)
+❎ cross mark button (274e)
+➰ curly loop (27b0)
+➿ double curly loop (27bf)
+〽 part alternation mark (303d)
+✳ eight-spoked asterisk (2733)
+✴ eight-pointed star (2734)
+❇ sparkle (2747)
+© copyright (00a9)
+® registered (00ae)
+™ trade mark (2122)
+🔟 keycap: 10 (1f51f)
+🔠 input latin uppercase (1f520)
+🔡 input latin lowercase (1f521)
+🔢 input numbers (1f522)
+🔣 input symbols (1f523)
+🔤 input latin letters (1f524)
+🅰 A button (blood type) (1f170)
+🆎 AB button (blood type) (1f18e)
+🅱 B button (blood type) (1f171)
+🆑 CL button (1f191)
+🆒 COOL button (1f192)
+🆓 FREE button (1f193)
+ℹ information (2139)
+🆔 ID button (1f194)
+Ⓜ circled M (24c2)
+🆕 NEW button (1f195)
+🆖 NG button (1f196)
+🅾 O button (blood type) (1f17e)
+🆗 OK button (1f197)
+🅿 P button (1f17f)
+🆘 SOS button (1f198)
+🆙 UP! button (1f199)
+🆚 VS button (1f19a)
+🈁 Japanese “here” button (1f201)
+🈂 Japanese “service charge” button (1f202)
+🈷 Japanese “monthly amount” button (1f237)
+🈶 Japanese “not free of charge” button (1f236)
+🈯 Japanese “reserved” button (1f22f)
+🉐 Japanese “bargain” button (1f250)
+🈹 Japanese “discount” button (1f239)
+🈚 Japanese “free of charge” button (1f21a)
+🈲 Japanese “prohibited” button (1f232)
+🉑 Japanese “acceptable” button (1f251)
+🈸 Japanese “application” button (1f238)
+🈴 Japanese “passing grade” button (1f234)
+🈳 Japanese “vacancy” button (1f233)
+㊗ Japanese “congratulations” button (3297)
+㊙ Japanese “secret” button (3299)
+🈺 Japanese “open for business” button (1f23a)
+🈵 Japanese “no vacancy” button (1f235)
+🔴 red circle (1f534)
+🟠 orange circle (1f7e0)
+🟡 yellow circle (1f7e1)
+🟢 green circle (1f7e2)
+🔵 blue circle (1f535)
+🟣 purple circle (1f7e3)
+🟤 brown circle (1f7e4)
+⚫ black circle (26ab)
+⚪ white circle (26aa)
+🟥 red square (1f7e5)
+🟧 orange square (1f7e7)
+🟨 yellow square (1f7e8)
+🟩 green square (1f7e9)
+🟦 blue square (1f7e6)
+🟪 purple square (1f7ea)
+🟫 brown square (1f7eb)
+⬛ black large square (2b1b)
+⬜ white large square (2b1c)
+◼ black medium square (25fc)
+◻ white medium square (25fb)
+◾ black medium-small square (25fe)
+◽ white medium-small square (25fd)
+▪ black small square (25aa)
+▫ white small square (25ab)
+🔶 large orange diamond (1f536)
+🔷 large blue diamond (1f537)
+🔸 small orange diamond (1f538)
+🔹 small blue diamond (1f539)
+🔺 red triangle pointed up (1f53a)
+🔻 red triangle pointed down (1f53b)
+💠 diamond with a dot (1f4a0)
+🔘 radio button (1f518)
+🔳 white square button (1f533)
+🔲 black square button (1f532)
+🏁 chequered flag (1f3c1)
+🚩 triangular flag (1f6a9)
+🎌 crossed flags (1f38c)
+🏴 black flag (1f3f4)
+🏳 white flag (1f3f3)
+🏳️‍🌈 rainbow flag (1f3f3)
+🏳️‍⚧️ ⊛ transgender flag (1f3f3)
+🏴‍☠️ pirate flag (1f3f4)
+🇦🇨 flag: Ascension Island (1f1e6)
+🇦🇩 flag: Andorra (1f1e6)
+🇦🇪 flag: United Arab Emirates (1f1e6)
+🇦🇫 flag: Afghanistan (1f1e6)
+🇦🇬 flag: Antigua & Barbuda (1f1e6)
+🇦🇮 flag: Anguilla (1f1e6)
+🇦🇱 flag: Albania (1f1e6)
+🇦🇲 flag: Armenia (1f1e6)
+🇦🇴 flag: Angola (1f1e6)
+🇦🇶 flag: Antarctica (1f1e6)
+🇦🇷 flag: Argentina (1f1e6)
+🇦🇸 flag: American Samoa (1f1e6)
+🇦🇹 flag: Austria (1f1e6)
+🇦🇺 flag: Australia (1f1e6)
+🇦🇼 flag: Aruba (1f1e6)
+🇦🇽 flag: Åland Islands (1f1e6)
+🇦🇿 flag: Azerbaijan (1f1e6)
+🇧🇦 flag: Bosnia & Herzegovina (1f1e7)
+🇧🇧 flag: Barbados (1f1e7)
+🇧🇩 flag: Bangladesh (1f1e7)
+🇧🇪 flag: Belgium (1f1e7)
+🇧🇫 flag: Burkina Faso (1f1e7)
+🇧🇬 flag: Bulgaria (1f1e7)
+🇧🇭 flag: Bahrain (1f1e7)
+🇧🇮 flag: Burundi (1f1e7)
+🇧🇯 flag: Benin (1f1e7)
+🇧🇱 flag: St. Barthélemy (1f1e7)
+🇧🇲 flag: Bermuda (1f1e7)
+🇧🇳 flag: Brunei (1f1e7)
+🇧🇴 flag: Bolivia (1f1e7)
+🇧🇶 flag: Caribbean Netherlands (1f1e7)
+🇧🇷 flag: Brazil (1f1e7)
+🇧🇸 flag: Bahamas (1f1e7)
+🇧🇹 flag: Bhutan (1f1e7)
+🇧🇻 flag: Bouvet Island (1f1e7)
+🇧🇼 flag: Botswana (1f1e7)
+🇧🇾 flag: Belarus (1f1e7)
+🇧🇿 flag: Belize (1f1e7)
+🇨🇦 flag: Canada (1f1e8)
+🇨🇨 flag: Cocos (Keeling) Islands (1f1e8)
+🇨🇩 flag: Congo - Kinshasa (1f1e8)
+🇨🇫 flag: Central African Republic (1f1e8)
+🇨🇬 flag: Congo - Brazzaville (1f1e8)
+🇨🇭 flag: Switzerland (1f1e8)
+🇨🇮 flag: Côte d’Ivoire (1f1e8)
+🇨🇰 flag: Cook Islands (1f1e8)
+🇨🇱 flag: Chile (1f1e8)
+🇨🇲 flag: Cameroon (1f1e8)
+🇨🇳 flag: China (1f1e8)
+🇨🇴 flag: Colombia (1f1e8)
+🇨🇵 flag: Clipperton Island (1f1e8)
+🇨🇷 flag: Costa Rica (1f1e8)
+🇨🇺 flag: Cuba (1f1e8)
+🇨🇻 flag: Cape Verde (1f1e8)
+🇨🇼 flag: Curaçao (1f1e8)
+🇨🇽 flag: Christmas Island (1f1e8)
+🇨🇾 flag: Cyprus (1f1e8)
+🇨🇿 flag: Czechia (1f1e8)
+🇩🇪 flag: Germany (1f1e9)
+🇩🇬 flag: Diego Garcia (1f1e9)
+🇩🇯 flag: Djibouti (1f1e9)
+🇩🇰 flag: Denmark (1f1e9)
+🇩🇲 flag: Dominica (1f1e9)
+🇩🇴 flag: Dominican Republic (1f1e9)
+🇩🇿 flag: Algeria (1f1e9)
+🇪🇦 flag: Ceuta & Melilla (1f1ea)
+🇪🇨 flag: Ecuador (1f1ea)
+🇪🇪 flag: Estonia (1f1ea)
+🇪🇬 flag: Egypt (1f1ea)
+🇪🇭 flag: Western Sahara (1f1ea)
+🇪🇷 flag: Eritrea (1f1ea)
+🇪🇸 flag: Spain (1f1ea)
+🇪🇹 flag: Ethiopia (1f1ea)
+🇪🇺 flag: European Union (1f1ea)
+🇫🇮 flag: Finland (1f1eb)
+🇫🇯 flag: Fiji (1f1eb)
+🇫🇰 flag: Falkland Islands (1f1eb)
+🇫🇲 flag: Micronesia (1f1eb)
+🇫🇴 flag: Faroe Islands (1f1eb)
+🇫🇷 flag: France (1f1eb)
+🇬🇦 flag: Gabon (1f1ec)
+🇬🇧 flag: United Kingdom (1f1ec)
+🇬🇩 flag: Grenada (1f1ec)
+🇬🇪 flag: Georgia (1f1ec)
+🇬🇫 flag: French Guiana (1f1ec)
+🇬🇬 flag: Guernsey (1f1ec)
+🇬🇭 flag: Ghana (1f1ec)
+🇬🇮 flag: Gibraltar (1f1ec)
+🇬🇱 flag: Greenland (1f1ec)
+🇬🇲 flag: Gambia (1f1ec)
+🇬🇳 flag: Guinea (1f1ec)
+🇬🇵 flag: Guadeloupe (1f1ec)
+🇬🇶 flag: Equatorial Guinea (1f1ec)
+🇬🇷 flag: Greece (1f1ec)
+🇬🇸 flag: South Georgia & South Sandwich Islands (1f1ec)
+🇬🇹 flag: Guatemala (1f1ec)
+🇬🇺 flag: Guam (1f1ec)
+🇬🇼 flag: Guinea-Bissau (1f1ec)
+🇬🇾 flag: Guyana (1f1ec)
+🇭🇰 flag: Hong Kong SAR China (1f1ed)
+🇭🇲 flag: Heard & McDonald Islands (1f1ed)
+🇭🇳 flag: Honduras (1f1ed)
+🇭🇷 flag: Croatia (1f1ed)
+🇭🇹 flag: Haiti (1f1ed)
+🇭🇺 flag: Hungary (1f1ed)
+🇮🇨 flag: Canary Islands (1f1ee)
+🇮🇩 flag: Indonesia (1f1ee)
+🇮🇪 flag: Ireland (1f1ee)
+🇮🇱 flag: Israel (1f1ee)
+🇮🇲 flag: Isle of Man (1f1ee)
+🇮🇳 flag: India (1f1ee)
+🇮🇴 flag: British Indian Ocean Territory (1f1ee)
+🇮🇶 flag: Iraq (1f1ee)
+🇮🇷 flag: Iran (1f1ee)
+🇮🇸 flag: Iceland (1f1ee)
+🇮🇹 flag: Italy (1f1ee)
+🇯🇪 flag: Jersey (1f1ef)
+🇯🇲 flag: Jamaica (1f1ef)
+🇯🇴 flag: Jordan (1f1ef)
+🇯🇵 flag: Japan (1f1ef)
+🇰🇪 flag: Kenya (1f1f0)
+🇰🇬 flag: Kyrgyzstan (1f1f0)
+🇰🇭 flag: Cambodia (1f1f0)
+🇰🇮 flag: Kiribati (1f1f0)
+🇰🇲 flag: Comoros (1f1f0)
+🇰🇳 flag: St. Kitts & Nevis (1f1f0)
+🇰🇵 flag: North Korea (1f1f0)
+🇰🇷 flag: South Korea (1f1f0)
+🇰🇼 flag: Kuwait (1f1f0)
+🇰🇾 flag: Cayman Islands (1f1f0)
+🇰🇿 flag: Kazakhstan (1f1f0)
+🇱🇦 flag: Laos (1f1f1)
+🇱🇧 flag: Lebanon (1f1f1)
+🇱🇨 flag: St. Lucia (1f1f1)
+🇱🇮 flag: Liechtenstein (1f1f1)
+🇱🇰 flag: Sri Lanka (1f1f1)
+🇱🇷 flag: Liberia (1f1f1)
+🇱🇸 flag: Lesotho (1f1f1)
+🇱🇹 flag: Lithuania (1f1f1)
+🇱🇺 flag: Luxembourg (1f1f1)
+🇱🇻 flag: Latvia (1f1f1)
+🇱🇾 flag: Libya (1f1f1)
+🇲🇦 flag: Morocco (1f1f2)
+🇲🇨 flag: Monaco (1f1f2)
+🇲🇩 flag: Moldova (1f1f2)
+🇲🇪 flag: Montenegro (1f1f2)
+🇲🇫 flag: St. Martin (1f1f2)
+🇲🇬 flag: Madagascar (1f1f2)
+🇲🇭 flag: Marshall Islands (1f1f2)
+🇲🇰 flag: North Macedonia (1f1f2)
+🇲🇱 flag: Mali (1f1f2)
+🇲🇲 flag: Myanmar (Burma) (1f1f2)
+🇲🇳 flag: Mongolia (1f1f2)
+🇲🇴 flag: Macao SAR China (1f1f2)
+🇲🇵 flag: Northern Mariana Islands (1f1f2)
+🇲🇶 flag: Martinique (1f1f2)
+🇲🇷 flag: Mauritania (1f1f2)
+🇲🇸 flag: Montserrat (1f1f2)
+🇲🇹 flag: Malta (1f1f2)
+🇲🇺 flag: Mauritius (1f1f2)
+🇲🇻 flag: Maldives (1f1f2)
+🇲🇼 flag: Malawi (1f1f2)
+🇲🇽 flag: Mexico (1f1f2)
+🇲🇾 flag: Malaysia (1f1f2)
+🇲🇿 flag: Mozambique (1f1f2)
+🇳🇦 flag: Namibia (1f1f3)
+🇳🇨 flag: New Caledonia (1f1f3)
+🇳🇪 flag: Niger (1f1f3)
+🇳🇫 flag: Norfolk Island (1f1f3)
+🇳🇬 flag: Nigeria (1f1f3)
+🇳🇮 flag: Nicaragua (1f1f3)
+🇳🇱 flag: Netherlands (1f1f3)
+🇳🇴 flag: Norway (1f1f3)
+🇳🇵 flag: Nepal (1f1f3)
+🇳🇷 flag: Nauru (1f1f3)
+🇳🇺 flag: Niue (1f1f3)
+🇳🇿 flag: New Zealand (1f1f3)
+🇴🇲 flag: Oman (1f1f4)
+🇵🇦 flag: Panama (1f1f5)
+🇵🇪 flag: Peru (1f1f5)
+🇵🇫 flag: French Polynesia (1f1f5)
+🇵🇬 flag: Papua New Guinea (1f1f5)
+🇵🇭 flag: Philippines (1f1f5)
+🇵🇰 flag: Pakistan (1f1f5)
+🇵🇱 flag: Poland (1f1f5)
+🇵🇲 flag: St. Pierre & Miquelon (1f1f5)
+🇵🇳 flag: Pitcairn Islands (1f1f5)
+🇵🇷 flag: Puerto Rico (1f1f5)
+🇵🇸 flag: Palestinian Territories (1f1f5)
+🇵🇹 flag: Portugal (1f1f5)
+🇵🇼 flag: Palau (1f1f5)
+🇵🇾 flag: Paraguay (1f1f5)
+🇶🇦 flag: Qatar (1f1f6)
+🇷🇪 flag: Réunion (1f1f7)
+🇷🇴 flag: Romania (1f1f7)
+🇷🇸 flag: Serbia (1f1f7)
+🇷🇺 flag: Russia (1f1f7)
+🇷🇼 flag: Rwanda (1f1f7)
+🇸🇦 flag: Saudi Arabia (1f1f8)
+🇸🇧 flag: Solomon Islands (1f1f8)
+🇸🇨 flag: Seychelles (1f1f8)
+🇸🇩 flag: Sudan (1f1f8)
+🇸🇪 flag: Sweden (1f1f8)
+🇸🇬 flag: Singapore (1f1f8)
+🇸🇭 flag: St. Helena (1f1f8)
+🇸🇮 flag: Slovenia (1f1f8)
+🇸🇯 flag: Svalbard & Jan Mayen (1f1f8)
+🇸🇰 flag: Slovakia (1f1f8)
+🇸🇱 flag: Sierra Leone (1f1f8)
+🇸🇲 flag: San Marino (1f1f8)
+🇸🇳 flag: Senegal (1f1f8)
+🇸🇴 flag: Somalia (1f1f8)
+🇸🇷 flag: Suriname (1f1f8)
+🇸🇸 flag: South Sudan (1f1f8)
+🇸🇹 flag: São Tomé & Príncipe (1f1f8)
+🇸🇻 flag: El Salvador (1f1f8)
+🇸🇽 flag: Sint Maarten (1f1f8)
+🇸🇾 flag: Syria (1f1f8)
+🇸🇿 flag: Eswatini (1f1f8)
+🇹🇦 flag: Tristan da Cunha (1f1f9)
+🇹🇨 flag: Turks & Caicos Islands (1f1f9)
+🇹🇩 flag: Chad (1f1f9)
+🇹🇫 flag: French Southern Territories (1f1f9)
+🇹🇬 flag: Togo (1f1f9)
+🇹🇭 flag: Thailand (1f1f9)
+🇹🇯 flag: Tajikistan (1f1f9)
+🇹🇰 flag: Tokelau (1f1f9)
+🇹🇱 flag: Timor-Leste (1f1f9)
+🇹🇲 flag: Turkmenistan (1f1f9)
+🇹🇳 flag: Tunisia (1f1f9)
+🇹🇴 flag: Tonga (1f1f9)
+🇹🇷 flag: Turkey (1f1f9)
+🇹🇹 flag: Trinidad & Tobago (1f1f9)
+🇹🇻 flag: Tuvalu (1f1f9)
+🇹🇼 flag: Taiwan (1f1f9)
+🇹🇿 flag: Tanzania (1f1f9)
+🇺🇦 flag: Ukraine (1f1fa)
+🇺🇬 flag: Uganda (1f1fa)
+🇺🇲 flag: U.S. Outlying Islands (1f1fa)
+🇺🇳 flag: United Nations (1f1fa)
+🇺🇸 flag: United States (1f1fa)
+🇺🇾 flag: Uruguay (1f1fa)
+🇺🇿 flag: Uzbekistan (1f1fa)
+🇻🇦 flag: Vatican City (1f1fb)
+🇻🇨 flag: St. Vincent & Grenadines (1f1fb)
+🇻🇪 flag: Venezuela (1f1fb)
+🇻🇬 flag: British Virgin Islands (1f1fb)
+🇻🇮 flag: U.S. Virgin Islands (1f1fb)
+🇻🇳 flag: Vietnam (1f1fb)
+🇻🇺 flag: Vanuatu (1f1fb)
+🇼🇫 flag: Wallis & Futuna (1f1fc)
+🇼🇸 flag: Samoa (1f1fc)
+🇽🇰 flag: Kosovo (1f1fd)
+🇾🇪 flag: Yemen (1f1fe)
+🇾🇹 flag: Mayotte (1f1fe)
+🇿🇦 flag: South Africa (1f1ff)
+🇿🇲 flag: Zambia (1f1ff)
+🇿🇼 flag: Zimbabwe (1f1ff)
+🏴󠁧󠁢󠁥󠁮󠁧󠁿 flag: England (1f3f4)
+🏴󠁧󠁢󠁳󠁣󠁴󠁿 flag: Scotland (1f3f4)
+🏴󠁧󠁢󠁷󠁬󠁳󠁿 flag: Wales (1f3f4)
+# Unicode (https://en.wikipedia.org/wiki/List_of_Unicode_characters):
+¡ latin
+¢ latin
+£ latin
+¤ latin
+¥ latin
+¦ latin
+§ latin
+¨ latin
+© latin
+ª latin
+« latin
+¬ latin
+® latin
+¯ latin
+° latin
+± latin
+² latin
+³ latin
+´ latin
+µ latin
+¶ latin
+· latin
+¸ latin
+¹ latin
+º latin
+» latin
+¼ latin
+½ latin
+¾ latin
+¿ latin
+À latin
+Á latin
+Â latin
+Ã latin
+Ä latin
+Å latin
+Æ latin
+Ç latin
+È latin
+É latin
+Ê latin
+Ë latin
+Ì latin
+Í latin
+Î latin
+Ï latin
+Ð latin
+Ñ latin
+Ò latin
+Ó latin
+Ô latin
+Õ latin
+Ö latin
+× latin
+Ø latin
+Ù latin
+Ú latin
+Û latin
+Ü latin
+Ý latin
+Þ latin
+ß latin
+à latin
+á latin
+â latin
+ã latin
+ä latin
+å latin
+æ latin
+ç latin
+è latin
+é latin
+ê latin
+ë latin
+ì latin
+í latin
+î latin
+ï latin
+ð latin
+ñ latin
+ò latin
+ó latin
+ô latin
+õ latin
+ö latin
+÷ latin
+ø latin
+ù latin
+ú latin
+û latin
+ü latin
+ý latin
+þ latin
+ÿ latin
+Ā latin
+ā latin
+Ă latin
+ă latin
+Ą latin
+ą latin
+Ć latin
+ć latin
+Ĉ latin
+ĉ latin
+Ċ latin
+ċ latin
+Č latin
+č latin
+Ď latin
+ď latin
+Đ latin
+đ latin
+Ē latin
+ē latin
+Ĕ latin
+ĕ latin
+Ė latin
+ė latin
+Ę latin
+ę latin
+Ě latin
+ě latin
+Ĝ latin
+ĝ latin
+Ğ latin
+ğ latin
+Ġ latin
+ġ latin
+Ģ latin
+ģ latin
+Ĥ latin
+ĥ latin
+Ħ latin
+ħ latin
+Ĩ latin
+ĩ latin
+Ī latin
+ī latin
+Ĭ latin
+ĭ latin
+Į latin
+į latin
+İ latin
+ı latin
+Ĳ latin
+ĳ latin
+Ĵ latin
+ĵ latin
+Ķ latin
+ķ latin
+ĸ latin
+Ĺ latin
+ĺ latin
+Ļ latin
+ļ latin
+Ľ latin
+ľ latin
+Ŀ latin
+ŀ latin
+Ł latin
+ł latin
+Ń latin
+ń latin
+Ņ latin
+ņ latin
+Ň latin
+ň latin
+ŉ latin
+Ŋ latin
+ŋ latin
+Ō latin
+ō latin
+Ŏ latin
+ŏ latin
+Ő latin
+ő latin
+Œ latin
+œ latin
+Ŕ latin
+ŕ latin
+Ŗ latin
+ŗ latin
+Ř latin
+ř latin
+Ś latin
+ś latin
+Ŝ latin
+ŝ latin
+Ş latin
+ş latin
+Š latin
+š latin
+Ţ latin
+ţ latin
+Ť latin
+ť latin
+Ŧ latin
+ŧ latin
+Ũ latin
+ũ latin
+Ū latin
+ū latin
+Ŭ latin
+ŭ latin
+Ů latin
+ů latin
+Ű latin
+ű latin
+Ų latin
+ų latin
+Ŵ latin
+ŵ latin
+Ŷ latin
+ŷ latin
+Ÿ latin
+Ź latin
+ź latin
+Ż latin
+ż latin
+Ž latin
+ž latin
+ſ latin
+ƀ latin
+Ɓ latin
+Ƃ latin
+ƃ latin
+Ƅ latin
+ƅ latin
+Ɔ latin
+Ƈ latin
+ƈ latin
+Ɖ latin
+Ɗ latin
+Ƌ latin
+ƌ latin
+ƍ latin
+Ǝ latin
+Ə latin
+Ɛ latin
+Ƒ latin
+ƒ latin
+Ɠ latin
+Ɣ latin
+ƕ latin
+Ɩ latin
+Ɨ latin
+Ƙ latin
+ƙ latin
+ƚ latin
+ƛ latin
+Ɯ latin
+Ɲ latin
+ƞ latin
+Ɵ latin
+Ơ latin
+ơ latin
+Ƣ latin
+ƣ latin
+Ƥ latin
+ƥ latin
+Ʀ latin
+Ƨ latin
+ƨ latin
+Ʃ latin
+ƪ latin
+ƫ latin
+Ƭ latin
+ƭ latin
+Ʈ latin
+Ư latin
+ư latin
+Ʊ latin
+Ʋ latin
+Ƴ latin
+ƴ latin
+Ƶ latin
+ƶ latin
+Ʒ latin
+Ƹ latin
+ƹ latin
+ƺ latin
+ƻ latin
+Ƽ latin
+ƽ latin
+ƾ latin
+ƿ latin
+ǀ latin
+ǁ latin
+ǂ latin
+ǃ latin
+Ǆ latin
+ǅ latin
+ǆ latin
+Ǉ latin
+ǈ latin
+ǉ latin
+Ǌ latin
+ǋ latin
+ǌ latin
+Ǎ latin
+ǎ latin
+Ǐ latin
+ǐ latin
+Ǒ latin
+ǒ latin
+Ǔ latin
+ǔ latin
+Ǖ latin
+ǖ latin
+Ǘ latin
+ǘ latin
+Ǚ latin
+ǚ latin
+Ǜ latin
+ǜ latin
+& latin
+ǝ latin
+Ǟ latin
+ǟ latin
+Ǡ latin
+ǡ latin
+Ǣ latin
+ǣ latin
+Ǥ latin
+ǥ latin
+Ǧ latin
+ǧ latin
+Ǩ latin
+ǩ latin
+Ǫ latin
+ǫ latin
+Ǭ latin
+ǭ latin
+Ǯ latin
+ǯ latin
+ǰ latin
+Ǳ latin
+ǲ latin
+ǳ latin
+Ǵ latin
+ǵ latin
+Ƕ latin
+Ƿ latin
+Ǹ latin
+ǹ latin
+Ǻ latin
+ǻ latin
+Ǽ latin
+ǽ latin
+Ǿ latin
+ǿ latin
+Ȁ latin
+ȁ latin
+Ȃ latin
+ȃ latin
+Ȅ latin
+ȅ latin
+Ȇ latin
+ȇ latin
+Ȉ latin
+ȉ latin
+Ȋ latin
+ȋ latin
+Ȍ latin
+ȍ latin
+Ȏ latin
+ȏ latin
+Ȑ latin
+ȑ latin
+Ȓ latin
+ȓ latin
+Ȕ latin
+ȕ latin
+Ȗ latin
+ȗ latin
+Ș latin
+ș latin
+Ț latin
+ț latin
+Ȝ latin
+ȝ latin
+Ȟ latin
+ȟ latin
+Ƞ latin
+ȡ latin
+Ȣ latin
+ȣ latin
+Ȥ latin
+ȥ latin
+Ȧ latin
+ȧ latin
+Ȩ latin
+ȩ latin
+Ȫ latin
+ȫ latin
+Ȭ latin
+ȭ latin
+Ȯ latin
+ȯ latin
+Ȱ latin
+ȱ latin
+Ȳ latin
+ȳ latin
+ȴ latin
+ȵ latin
+ȶ latin
+ȷ latin
+ȸ latin
+ȹ latin
+Ⱥ latin
+Ȼ latin
+ȼ latin
+Ƚ latin
+Ⱦ latin
+ȿ latin
+ɀ latin
+Ɂ latin
+ɂ latin
+Ƀ latin
+Ʉ latin
+Ʌ latin
+Ɇ latin
+ɇ latin
+Ɉ latin
+ɉ latin
+Ɋ latin
+ɋ latin
+Ɍ latin
+ɍ latin
+Ɏ latin
+ɏ latin
+Ḃ latin
+ḃ latin
+Ḋ latin
+ḋ latin
+Ḟ latin
+ḟ latin
+Ṁ latin
+ṁ latin
+Ṗ latin
+ṗ latin
+Ṡ latin
+ṡ latin
+Ṫ latin
+ṫ latin
+Ẁ latin
+ẁ latin
+Ẃ latin
+ẃ latin
+Ẅ latin
+ẅ latin
+ẛ latin
+Ỳ latin
+ỳ latin
+ə latin
+ɼ latin
+ʒ latin
+ʰ spacing modifier letters
+ʱ spacing modifier letters
+ʲ spacing modifier letters
+ʳ spacing modifier letters
+ʴ spacing modifier letters
+ʵ spacing modifier letters
+ʶ spacing modifier letters
+ʷ spacing modifier letters
+ʸ spacing modifier letters
+ʹ spacing modifier letters
+ʺ spacing modifier letters
+ʻ spacing modifier letters
+ʼ spacing modifier letters
+ʽ spacing modifier letters
+ʾ spacing modifier letters
+ʿ spacing modifier letters
+ˀ spacing modifier letters
+ˁ spacing modifier letters
+˂ spacing modifier letters
+˃ spacing modifier letters
+˄ spacing modifier letters
+˅ spacing modifier letters
+ˆ spacing modifier letters
+ˇ spacing modifier letters
+ˈ spacing modifier letters
+ˉ spacing modifier letters
+ˊ spacing modifier letters
+ˋ spacing modifier letters
+ˌ spacing modifier letters
+ˍ spacing modifier letters
+ˎ spacing modifier letters
+ˏ spacing modifier letters
+ː spacing modifier letters
+ˑ spacing modifier letters
+˒ spacing modifier letters
+˓ spacing modifier letters
+˔ spacing modifier letters
+˕ spacing modifier letters
+˖ spacing modifier letters
+˗ spacing modifier letters
+˘ spacing modifier letters
+˙ spacing modifier letters
+˚ spacing modifier letters
+˛ spacing modifier letters
+˜ spacing modifier letters
+˝ spacing modifier letters
+˞ spacing modifier letters
+˟ spacing modifier letters
+ˠ spacing modifier letters
+ˡ spacing modifier letters
+ˢ spacing modifier letters
+ˣ spacing modifier letters
+ˤ spacing modifier letters
+˥ spacing modifier letters
+˦ spacing modifier letters
+˧ spacing modifier letters
+˨ spacing modifier letters
+˩ spacing modifier letters
+˪ spacing modifier letters
+˫ spacing modifier letters
+ˬ spacing modifier letters
+˭ spacing modifier letters
+ˮ spacing modifier letters
+˯ spacing modifier letters
+˰ spacing modifier letters
+˱ spacing modifier letters
+˲ spacing modifier letters
+˳ spacing modifier letters
+˴ spacing modifier letters
+˵ spacing modifier letters
+˶ spacing modifier letters
+˷ spacing modifier letters
+˸ spacing modifier letters
+˹ spacing modifier letters
+˺ spacing modifier letters
+˻ spacing modifier letters
+˼ spacing modifier letters
+˽ spacing modifier letters
+˾ spacing modifier letters
+˿ spacing modifier letters
+Ͱ greek and coptic
+ͱ greek and coptic
+Ͳ greek and coptic
+ͳ greek and coptic
+ʹ greek and coptic
+͵ greek and coptic
+Ͷ greek and coptic
+ͷ greek and coptic
+ͺ greek and coptic
+ͻ greek and coptic
+ͼ greek and coptic
+ͽ greek and coptic
+; greek and coptic
+Ϳ greek and coptic
+΄ greek and coptic
+΅ greek and coptic
+Ά greek and coptic
+· greek and coptic
+Έ greek and coptic
+Ή greek and coptic
+Ί greek and coptic
+Ό greek and coptic
+Ύ greek and coptic
+Ώ greek and coptic
+ΐ greek and coptic
+Α greek and coptic
+Β greek and coptic
+Γ greek and coptic
+Δ greek and coptic
+Ε greek and coptic
+Ζ greek and coptic
+Η greek and coptic
+Θ greek and coptic
+Ι greek and coptic
+Κ greek and coptic
+Λ greek and coptic
+Μ greek and coptic
+Ν greek and coptic
+Ξ greek and coptic
+Ο greek and coptic
+Π greek and coptic
+Ρ greek and coptic
+Σ greek and coptic
+Τ greek and coptic
+Υ greek and coptic
+Φ greek and coptic
+Χ greek and coptic
+Ψ greek and coptic
+Ω greek and coptic
+Ϊ greek and coptic
+Ϋ greek and coptic
+ά greek and coptic
+έ greek and coptic
+ή greek and coptic
+ί greek and coptic
+ΰ greek and coptic
+α greek and coptic
+β greek and coptic
+γ greek and coptic
+δ greek and coptic
+ε greek and coptic
+ζ greek and coptic
+η greek and coptic
+θ greek and coptic
+ι greek and coptic
+κ greek and coptic
+λ greek and coptic
+μ greek and coptic
+ν greek and coptic
+ξ greek and coptic
+ο greek and coptic
+π greek and coptic
+ρ greek and coptic
+ς greek and coptic
+σ greek and coptic
+τ greek and coptic
+υ greek and coptic
+φ greek and coptic
+χ greek and coptic
+ψ greek and coptic
+ω greek and coptic
+ϊ greek and coptic
+ϋ greek and coptic
+ό greek and coptic
+ύ greek and coptic
+ώ greek and coptic
+Ϗ greek and coptic
+ϐ greek and coptic
+ϑ greek and coptic
+ϒ greek and coptic
+ϓ greek and coptic
+ϔ greek and coptic
+ϕ greek and coptic
+ϖ greek and coptic
+ϗ greek and coptic
+Ϙ greek and coptic
+ϙ greek and coptic
+Ϛ greek and coptic
+ϛ greek and coptic
+Ϝ greek and coptic
+ϝ greek and coptic
+Ϟ greek and coptic
+ϟ greek and coptic
+Ϡ greek and coptic
+ϡ greek and coptic
+Ϣ greek and coptic
+ϣ greek and coptic
+Ϥ greek and coptic
+ϥ greek and coptic
+Ϧ greek and coptic
+ϧ greek and coptic
+Ϩ greek and coptic
+ϩ greek and coptic
+Ϫ greek and coptic
+ϫ greek and coptic
+Ϭ greek and coptic
+ϭ greek and coptic
+Ϯ greek and coptic
+ϯ greek and coptic
+ϰ greek and coptic
+ϱ greek and coptic
+ϲ greek and coptic
+ϳ greek and coptic
+ϴ greek and coptic
+ϵ greek and coptic
+϶ greek and coptic
+Ϸ greek and coptic
+ϸ greek and coptic
+Ϲ greek and coptic
+Ϻ greek and coptic
+ϻ greek and coptic
+ϼ greek and coptic
+Ͻ greek and coptic
+Ͼ greek and coptic
+Ͽ greek and coptic
+ἀ greek
+ἁ greek
+ἂ greek
+ἃ greek
+ἄ greek
+ἅ greek
+ἆ greek
+ἇ greek
+Ἀ greek
+Ἁ greek
+Ἂ greek
+Ἃ greek
+Ἄ greek
+Ἅ greek
+Ἆ greek
+Ἇ greek
+ἐ greek
+ἑ greek
+ἒ greek
+ἓ greek
+ἔ greek
+ἕ greek
+Ἐ greek
+Ἑ greek
+Ἒ greek
+Ἓ greek
+Ἔ greek
+Ἕ greek
+ἠ greek
+ἡ greek
+ἢ greek
+ἣ greek
+ἤ greek
+ἥ greek
+ἦ greek
+ἧ greek
+Ἠ greek
+Ἡ greek
+Ἢ greek
+Ἣ greek
+Ἤ greek
+Ἥ greek
+Ἦ greek
+Ἧ greek
+ἰ greek
+ἱ greek
+ἲ greek
+ἳ greek
+ἴ greek
+ἵ greek
+ἶ greek
+ἷ greek
+Ἰ greek
+Ἱ greek
+Ἲ greek
+Ἳ greek
+Ἴ greek
+Ἵ greek
+Ἶ greek
+Ἷ greek
+ὀ greek
+ὁ greek
+ὂ greek
+ὃ greek
+ὄ greek
+ὅ greek
+Ὀ greek
+Ὁ greek
+Ὂ greek
+Ὃ greek
+Ὄ greek
+Ὅ greek
+ὐ greek
+ὑ greek
+ὒ greek
+ὓ greek
+ὔ greek
+ὕ greek
+ὖ greek
+ὗ greek
+Ὑ greek
+Ὓ greek
+Ὕ greek
+Ὗ greek
+ὠ greek
+ὡ greek
+ὢ greek
+ὣ greek
+ὤ greek
+ὥ greek
+ὦ greek
+ὧ greek
+Ὠ greek
+Ὡ greek
+Ὢ greek
+Ὣ greek
+Ὤ greek
+Ὥ greek
+Ὦ greek
+Ὧ greek
+ὰ greek
+ά greek
+ὲ greek
+έ greek
+ὴ greek
+ή greek
+ὶ greek
+ί greek
+ὸ greek
+ό greek
+ὺ greek
+ύ greek
+ὼ greek
+ώ greek
+ᾀ greek
+ᾁ greek
+ᾂ greek
+ᾃ greek
+ᾄ greek
+ᾅ greek
+ᾆ greek
+ᾇ greek
+ᾈ greek
+ᾉ greek
+ᾊ greek
+ᾋ greek
+ᾌ greek
+ᾍ greek
+ᾎ greek
+ᾏ greek
+ᾐ greek
+ᾑ greek
+ᾒ greek
+ᾓ greek
+ᾔ greek
+ᾕ greek
+ᾖ greek
+ᾗ greek
+ᾘ greek
+ᾙ greek
+ᾚ greek
+ᾛ greek
+ᾜ greek
+ᾝ greek
+ᾞ greek
+ᾟ greek
+ᾠ greek
+ᾡ greek
+ᾢ greek
+ᾣ greek
+ᾤ greek
+ᾥ greek
+ᾦ greek
+ᾧ greek
+ᾨ greek
+ᾩ greek
+ᾪ greek
+ᾫ greek
+ᾬ greek
+ᾭ greek
+ᾮ greek
+ᾯ greek
+ᾰ greek
+ᾱ greek
+ᾲ greek
+ᾳ greek
+ᾴ greek
+ᾶ greek
+ᾷ greek
+Ᾰ greek
+Ᾱ greek
+Ὰ greek
+Ά greek
+ᾼ greek
+᾽ greek
+ι greek
+᾿ greek
+ῂ greek
+ῃ greek
+ῄ greek
+ῆ greek
+ῇ greek
+Ὲ greek
+Έ greek
+Ὴ greek
+Ή greek
+ῌ greek
+῍ greek
+῎ greek
+῏ greek
+ῐ greek
+ῑ greek
+ῒ greek
+ΐ greek
+ῖ greek
+ῗ greek
+Ῐ greek
+Ῑ greek
+Ὶ greek
+Ί greek
+῝ greek
+῞ greek
+῟ greek
+ῠ greek
+ῡ greek
+ῢ greek
+ΰ greek
+ῤ greek
+ῥ greek
+ῦ greek
+ῧ greek
+Ῠ greek
+Ῡ greek
+Ὺ greek
+Ύ greek
+Ῥ greek
+῭ greek
+΅ greek
+` greek
+ῲ greek
+ῳ greek
+ῴ greek
+ῶ greek
+ῷ greek
+Ὸ greek
+Ό greek
+Ὼ greek
+Ώ greek
+ῼ greek
+´ greek
+῾ greek
+Ѐ cyrillic
+Ё cyrillic
+Ђ cyrillic
+Ѓ cyrillic
+Є cyrillic
+Ѕ cyrillic
+І cyrillic
+Ї cyrillic
+Ј cyrillic
+Љ cyrillic
+Њ cyrillic
+Ћ cyrillic
+Ќ cyrillic
+Ѝ cyrillic
+Ў cyrillic
+Џ cyrillic
+А cyrillic
+Б cyrillic
+В cyrillic
+Г cyrillic
+Д cyrillic
+Е cyrillic
+Ж cyrillic
+З cyrillic
+И cyrillic
+Й cyrillic
+К cyrillic
+Л cyrillic
+М cyrillic
+Н cyrillic
+О cyrillic
+П cyrillic
+Р cyrillic
+С cyrillic
+Т cyrillic
+У cyrillic
+Ф cyrillic
+Х cyrillic
+Ц cyrillic
+Ч cyrillic
+Ш cyrillic
+Щ cyrillic
+Ъ cyrillic
+Ы cyrillic
+Ь cyrillic
+Э cyrillic
+Ю cyrillic
+Я cyrillic
+а cyrillic
+б cyrillic
+в cyrillic
+г cyrillic
+д cyrillic
+е cyrillic
+ж cyrillic
+з cyrillic
+и cyrillic
+й cyrillic
+к cyrillic
+л cyrillic
+м cyrillic
+н cyrillic
+о cyrillic
+п cyrillic
+р cyrillic
+с cyrillic
+т cyrillic
+у cyrillic
+ф cyrillic
+х cyrillic
+ц cyrillic
+ч cyrillic
+ш cyrillic
+щ cyrillic
+ъ cyrillic
+ы cyrillic
+ь cyrillic
+э cyrillic
+ю cyrillic
+я cyrillic
+ѐ cyrillic
+ё cyrillic
+ђ cyrillic
+ѓ cyrillic
+є cyrillic
+ѕ cyrillic
+і cyrillic
+ї cyrillic
+ј cyrillic
+љ cyrillic
+њ cyrillic
+ћ cyrillic
+ќ cyrillic
+ѝ cyrillic
+ў cyrillic
+џ cyrillic
+Ѡ cyrillic
+ѡ cyrillic
+Ѣ cyrillic
+ѣ cyrillic
+Ѥ cyrillic
+ѥ cyrillic
+Ѧ cyrillic
+ѧ cyrillic
+Ѩ cyrillic
+ѩ cyrillic
+Ѫ cyrillic
+ѫ cyrillic
+Ѭ cyrillic
+ѭ cyrillic
+Ѯ cyrillic
+ѯ cyrillic
+Ѱ cyrillic
+ѱ cyrillic
+Ѳ cyrillic
+ѳ cyrillic
+Ѵ cyrillic
+ѵ cyrillic
+Ѷ cyrillic
+ѷ cyrillic
+Ѹ cyrillic
+ѹ cyrillic
+Ѻ cyrillic
+ѻ cyrillic
+Ѽ cyrillic
+ѽ cyrillic
+Ѿ cyrillic
+ѿ cyrillic
+Ҁ cyrillic
+ҁ cyrillic
+҂ cyrillic
+҃ cyrillic
+҄ cyrillic
+҅ cyrillic
+҆ cyrillic
+҇ cyrillic
+҈ cyrillic
+҉ cyrillic
+Ҋ cyrillic
+ҋ cyrillic
+Ҍ cyrillic
+ҍ cyrillic
+Ҏ cyrillic
+ҏ cyrillic
+Ґ cyrillic
+ґ cyrillic
+Ғ cyrillic
+ғ cyrillic
+Ҕ cyrillic
+ҕ cyrillic
+Җ cyrillic
+җ cyrillic
+Ҙ cyrillic
+ҙ cyrillic
+Қ cyrillic
+қ cyrillic
+Ҝ cyrillic
+ҝ cyrillic
+Ҟ cyrillic
+ҟ cyrillic
+Ҡ cyrillic
+ҡ cyrillic
+Ң cyrillic
+ң cyrillic
+Ҥ cyrillic
+ҥ cyrillic
+Ҧ cyrillic
+ҧ cyrillic
+Ҩ cyrillic
+ҩ cyrillic
+Ҫ cyrillic
+ҫ cyrillic
+Ҭ cyrillic
+ҭ cyrillic
+Ү cyrillic
+ү cyrillic
+Ұ cyrillic
+ұ cyrillic
+Ҳ cyrillic
+ҳ cyrillic
+Ҵ cyrillic
+ҵ cyrillic
+Ҷ cyrillic
+ҷ cyrillic
+Ҹ cyrillic
+ҹ cyrillic
+Һ cyrillic
+һ cyrillic
+Ҽ cyrillic
+ҽ cyrillic
+Ҿ cyrillic
+ҿ cyrillic
+Ӏ cyrillic
+Ӂ cyrillic
+ӂ cyrillic
+Ӄ cyrillic
+ӄ cyrillic
+Ӆ cyrillic
+ӆ cyrillic
+Ӈ cyrillic
+ӈ cyrillic
+Ӊ cyrillic
+ӊ cyrillic
+Ӌ cyrillic
+ӌ cyrillic
+Ӎ cyrillic
+ӎ cyrillic
+ӏ cyrillic
+Ӑ cyrillic
+ӑ cyrillic
+Ӓ cyrillic
+ӓ cyrillic
+Ӕ cyrillic
+ӕ cyrillic
+Ӗ cyrillic
+ӗ cyrillic
+Ә cyrillic
+ә cyrillic
+Ӛ cyrillic
+ӛ cyrillic
+Ӝ cyrillic
+ӝ cyrillic
+Ӟ cyrillic
+ӟ cyrillic
+Ӡ cyrillic
+ӡ cyrillic
+Ӣ cyrillic
+ӣ cyrillic
+Ӥ cyrillic
+ӥ cyrillic
+Ӧ cyrillic
+ӧ cyrillic
+Ө cyrillic
+ө cyrillic
+Ӫ cyrillic
+ӫ cyrillic
+Ӭ cyrillic
+ӭ cyrillic
+Ӯ cyrillic
+ӯ cyrillic
+Ӱ cyrillic
+ӱ cyrillic
+Ӳ cyrillic
+ӳ cyrillic
+Ӵ cyrillic
+ӵ cyrillic
+Ӷ cyrillic
+ӷ cyrillic
+Ӹ cyrillic
+ӹ cyrillic
+Ӻ cyrillic
+ӻ cyrillic
+Ӽ cyrillic
+ӽ cyrillic
+Ӿ cyrillic
+ӿ cyrillic
+– unicode symbols
+— unicode symbols
+― unicode symbols
+‗ unicode symbols
+‘ unicode symbols
+’ unicode symbols
+‚ unicode symbols
+‛ unicode symbols
+“ unicode symbols
+” unicode symbols
+„ unicode symbols
+† unicode symbols
+‡ unicode symbols
+• unicode symbols
+… unicode symbols
+‰ unicode symbols
+′ unicode symbols
+″ unicode symbols
+‹ unicode symbols
+› unicode symbols
+‼ unicode symbols
+‾ unicode symbols
+⁄ unicode symbols
+⁊ unicode symbols
+‐ general punctuation
+‑ general punctuation
+‒ general punctuation
+– general punctuation
+— general punctuation
+― general punctuation
+‖ general punctuation
+‗ general punctuation
+‘ general punctuation
+’ general punctuation
+‚ general punctuation
+‛ general punctuation
+“ general punctuation
+” general punctuation
+„ general punctuation
+‟ general punctuation
+† general punctuation
+‡ general punctuation
+• general punctuation
+‣ general punctuation
+․ general punctuation
+‥ general punctuation
+… general punctuation
+‧ general punctuation
+‰ general punctuation
+‱ general punctuation
+′ general punctuation
+″ general punctuation
+‴ general punctuation
+‵ general punctuation
+‶ general punctuation
+‷ general punctuation
+‸ general punctuation
+‹ general punctuation
+› general punctuation
+※ general punctuation
+‼ general punctuation
+‽ general punctuation
+‾ general punctuation
+‿ general punctuation
+⁀ general punctuation
+⁁ general punctuation
+⁂ general punctuation
+⁃ general punctuation
+⁄ general punctuation
+⁅ general punctuation
+⁆ general punctuation
+⁇ general punctuation
+⁈ general punctuation
+⁉ general punctuation
+⁊ general punctuation
+⁋ general punctuation
+⁌ general punctuation
+⁍ general punctuation
+⁎ general punctuation
+⁏ general punctuation
+⁐ general punctuation
+⁑ general punctuation
+⁒ general punctuation
+⁓ general punctuation
+⁔ general punctuation
+⁕ general punctuation
+⁖ general punctuation
+⁗ general punctuation
+⁘ general punctuation
+⁙ general punctuation
+⁚ general punctuation
+⁛ general punctuation
+⁜ general punctuation
+⁝ general punctuation
+⁞ general punctuation
+₠ currency
+₡ currency
+₢ currency
+₣ currency
+₤ currency
+₥ currency
+₦ currency
+₧ currency
+₨ currency
+₩ currency
+₪ currency
+₫ currency
+€ currency
+₭ currency
+₮ currency
+₯ currency
+₰ currency
+₱ currency
+₲ currency
+₳ currency
+₴ currency
+₵ currency
+₶ currency
+₷ currency
+₸ currency
+₹ currency
+₺ currency
+₻ currency
+₼ currency
+₽ currency
+₾ currency
+℀ letter-like symbols
+℁ letter-like symbols
+ℂ letter-like symbols
+℃ letter-like symbols
+℄ letter-like symbols
+℅ letter-like symbols
+℆ letter-like symbols
+ℇ letter-like symbols
+℈ letter-like symbols
+℉ letter-like symbols
+ℊ letter-like symbols
+ℋ letter-like symbols
+ℌ letter-like symbols
+ℍ letter-like symbols
+ℎ letter-like symbols
+ℏ letter-like symbols
+ℐ letter-like symbols
+ℑ letter-like symbols
+ℒ letter-like symbols
+ℓ letter-like symbols
+℔ letter-like symbols
+ℕ letter-like symbols
+№ letter-like symbols
+℗ letter-like symbols
+℘ letter-like symbols
+ℙ letter-like symbols
+ℚ letter-like symbols
+ℛ letter-like symbols
+ℜ letter-like symbols
+ℝ letter-like symbols
+℞ letter-like symbols
+℟ letter-like symbols
+℠ letter-like symbols
+℡ letter-like symbols
+™ letter-like symbols
+℣ letter-like symbols
+ℤ letter-like symbols
+℥ letter-like symbols
+Ω letter-like symbols
+℧ letter-like symbols
+ℨ letter-like symbols
+℩ letter-like symbols
+K letter-like symbols
+Å letter-like symbols
+ℬ letter-like symbols
+ℭ letter-like symbols
+℮ letter-like symbols
+ℯ letter-like symbols
+ℰ letter-like symbols
+ℱ letter-like symbols
+Ⅎ letter-like symbols
+ℳ letter-like symbols
+ℴ letter-like symbols
+ℵ letter-like symbols
+ℶ letter-like symbols
+ℷ letter-like symbols
+ℸ letter-like symbols
+ℹ letter-like symbols
+℺ letter-like symbols
+℻ letter-like symbols
+ℼ letter-like symbols
+ℽ letter-like symbols
+ℾ letter-like symbols
+ℿ letter-like symbols
+⅀ letter-like symbols
+⅁ letter-like symbols
+⅂ letter-like symbols
+⅃ letter-like symbols
+⅄ letter-like symbols
+ⅅ letter-like symbols
+ⅆ letter-like symbols
+ⅇ letter-like symbols
+ⅈ letter-like symbols
+ⅉ letter-like symbols
+⅊ letter-like symbols
+⅋ letter-like symbols
+⅌ letter-like symbols
+⅍ letter-like symbols
+ⅎ letter-like symbols
+⅏ letter-like symbols
+⅓ number forms
+⅔ number forms
+⅕ number forms
+⅖ number forms
+⅗ number forms
+⅘ number forms
+⅙ number forms
+⅚ number forms
+⅛ number forms
+⅜ number forms
+⅝ number forms
+⅞ number forms
+⅟ number forms
+Ⅰ number forms
+Ⅱ number forms
+Ⅲ number forms
+Ⅳ number forms
+Ⅴ number forms
+Ⅵ number forms
+Ⅶ number forms
+Ⅷ number forms
+Ⅸ number forms
+Ⅹ number forms
+Ⅺ number forms
+Ⅻ number forms
+ⅰ number forms
+ⅱ number forms
+ⅲ number forms
+ⅳ number forms
+ⅴ number forms
+ⅵ number forms
+ⅶ number forms
+ⅷ number forms
+ⅸ number forms
+ⅹ number forms
+ⅺ number forms
+ⅻ number forms
+← arrows
+↑ arrows
+→ arrows
+↓ arrows
+↔ arrows
+↕ arrows
+↖ arrows
+↗ arrows
+↘ arrows
+↙ arrows
+↚ arrows
+↛ arrows
+↜ arrows
+↝ arrows
+↞ arrows
+↟ arrows
+↠ arrows
+↡ arrows
+↢ arrows
+↣ arrows
+↤ arrows
+↥ arrows
+↦ arrows
+↧ arrows
+↨ arrows
+↩ arrows
+↪ arrows
+↫ arrows
+↬ arrows
+↭ arrows
+↮ arrows
+↯ arrows
+↰ arrows
+↱ arrows
+↲ arrows
+↳ arrows
+↴ arrows
+↵ arrows
+↶ arrows
+↷ arrows
+↸ arrows
+↹ arrows
+↺ arrows
+↻ arrows
+↼ arrows
+↽ arrows
+↾ arrows
+↿ arrows
+⇀ arrows
+⇁ arrows
+⇂ arrows
+⇃ arrows
+⇄ arrows
+⇅ arrows
+⇆ arrows
+⇇ arrows
+⇈ arrows
+⇉ arrows
+⇊ arrows
+⇋ arrows
+⇌ arrows
+⇍ arrows
+⇎ arrows
+⇏ arrows
+⇐ arrows
+⇑ arrows
+⇒ arrows
+⇓ arrows
+⇔ arrows
+⇕ arrows
+⇖ arrows
+⇗ arrows
+⇘ arrows
+⇙ arrows
+⇚ arrows
+⇛ arrows
+⇜ arrows
+⇝ arrows
+⇞ arrows
+⇟ arrows
+⇠ arrows
+⇡ arrows
+⇢ arrows
+⇣ arrows
+⇤ arrows
+⇥ arrows
+⇦ arrows
+⇧ arrows
+⇨ arrows
+⇩ arrows
+⇪ arrows
+⇫ arrows
+⇬ arrows
+⇭ arrows
+⇮ arrows
+⇯ arrows
+⇰ arrows
+⇱ arrows
+⇲ arrows
+⇳ arrows
+⇴ arrows
+⇵ arrows
+⇶ arrows
+⇷ arrows
+⇸ arrows
+⇹ arrows
+⇺ arrows
+⇻ arrows
+⇼ arrows
+⇽ arrows
+⇾ arrows
+⇿ arrows
+∀ mathematical symbols
+∁ mathematical symbols
+∂ mathematical symbols
+∃ mathematical symbols
+∄ mathematical symbols
+∅ mathematical symbols
+∆ mathematical symbols
+∇ mathematical symbols
+∈ mathematical symbols
+∉ mathematical symbols
+∊ mathematical symbols
+∋ mathematical symbols
+∌ mathematical symbols
+∍ mathematical symbols
+∎ mathematical symbols
+∏ mathematical symbols
+∐ mathematical symbols
+∑ mathematical symbols
+− mathematical symbols
+∓ mathematical symbols
+∔ mathematical symbols
+∕ mathematical symbols
+∖ mathematical symbols
+∗ mathematical symbols
+∘ mathematical symbols
+∙ mathematical symbols
+√ mathematical symbols
+∛ mathematical symbols
+∜ mathematical symbols
+∝ mathematical symbols
+∞ mathematical symbols
+∟ mathematical symbols
+∠ mathematical symbols
+∡ mathematical symbols
+∢ mathematical symbols
+∣ mathematical symbols
+∤ mathematical symbols
+∥ mathematical symbols
+∦ mathematical symbols
+∧ mathematical symbols
+∨ mathematical symbols
+∩ mathematical symbols
+∪ mathematical symbols
+∫ mathematical symbols
+∬ mathematical symbols
+∭ mathematical symbols
+∮ mathematical symbols
+∯ mathematical symbols
+∰ mathematical symbols
+∱ mathematical symbols
+∲ mathematical symbols
+∳ mathematical symbols
+∴ mathematical symbols
+∵ mathematical symbols
+∶ mathematical symbols
+∷ mathematical symbols
+∸ mathematical symbols
+∹ mathematical symbols
+∺ mathematical symbols
+∻ mathematical symbols
+∼ mathematical symbols
+∽ mathematical symbols
+∾ mathematical symbols
+∿ mathematical symbols
+≀ mathematical symbols
+≁ mathematical symbols
+≂ mathematical symbols
+≃ mathematical symbols
+≄ mathematical symbols
+≅ mathematical symbols
+≆ mathematical symbols
+≇ mathematical symbols
+≈ mathematical symbols
+≉ mathematical symbols
+≊ mathematical symbols
+≋ mathematical symbols
+≌ mathematical symbols
+≍ mathematical symbols
+≎ mathematical symbols
+≏ mathematical symbols
+≐ mathematical symbols
+≑ mathematical symbols
+≒ mathematical symbols
+≓ mathematical symbols
+≔ mathematical symbols
+≕ mathematical symbols
+≖ mathematical symbols
+≗ mathematical symbols
+≘ mathematical symbols
+≙ mathematical symbols
+≚ mathematical symbols
+≛ mathematical symbols
+≜ mathematical symbols
+≝ mathematical symbols
+≞ mathematical symbols
+≟ mathematical symbols
+≠ mathematical symbols
+≡ mathematical symbols
+≢ mathematical symbols
+≣ mathematical symbols
+≤ mathematical symbols
+≥ mathematical symbols
+≦ mathematical symbols
+≧ mathematical symbols
+≨ mathematical symbols
+≩ mathematical symbols
+≪ mathematical symbols
+≫ mathematical symbols
+≬ mathematical symbols
+≭ mathematical symbols
+≮ mathematical symbols
+≯ mathematical symbols
+≰ mathematical symbols
+≱ mathematical symbols
+≲ mathematical symbols
+≳ mathematical symbols
+≴ mathematical symbols
+≵ mathematical symbols
+≶ mathematical symbols
+≷ mathematical symbols
+≸ mathematical symbols
+≹ mathematical symbols
+≺ mathematical symbols
+≻ mathematical symbols
+≼ mathematical symbols
+≽ mathematical symbols
+≾ mathematical symbols
+≿ mathematical symbols
+⊀ mathematical symbols
+⊁ mathematical symbols
+⊂ mathematical symbols
+⊃ mathematical symbols
+⊄ mathematical symbols
+⊅ mathematical symbols
+⊆ mathematical symbols
+⊇ mathematical symbols
+⊈ mathematical symbols
+⊉ mathematical symbols
+⊊ mathematical symbols
+⊋ mathematical symbols
+⊌ mathematical symbols
+⊍ mathematical symbols
+⊎ mathematical symbols
+⊏ mathematical symbols
+⊐ mathematical symbols
+⊑ mathematical symbols
+⊒ mathematical symbols
+⊓ mathematical symbols
+⊔ mathematical symbols
+⊕ mathematical symbols
+⊖ mathematical symbols
+⊗ mathematical symbols
+⊘ mathematical symbols
+⊙ mathematical symbols
+⊚ mathematical symbols
+⊛ mathematical symbols
+⊜ mathematical symbols
+⊝ mathematical symbols
+⊞ mathematical symbols
+⊟ mathematical symbols
+⊠ mathematical symbols
+⊡ mathematical symbols
+⊢ mathematical symbols
+⊣ mathematical symbols
+⊤ mathematical symbols
+⊥ mathematical symbols
+⊦ mathematical symbols
+⊧ mathematical symbols
+⊨ mathematical symbols
+⊩ mathematical symbols
+⊪ mathematical symbols
+⊫ mathematical symbols
+⊬ mathematical symbols
+⊭ mathematical symbols
+⊮ mathematical symbols
+⊯ mathematical symbols
+⊰ mathematical symbols
+⊱ mathematical symbols
+⊲ mathematical symbols
+⊳ mathematical symbols
+⊴ mathematical symbols
+⊵ mathematical symbols
+⊶ mathematical symbols
+⊷ mathematical symbols
+⊸ mathematical symbols
+⊹ mathematical symbols
+⊺ mathematical symbols
+⊻ mathematical symbols
+⊼ mathematical symbols
+⊽ mathematical symbols
+⊾ mathematical symbols
+⊿ mathematical symbols
+⋀ mathematical symbols
+⋁ mathematical symbols
+⋂ mathematical symbols
+⋃ mathematical symbols
+⋄ mathematical symbols
+⋅ mathematical symbols
+⋆ mathematical symbols
+⋇ mathematical symbols
+⋈ mathematical symbols
+⋉ mathematical symbols
+⋊ mathematical symbols
+⋋ mathematical symbols
+⋌ mathematical symbols
+⋍ mathematical symbols
+⋎ mathematical symbols
+⋏ mathematical symbols
+⋐ mathematical symbols
+⋑ mathematical symbols
+⋒ mathematical symbols
+⋓ mathematical symbols
+⋔ mathematical symbols
+⋕ mathematical symbols
+⋖ mathematical symbols
+⋗ mathematical symbols
+⋘ mathematical symbols
+⋙ mathematical symbols
+⋚ mathematical symbols
+⋛ mathematical symbols
+⋜ mathematical symbols
+⋝ mathematical symbols
+⋞ mathematical symbols
+⋟ mathematical symbols
+⋠ mathematical symbols
+⋡ mathematical symbols
+⋢ mathematical symbols
+⋣ mathematical symbols
+⋤ mathematical symbols
+⋥ mathematical symbols
+⋦ mathematical symbols
+⋧ mathematical symbols
+⋨ mathematical symbols
+⋩ mathematical symbols
+⋪ mathematical symbols
+⋫ mathematical symbols
+⋬ mathematical symbols
+⋭ mathematical symbols
+⋮ mathematical symbols
+⋯ mathematical symbols
+⋰ mathematical symbols
+⋱ mathematical symbols
+⋲ mathematical symbols
+⋳ mathematical symbols
+⋴ mathematical symbols
+⋵ mathematical symbols
+⋶ mathematical symbols
+⋷ mathematical symbols
+⋸ mathematical symbols
+⋹ mathematical symbols
+⋺ mathematical symbols
+⋻ mathematical symbols
+⋼ mathematical symbols
+⋽ mathematical symbols
+⋾ mathematical symbols
+⋿ mathematical symbols
+⌀ miscellaneous technical
+⌁ miscellaneous technical
+⌂ miscellaneous technical
+⌃ miscellaneous technical
+⌄ miscellaneous technical
+⌅ miscellaneous technical
+⌆ miscellaneous technical
+⌇ miscellaneous technical
+⌈ miscellaneous technical
+⌉ miscellaneous technical
+⌊ miscellaneous technical
+⌋ miscellaneous technical
+⌌ miscellaneous technical
+⌍ miscellaneous technical
+⌎ miscellaneous technical
+⌏ miscellaneous technical
+⌐ miscellaneous technical
+⌑ miscellaneous technical
+⌒ miscellaneous technical
+⌓ miscellaneous technical
+⌔ miscellaneous technical
+⌕ miscellaneous technical
+⌖ miscellaneous technical
+⌗ miscellaneous technical
+⌘ miscellaneous technical
+⌙ miscellaneous technical
+⌚ miscellaneous technical
+⌛ miscellaneous technical
+⌜ miscellaneous technical
+⌝ miscellaneous technical
+⌞ miscellaneous technical
+⌟ miscellaneous technical
+⌠ miscellaneous technical
+⌡ miscellaneous technical
+⌢ miscellaneous technical
+⌣ miscellaneous technical
+⌤ miscellaneous technical
+⌥ miscellaneous technical
+⌦ miscellaneous technical
+⌧ miscellaneous technical
+⌨ miscellaneous technical
+〈 miscellaneous technical
+〉 miscellaneous technical
+⌫ miscellaneous technical
+⌬ miscellaneous technical
+⌭ miscellaneous technical
+⌮ miscellaneous technical
+⌯ miscellaneous technical
+⌰ miscellaneous technical
+⌱ miscellaneous technical
+⌲ miscellaneous technical
+⌳ miscellaneous technical
+⌴ miscellaneous technical
+⌵ miscellaneous technical
+⌶ miscellaneous technical
+⌷ miscellaneous technical
+⌸ miscellaneous technical
+⌹ miscellaneous technical
+⌺ miscellaneous technical
+⌻ miscellaneous technical
+⌼ miscellaneous technical
+⌽ miscellaneous technical
+⌾ miscellaneous technical
+⌿ miscellaneous technical
+⍀ miscellaneous technical
+⍁ miscellaneous technical
+⍂ miscellaneous technical
+⍃ miscellaneous technical
+⍄ miscellaneous technical
+⍅ miscellaneous technical
+⍆ miscellaneous technical
+⍇ miscellaneous technical
+⍈ miscellaneous technical
+⍉ miscellaneous technical
+⍊ miscellaneous technical
+⍋ miscellaneous technical
+⍌ miscellaneous technical
+⍍ miscellaneous technical
+⍎ miscellaneous technical
+⍏ miscellaneous technical
+⍐ miscellaneous technical
+⍑ miscellaneous technical
+⍒ miscellaneous technical
+⍓ miscellaneous technical
+⍔ miscellaneous technical
+⍕ miscellaneous technical
+⍖ miscellaneous technical
+⍗ miscellaneous technical
+⍘ miscellaneous technical
+⍙ miscellaneous technical
+⍚ miscellaneous technical
+⍛ miscellaneous technical
+⍜ miscellaneous technical
+⍝ miscellaneous technical
+⍞ miscellaneous technical
+⍟ miscellaneous technical
+⍠ miscellaneous technical
+⍡ miscellaneous technical
+⍢ miscellaneous technical
+⍣ miscellaneous technical
+⍤ miscellaneous technical
+⍥ miscellaneous technical
+⍦ miscellaneous technical
+⍧ miscellaneous technical
+⍨ miscellaneous technical
+⍩ miscellaneous technical
+⍪ miscellaneous technical
+⍫ miscellaneous technical
+⍬ miscellaneous technical
+⍭ miscellaneous technical
+⍮ miscellaneous technical
+⍯ miscellaneous technical
+⍰ miscellaneous technical
+⍱ miscellaneous technical
+⍲ miscellaneous technical
+⍳ miscellaneous technical
+⍴ miscellaneous technical
+⍵ miscellaneous technical
+⍶ miscellaneous technical
+⍷ miscellaneous technical
+⍸ miscellaneous technical
+⍹ miscellaneous technical
+⍺ miscellaneous technical
+⍻ miscellaneous technical
+⍼ miscellaneous technical
+⍽ miscellaneous technical
+⍾ miscellaneous technical
+⍿ miscellaneous technical
+⎀ miscellaneous technical
+⎁ miscellaneous technical
+⎂ miscellaneous technical
+⎃ miscellaneous technical
+⎄ miscellaneous technical
+⎅ miscellaneous technical
+⎆ miscellaneous technical
+⎇ miscellaneous technical
+⎈ miscellaneous technical
+⎉ miscellaneous technical
+⎊ miscellaneous technical
+⎋ miscellaneous technical
+⎌ miscellaneous technical
+⎍ miscellaneous technical
+⎎ miscellaneous technical
+⎏ miscellaneous technical
+⎐ miscellaneous technical
+⎑ miscellaneous technical
+⎒ miscellaneous technical
+⎓ miscellaneous technical
+⎔ miscellaneous technical
+⎕ miscellaneous technical
+⎖ miscellaneous technical
+⎗ miscellaneous technical
+⎘ miscellaneous technical
+⎙ miscellaneous technical
+⎚ miscellaneous technical
+⎛ miscellaneous technical
+⎜ miscellaneous technical
+⎝ miscellaneous technical
+⎞ miscellaneous technical
+⎟ miscellaneous technical
+⎠ miscellaneous technical
+⎡ miscellaneous technical
+⎢ miscellaneous technical
+⎣ miscellaneous technical
+⎤ miscellaneous technical
+⎥ miscellaneous technical
+⎦ miscellaneous technical
+⎧ miscellaneous technical
+⎨ miscellaneous technical
+⎩ miscellaneous technical
+⎪ miscellaneous technical
+⎫ miscellaneous technical
+⎬ miscellaneous technical
+⎭ miscellaneous technical
+⎮ miscellaneous technical
+⎯ miscellaneous technical
+⎰ miscellaneous technical
+⎱ miscellaneous technical
+⎲ miscellaneous technical
+⎳ miscellaneous technical
+⎴ miscellaneous technical
+⎵ miscellaneous technical
+⎶ miscellaneous technical
+⎷ miscellaneous technical
+⎸ miscellaneous technical
+⎹ miscellaneous technical
+⎺ miscellaneous technical
+⎻ miscellaneous technical
+⎼ miscellaneous technical
+⎽ miscellaneous technical
+⎾ miscellaneous technical
+⎿ miscellaneous technical
+⏀ miscellaneous technical
+⏁ miscellaneous technical
+⏂ miscellaneous technical
+⏃ miscellaneous technical
+⏄ miscellaneous technical
+⏅ miscellaneous technical
+⏆ miscellaneous technical
+⏇ miscellaneous technical
+⏈ miscellaneous technical
+⏉ miscellaneous technical
+⏊ miscellaneous technical
+⏋ miscellaneous technical
+⏌ miscellaneous technical
+⏍ miscellaneous technical
+⏎ miscellaneous technical
+⏏ miscellaneous technical
+⏐ miscellaneous technical
+⏑ miscellaneous technical
+⏒ miscellaneous technical
+⏓ miscellaneous technical
+⏔ miscellaneous technical
+⏕ miscellaneous technical
+⏖ miscellaneous technical
+⏗ miscellaneous technical
+⏘ miscellaneous technical
+⏙ miscellaneous technical
+⏚ miscellaneous technical
+⏛ miscellaneous technical
+⏜ miscellaneous technical
+⏝ miscellaneous technical
+⏞ miscellaneous technical
+⏟ miscellaneous technical
+⏠ miscellaneous technical
+⏡ miscellaneous technical
+⏢ miscellaneous technical
+⏣ miscellaneous technical
+⏤ miscellaneous technical
+⏥ miscellaneous technical
+⏦ miscellaneous technical
+⏧ miscellaneous technical
+⏨ miscellaneous technical
+⏭ miscellaneous technical
+⏮ miscellaneous technical
+⏯ miscellaneous technical
+⏰ miscellaneous technical
+⏱ miscellaneous technical
+⏲ miscellaneous technical
+⏳ miscellaneous technical
+⏴ miscellaneous technical
+⏵ miscellaneous technical
+⏶ miscellaneous technical
+⏷ miscellaneous technical
+⏸ miscellaneous technical
+⏹ miscellaneous technical
+⏺ miscellaneous technical
+⏻ miscellaneous technical
+⏼ miscellaneous technical
+⏽ miscellaneous technical
+⏾ miscellaneous technical
+⏿ miscellaneous technical
+① enclosed alphanumerics
+② enclosed alphanumerics
+③ enclosed alphanumerics
+④ enclosed alphanumerics
+⑤ enclosed alphanumerics
+⑥ enclosed alphanumerics
+⑦ enclosed alphanumerics
+⑧ enclosed alphanumerics
+⑨ enclosed alphanumerics
+⑩ enclosed alphanumerics
+⑪ enclosed alphanumerics
+⑫ enclosed alphanumerics
+⑬ enclosed alphanumerics
+⑭ enclosed alphanumerics
+⑮ enclosed alphanumerics
+⑯ enclosed alphanumerics
+⑰ enclosed alphanumerics
+⑱ enclosed alphanumerics
+⑲ enclosed alphanumerics
+⑳ enclosed alphanumerics
+⑴ enclosed alphanumerics
+⑵ enclosed alphanumerics
+⑶ enclosed alphanumerics
+⑷ enclosed alphanumerics
+⑸ enclosed alphanumerics
+⑹ enclosed alphanumerics
+⑺ enclosed alphanumerics
+⑻ enclosed alphanumerics
+⑼ enclosed alphanumerics
+⑽ enclosed alphanumerics
+⑾ enclosed alphanumerics
+⑿ enclosed alphanumerics
+⒀ enclosed alphanumerics
+⒁ enclosed alphanumerics
+⒂ enclosed alphanumerics
+⒃ enclosed alphanumerics
+⒄ enclosed alphanumerics
+⒅ enclosed alphanumerics
+⒆ enclosed alphanumerics
+⒇ enclosed alphanumerics
+⒈ enclosed alphanumerics
+⒉ enclosed alphanumerics
+⒊ enclosed alphanumerics
+⒋ enclosed alphanumerics
+⒌ enclosed alphanumerics
+⒍ enclosed alphanumerics
+⒎ enclosed alphanumerics
+⒏ enclosed alphanumerics
+⒐ enclosed alphanumerics
+⒑ enclosed alphanumerics
+⒒ enclosed alphanumerics
+⒓ enclosed alphanumerics
+⒔ enclosed alphanumerics
+⒕ enclosed alphanumerics
+⒖ enclosed alphanumerics
+⒗ enclosed alphanumerics
+⒘ enclosed alphanumerics
+⒙ enclosed alphanumerics
+⒚ enclosed alphanumerics
+⒛ enclosed alphanumerics
+⒜ enclosed alphanumerics
+⒝ enclosed alphanumerics
+⒞ enclosed alphanumerics
+⒟ enclosed alphanumerics
+⒠ enclosed alphanumerics
+⒡ enclosed alphanumerics
+⒢ enclosed alphanumerics
+⒣ enclosed alphanumerics
+⒤ enclosed alphanumerics
+⒥ enclosed alphanumerics
+⒦ enclosed alphanumerics
+⒧ enclosed alphanumerics
+⒨ enclosed alphanumerics
+⒩ enclosed alphanumerics
+⒪ enclosed alphanumerics
+⒫ enclosed alphanumerics
+⒬ enclosed alphanumerics
+⒭ enclosed alphanumerics
+⒮ enclosed alphanumerics
+⒯ enclosed alphanumerics
+⒰ enclosed alphanumerics
+⒱ enclosed alphanumerics
+⒲ enclosed alphanumerics
+⒳ enclosed alphanumerics
+⒴ enclosed alphanumerics
+⒵ enclosed alphanumerics
+Ⓐ enclosed alphanumerics
+Ⓑ enclosed alphanumerics
+Ⓒ enclosed alphanumerics
+Ⓓ enclosed alphanumerics
+Ⓔ enclosed alphanumerics
+Ⓕ enclosed alphanumerics
+Ⓖ enclosed alphanumerics
+Ⓗ enclosed alphanumerics
+Ⓘ enclosed alphanumerics
+Ⓙ enclosed alphanumerics
+Ⓚ enclosed alphanumerics
+Ⓛ enclosed alphanumerics
+Ⓜenclosed alphanumerics
+Ⓝ enclosed alphanumerics
+Ⓞ enclosed alphanumerics
+Ⓟ enclosed alphanumerics
+Ⓠ enclosed alphanumerics
+Ⓡ enclosed alphanumerics
+Ⓢ enclosed alphanumerics
+Ⓣ enclosed alphanumerics
+Ⓤ enclosed alphanumerics
+Ⓥ enclosed alphanumerics
+Ⓦ enclosed alphanumerics
+Ⓧ enclosed alphanumerics
+Ⓨ enclosed alphanumerics
+Ⓩ enclosed alphanumerics
+ⓐ enclosed alphanumerics
+ⓑ enclosed alphanumerics
+ⓒ enclosed alphanumerics
+ⓓ enclosed alphanumerics
+ⓔ enclosed alphanumerics
+ⓕ enclosed alphanumerics
+ⓖ enclosed alphanumerics
+ⓗ enclosed alphanumerics
+ⓘ enclosed alphanumerics
+ⓙ enclosed alphanumerics
+ⓚ enclosed alphanumerics
+ⓛ enclosed alphanumerics
+ⓜ enclosed alphanumerics
+ⓝ enclosed alphanumerics
+ⓞ enclosed alphanumerics
+ⓟ enclosed alphanumerics
+ⓠ enclosed alphanumerics
+ⓡ enclosed alphanumerics
+ⓢ enclosed alphanumerics
+ⓣ enclosed alphanumerics
+ⓤ enclosed alphanumerics
+ⓥ enclosed alphanumerics
+ⓦ enclosed alphanumerics
+ⓧ enclosed alphanumerics
+ⓨ enclosed alphanumerics
+ⓩ enclosed alphanumerics
+⓪ enclosed alphanumerics
+⓫ enclosed alphanumerics
+⓬ enclosed alphanumerics
+⓭ enclosed alphanumerics
+⓮ enclosed alphanumerics
+⓯ enclosed alphanumerics
+⓰ enclosed alphanumerics
+⓱ enclosed alphanumerics
+⓲ enclosed alphanumerics
+⓳ enclosed alphanumerics
+⓴ enclosed alphanumerics
+⓵ enclosed alphanumerics
+⓶ enclosed alphanumerics
+⓷ enclosed alphanumerics
+⓸ enclosed alphanumerics
+⓹ enclosed alphanumerics
+⓺ enclosed alphanumerics
+⓻ enclosed alphanumerics
+⓼ enclosed alphanumerics
+⓽ enclosed alphanumerics
+⓾ enclosed alphanumerics
+⓿ enclosed alphanumerics
+─ box drawing
+━ box drawing
+│ box drawing
+┃ box drawing
+┄ box drawing
+┅ box drawing
+┆ box drawing
+┇ box drawing
+┈ box drawing
+┉ box drawing
+┊ box drawing
+┋ box drawing
+┌ box drawing
+┍ box drawing
+┎ box drawing
+┏ box drawing
+┐ box drawing
+┑ box drawing
+┒ box drawing
+┓ box drawing
+└ box drawing
+┕ box drawing
+┖ box drawing
+┗ box drawing
+┘ box drawing
+┙ box drawing
+┚ box drawing
+┛ box drawing
+├ box drawing
+┝ box drawing
+┞ box drawing
+┟ box drawing
+┠ box drawing
+┡ box drawing
+┢ box drawing
+┣ box drawing
+┤ box drawing
+┥ box drawing
+┦ box drawing
+┧ box drawing
+┨ box drawing
+┩ box drawing
+┪ box drawing
+┫ box drawing
+┬ box drawing
+┭ box drawing
+┮ box drawing
+┯ box drawing
+┰ box drawing
+┱ box drawing
+┲ box drawing
+┳ box drawing
+┴ box drawing
+┵ box drawing
+┶ box drawing
+┷ box drawing
+┸ box drawing
+┹ box drawing
+┺ box drawing
+┻ box drawing
+┼ box drawing
+┽ box drawing
+┾ box drawing
+┿ box drawing
+╀ box drawing
+╁ box drawing
+╂ box drawing
+╃ box drawing
+╄ box drawing
+╅ box drawing
+╆ box drawing
+╇ box drawing
+╈ box drawing
+╉ box drawing
+╊ box drawing
+╋ box drawing
+╌ box drawing
+╍ box drawing
+╎ box drawing
+╏ box drawing
+═ box drawing
+║ box drawing
+╒ box drawing
+╓ box drawing
+╔ box drawing
+╕ box drawing
+╖ box drawing
+╗ box drawing
+╘ box drawing
+╙ box drawing
+╚ box drawing
+╛ box drawing
+╜ box drawing
+╝ box drawing
+╞ box drawing
+╟ box drawing
+╠ box drawing
+╡ box drawing
+╢ box drawing
+╣ box drawing
+╤ box drawing
+╥ box drawing
+╦ box drawing
+╧ box drawing
+╨ box drawing
+╩ box drawing
+╪ box drawing
+╫ box drawing
+╬ box drawing
+╭ box drawing
+╮ box drawing
+╯ box drawing
+╰ box drawing
+╱ box drawing
+╲ box drawing
+╳ box drawing
+╴ box drawing
+╵ box drawing
+╶ box drawing
+╷ box drawing
+╸ box drawing
+╹ box drawing
+╺ box drawing
+╻ box drawing
+╼ box drawing
+╽ box drawing
+╾ box drawing
+╿ box drawing
+▀ block elements
+▁ block elements
+▂ block elements
+▃ block elements
+▄ block elements
+▅ block elements
+▆ block elements
+▇ block elements
+█ block elements
+▉ block elements
+▊ block elements
+▋ block elements
+▌ block elements
+▍ block elements
+▎ block elements
+▏ block elements
+▐ block elements
+░ block elements
+▒ block elements
+▓ block elements
+▔ block elements
+▕ block elements
+▖ block elements
+▗ block elements
+▘ block elements
+▙ block elements
+▚ block elements
+▛ block elements
+▜ block elements
+▝ block elements
+▞ block elements
+▟ block elements
+■ geometric shapes
+□ geometric shapes
+▢ geometric shapes
+▣ geometric shapes
+▤ geometric shapes
+▥ geometric shapes
+▦ geometric shapes
+▧ geometric shapes
+▨ geometric shapes
+▩ geometric shapes
+▪ geometric shapes
+▫ geometric shapes
+▬ geometric shapes
+▭ geometric shapes
+▮ geometric shapes
+▯ geometric shapes
+▰ geometric shapes
+▱ geometric shapes
+▲ geometric shapes
+△ geometric shapes
+▴ geometric shapes
+▵ geometric shapes
+▶ geometric shapes
+▷ geometric shapes
+▸ geometric shapes
+▹ geometric shapes
+► geometric shapes
+▻ geometric shapes
+▼ geometric shapes
+▽ geometric shapes
+▾ geometric shapes
+▿ geometric shapes
+◀ geometric shapes
+◁ geometric shapes
+◂ geometric shapes
+◃ geometric shapes
+◄ geometric shapes
+◅ geometric shapes
+◆ geometric shapes
+◇ geometric shapes
+◈ geometric shapes
+◉ geometric shapes
+◊ geometric shapes
+○ geometric shapes
+◌ geometric shapes
+◍ geometric shapes
+◎ geometric shapes
+● geometric shapes
+◐ geometric shapes
+◑ geometric shapes
+◒ geometric shapes
+◓ geometric shapes
+◔ geometric shapes
+◕ geometric shapes
+◖ geometric shapes
+◗ geometric shapes
+◘ geometric shapes
+◙ geometric shapes
+◚ geometric shapes
+◛ geometric shapes
+◜ geometric shapes
+◝ geometric shapes
+◞ geometric shapes
+◟ geometric shapes
+◠ geometric shapes
+◡ geometric shapes
+◢ geometric shapes
+◣ geometric shapes
+◤ geometric shapes
+◥ geometric shapes
+◦ geometric shapes
+◧ geometric shapes
+◨ geometric shapes
+◩ geometric shapes
+◪ geometric shapes
+◫ geometric shapes
+◬ geometric shapes
+◭ geometric shapes
+◮ geometric shapes
+◯ geometric shapes
+◰ geometric shapes
+◱ geometric shapes
+◲ geometric shapes
+◳ geometric shapes
+◴ geometric shapes
+◵ geometric shapes
+◶ geometric shapes
+◷ geometric shapes
+◸ geometric shapes
+◹ geometric shapes
+◺ geometric shapes
+◻ geometric shapes
+◼ geometric shapes
+◽ geometric shapes
+◾ geometric shapes
+◿ geometric shapes
+☀ miscellaneous symbols
+☁ miscellaneous symbols
+☂ miscellaneous symbols
+☃ miscellaneous symbols
+☄ miscellaneous symbols
+★ miscellaneous symbols
+☆ miscellaneous symbols
+☇ miscellaneous symbols
+☈ miscellaneous symbols
+☉ miscellaneous symbols
+☊ miscellaneous symbols
+☋ miscellaneous symbols
+☌ miscellaneous symbols
+☍ miscellaneous symbols
+☎ miscellaneous symbols
+☏ miscellaneous symbols
+☐ miscellaneous symbols
+☑ miscellaneous symbols
+☒ miscellaneous symbols
+☓ miscellaneous symbols
+☔ miscellaneous symbols
+☕ miscellaneous symbols
+☖ miscellaneous symbols
+☗ miscellaneous symbols
+☘ miscellaneous symbols
+☙ miscellaneous symbols
+☚ miscellaneous symbols
+☛ miscellaneous symbols
+☜ miscellaneous symbols
+☝ miscellaneous symbols
+☞ miscellaneous symbols
+☟ miscellaneous symbols
+☠ miscellaneous symbols
+☡ miscellaneous symbols
+☢ miscellaneous symbols
+☣ miscellaneous symbols
+☤ miscellaneous symbols
+☥ miscellaneous symbols
+☦ miscellaneous symbols
+☧ miscellaneous symbols
+☨ miscellaneous symbols
+☩ miscellaneous symbols
+☪ miscellaneous symbols
+☫ miscellaneous symbols
+☬ miscellaneous symbols
+☭ miscellaneous symbols
+☮ miscellaneous symbols
+☯ miscellaneous symbols
+☰ miscellaneous symbols
+☱ miscellaneous symbols
+☲ miscellaneous symbols
+☳ miscellaneous symbols
+☴ miscellaneous symbols
+☵ miscellaneous symbols
+☶ miscellaneous symbols
+☷ miscellaneous symbols
+☸ miscellaneous symbols
+☹ miscellaneous symbols
+☺ miscellaneous symbols
+☻ miscellaneous symbols
+☼ miscellaneous symbols
+☽ miscellaneous symbols
+☾ miscellaneous symbols
+☿ miscellaneous symbols
+♀ miscellaneous symbols
+♁ miscellaneous symbols
+♂ miscellaneous symbols
+♃ miscellaneous symbols
+♄ miscellaneous symbols
+♅ miscellaneous symbols
+♆ miscellaneous symbols
+♇ miscellaneous symbols
+♈ miscellaneous symbols
+♉ miscellaneous symbols
+♊ miscellaneous symbols
+♋ miscellaneous symbols
+♌ miscellaneous symbols
+♍ miscellaneous symbols
+♎ miscellaneous symbols
+♏ miscellaneous symbols
+♐ miscellaneous symbols
+♑ miscellaneous symbols
+♒ miscellaneous symbols
+♓ miscellaneous symbols
+♔ miscellaneous symbols
+♕ miscellaneous symbols
+♖ miscellaneous symbols
+♗ miscellaneous symbols
+♘ miscellaneous symbols
+♙ miscellaneous symbols
+♚ miscellaneous symbols
+♛ miscellaneous symbols
+♜ miscellaneous symbols
+♝ miscellaneous symbols
+♞ miscellaneous symbols
+♟ miscellaneous symbols
+♠ miscellaneous symbols
+♡ miscellaneous symbols
+♢ miscellaneous symbols
+♣ miscellaneous symbols
+♤ miscellaneous symbols
+♥ miscellaneous symbols
+♦ miscellaneous symbols
+♧ miscellaneous symbols
+♨ miscellaneous symbols
+♩ miscellaneous symbols
+♪ miscellaneous symbols
+♫ miscellaneous symbols
+♬ miscellaneous symbols
+♭ miscellaneous symbols
+♮ miscellaneous symbols
+♯ miscellaneous symbols
+♰ miscellaneous symbols
+♱ miscellaneous symbols
+♲ miscellaneous symbols
+♳ miscellaneous symbols
+♴ miscellaneous symbols
+♵ miscellaneous symbols
+♶ miscellaneous symbols
+♷ miscellaneous symbols
+♸ miscellaneous symbols
+♹ miscellaneous symbols
+♺ miscellaneous symbols
+♻ miscellaneous symbols
+♼ miscellaneous symbols
+♽ miscellaneous symbols
+♾ miscellaneous symbols
+♿ miscellaneous symbols
+⚀ miscellaneous symbols
+⚁ miscellaneous symbols
+⚂ miscellaneous symbols
+⚃ miscellaneous symbols
+⚄ miscellaneous symbols
+⚅ miscellaneous symbols
+⚆ miscellaneous symbols
+⚇ miscellaneous symbols
+⚈ miscellaneous symbols
+⚉ miscellaneous symbols
+⚊ miscellaneous symbols
+⚋ miscellaneous symbols
+⚌ miscellaneous symbols
+⚍ miscellaneous symbols
+⚎ miscellaneous symbols
+⚏ miscellaneous symbols
+⚐ miscellaneous symbols
+⚑ miscellaneous symbols
+⚒ miscellaneous symbols
+⚓ miscellaneous symbols
+⚔ miscellaneous symbols
+⚕ miscellaneous symbols
+⚖ miscellaneous symbols
+⚗ miscellaneous symbols
+⚘ miscellaneous symbols
+⚙ miscellaneous symbols
+⚚ miscellaneous symbols
+⚛ miscellaneous symbols
+⚜ miscellaneous symbols
+⚝ miscellaneous symbols
+⚞ miscellaneous symbols
+⚟ miscellaneous symbols
+⚠ miscellaneous symbols
+⚡ miscellaneous symbols
+⚢ miscellaneous symbols
+⚣ miscellaneous symbols
+⚤ miscellaneous symbols
+⚥ miscellaneous symbols
+⚦ miscellaneous symbols
+⚧ miscellaneous symbols
+⚨ miscellaneous symbols
+⚩ miscellaneous symbols
+⚪ miscellaneous symbols
+⚫ miscellaneous symbols
+⚬ miscellaneous symbols
+⚭ miscellaneous symbols
+⚮ miscellaneous symbols
+⚯ miscellaneous symbols
+⚰ miscellaneous symbols
+⚱ miscellaneous symbols
+⚲ miscellaneous symbols
+⚳ miscellaneous symbols
+⚴ miscellaneous symbols
+⚵ miscellaneous symbols
+⚶ miscellaneous symbols
+⚷ miscellaneous symbols
+⚸ miscellaneous symbols
+⚹ miscellaneous symbols
+⚺ miscellaneous symbols
+⚻ miscellaneous symbols
+⚼ miscellaneous symbols
+⚽ miscellaneous symbols
+⚾ miscellaneous symbols
+⚿ miscellaneous symbols
+⛀ miscellaneous symbols
+⛁ miscellaneous symbols
+⛂ miscellaneous symbols
+⛃ miscellaneous symbols
+⛄ miscellaneous symbols
+⛅ miscellaneous symbols
+⛆ miscellaneous symbols
+⛇ miscellaneous symbols
+⛈ miscellaneous symbols
+⛉ miscellaneous symbols
+⛊ miscellaneous symbols
+⛋ miscellaneous symbols
+⛌ miscellaneous symbols
+⛍ miscellaneous symbols
+⛎ miscellaneous symbols
+⛏ miscellaneous symbols
+⛐ miscellaneous symbols
+⛑ miscellaneous symbols
+⛒ miscellaneous symbols
+⛓ miscellaneous symbols
+⛔ miscellaneous symbols
+⛕ miscellaneous symbols
+⛖ miscellaneous symbols
+⛗ miscellaneous symbols
+⛘ miscellaneous symbols
+⛙ miscellaneous symbols
+⛚ miscellaneous symbols
+⛛ miscellaneous symbols
+⛜ miscellaneous symbols
+⛝ miscellaneous symbols
+⛞ miscellaneous symbols
+⛟ miscellaneous symbols
+⛠ miscellaneous symbols
+⛡ miscellaneous symbols
+⛢ miscellaneous symbols
+⛣ miscellaneous symbols
+⛤ miscellaneous symbols
+⛥ miscellaneous symbols
+⛦ miscellaneous symbols
+⛧ miscellaneous symbols
+⛨ miscellaneous symbols
+⛩ miscellaneous symbols
+⛪ miscellaneous symbols
+⛫ miscellaneous symbols
+⛬ miscellaneous symbols
+⛭ miscellaneous symbols
+⛮ miscellaneous symbols
+⛯ miscellaneous symbols
+⛰ miscellaneous symbols
+⛱ miscellaneous symbols
+⛲ miscellaneous symbols
+⛳ miscellaneous symbols
+⛴ miscellaneous symbols
+⛵ miscellaneous symbols
+⛶ miscellaneous symbols
+⛷ miscellaneous symbols
+⛸ miscellaneous symbols
+⛹ miscellaneous symbols
+⛺ miscellaneous symbols
+⛻ miscellaneous symbols
+⛼ miscellaneous symbols
+⛽ miscellaneous symbols
+⛾ miscellaneous symbols
+⛿ miscellaneous symbols
+ﬀ alphabetic presentation forms
+ﬁ alphabetic presentation forms
+ﬂ alphabetic presentation forms
+ﬃ alphabetic presentation forms
+ﬄ alphabetic presentation forms
+ﬅ alphabetic presentation forms
+ﬆ alphabetic presentation forms
+ﬓ alphabetic presentation forms
+ﬔ alphabetic presentation forms
+ﬕ alphabetic presentation forms
+ﬖ alphabetic presentation forms
+ﬗ alphabetic presentation forms
+יִ alphabetic presentation forms
+ﬞײַ alphabetic presentation forms
+ﬠ alphabetic presentation forms
+ﬡ alphabetic presentation forms
+ﬢ alphabetic presentation forms
+ﬣ alphabetic presentation forms
+ﬤ alphabetic presentation forms
+ﬥ alphabetic presentation forms
+ﬦ alphabetic presentation forms
+ﬧ alphabetic presentation forms
+ﬨ alphabetic presentation forms
+﬩ alphabetic presentation forms
+שׁ alphabetic presentation forms
+שׂ alphabetic presentation forms
+שּׁ alphabetic presentation forms
+שּׂ alphabetic presentation forms
+אַ alphabetic presentation forms
+אָ alphabetic presentation forms
+אּ alphabetic presentation forms
+בּ alphabetic presentation forms
+גּ alphabetic presentation forms
+דּ alphabetic presentation forms
+הּ alphabetic presentation forms
+וּ alphabetic presentation forms
+זּ alphabetic presentation forms
+טּ alphabetic presentation forms
+יּ alphabetic presentation forms
+ךּ alphabetic presentation forms
+כּ alphabetic presentation forms
+לּ alphabetic presentation forms
+מּ alphabetic presentation forms
+נּ alphabetic presentation forms
+סּ alphabetic presentation forms
+ףּ alphabetic presentation forms
+פּ alphabetic presentation forms
+צּ alphabetic presentation forms
+קּ alphabetic presentation forms
+רּ alphabetic presentation forms
+שּ alphabetic presentation forms
+תּ alphabetic presentation forms
+וֹ alphabetic presentation forms
+בֿ alphabetic presentation forms
+כֿ alphabetic presentation forms
+פֿ alphabetic presentation forms

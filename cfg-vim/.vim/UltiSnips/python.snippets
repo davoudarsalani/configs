@@ -1,0 +1,82 @@
+## b flag prevents snippets when in the middle of the line
+###############################################
+snippet pr "print()" b
+print($1)
+endsnippet
+###############################################
+snippet ex "exit()" b
+exit()
+endsnippet
+###############################################
+snippet br "breakpoint()" b
+breakpoint()
+endsnippet
+###############################################
+snippet li "list" b
+$1 = ['$2', '$3', '$4']
+endsnippet
+###############################################
+snippet tu "tuple" b
+$1 = ('$2', '$3', '$4')
+endsnippet
+###############################################
+snippet se "set" b
+$1 = {'$2', '$3', '$4'}
+endsnippet
+###############################################
+snippet di "dictionary" b
+$1 = {'$2': '$3', '$4': '$5', '$6': '$7'}
+endsnippet
+###############################################
+snippet de "def" b
+def $1($2: $3=$4, $5: $6=$7) -> $8:
+	pass
+endsnippet
+###############################################
+snippet cl "class" b
+class $1:
+	def __init__(self, $2: $3=$4, $5: $6=$7, $8: $9=$10):
+		self.$2 = $2
+		self.$5 = $5
+		self.$8 = $8
+
+	def __repr__(self):
+		pass
+
+	def $11(self) -> $12:
+		pass
+endsnippet
+###############################################
+snippet f "fstring"
+f'{$1!r}'
+endsnippet
+###############################################
+snippet re "requests" b
+from requests import Session
+from bs4 import BeautifulSoup
+creds = {'username': username, 'password': password}
+url   = '$1'
+s     = Session()
+hdrs  = get_headers()
+try:
+	response = s.post(url, headers=hdrs, data=creds, timeout=20)
+	response = s.get(url, headers=hdrs, timeout=20)
+	souped = BeautifulSoup(response.content, 'html.parser')
+	usage = souped.find('div', attrs={'class': 'loaded'}).text
+	# OR:
+	# usage = souped.find('div', attrs={'class': re.compile(r'.*loaded.*')}).text
+
+	# print(response)
+	# print(souped)
+	print(usage)
+except Exception as exc:
+	print(f'{exc!r}')
+endsnippet
+###############################################
+snippet tr "try" b
+try:
+	$1
+except Exception as exc:
+	print(f'{exc!r}')
+endsnippet
+###############################################

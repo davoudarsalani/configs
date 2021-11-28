@@ -1,0 +1,17 @@
+/* show audio icon as a separate icon in compact mode (https://github.com/SeanLedbetter/Userchrome.css/blob/master/userchrome.css) */
+.tab-icon-stack:is([muted],[soundplaying],[activemedia-blocked]) {
+    grid-template-areas: "a s";
+}
+.tab-icon-overlay:is([muted],[soundplaying],[activemedia-blocked]) {
+    grid-area: s;
+}
+.tab-icon-overlay, .tab-icon-image {
+    opacity: 1 !important;
+}
+.tab-icon-overlay {
+    padding: 0 !important;
+    color: yellowgreen !important;
+}
+.tab-icon-overlay:hover {
+    background: none !important;
+}

@@ -1,0 +1,380 @@
+## set {{{
+set ifs "\n"  ## NOTE do NOT replace " with '
+set shell bash
+set previewer ~/scripts/previewer  ## do NOT replace ~ with $HOME
+set info size
+set icons true
+set number true
+set relativenumber true
+set incsearch true
+set timefmt "20060202150405"  ## ORIG: "Mon Jan _2 15:04:05 2006"
+set errorfmt "\033[0;49;31m%s\033[0m"    ## --,--> NOTE do NOT replace \033 and " with \e and ' respectively
+set promptfmt "\033[0;49;90m %f\033[0m"  ## --'
+set wrapscroll true
+set scrolloff 5
+set dircounts true
+set period 1
+set shellopts "-e"  ## for shell commands.
+                    ## "-e" to exit on error.
+                    ## "-u" to give error for unset variables.
+                    ## "-f" disables pathname expansion which can be useful when $f, $fs, and $fx variables contain names with '*' or '?' characters.
+                    ## However, this option is used selectively within individual commands as it can be limiting at times.
+% {{
+    ## ratios
+    width=$(tput cols)
+    [ $width -le 88 ] && lf -remote "send $id set ratios 1:1" || lf -remote "send $id set ratios 1:2"
+}}
+% {{
+    [ $LF_LEVEL -eq 1 ] || lf -remote "send $id echoerr 'WARNING: You are in a nested lf instance!'"
+}}
+## }}}
+## unmap {{{
+map '~'
+map '`'
+# map "'"
+map '"'
+map ';'
+map ','
+map ?
+map <enter>
+map <right>
+map <left>
+map <lt>
+map <gt>
+map a
+map b
+map c
+# map d
+map e
+map f
+# map g
+# map h
+map i
+# map j
+# map k
+# map l
+# map m
+# map n
+map o
+# map p
+map q
+map r
+map s
+map t
+map u
+# map v
+map w
+map x
+# map y
+map z
+map F
+## }}}
+## highlight {{{
+map i $ {{
+    eval "$HIGHLIGHT" $f 2>/dev/null | less -R  ## do NOT replace 2 with &
+}}
+## }}}
+## quit {{{
+map q % {{
+    > /tmp/lf_preview_status
+    lf -remote "send $id clear"
+    lf -remote "send $id unselect"
+    lf -remote "send $id reload"
+    lf -remote "send $id quit"
+}}
+## }}}
+## toggle preview {{{
+map w % {{
+    lf_preview_status_file=/tmp/lf_preview_status
+    case "$(cat "$lf_preview_status_file")" in
+        hide )  ## display preview
+               width=$(tput cols)
+               [ $width -gt 88 ] && lf -remote "send $id set ratios 1:2" || lf -remote "send $id set ratios 1:1"
+               lf -remote "send $id set preview!"
+               printf '%s\n' 'display' > "$lf_preview_status_file" ;;
+         * )   ## hide preview
+               lf -remote "send $id set preview!"
+               lf -remote "send $id set ratios 1"
+               printf '%s\n' 'hide' > "$lf_preview_status_file" ;;
+    esac
+}}
+map W % {{
+    > /tmp/lf_preview_status
+}}
+## }}}
+## mkdir, touch, rm, trash {{{
+## mkdir
+## 1:
+# map [ push %mkdir<space>
+## 2:
+# cmd mkdir $ {{
+#   echo -ne '\e[38;5;64m dir name \e[0m'
+#   read dirname
+#   mkdir -p "$dirname"
+#   sleep 1
+#   lf -remote "send $id load"$'\n'"send $id select \"$dirname\""
+# }}
+# map m mkdir
+## 3:
+cmd mkdir $ {{
+    mkdir "$@"
+    lf -remote "send $id load"$'\n'"send $id select \"$@\""
+}}
+## touch
+## 1:
+# map ] push %touch<space>
+## 2:
+# cmd touch $ {{
+#   echo -ne '\e[38;5;64m file name \e[0m ' ; read filename
+#   touch "$filename"
+#   lf -remote "send $id load"$'\n'"send $id select \"$filename\""
+# }}
+# map t touch
+## 3:
+cmd touch $ {{
+    touch "$@"
+    lf -remote "send $id load"$'\n'"send $id select \"$@\""
+}}
+## rm
+## 1:
+# map <delete> delete
+## 2:
+# cmd delete $ {{
+#   echo -ne '\e[38;5;64m Delete? \e[0m ' ; read -n 1 delete_prompt ; printf '\n'
+#   case "$delete_prompt" in
+#       y|$RETURN ) rm -rf $fx ;;
+#       * ) exit ;;
+#   esac
+# }}
+# map <delete> delete
+## 3:
+# cmd rm   $ rm     $fx
+# cmd rmf  $ rm -f  $fx
+# cmd rmr  $ rm -r  $fx
+# cmd rmrf $ rm -rf $fx
+
+## trash
+## 1:
+# cmd trash $ {{
+#   echo -ne '\e[38;5;64m Trash? \e[0m ' ; read -n 1 trash_prompt ; printf '\n'
+#   printf '\n'
+#     case "$trash_prompt" in
+#       y|$RETURN ) ~/scripts/lf.py trash $fx ;;
+#       * )         exit ;;
+#     esac
+# }}
+# map ~ trash # ~ is Shift+Delete
+## }}}
+## bulk_rename {{{
+cmd bulk_rename $ {{
+    old=$(mktemp)
+    new=$(mktemp)
+    [ -n $fs ] 2>/dev/null && fs=$(ls)
+    printf "$fs\n" > $old
+    printf "$fs\n" > $new
+    $editor $new
+    [ $(cat $new | wc -l) -ne $(cat $old | wc -l) ] && exit
+    paste $old $new | while read names; do
+        src=$(printf $names | cut -f1)
+        dst=$(printf $names | cut -f2)
+        [ $src = $dst ] && continue
+        [ -e $dst ] && continue
+        mv $src $dst
+    done
+    rm $old $new
+    lf -remote "send $id unselect"
+}}
+## }}}
+## du {{{
+cmd du $ {{
+    du -h --max-depth=1 --apparent-size | sort -rh | less -R  ## do NOT add s to -h because it conflicts with --max-depth=1
+}}
+## }}}
+## git {{{
+map <c-g> git
+cmd git $ {{
+    [ ! -d .git ] && lf -remote "send $id echoerr 'No '" && exit
+    "$HOME"/scripts/g
+}}
+## }}}
+## open {{{
+cmd open $ {{
+    case $f in
+        *gpg ) exit ;;
+    esac
+
+    case "$(file --mime-type $f -bL)" in
+        audio/* )            if [ ! "$HOSTNAME" == 'sony' ]; then
+                                 audacious $fx &>/dev/null &
+                             else
+                                 vlc -f --play-and-exit -- $fx &>/dev/null &
+                             fi ;;
+        video/* )            vlc -f --play-and-exit -- $fx &>/dev/null & ;;
+        text/* )             $editor $fx ;;  ## NOTE do NOT redirect
+        application/json )   $editor $fx &>/dev/null & ;;
+        application/csv )    $editor $fx &>/dev/null & ;;
+        message/news )       $editor $fx &>/dev/null & ;;
+        */octet-stream )     libreoffice $fx &>/dev/null & ;;
+        application/msword ) libreoffice $fx &>/dev/null & ;;
+        */*spreadsheet* )    libreoffice $fx &>/dev/null & ;;
+        */*officedocument* ) libreoffice $fx &>/dev/null & ;;
+        */pdf )              xreader $fx &>/dev/null & ;;
+        image/* )            gpicview $fx &>/dev/null & ;;
+        */*tar )             exit ;;
+        */gzip )             exit ;;
+        *bzip2 )             exit ;;
+        */zip )              exit ;;
+        */*rar )             exit ;;
+        */*iso*image )       exit ;;
+        * )                  lf -remote "send $id open_with" ;;
+        # * ) for f in $fx; do setsid $OPENER $f &>/dev/null & done ;;
+    esac
+}}
+## }}}
+## open_with {{{
+map o open_with
+cmd open_with $ {{
+    source "$HOME"/scripts/gb-color
+    num_color='blue'
+
+    if [ -f "$f" ]; then
+        case "$(file --mime-type $f -bL)" in
+            audio/*|video/* ) read -n 1 -p "$(olive 'open with') $($num_color '1') audacious $($num_color '2') vlc $($num_color '3') vlc (no audio) $($num_color '4') mpv " media_app
+                              printf '\n'
+                              case "$media_app" in
+                                  1 ) audacious $fx &>/dev/null & ;;
+                                  2 ) vlc -f --play-and-exit -- $fx &>/dev/null & ;;
+                                  3 ) vlc -f --play-and-exit --no-audio -- $fx &>/dev/null & ;;
+                                  4 ) mpv $fx &>/dev/null & ;;
+                                  q ) exit ;;
+                                  * ) lf -remote "send $id open_with_other" ;;
+                              esac ;;
+            text/*|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument*|application/json|application/csv|message/news )
+                                read -n 1 -p "$(olive 'open with') $($num_color '1') nano $($num_color '2') gedit $($num_color '3') vim $($num_color '4') vi $($num_color '5') libreoffice $($num_color 'o') vim (in new window) " text_app
+                                printf '\n'
+                                case "$text_app" in
+                                    1 ) nano $fx ;;  ## NOTE do NOT redirect
+                                    2 ) gedit $fx &>/dev/null & ;;
+                                    3 ) vim $fx ;;  ## NOTE do NOT redirect
+                                    4 ) vi $fx ;;  ## NOTE do NOT redirect
+                                    5 ) libreoffice $fx &>/dev/null & ;;
+                                    o ) SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
+                                        base="${fx##*/}"  ## 0-test.py
+                                        no_suffix="${base%.*}"  ## 0-test
+                                        WIN="$no_suffix"
+                                        tmux new-window -n "$base"
+                                        tmux send-key -t ${SESS}:${WIN} "vim $fx" ENTER ;;
+                                    q ) exit ;;
+                                    * ) lf -remote "send $id open_with_other" ;;
+                                esac ;;
+            */pdf ) read -n 1 -p "$(olive 'open with') $($num_color '1') xreader $($num_color '2') firefox $($num_color '3') chromium " pdf_app
+                    printf '\n'
+                    case "$pdf_app" in
+                        1 ) xreader $fx &>/dev/null & ;;
+                        2 ) firefox $fx &>/dev/null & ;;
+                        3 ) chromium $fx &>/dev/null & ;;
+                        q ) exit ;;
+                        * ) lf -remote "send $id open_with_other" ;;
+                    esac ;;
+            image/* ) read -n 1 -p "$(olive 'open with') $($num_color '1') gpicview $($num_color '2') firefox $($num_color '3') chromium $($num_color '4') gimp " image_app
+                      printf '\n'
+                      case "$image_app" in
+                          1 ) gpicview $fx &>/dev/null & ;;
+                          2 ) firefox $fx &>/dev/null & ;;
+                          3 ) chromium $fx &>/dev/null & ;;
+                          4 ) gimp $fx &>/dev/null & ;;
+                          q ) exit ;;
+                          * ) lf -remote "send $id open_with_other" ;;
+                      esac ;;
+            * ) lf -remote "send $id open_with_other" ;;
+        esac
+    elif [ -d "$f" ]; then
+        read -n 1 -p "$(olive 'open') $($num_color 'o') (in new window) " dir_open
+        printf '\n'
+        case "$dir_open" in
+            o ) SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
+                base="${fx##*/}"  ## downloads
+                base="${base%/}"  ## remove possible trailing /
+                base="${base#.}"  ## <--,-- remove leading . to prevent the error: can't find pane: downloads
+                                  ##    '-- which occurs for hidden dirs
+                WIN="$base"
+                tmux new-window -n "$base"
+                tmux send-key -t ${SESS}:${WIN} "\lf $f" ENTER ;;
+        esac
+    fi
+}}
+## }}}
+## open_with_other {{{
+cmd open_with_other $ {{
+    source "$HOME"/scripts/gb-color
+    # num_color='blue'
+
+    read -p "$(olive 'open with') " other_app
+    case "$other_app" in
+        q ) exit ;;
+        * ) "$other_app" $fx ;;  ## NOTE do NOT add &>/dev/null &
+    esac
+}}
+## }}}
+## fzf_select {{{
+map <c-t> fzf_select
+cmd fzf_select $ {{
+    source "$HOME"/scripts/gb
+    source "$HOME"/scripts/gb-color
+
+    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS"
+    files=( $(eval $FZF_CTRL_T_COMMAND) )
+    file="$(pipe_to_fzf "${files[@]}")" || exit 37
+    lf -remote "send $id load"$'\n'"send $id select \"$file\""
+}}
+## }}}
+## fzf_cd {{{
+map <a-c> fzf_cd
+cmd fzf_cd $ {{
+    source "$HOME"/scripts/gb
+    source "$HOME"/scripts/gb-color
+
+    ## FIXME can't display preview (neither in bashrc nor in lfrc) [14000418213615]
+    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS"
+    dirs=( $(eval $FZF_ALT_C_COMMAND) )
+    dir="$(pipe_to_fzf "${dirs[@]}")" || exit 37
+    lf -remote "send $id load"$'\n'"send $id cd \"$dir\""
+}}
+## }}}
+## commands {{{
+map <c-c> commands
+cmd commands $ {{
+    source "$HOME"/scripts/gb
+    source "$HOME"/scripts/gb-color
+
+    # FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --header 'commands'"
+    items=( 'chattr' 'trash' 'rm' 'mime_type' 'softlink' 'compress_tar' 'compress_zip' 'xtract_tar' 'xtract_zip' 'xtract_rar' 'du' 'mkdir' 'touch' 'bulk_rename' 'rename')
+    item="$(pipe_to_fzf "${items[@]}")" || exit 37
+    case "$item" in
+        chattr )       "$HOME"/scripts/lf.py chattr    $fx ;;
+        trash )        "$HOME"/scripts/lf.py trash     $fx ;;
+        rm )           "$HOME"/scripts/lf.py rm        $fx ;;
+        mime_type )    "$HOME"/scripts/lf.py mime_type $fx ;;
+        softlink )     "$HOME"/scripts/lf.py softlink  $fx ;;
+        compress_tar ) "$HOME"/scripts/lf.py tar       $fx ;;
+        xtract_tar )   "$HOME"/scripts/lf.py untar     $fx ;;
+        compress_zip ) "$HOME"/scripts/lf.py zip       $fx ;;
+        xtract_zip )   "$HOME"/scripts/lf.py unzip     $fx ;;
+        xtract_rar )   "$HOME"/scripts/lf.py unrar     $fx ;;
+        du )           lf -remote "send $id du"                 ;;
+        mkdir )        lf -remote "send $id push :mkdir<space>" ;;  ## <--,-- used push for the cmd to read my input
+        touch )        lf -remote "send $id push :touch<space>" ;;  ## <--'
+        bulk_rename )  lf -remote "send $id bulk_rename"        ;;
+        rename )       lf -remote "send $id rename"             ;;
+    esac
+}}
+## }}}
+## map {{{
+map <tab>   :clear ; unselect ; reload
+map <enter> :open  ; unselect
+map <right> :open  ; unselect
+map <left>  :updir ; unselect
+map .       :set hidden!
+map '`'     mark-load
+map ';'     read
+## }}}

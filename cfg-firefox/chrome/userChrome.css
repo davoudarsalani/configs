@@ -1,0 +1,25 @@
+/* NOTE do not use ~ or $HOME in absolute paths */
+
+@import url(./audio_icon_displayed_separately.css);
+/* @import url(./autohide_bookmarks_toolbar.css); */
+@import url(./compact-findbar-on-top.css);
+/* @import url(./navbar_tabs_oneliner.css); */
+@import url(./navbar_tabs_oneliner_tabs_on_left.css);  /* JUMP_1 recommended to be used with window_control_placeholder_support.css */
+/* @import url(./navbar_tabs_responsive_oneliner.css); */
+/* @import url(./numbered_tabs.css); */
+@import url(./other.css);
+@import url(./status_inside_urlbar_v2.css);
+@import url(./tab_close_button_always_on_hover.css);
+@import url(./tab_line_loading_indicator.css);
+@import url(./tab_loading_progress_throbber.css);
+@import url(./tab_separator_lines.css);
+@import url(./urlbar_connection_type_colors.css);
+/* @import url(./vertical_bookmarks_toolbar.css); */
+@import url(./window_control_placeholder_support.css);  /* JUMP_1 recommended to be used with navbar_tabs_oneliner_tabs_on_left.css */
+
+:root {
+    --bg: black !important;
+    --top_border: #00608a !important;
+    --lwt-toolbarbutton-icon-fill: white !important;
+    --toolbarbutton-icon-fill: white !important;
+}
