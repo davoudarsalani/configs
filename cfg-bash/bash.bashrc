@@ -48,7 +48,7 @@ echo "\
 ## }}}
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='d:l:s:r:rl:rs:lf:lfl:lfs:ls:cp:rm:mv:mkdir:ln:chown:chmod:rmdir:ftp:grep:diff:diff2:xprop:swappiness:lsblk:month:season:year:jmonth:jseason:jyear:mega:watch:journalctl:rg:q'
+export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:cp:rm:mv:mkdir:ln:chown:chmod:rmdir:ftp:grep:diff:diff2:xprop:swappiness:lsblk:month:season:year:jmonth:jseason:jyear:mega:watch:journalctl:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/scripts"
@@ -61,6 +61,10 @@ export RANGER_LOAD_DEFAULT_RC='FALSE'  ## to avoid loading rc.conf twice
 export HIGHLIGHT='highlight --config-file=$HOME/.config/highlight/anotherdark.theme -O xterm256 --line-numbers --line-range=1-50 --force'  ## NOTE do NOT replace $HOME with ~
 export BLACK='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization'
 export BLACKDIFF='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
+common_rg_flags='--smart-case --color=always'
+export RG_MATCH_FLAGS="$common_rg_flags --colors 'match:bg:0' --colors 'match:fg:2' --colors 'match:style:underline'"
+export RG="rg $common_rg_flags --sort path --hidden --files-with-matches --no-messages --glob '!{.git,kaddy,*venv*}/*'"
+
 
 ## fzf {{{
 export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path ".git" ! -path "*.venv*" ! -path "*.cache*" | sed 's#$HOME#~#''
@@ -329,9 +333,6 @@ bind -m vi-insert 'Control-l: clear-screen'
 alias d='cd "$HOME"/downloads/'
 alias l='cd "$HOME"/linux/'
 alias s='cd "$HOME"/scripts/'
-alias r='ranger "$HOME"/downloads/'
-alias rl='ranger "$HOME"/linux/'
-alias rs='ranger "$HOME"/scripts/'
 alias lf='\lf "$HOME"/downloads/'
 alias lfl='\lf "$HOME"/linux/'
 alias lfs='\lf "$HOME"/scripts/'
@@ -360,7 +361,6 @@ alias jyear='jcal -y'
 alias mega='mega-cmd'
 alias watch='watch --interval 1 --no-title --color'
 alias journalctl='journalctl -exfu'
-alias rg='"$HOME"/scripts/rg'
 alias q='exit'
 ## }}}
 ## functions {{{

@@ -254,6 +254,7 @@ local vim_keys = { -- {{{
                v      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[V]</span> run selection"),
                w      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> words frequency"),
                q      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> toggle quickfix"),
+               r      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> rename tmux window to current file name"),
              }
     }
   },

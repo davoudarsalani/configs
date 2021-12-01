@@ -47,7 +47,7 @@ __fzf_cd__() {  ## {{{
   local cmd dir
   cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d -print 2> /dev/null | cut -b3-"}"
-  dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd)) && printf 'cd %q' "${dir//\~/$HOME}"  ## keep \~ escaped
+  dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd)) && printf 'cd %q' "${dir/\~/$HOME}"  ## keep \~ escaped
   ## '--> ORIG: dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--preview '\ls -A --color=always --group-directories-first {-1}' --header 'cd' --height ${FZF_TMUX_HEIGHT:-70%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS --preview-window noborder:right:70%:wrap" $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 }
 ## }}}

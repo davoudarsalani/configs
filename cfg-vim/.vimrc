@@ -184,8 +184,9 @@ noremap <Leader>f :FZF<CR>
 noremap <Leader>h :HighlightLinesToggle<CR>
 noremap <Leader>s :call SyntaxAttr()<CR>
 noremap <Leader>t :TyperStart FILEPATH
-noremap <Leader>w :WordsFrequency<CR>
 noremap <Leader>q :QuickfixToggle<CR>
+noremap <Leader>w :WordsFrequency<CR>
+noremap <Leader>r :RenameTmuxWindow<CR>
 
 " show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
 noremap <silent> K :execute 'help ' . expand('<cword>')<CR>
@@ -700,7 +701,7 @@ function! Watch() " {{{
 endfunction
 command! Watch :call Watch()
 " }}}
-function LastModified()  " {{{ https://superuser.com/questions/504733/how-to-make-vim-change-a-date-when-a-section-of-a-file-was-edited
+function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-make-vim-change-a-date-when-a-section-of-a-file-was-edited
     if !&modified || &filetype == 'vim' || (&filetype != 'python' && &filetype != 'sh')
         return
     endif
@@ -732,6 +733,17 @@ function LastModified()  " {{{ https://superuser.com/questions/504733/how-to-mak
 
     call cursor(lnum, col)  " restore cursor position
 endfunction
+" }}}
+function! RenameTmuxWindow() " {{{
+
+    if exists('$TMUX')
+        call system("tmux rename-window " . expand('%'))
+    else
+        PrintfWarning 'in tmux only'
+    endif
+
+endfunction
+command! RenameTmuxWindow :call RenameTmuxWindow()
 " }}}
 " }}}
 " plugins {{{
@@ -815,6 +827,7 @@ let g:better_whitespace_ctermcolor = 24
 hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " }}}
 " }}}
+
 
 " MISC {{{
 " number of windows in the current buffer
