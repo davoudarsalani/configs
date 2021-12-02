@@ -14,11 +14,13 @@
 # Key bindings
 # ------------
 __fzf_select__() {  ## {{{
+  ##  NOTE a simple version of this function is used in fzf_select in ~/.config/lf/lfrc
+  ##       any change you make here, make sure to apply the changes there too
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type f -print \
     -o -type d -print \
     -o -type l -print 2> /dev/null | cut -b3-"}"
-  eval "$cmd" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS --expect=ctrl-v" $(__fzfcmd) "$@" | while read -r item; do  ## do NOT move --expect=ctrl-v to bashrc in FZF_CTRL_T_OPTS because it makes fzf select in lf screw up and not select file properly
+  eval "$cmd" | sed "s#$HOME#~#" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS --expect=ctrl-v" $(__fzfcmd) "$@" | while read -r item; do  ## do NOT move --expect=ctrl-v to bashrc in FZF_CTRL_T_OPTS because it makes fzf select in lf screw up and not select file properly
   ## '--> ORIG: eval "$cmd" | FZF_DEFAULT_OPTS="--expect=ctrl-v --preview 'eval $HIGHLIGHT {-1} 2>/dev/null' --header 'select' --height ${FZF_TMUX_HEIGHT:-70%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS --preview-window noborder:right:70%:wrap" $(__fzfcmd) -m "$@" | while read -r item; do
 
       # https://github.com/junegunn/fzf/wiki/Examples in fo(){} function
@@ -44,10 +46,12 @@ fzf-file-widget() {  ## {{{
 }
 ## }}}
 __fzf_cd__() {  ## {{{
-  local cmd dir
+  ##  NOTE a simple version of this function is used in choose_directory function in ~/scripts/gb
+  ##       any change you make here, make sure to apply the changes there too
+    local cmd dir
   cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
     -o -type d -print 2> /dev/null | cut -b3-"}"
-  dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd)) && printf 'cd %q' "${dir/\~/$HOME}"  ## keep \~ escaped
+  dir=$(eval "$cmd" | sed "s#$HOME#~#" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd)) && printf 'cd %q' "${dir/\~/$HOME}"  ## keep \~ escaped
   ## '--> ORIG: dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--preview '\ls -A --color=always --group-directories-first {-1}' --header 'cd' --height ${FZF_TMUX_HEIGHT:-70%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS --preview-window noborder:right:70%:wrap" $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 }
 ## }}}
@@ -89,6 +93,9 @@ else
   bind -m emacs-standard -x '"\C-t": fzf-file-widget'
   bind -m vi-command -x '"\C-t": fzf-file-widget'
   bind -m vi-insert -x '"\C-t": fzf-file-widget'
+
+  ## By me:
+  bind -m vi-insert -x '"\et": fzf-file-widget'
 
   # CTRL-R - Paste the selected command from history into the command line
   bind -m emacs-standard -x '"\C-r": __fzf_history__'

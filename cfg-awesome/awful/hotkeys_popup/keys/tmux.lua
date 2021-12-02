@@ -266,7 +266,6 @@ local lf_keys = { -- {{{
       modifiers = {"Ctrl"},
       keys = {
                c = create_description(lf_kb_fg, "commands"),
-               g = create_description(lf_kb_fg, "git"),
                p = create_description(lf_kb_fg, "prev command"),
                n = create_description(lf_kb_fg, "next command"),
                o = create_description(lf_kb_fg, "open"),

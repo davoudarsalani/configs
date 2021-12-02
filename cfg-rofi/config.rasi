@@ -42,7 +42,7 @@ configuration {
     scroll-method: 0;
     window-format: "{c} -- {t}";
 /*  click-to-exit: true;*/
-    theme: "onedark.rasi";
+/*  theme: "onedark.rasi"; */
 /*  max-history-size: 25;*/
 /*  combi-hide-mode-prefix: false;*/
 /*  matching-negate-char: '-' /* unsupported */;*/
@@ -145,3 +145,5 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+@theme "onedark.rasi"

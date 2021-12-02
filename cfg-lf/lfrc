@@ -19,11 +19,17 @@ set shellopts "-e"  ## for shell commands.
                     ## "-u" to give error for unset variables.
                     ## "-f" disables pathname expansion which can be useful when $f, $fs, and $fx variables contain names with '*' or '?' characters.
                     ## However, this option is used selectively within individual commands as it can be limiting at times.
-% {{
+
+set ratios 1:2
+## ^^vv after updating to 26-1, the following group screws pane size and shows panes in 3:1 ratio.
+##      so we have to comment that and use the line below
+##      also it screws groups mapped to w and W in JUMP_1
+# % {{
     ## ratios
-    width=$(tput cols)
-    [ $width -le 88 ] && lf -remote "send $id set ratios 1:1" || lf -remote "send $id set ratios 1:2"
-}}
+    # width=$(tput cols)
+    # [ $width -le 88 ] && lf -remote "send $id set ratios 1:1" || lf -remote "send $id set ratios 1:2"
+# }}
+
 % {{
     [ $LF_LEVEL -eq 1 ] || lf -remote "send $id echoerr 'WARNING: You are in a nested lf instance!'"
 }}
@@ -84,7 +90,7 @@ map q % {{
 }}
 ## }}}
 ## toggle preview {{{
-map w % {{
+map w % {{  ## JUMP_1
     lf_preview_status_file=/tmp/lf_preview_status
     case "$(cat "$lf_preview_status_file")" in
         hide )  ## display preview
@@ -98,7 +104,7 @@ map w % {{
                printf '%s\n' 'hide' > "$lf_preview_status_file" ;;
     esac
 }}
-map W % {{
+map W % {{  ## JUMP_1
     > /tmp/lf_preview_status
 }}
 ## }}}
@@ -188,13 +194,6 @@ cmd bulk_rename $ {{
 ## du {{{
 cmd du $ {{
     du -h --max-depth=1 --apparent-size | sort -rh | less -R  ## do NOT add s to -h because it conflicts with --max-depth=1
-}}
-## }}}
-## git {{{
-map <c-g> git
-cmd git $ {{
-    [ ! -d .git ] && lf -remote "send $id echoerr 'No '" && exit
-    "$HOME"/scripts/g
 }}
 ## }}}
 ## open {{{
@@ -316,29 +315,28 @@ cmd open_with_other $ {{
     esac
 }}
 ## }}}
-## fzf_select {{{
-map <c-t> fzf_select
-cmd fzf_select $ {{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
-
-    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS"
-    files=( $(eval $FZF_CTRL_T_COMMAND) )
-    file="$(pipe_to_fzf "${files[@]}")" || exit 37
-    lf -remote "send $id load"$'\n'"send $id select \"$file\""
-}}
-## }}}
 ## fzf_cd {{{
 map <a-c> fzf_cd
 cmd fzf_cd $ {{
     source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
 
-    ## FIXME can't display preview (neither in bashrc nor in lfrc) [14000418213615]
-    FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS"
-    dirs=( $(eval $FZF_ALT_C_COMMAND) )
-    dir="$(pipe_to_fzf "${dirs[@]}")" || exit 37
-    lf -remote "send $id load"$'\n'"send $id cd \"$dir\""
+    directory="$(choose_directory)" || exit 37
+    lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
+}}
+## }}}
+## fzf_select {{{
+map <c-t> fzf_select
+cmd fzf_select $ {{
+    source "$HOME"/scripts/gb
+
+    ## NOTE stolen from "$HOME"/.fzf/shell/key-bindings.bash with modifications
+    ##      any change you make here, make sure to apply the changes there too
+
+    eval "$FZF_CTRL_T_COMMAND" | sed "s#$HOME#~#" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf "$@" | \
+    while read -r item; do
+        item="$(head -2 <<< "$item" | tail -1)"
+        lf -remote "send $id load"$'\n'"send $id select \"$item\""
+    done
 }}
 ## }}}
 ## commands {{{

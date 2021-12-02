@@ -737,7 +737,12 @@ endfunction
 function! RenameTmuxWindow() " {{{
 
     if exists('$TMUX')
-        call system("tmux rename-window " . expand('%'))
+        " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
+        " base would be /home/nnnn/scripts/application which is not what we want
+        " so have to do some substitution:
+        let base = substitute(expand('%'), ".*/", "", 1)
+
+        call system("tmux rename-window " . base)
     else
         PrintfWarning 'in tmux only'
     endif

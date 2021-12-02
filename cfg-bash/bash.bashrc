@@ -63,11 +63,10 @@ export BLACK='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-norm
 export BLACKDIFF='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
 common_rg_flags='--smart-case --color=always'
 export RG_MATCH_FLAGS="$common_rg_flags --colors 'match:bg:0' --colors 'match:fg:2' --colors 'match:style:underline'"
-export RG="rg $common_rg_flags --sort path --hidden --files-with-matches --no-messages --glob '!{.git,kaddy,*venv*}/*'"
-
+export RG="rg $common_rg_flags --sort path --hidden --files-with-matches --no-messages --glob '!{.git,.cache,*.venv*,kaddy}/*'"  ## keep ignored paths synced with JUMP_1
 
 ## fzf {{{
-export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path ".git" ! -path "*.venv*" ! -path "*.cache*" | sed 's#$HOME#~#''
+export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git*" ! -path "*.cache*" ! -path "*.venv*" ! -path "*kaddy*"' #' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
 export FZF_DEFAULT_OPTS='--no-bold --sort --cycle --border horizontal --no-multi --reverse --inline-info --ansi --pointer ">" --prompt ": " --marker "+" --height 70% --preview-window noborder:right:80%:wrap --bind "ctrl-s:toggle-sort,ctrl-y:execute-silent(echo "{-1}" | xclip -selection clipboard)+abort,backward-eof:abort,ctrl-k:preview-up,ctrl-j:preview-down,ctrl-w:toggle-preview,ctrl-a:select-all" --color 'fg:$silver,fg+:$silver,hl+:2:underline,hl:2:underline,bg:$black,bg+:$grey_dark,preview-bg:$black,border:$grey_dark,gutter:$black,header:$blue''
 ## conditional preview: --preview "[[ -d {} ]] && tree -C {} | head -200"  ## https://github.com/Bhupesh-V/til/blob/master/Shell/fzf-tips-tricks.md
 
@@ -78,8 +77,8 @@ export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview 'eval "$HIGHLIGHT" {-1} 2>/d
 
 ## FIXME can't display preview (neither in bashrc nor in lfrc)
 ##       if you do find a solution for that, make sure to remove the --preview-window 'hidden' from FZF_ALT_C_OPTS down below [14000418213615]
-export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND// -type f / -type d }"
-export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '\ls -A --color=always --group-directories-first {-1} 2>/dev/null' --header 'cd' --color 'fg:$blue,fg+:$blue' --preview-window 'hidden'"  ## FIXME make sure to remove the --preview-window 'hidden' when you find a way to display preview [14000420112902]
+export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND/ -type f / -type d }"
+export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '\ls -A --color=always --group-directories-first {-1} 2>/dev/null' --header 'cd' --color 'fg:$blue,fg+:$blue' --preview-window 'hidden'"  ## FIXME make sure to remove the --preview-window 'hidden' when you find a way to display preview
 
 export FZF_CTRL_R_OPTS="--header='history'"
 
