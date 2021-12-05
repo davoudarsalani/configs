@@ -420,15 +420,21 @@ function if_tor {  ## https://sylvaindurand.org/use-tor-with-python/
 }
 
 function awesome_tail {  ## https://askubuntu.com/questions/830484/how-to-start-tmux-with-several-panes-open-at-the-same-time
-    local WIN='awesome_std{out,err}'  ## dest window name
+    local DEST_WIN='awesome_std{out,err}'  ## dest window name
     local SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
-    tmux new-window -n "$WIN"  ## add -d to prevent from jumping to $WIN (https://unix.stackexchange.com/questions/445307/open-new-tmux-window-with-specific-name-only-if-missing)
-    tmux split-window -h -t ${SESS}:${WIN}.1
-    # tmux split-window -h -t ${SESS}:${WIN}.2  ## <-,-- no need to create pane 2
-                                                ##   |-- because when we create pane 1 in prev command,
-                                                ##   '-- we automatically end up with 2 panes
-    tmux send-keys -t ${SESS}:${WIN}.1 "tail -f ${HOME}/.awesome_stdout" Enter
-    tmux send-keys -t ${SESS}:${WIN}.2 "tail -f ${HOME}/.awesome_stderr" Enter
+
+    ## create window:
+    tmux new-window -n "$DEST_WIN"  ## add -d to prevent from jumping to $DEST_WIN (https://unix.stackexchange.com/questions/445307/open-new-tmux-window-with-specific-name-only-if-missing)
+
+    ## create panes:
+    tmux split-window -h -t ${SESS}:${DEST_WIN}.1
+    # tmux split-window -h -t ${SESS}:${DEST_WIN}.2  ## <-,-- no need to create pane 2
+                                                     ##   |-- because when we create pane 1 in prev command,
+                                                     ##   '-- we automatically end up with 2 panes
+
+    ## send commands:
+    tmux send-keys -t ${SESS}:${DEST_WIN}.1 "tail -f ${HOME}/.awesome_stdout" Enter
+    tmux send-keys -t ${SESS}:${DEST_WIN}.2 "tail -f ${HOME}/.awesome_stderr" Enter
 }
 
 ## create/activate/deactivate a virtual environmant

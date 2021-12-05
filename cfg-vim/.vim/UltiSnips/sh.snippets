@@ -68,7 +68,9 @@ endsnippet
 ###############################################
 snippet ge "getopt" b
 function get_opts {
-	local options="$(getopt --longoptions 'help,$1:,:,:,:,' --options 'h$2::::' --alternative -- "$@")"
+	local options
+
+	options="$(getopt --longoptions 'help,$1:,:,:,:,' --options 'h$2::::' --alternative -- "$@")"
 	eval set -- "$options"
 	while true; do
 		case "\$1" in

@@ -195,7 +195,7 @@ function! s:PrintMatches()
     " If there are no matches, search fails before we get here. The only way
     " we could see zero results is on 'g/' (but that's a reasonable result).
     let [l:current, l:total] = searchindex#MatchCounts()
-    let l:msg = '[' . l:current . '/' . l:total . '] ' . l:dir_char . @/
+    let l:msg = ' ' . l:current . '/' . l:total . ' '
   endif
 
   " foldopen+=search causes search commands to open folds in the matched line
@@ -219,7 +219,13 @@ function! s:PrintMatches()
   " by me:
   " normal zz
 
-  redraw | echo l:msg
+  redraw
+  echohl MoreMsg
+  echo l:msg
+  echohl Identifier
+  echon l:dir_char . @/
+  echohl None
+
 endfunction
 
 " Return 2-element array, containing current index and total number of matches

@@ -186,7 +186,7 @@ noremap <Leader>s :call SyntaxAttr()<CR>
 noremap <Leader>t :TyperStart FILEPATH
 noremap <Leader>q :QuickfixToggle<CR>
 noremap <Leader>w :WordsFrequency<CR>
-noremap <Leader>r :RenameTmuxWindow<CR>
+noremap <Leader>r :RenameTmuxWindowToCurrentFile<CR>
 
 " show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
 noremap <silent> K :execute 'help ' . expand('<cword>')<CR>
@@ -251,16 +251,20 @@ map ; :
 " au & hi {{{
 " au VimEnter * :vertical resize +9  " widen main split so undotree split occupies less space
 " vv needed because restore_view.vim opens buffer with current fold open
+au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
+au InsertLeave *  hi CursorLineNr ctermbg=none ctermfg=235 cterm=none
+au InsertEnter *  hi CursorLine   ctermbg=none
+au InsertLeave *  hi CursorLine   ctermbg=233
+
 au vimEnter    *  RestoreCursorPosition
 au VimEnter    *  normal zM
 au VimEnter    *  normal zz
 au VimEnter    *  set noshowmode
 au VimEnter    *  UndotreeShow
-au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
-au InsertLeave *  hi CursorLineNr ctermbg=none ctermfg=235 cterm=none
-au InsertEnter *  hi CursorLine   ctermbg=none
-au InsertLeave *  hi CursorLine   ctermbg=233
-au BufWritePre * :call LastModified()
+au BufWritePre *  :call LastModified()  " :LastModified did not work
+au VimEnter    *  :RenameTmuxWindowToCurrentFile
+au BufWinLeave *  :RenameTmuxWindowToVim
+
 au FileType    sh MatchTodoInSh
 " run selection:
 au FileType sh     vnoremap <leader>v :w  !source %:p; bash<CR>
@@ -733,8 +737,9 @@ function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-ma
 
     call cursor(lnum, col)  " restore cursor position
 endfunction
+command! LastModified :call LastModified()
 " }}}
-function! RenameTmuxWindow() " {{{
+function! RenameTmuxWindowToCurrentFile() " {{{
 
     if exists('$TMUX')
         " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
@@ -748,7 +753,14 @@ function! RenameTmuxWindow() " {{{
     endif
 
 endfunction
-command! RenameTmuxWindow :call RenameTmuxWindow()
+command! RenameTmuxWindowToCurrentFile :call RenameTmuxWindowToCurrentFile()
+
+function! RenameTmuxWindowToVim()
+    if exists('$TMUX')
+        call system("tmux rename-window vim")
+    endif
+endfunction
+command! RenameTmuxWindowToVim :call RenameTmuxWindowToVim()
 " }}}
 " }}}
 " plugins {{{

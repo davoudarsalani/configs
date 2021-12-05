@@ -258,11 +258,12 @@ cmd open_with $ {{
                                     4 ) vi $fx ;;  ## NOTE do NOT redirect
                                     5 ) libreoffice $fx &>/dev/null & ;;
                                     o ) SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
-                                        base="${fx##*/}"  ## 0-test.py
-                                        no_suffix="${base%.*}"  ## 0-test
-                                        WIN="$no_suffix"
-                                        tmux new-window -n "$base"
-                                        tmux send-key -t ${SESS}:${WIN} "vim $fx" ENTER ;;
+                                        DEST_WIN='XXX'  ## <--,-- no need to find base for name of new window
+                                                        ##    '-- because vim is told to automaticcally rename tmux window upon opening files
+                                        ## create window:
+                                        tmux new-window -n "$DEST_WIN"  ## add -d to prevent from jumping to $DEST_WIN
+                                        ## send command:
+                                        tmux send-key -t ${SESS}:${DEST_WIN} "vim $fx" ENTER ;;
                                     q ) exit ;;
                                     * ) lf -remote "send $id open_with_other" ;;
                                 esac ;;
@@ -296,9 +297,11 @@ cmd open_with $ {{
                 base="${base%/}"  ## remove possible trailing /
                 base="${base#.}"  ## <--,-- remove leading . to prevent the error: can't find pane: downloads
                                   ##    '-- which occurs for hidden dirs
-                WIN="$base"
+                DEST_WIN="$base"
+                ## create window:
                 tmux new-window -n "$base"
-                tmux send-key -t ${SESS}:${WIN} "\lf $f" ENTER ;;
+                ## send command:
+                tmux send-key -t ${SESS}:${DEST_WIN} "\lf $f" ENTER ;;
         esac
     fi
 }}
@@ -315,6 +318,15 @@ cmd open_with_other $ {{
     esac
 }}
 ## }}}
+## fzf_select {{{
+map <c-t> fzf_select
+cmd fzf_select $ {{
+    source "$HOME"/scripts/gb
+
+    file="$(choose_file)" || exit 37
+    lf -remote "send $id load"$'\n'"send $id select \"$file\""
+}}
+## }}}
 ## fzf_cd {{{
 map <a-c> fzf_cd
 cmd fzf_cd $ {{
@@ -322,21 +334,6 @@ cmd fzf_cd $ {{
 
     directory="$(choose_directory)" || exit 37
     lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
-}}
-## }}}
-## fzf_select {{{
-map <c-t> fzf_select
-cmd fzf_select $ {{
-    source "$HOME"/scripts/gb
-
-    ## NOTE stolen from "$HOME"/.fzf/shell/key-bindings.bash with modifications
-    ##      any change you make here, make sure to apply the changes there too
-
-    eval "$FZF_CTRL_T_COMMAND" | sed "s#$HOME#~#" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf "$@" | \
-    while read -r item; do
-        item="$(head -2 <<< "$item" | tail -1)"
-        lf -remote "send $id load"$'\n'"send $id select \"$item\""
-    done
 }}
 ## }}}
 ## commands {{{
