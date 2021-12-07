@@ -13,7 +13,7 @@
 
 # Key bindings
 # ------------
-__fzf_select__() {  ## {{{
+__fzf_select__() {
   ##  NOTE a simple version of this function is used in fzf_select in ~/.config/lf/lfrc
   ##       any change you make here, make sure to apply the changes there too
   local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
@@ -31,21 +31,18 @@ __fzf_select__() {  ## {{{
   done
   echo
 }
-## }}}
 
 if [[ $- =~ i ]]; then
-__fzfcmd() {  ## {{{
+__fzfcmd() {
   [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
     echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-70%}} -- " || echo "fzf"
 }
-## }}}
-fzf-file-widget() {  ## {{{
+fzf-file-widget() {
   local selected="$(__fzf_select__)"
   READLINE_LINE="${READLINE_LINE:0:$READLINE_POINT}$selected${READLINE_LINE:$READLINE_POINT}"
   READLINE_POINT=$(( READLINE_POINT + ${#selected} ))
 }
-## }}}
-__fzf_cd__() {  ## {{{
+__fzf_cd__() {
   ##  NOTE a simple version of this function is used in choose_directory function in ~/scripts/gb
   ##       any change you make here, make sure to apply the changes there too
     local cmd dir
@@ -54,8 +51,7 @@ __fzf_cd__() {  ## {{{
   dir=$(eval "$cmd" | sed "s#$HOME#~#" | FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd)) && printf 'cd %q' "${dir/\~/$HOME}"  ## keep \~ escaped
   ## '--> ORIG: dir=$(eval "$cmd" | FZF_DEFAULT_OPTS="--preview '\ls -A --color=always --group-directories-first {-1}' --header 'cd' --height ${FZF_TMUX_HEIGHT:-70%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS --preview-window noborder:right:70%:wrap" $(__fzfcmd) +m) && printf 'cd %q' "$dir"
 }
-## }}}
-__fzf_history__() {  ## {{{
+__fzf_history__() {
   local output
   output=$(
     builtin fc -lnr -2147483648 |
@@ -70,7 +66,6 @@ __fzf_history__() {  ## {{{
     READLINE_POINT=0x7fffffff
   fi
 }
-## }}}
 ## Required to refresh the prompt after fzf {{{
 bind -m emacs-standard '"\er": redraw-current-line'
 
@@ -107,5 +102,4 @@ fi
 bind -m emacs-standard '"\ec": " \C-b\C-k \C-u`__fzf_cd__`\e\C-e\er\C-m\C-y\C-h\e \C-y\ey\C-x\C-x\C-d"'
 bind -m vi-command '"\ec": "\C-z\ec\C-z"'
 bind -m vi-insert '"\ec": "\C-z\ec\C-z"'
-## }}}
 fi

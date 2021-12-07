@@ -86,7 +86,8 @@ hi command_mode ctermfg=220 ctermbg=none
 " set statusline+=%#warningmsg#
 set stl+=%#CurrentModeColor#\ %{CurrentMode()}
 set stl+=%#dark#
-let &stl.="%2.2(%{matchstr(getline('.'), '\\%' . col('.') . 'c.')}%)"  " https://stackoverflow.com/questions/40508385/vim-statusline-show-the-character-itself
+set stl+=%#dark#\ %{strpart(getline('.'),col('.')-1,1)}  " https://devhints.io/vimscript
+" ^^ PREVIOUSLY: let &stl.="%2.2(%{matchstr(getline('.'), '\\%' . col('.') . 'c.')}%)"  " https://stackoverflow.com/questions/40508385/vim-statusline-show-the-character-itself
 set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
 set stl+=%#dark#\ L:\ %l/%L
 set stl+=%#lite#\ W:\ %{wordcount().words}  " %p%%
@@ -110,10 +111,10 @@ set stl+=%#CurrentModeColor#\ ▮
 " set stl+=%{&ff}  " file format, e.g. unix
 " set stl+=%{v:register}  " active register
 " }}}
-" abbreviations {{{
+" {{{ abbreviations
 iabbrev writedatetime <c-r>=strftime('%Y%m%d%H%M%S')<CR>
 " }}}
-" maps {{{
+" {{{ maps
 " {{{ F1-10
 " write
 noremap  <F1>      :q!<CR>
@@ -248,7 +249,7 @@ noremap J J<Home>
 
 map ; :
 " }}}
-" au & hi {{{
+" {{{ au & hi
 " au VimEnter * :vertical resize +9  " widen main split so undotree split occupies less space
 " vv needed because restore_view.vim opens buffer with current fold open
 au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
@@ -294,9 +295,9 @@ hi def jediFatSymbol ctermbg=202  ctermfg=202  cterm=none
 hi WordUnderCursorTheme ctermbg=235
 hi link illuminatedWord WordUnderCursorTheme
 " }}}
-" functions {{{
+" {{{ functions
 function! CurrentMode() " {{{
-    let currentmode = mode()
+    let l:currentmode = mode()
     if currentmode == "i"
         hi link CurrentModeColor lite
         return "INSERT"
@@ -305,8 +306,8 @@ function! CurrentMode() " {{{
         return "NORMAL"
     elseif currentmode == "v"
         hi link CurrentModeColor visual_mode
-        let selected_bytes = wordcount().visual_bytes
-        let selected_words = wordcount().visual_words
+        let l:selected_bytes = wordcount().visual_bytes
+        let l:selected_words = wordcount().visual_words
         return "VISUAL " . selected_bytes . " " . selected_words
     elseif currentmode == "r"
         hi link CurrentModeColor replace_mode
@@ -325,15 +326,15 @@ function! CurrentMode() " {{{
         return "SHELL"
     elseif currentmode == +"v"  " put lower than replace
         hi link CurrentModeColor visual_mode
-        let selected_bytes = wordcount().visual_bytes
-        let selected_words = wordcount().visual_words
+        let l:selected_bytes = wordcount().visual_bytes
+        let l:selected_words = wordcount().visual_words
         return "VISUAL-BLOCK " . selected_bytes . " " . selected_words
     endif
 endfunction
 " }}}
 function! IndentLevel() " {{{ https://vim.fandom.com/wiki/Put_the_indentation_level_on_the_status_line
     if &filetype == "python"
-        let TabLevel = (indent(".") / &ts )
+        let l:TabLevel = (indent(".") / &ts )
         hi link IndentLevelColor dark
         return TabLevel
     else
@@ -344,40 +345,40 @@ endfunction
 " }}}
 function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-display-the-number-of-instances-of-a-string-in-vim-statusline/
     if &filetype != "vim"
-        let lines = getline(1, '$')
-        let todos = filter(lines, 'v:val =~? "TODO"')
+        let l:lines = getline(1, '$')
+        let l:todos = filter(lines, 'v:val =~? "TODO"')
 
-        let lines = getline(1, '$')
-        let fixmes = filter(lines, 'v:val =~? "FIXME"')
+        let l:lines = getline(1, '$')
+        let l:fixmes = filter(lines, 'v:val =~? "FIXME"')
 
-        let lines = getline(1, '$')
-        let tempos = filter(lines, 'v:val =~? "TEMPORARY"')
+        let l:lines = getline(1, '$')
+        let l:tempos = filter(lines, 'v:val =~? "TEMPORARY"')
 
-        let lines = getline(1, '$')
-        let breaks = filter(lines, 'v:val =~? "breakpoint()"')
+        let l:lines = getline(1, '$')
+        let l:breaks = filter(lines, 'v:val =~? "breakpoint()"')
 
-        let todos_count  = len(todos)
-        let fixmes_count = len(fixmes)
-        let tempos_count = len(tempos)
-        let breaks_count = len(breaks)
+        let l:todos_count  = len(todos)
+        let l:fixmes_count = len(fixmes)
+        let l:tempos_count = len(tempos)
+        let l:breaks_count = len(breaks)
 
         if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
             hi link TFTBColor dark
-            let all = todos_count . " " . fixmes_count . " " . tempos_count . " " . breaks_count
+            let l:all = todos_count . " " . fixmes_count . " " . tempos_count . " " . breaks_count
         else
             hi link TFTBColor dark_i
-            let all = "TFTB"
+            let l:all = "TFTB"
         endif
 
     else
         hi link TFTBColor dark_i
-        let all = "TFTB"
+        let l:all = "TFTB"
     endif
     return all
 endfunction
 " }}}
 function! Modified() " {{{
-    let mo_index = &modified
+    let l:mo_index = &modified
     if mo_index == 0
         hi link ModifiedColor lite_i
     else
@@ -388,10 +389,10 @@ function! Modified() " {{{
 endfunction
 " }}}
 function! CurrentTag() " {{{
-    let text = tagbar#currenttag("%s","","f","scoped-stl")
+    let l:text = tagbar#currenttag("%s","","f","scoped-stl")
     if len(text) == 0 || &filetype != "python"
         hi link CurrentTagColor dark_i
-        let text = "TA"
+        let l:text = "TA"
     else
         hi link CurrentTagColor dark
     endif
@@ -399,19 +400,19 @@ function! CurrentTag() " {{{
 endfunction
 " }}}
 function! CheckSyntax() " {{{
-   let error_text = SyntasticStatuslineFlag()
+   let l:error_text = SyntasticStatuslineFlag()
    if len(error_text) == 0
        hi link SyntasticColor lite_i
-       let text = "ER"
+       let l:text = "ER"
    else
        hi link SyntasticColor lite
-       let text = error_text
+       let l:text = error_text
    endif
    return text
 endfunction
 " }}}
 function! ReadOnly() " {{{
-    let ro_index = &readonly
+    let l:ro_index = &readonly
     if ro_index == 0
         hi link ReadonlyColor dark_i
     else
@@ -471,15 +472,15 @@ endfunction
 command! ToggleJedi :call ToggleJedi()
 " }}}
 function! MyFoldText() " {{{ https://stackoverflow.com/questions/5983396/change-the-text-in-folds
-    let lines_count = v:foldend - v:foldstart + 1
+    let l:lines_count = v:foldend - v:foldstart + 1
     if     strlen(lines_count) == 1
-        let lines_count = '  ' . lines_count
+        let l:lines_count = '  ' . lines_count
     elseif strlen(lines_count) == 2
-        let lines_count = ' ' . lines_count
+        let l:lines_count = ' ' . lines_count
     endif
-    let comment = substitute(getline(v:foldstart), "^[^a-zA-Z0-9]* *", "", 1)
-    let comment = substitute(comment,              " *[^a-zA-Z0-9)'\\]]* *\{\{\{.*",  "", 1)
-    let txt     = lines_count . ' ' . comment                    " ^^ why had to use \\] instead of \] ?
+    let l:comment = substitute(getline(v:foldstart), "^[^a-zA-Z0-9]* *", "", 1)
+    let l:comment = substitute(comment,              " *[^a-zA-Z0-9)'\\]]* *\{\{\{.*",  "", 1)
+    let l:txt     = lines_count . ' ' . comment                    " ^^ why had to use \\] instead of \] ?
     return txt
 endfunction
 " }}}
@@ -538,7 +539,7 @@ command! MatchTodoInSh :call MatchTodoInSh()
 " }}}
 function! Black() " {{{
     if &filetype == "python"
-        let answer = confirm("Apply black? ", "&Yes\n&No")
+        let l:answer = confirm("Apply black? ", "&Yes\n&No")
         if answer == "1"
             " do NOT quote $BLACK
             execute "!clear; eval $BLACK %:p"
@@ -570,7 +571,7 @@ function! InsertLineNumbers() " {{{ https://vim.fandom.com/wiki/Insert_line_numb
 endfunction
 command! InsertLineNumbers :call InsertLineNumbers()
 " }}}
-" function! WordsFrequency() {{{ (https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file)
+" {{{ function! WordsFrequency() (https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file)
 " Sorts numbers in ascending order.
 " Examples:
 " [2, 3, 1, 11, 2] --> [1, 2, 2, 3, 11]
@@ -607,18 +608,18 @@ endfunction
 
 function! WordsFrequency() range
     " Words are separated by whitespace or punctuation characters
-    let wordSeparators = '[[:blank:][:punct:]]\+'
-    let allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
-    let wordToCount = {}
+    let l:wordSeparators = '[[:blank:][:punct:]]\+'
+    let l:allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
+    let l:wordToCount = {}
     for word in allWords
-        let wordToCount[word] = get(wordToCount, word, 0) + 1
+        let l:wordToCount[word] = get(wordToCount, word, 0) + 1
     endfor
 
-    let countToWords = {}
+    let l:countToWords = {}
     for [word,cnt] in items(wordToCount)
-        let words = get(countToWords,cnt,"")
+        let l:words = get(countToWords,cnt,"")
         " Append this word to the other words that occur as many times in the text
-        let countToWords[cnt] = words . " " . word
+        let l:countToWords[cnt] = words . " " . word
     endfor
 
     " Create a new buffer to show the results in
@@ -626,19 +627,19 @@ function! WordsFrequency() range
     setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
 
     " List of word counts in ascending order
-    let sortedWordCounts = Sorted(keys(countToWords))
+    let l:sortedWordCounts = Sorted(keys(countToWords))
 
     call append("$", "count    words")
     call append("$", "--------------")
     " Show the most frequent words first -> Descending order
     for cnt in reverse(sortedWordCounts)
-        let words = countToWords[cnt]
+        let l:words = countToWords[cnt]
         call append("$", cnt . "    " . words)
     endfor
 endfunction
 command! -range=% WordsFrequency <line1>,<line2>call WordsFrequency()
 " }}}
-" function! s:QuickfixToggle() " {{{ https://github.com/nvie/vimrc/blob/master/vimrc
+" {{{ function! s:QuickfixToggle()  " https://github.com/nvie/vimrc/blob/master/vimrc
 let g:quickfix_is_open = 0
 function! s:QuickfixToggle()  " ## TODO what doses it do exatly?
     if g:quickfix_is_open
@@ -679,16 +680,16 @@ function! Watch() " {{{
         return
     endif
 
-    let current_file = expand('%:p')
+    let l:current_file = expand('%:p')
     if current_file == '/home/nnnn/scripts/0-test' || current_file == '/home/nnnn/scripts/0-test.py'
-        let permission = 'true'
+        let l:permission = 'true'
     else
-        let permission = confirm("Not a 0-test{.py} file. Run anyway?", "&Yes\n&No")
+        let l:permission = confirm("Not a 0-test{.py} file. Run anyway?", "&Yes\n&No")
     endif
 
-    let if_watch = system("pgrep -a 'watch' | grep '" . current_file . "'")  " -a makes it list all data and not just the pid
+    let l:if_watch = system("pgrep -a 'watch' | grep '" . current_file . "'")  " -a makes it list all data and not just the pid
     if if_watch != ''
-        let permission = 'false'
+        let l:permission = 'false'
         PrintfWarning 'Watch already running'
     endif
 
@@ -710,25 +711,25 @@ function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-ma
         return
     endif
 
-    let today=system("echo -n $(jdate +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
+    let l:today=system("echo -n $(jdate +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
     " use date if, for any reason, jdate fails
     if today !~ '.*day'
-        let today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
+        let l:today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
     endif
 
-    let dest_line_pattern='## last modified: '
+    let l:dest_line_pattern='## last modified: '
 
     " save current cursor position
-    let lnum = line('.')
-    let col  = col('.')
+    let l:lnum = line('.')
+    let l:col  = col('.')
 
     if search(dest_line_pattern, 'w')
-        let line1 = getline('.')
+        let l:line1 = getline('.')
         if line1 =~ today
             call cursor(lnum, col)  " restore cursor position
             return
         endif
-        let line2 = substitute(line1,
+        let l:line2 = substitute(line1,
                                \dest_line_pattern . '.*',
                                \dest_line_pattern . today,
                                \'')
@@ -745,7 +746,7 @@ function! RenameTmuxWindowToCurrentFile() " {{{
         " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
         " base would be /home/nnnn/scripts/application which is not what we want
         " so have to do some substitution:
-        let base = substitute(expand('%'), ".*/", "", 1)
+        let l:base = substitute(expand('%'), ".*/", "", 1)
 
         call system("tmux rename-window " . base)
     else
@@ -763,8 +764,8 @@ endfunction
 command! RenameTmuxWindowToVim :call RenameTmuxWindowToVim()
 " }}}
 " }}}
-" plugins {{{
-" commentary {{{
+" {{{ plugins
+" {{{ commentary
 au FileType php,html         setlocal commentstring=<!--\ %s\ -->
 au FileType css,javascript   setlocal commentstring=/*\ %s\ */
 au FileType c,cpp,java,scala setlocal commentstring=//\ %s
@@ -776,20 +777,20 @@ au FileType mail             setlocal commentstring=>\ %s
 au FileType vim              setlocal commentstring=\"\ %s
 au FileType lua              setlocal commentstring=--\ %s
 " }}}
-" mucomplete {{{
+" {{{ mucomplete
 set completeopt-=preview  " disable doc preview in omnicomplete
 set completeopt+=menuone
 set completeopt+=noinsert
 set complete=.,w,b,u,t
 " set complete+=k~/bgls/words  " use C-n to access suggestions (https://superuser.com/questions/102343/can-i-add-a-set-of-words-to-the-vim-autocomplete-vocabulary)
 " }}}
-" syntastic {{{
+" {{{ syntastic
 let g:syntastic_check_on_open = 1
 " let g:syntastic_auto_jump = 1
 hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
 hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
 " }}}
-" python-mode {{{
+" {{{ python-mode
 let g:pymode_run = 0
 let g:pymode_run_bind = ""
 let g:pymode_breakpoint_bind = ""
@@ -810,7 +811,7 @@ let g:pymode_lint_ignore = ["E501", "C901", "E252", "E266", "E262"]
 " E266 too many leading '#' for block comment
 " E262 inline comment should start with '# '
 " }}}
-" jedi {{{
+" {{{ jedi
 let g:jedi#goto_assignments_command = ""
 let g:jedi#goto_stubs_command = ""
 let g:jedi#call_signatures_command = ""
@@ -822,14 +823,14 @@ let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#popup_on_dot = 0
 let g:pymode_rope = 0
 " }}}
-" undotree {{{
+" {{{ undotree
 let g:undotree_SplitWidth = 11
 let g:undotree_WindowLayout = 3
 let g:undotree_DiffAutoOpen = 0
 let g:undotree_ShortIndicators = 1
 let g:undotree_HighlightChangedText = 0
 " }}}
-" CtrlXA {{{
+" {{{ CtrlXA
 silent! nmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
 silent! nmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
 silent! xmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
@@ -837,16 +838,16 @@ silent! xmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
 silent! xmap <silent> g<C-X> <Plug>(CtrlXA-gCtrlA)
 silent! xmap <silent> g<C-A> <Plug>(CtrlXA-gCtrlX)
 " }}}
-" better-whitespace {{{
+" {{{ better-whitespace
 let g:better_whitespace_ctermcolor = 24
 " }}}
-" multiple-cursors {{{
+" {{{ multiple-cursors
 hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " }}}
 " }}}
 
 
-" MISC {{{
+" {{{ MISC
 " number of windows in the current buffer
 " winnr("$")
 
@@ -855,12 +856,18 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " catch
 " endtry
 
-" expand("%:p:h")  " returns base directory (e.g. /home/nnnn if file name is ~/.vimrc)
-" expand("%:h")    " returns base directory (e.g. /home/nnnn if file name is ~/.vimrc)
-" expand("%:p")    " returns full path (e.g. /home/nnnn/.vimrc)
+" expand('%')     " /home/nnnn/.vimrc
+" expand('%:p')   " /home/nnnn/.vimrc
+" expand('%:h')   " /home/nnnn
+" expand('%:p:h') " /home/nnnn
+" expand('%:t')   " .vimrc
+" expand('%:r')   " (extension e.g. py)
+
 " winwidth('%')    " 139
 " winheight('%')   " 34
 " winline()        " 12 (12th line from the top of screen)
+"
+" let cur_column = col(".")
 
 " substitute (https://github.com/ppwwyyxx/dotvim/blob/master/vimrc)
 " set statusline+=%{substitute(getcwd(),expand(\"$HOME\"),\'+\',\'g\')}
@@ -868,13 +875,14 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " au BufEnter * if &buftype == 'help' | wincmd L | endif  " display help window on vertically. do NOT change BufEnter
 
 " if exists('$TMUX')
-" if system('uname -s') == 'Darwin\n'
 " if exists('g:breaker_map_cr_omni_complete')
+" if exists("variable")
+" if exists(":command")
+" if exists("+option")
+" if system('uname -s') == 'Darwin\n'
 " if filereadable(expand("~/.vimrc.local"))
 " if isdirectory(expand("~/.vim/bundle/nerdtree"))
 " if count(g:breaker_bundle_groups, 'youcompleteme')  " what does it do?
-
-" let cur_column = col(".")
 
 " use a function output in another function (https://stackoverflow.com/questions/48271865/vim-whats-the-best-way-to-set-statusline-color-to-change-based-on-mode):
 " function! GitBranch()
@@ -927,8 +935,8 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " noremap <left>  <Nop>
 " noremap <right> <Nop>
 
-" function! Paste() " {{{
-"     let pa_index = &paste
+" function! Paste()  " {{{
+"     let l:pa_index = &paste
 "     if pa_index == 0
 "         hi link PasteColor lite_i
 "     else
@@ -949,8 +957,8 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 "     normal o
 " endf
 " }}}
-" function! ReplaceChn() " {{{ https://github.com/ppwwyyxx/dotvim/blob/master/vimrc
-"     let chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
+" function! ReplaceChn()  " {{{ https://github.com/ppwwyyxx/dotvim/blob/master/vimrc
+"     let l:chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
 "     "？" : "?", "！" : "!", "“" : "\"", "’" : "'" ,
 "     ""”" : "\"", "℃" : "\\\\textcelsius", "μ" : "$\\\\mu$"}
 "     for i in keys(chinese)
@@ -959,26 +967,26 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " endfunction
 " nnoremap <leader>sch :call ReplaceChn()<cr>
 " }}}
-" function! s:AskToExpandAbbr(abbr, expansion, defprompt) " {{{ https://vim.fandom.com/wiki/Abbreviation_that_prompts_whether_to_expand_it_or_not
-"   let answer = confirm("Expand '" . a:abbr . "'?", "&Yes\n&No", a:defprompt)
+" function! s:AskToExpandAbbr(abbr, expansion, defprompt)  " {{{ https://vim.fandom.com/wiki/Abbreviation_that_prompts_whether_to_expand_it_or_not
+"   let l:answer = confirm("Expand '" . a:abbr . "'?", "&Yes\n&No", a:defprompt)
 "   " testing against 1 and not 2, I correctly take care of <abort>
 "   return answer == 1 ? a:expansion : a:abbr
 " endfunction
 " iabbrev <expr> for <SID>AskToExpandAbbr('for', "for () {\n}", 2)
 " }}}
-" function! SyntAttr() " {{{ https://www.reddit.com/r/vim/comments/e19bu/whats_your_status_line/
-"     let name = synIDattr(synID(line('.'),col('.'),1),'name')
+" function! SyntAttr()  " {{{ https://www.reddit.com/r/vim/comments/e19bu/whats_your_status_line/
+"     let l:name = synIDattr(synID(line('.'),col('.'),1),'name')
 "     if name == ''
 "         hi link SyntAttrColor dark_i
-"         let synt_attr = 'SYNT-ATTR'
+"         let l:synt_attr = 'SYNT-ATTR'
 "     else
 "         hi link SyntAttrColor dark
-"         let synt_attr = name
+"         let l:synt_attr = name
 "     endif
 "     return synt_attr
 " endfunction
 " }}}
-" function! TrailingWhiteSpace() " {{{
+" function! TrailingWhiteSpace()  " {{{
 "     if search('\s\+$', 'nw') != 0
 "         hi link TrailingWhiteSpaceColor dark
 "     else
@@ -987,13 +995,13 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 "     return 'TWS'
 " endfunction
 " }}}
-" function! Replace() " {{{ Search for <cword> and replace with input() in all open buffers (https://github.com/vgod/vimrc/blob/master/vimrc)
+" function! Replace()  " {{{ Search for <cword> and replace with input() in all open buffers (https://github.com/vgod/vimrc/blob/master/vimrc)
 "     let s:word = input("Replace " . expand('<cword>') . " with:")
 "     :exe 'bufdo! %s/\<' . expand('<cword>') . '\>/' . s:word . '/ge'
 "     :unlet! s:word
 " endfunction
 "}}}
-" users {{{
+" {{{ users
 " hi User1 ctermbg=7   ctermfg=none
 " hi User2 ctermbg=3   ctermfg=16
 " hi User3 ctermbg=1   ctermfg=7

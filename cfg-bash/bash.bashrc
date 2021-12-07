@@ -45,7 +45,6 @@ echo "\
 \[\e[38;05;004m\]${HERE}${reset}\
 \[\e[38;05;005m\]${VIRT}${reset}"
 )'
-## }}}
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
 export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:cp:rm:mv:mkdir:ln:chown:chmod:rmdir:ftp:grep:diff:diff2:xprop:swappiness:lsblk:month:season:year:jmonth:jseason:jyear:mega:watch:journalctl:q'
@@ -63,7 +62,12 @@ export BLACK='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-norm
 export BLACKDIFF='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
 common_rg_flags='--smart-case --color=always'
 export RG_MATCH_FLAGS="$common_rg_flags --colors 'match:bg:0' --colors 'match:fg:2' --colors 'match:style:underline'"
-export RG="rg $common_rg_flags --sort path --hidden --files-with-matches --no-messages --glob '!{.git,.cache,*.venv*,kaddy}/*'"  ## keep ignored paths synced with JUMP_1
+export RG="rg $common_rg_flags --sort path --hidden --files-with-matches \
+           --no-messages --glob '!{.git,.cache,*.venv*,kaddy}/*'"
+           ## keep ignored paths synced with JUMP_1
+           ## --files-with-matches prints the paths with at least one match and suppress match contents
+           ## --multiline prints the total number of matches instead of the total number of lines
+           ## --fixed-strings when used, special regular expression meta characters such as .(){}*+ do not need to be escaped
 
 ## fzf {{{
 export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git*" ! -path "*.cache*" ! -path "*.venv*" ! -path "*kaddy*"' #' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
@@ -86,8 +90,6 @@ export FZF_CTRL_R_OPTS="--header='history'"
 # export FZF_COMPLETION_OPTS="$FZF_DEFAULT_OPTS"
 
 # export FZF_TMUX_OPTS=''
-## }}}
-## }}}
 ## ls colors {{{
 ## (https://linuxhint.com/ls_colors_bash/)
 ## Command to get extensions: dircolors --print-database
@@ -96,7 +98,6 @@ export LS_COLORS="no=2;37:di=0;34:fi=0;37:ex=0;32:ln=0;36:\
 *.jpg=0;33:*.jpeg=0;33:*.mjpg=0;33:*.mjpeg=0;33:*.gif=0;33:*.webp=0;33:*.bmp=0;33:*.pbm=0;33:*.pgm=0;33:*.ppm=0;33:*.tga=0;33:*.xbm=0;33:*.xpm=0;33:*.tif=0;33:*.tiff=0;33:*.png=0;33:*.svg=0;33:*.svgz=0;33:*.mng=0;33:*.pcx=0;33:*.qt=0;33:*.nuv=0;33:*.gl=0;33:*.dl=0;33:*.xcf=0;33:*.xwd=0;33:*.yuv=0;33:*.cgm=0;33:*.emf=0;33:\
 *.mov=0;35:*.mpg=0;35:*.mpeg=0;35:*.m2v=0;35:*.mkv=0;35:*.webm=0;35:*.ogm=0;35:*.mp4=0;35:*.m4v=0;35:*.mp4v=0;35:*.vob=0;35:*.wmv=0;35:*.asf=0;35:*.rm=0;35:*.rmvb=0;35:*.flc=0;35:*.avi=0;35:*.fli=0;35:*.flv=0;35:\
 *.aac=0;35:*.au=0;35:*.flac=0;35:*.m4a=0;35:*.mid=0;35:*.midi=0;35:*.mka=0;35:*.mp3=0;35:*.wma=0;35:*.mpc=0;35:*.ogg=0;35:*.oga=0;35:*.ra=0;35:*.wav=0;35:*.opus=0;35"
-## }}}
 ## lf icons {{{
 ## https://github.com/gokcehan/lf/wiki/Icons
 export LF_ICONS="\
@@ -301,7 +302,6 @@ ex=:\
 ## su = (SETUID)   File that is setuid (u+s)
 ## tw = (STICKY_OTHER_WRITABLE)    Directory that is sticky and other-writable (+t,o+w)
 ## *.extension =   Every file using this extension e.g. *.rpm = files with the ending .rpm
-## }}}
 ## set and shopt {{{
 shopt -s globstar
 # shopt -s autocd # autocd
@@ -327,7 +327,6 @@ set -o vi  ## turn on vi mode
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
-## }}}
 ## aliases {{{
 alias d='cd "$HOME"/downloads/'
 alias l='cd "$HOME"/linux/'
@@ -361,13 +360,12 @@ alias mega='mega-cmd'
 alias watch='watch --interval 1 --no-title --color'
 alias journalctl='journalctl -exfu'
 alias q='exit'
-## }}}
 ## functions {{{
 function command_not_found_handle {
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    red "Command not found: $1"
+    red "not found: $1"
     return 127
 }
 
@@ -392,7 +390,11 @@ function b {  ## black
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    [ ! "$1" ] && red 'arg required' && return
+    [ "$1" ] || {
+        red 'arg required'
+        return
+    }
+
     eval "$BLACK" "$1"
 }
 
@@ -400,7 +402,11 @@ function bd {  ## black diff
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    [ ! "$1" ] && red 'arg required' && return
+    [ "$1" ] || {
+        red 'arg required'
+        return
+    }
+
     eval "$BLACKDIFF" "$1" | less -R
 }
 
@@ -408,7 +414,10 @@ function rvj {  ## remove vim junk (i.e. tmp files and swap files)
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    [ "$(pgrep "vim")" ] && red 'vim is running' && return
+    [ "$(pgrep 'vim')" ] && {
+        red 'vim is running'
+        return
+    }
 
     rm "$HOME"/.*tmp             2>/dev/null || printf '%s\n' 'no temp files'  ## do NOT change .*tmp
     rm "$HOME"/.cache/vim/swap/* 2>/dev/null || printf '%s\n' 'no swap files'
@@ -443,7 +452,11 @@ function vc {
     source "$HOME"/scripts/gb-color
 
     if [ "$1" ]; then
-        [ -d "$1" ] && red "$1 already exists" && return
+        [ -d "$1" ] && {
+            red "$1 already exists"
+            return
+        }
+
         python3 -m venv "$1"
         accomplished "$1 created"
     else
@@ -456,7 +469,10 @@ function va {
     source "$HOME"/scripts/gb-color
 
     if [ "$1" ]; then
-        [ ! -d "$1" ] && red 'no such dir' && return
+        [ -d "$1" ] || {
+            red 'no such dir'
+            return
+        }
         . "$1"/bin/activate
     else
         red 'arg required'
@@ -468,7 +484,10 @@ function vu {
     source "$HOME"/scripts/gb-color
 
     if [ "$1" ]; then
-        [ ! -d "$1" ] && red 'no such dir' && return
+        [ -d "$1" ] || {
+            red 'no such dir'
+            return
+        }
         python3 -m venv --upgrade "$1" && accomplished "$1 updated"
     else
         red 'arg required'
@@ -498,4 +517,3 @@ function less {
     LESS_TERMCAP_us=$'\e[32m' \
     command less "$@"
 }
-## }}}

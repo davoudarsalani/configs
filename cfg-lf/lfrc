@@ -33,7 +33,6 @@ set ratios 1:2
 % {{
     [ $LF_LEVEL -eq 1 ] || lf -remote "send $id echoerr 'WARNING: You are in a nested lf instance!'"
 }}
-## }}}
 ## unmap {{{
 map '~'
 map '`'
@@ -74,12 +73,10 @@ map x
 # map y
 map z
 map F
-## }}}
 ## highlight {{{
 map i $ {{
     eval "$HIGHLIGHT" $f 2>/dev/null | less -R  ## do NOT replace 2 with &
 }}
-## }}}
 ## quit {{{
 map q % {{
     > /tmp/lf_preview_status
@@ -88,7 +85,6 @@ map q % {{
     lf -remote "send $id reload"
     lf -remote "send $id quit"
 }}
-## }}}
 ## toggle preview {{{
 map w % {{  ## JUMP_1
     lf_preview_status_file=/tmp/lf_preview_status
@@ -107,7 +103,6 @@ map w % {{  ## JUMP_1
 map W % {{  ## JUMP_1
     > /tmp/lf_preview_status
 }}
-## }}}
 ## mkdir, touch, rm, trash {{{
 ## mkdir
 ## 1:
@@ -170,7 +165,6 @@ cmd touch $ {{
 #     esac
 # }}
 # map ~ trash # ~ is Shift+Delete
-## }}}
 ## bulk_rename {{{
 cmd bulk_rename $ {{
     old=$(mktemp)
@@ -190,12 +184,10 @@ cmd bulk_rename $ {{
     rm $old $new
     lf -remote "send $id unselect"
 }}
-## }}}
 ## du {{{
 cmd du $ {{
     du -h --max-depth=1 --apparent-size | sort -rh | less -R  ## do NOT add s to -h because it conflicts with --max-depth=1
 }}
-## }}}
 ## open {{{
 cmd open $ {{
     case $f in
@@ -229,7 +221,6 @@ cmd open $ {{
         # * ) for f in $fx; do setsid $OPENER $f &>/dev/null & done ;;
     esac
 }}
-## }}}
 ## open_with {{{
 map o open_with
 cmd open_with $ {{
@@ -305,7 +296,6 @@ cmd open_with $ {{
         esac
     fi
 }}
-## }}}
 ## open_with_other {{{
 cmd open_with_other $ {{
     source "$HOME"/scripts/gb-color
@@ -317,7 +307,6 @@ cmd open_with_other $ {{
         * ) "$other_app" $fx ;;  ## NOTE do NOT add &>/dev/null &
     esac
 }}
-## }}}
 ## fzf_select {{{
 map <c-t> fzf_select
 cmd fzf_select $ {{
@@ -326,7 +315,6 @@ cmd fzf_select $ {{
     file="$(choose_file)" || exit 37
     lf -remote "send $id load"$'\n'"send $id select \"$file\""
 }}
-## }}}
 ## fzf_cd {{{
 map <a-c> fzf_cd
 cmd fzf_cd $ {{
@@ -335,7 +323,6 @@ cmd fzf_cd $ {{
     directory="$(choose_directory)" || exit 37
     lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
 }}
-## }}}
 ## commands {{{
 map <c-c> commands
 cmd commands $ {{
@@ -363,7 +350,6 @@ cmd commands $ {{
         rename )       lf -remote "send $id rename"             ;;
     esac
 }}
-## }}}
 ## map {{{
 map <tab>   :clear ; unselect ; reload
 map <enter> :open  ; unselect
@@ -372,4 +358,3 @@ map <left>  :updir ; unselect
 map .       :set hidden!
 map '`'     mark-load
 map ';'     read
-## }}}
