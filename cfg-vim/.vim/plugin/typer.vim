@@ -38,4 +38,3 @@ function! TyperLoop(file)
 endfunction
 
 :command! -nargs=1 -complete=file Typer :call TyperLoop('<args>')
-

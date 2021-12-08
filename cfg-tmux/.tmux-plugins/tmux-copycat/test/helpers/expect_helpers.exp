@@ -146,4 +146,3 @@ proc _kill_tmux_server {} {
   send "tmux kill-server\r"
   sync_tmux
 }
-
