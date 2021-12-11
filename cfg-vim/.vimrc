@@ -717,7 +717,7 @@ function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-ma
         let l:today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
     endif
 
-    let l:dest_line_pattern='## last modified: '
+    let l:dest_line_pattern='## @last-modified '
 
     " save current cursor position
     let l:lnum = line('.')
