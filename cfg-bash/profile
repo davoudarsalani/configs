@@ -644,6 +644,7 @@ export terminal='xfce4-terminal'
 
 
 
+
 export dmenunb="$solarized_dark"
 export dmenusb="$grey_dark"
 export dmenunf="$fg_l"
