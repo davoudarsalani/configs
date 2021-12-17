@@ -423,14 +423,14 @@ function! ReadOnly() " {{{
 endfunction
 " }}}
 function! FileSize() " {{{ https://github.com/sd65/MiniVim/blob/master/vimrc
-    let bytes = getfsize(expand('%:p'))
+    let l:bytes = getfsize(expand('%:p'))
     if bytes <= 0
         return '0B'
-    elseif bytes > 1024000000
+    elseif bytes >= 1024000000
        return (bytes / 1024000000) . 'GB'
-    elseif bytes > 1024000
+    elseif bytes >= 1024000
        return (bytes / 10241000) . 'MB'
-    elseif bytes > 1024
+    elseif bytes >= 1024
        return (bytes / 1024) . 'KB'
     else
        return bytes . 'B'
@@ -867,7 +867,7 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " winheight('%')   " 34
 " winline()        " 12 (12th line from the top of screen)
 "
-" let cur_column = col(".")
+" let l:cur_column = col(".")
 
 " substitute (https://github.com/ppwwyyxx/dotvim/blob/master/vimrc)
 " set statusline+=%{substitute(getcwd(),expand(\"$HOME\"),\'+\',\'g\')}

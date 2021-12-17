@@ -637,6 +637,14 @@ export fg_d="$blue"
 export fg_l="$silver"
 export bg="$black"
 
+export dmenunb="$solarized_dark"
+export dmenusb="$grey_dark"
+export dmenunf="$fg_l"
+export dmenusf="$fg_l"
+export dmenufn='play-12'
+export dmenufn2='monospace-12'
+export dmenulines=35
+
 export QT_QPA_PLATFORMTHEME=gtk2  ## https://www.linuxuprising.com/2018/05/get-qt5-apps-to-use-native-gtk-style-in.html
 export refresh_icon='♻'  ## 
 export editor='vim'
@@ -645,13 +653,7 @@ export terminal='xfce4-terminal'
 
 
 
-export dmenunb="$solarized_dark"
-export dmenusb="$grey_dark"
-export dmenunf="$fg_l"
-export dmenusf="$fg_l"
-export dmenufn='play-12'
-export dmenufn2='monospace-12'
-export dmenulines=35
+
 
 function start_xorg {
     unset single_input

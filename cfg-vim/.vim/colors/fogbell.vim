@@ -370,3 +370,4 @@ call <sid>hi('BufTabLineActive', s:voidSteel, s:voidGray2, 'none')
 call <sid>hi('BufTabLineCurrent', s:voidBlack, s:voidGray4, 'none')
 call <sid>hi('BufTabLineFill', s:voidBlack, s:voidBlack, 'none')
 call <sid>hi('BufTabLineHidden', s:voidGray3, s:voidBlack2, 'none')
+
