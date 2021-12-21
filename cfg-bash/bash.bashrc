@@ -48,7 +48,7 @@ echo "\
 
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:cp:rm:mv:mkdir:ln:chown:chmod:rmdir:ftp:grep:diff:diff2:xprop:swappiness:lsblk:month:season:year:jmonth:jseason:jyear:mega:watch:journalctl:q'
+export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/scripts"
@@ -361,7 +361,7 @@ alias jmonth='jcal -p'
 alias jseason='jcal -3'
 alias jyear='jcal -y'
 alias mega='mega-cmd'
-alias watch='watch --interval 1 --no-title --color'
+alias watch='watch --interval 2 --no-title --color'
 alias journalctl='journalctl -exfu'
 alias q='exit'
 

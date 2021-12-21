@@ -697,7 +697,7 @@ function! Watch() " {{{
         if exists('$TMUX')
             " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
             call system("tmux split-window -v -d -p 40")  " open pane below (-d prevents from jumping to the pane), -p 40 is pane size
-            call system("tmux send-keys -t 2 'watch --interval 1 --no-title --color " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
+            call system("tmux send-keys -t 2 'watch --interval 2 --no-title --color " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
         else
             " in split below:
             :w | below terminal echo %:p

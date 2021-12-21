@@ -210,9 +210,9 @@ cmd open $ {{
                              fi ;;
         video/* )            vlc -f --play-and-exit -- $fx &>/dev/null & ;;
         text/* )             $editor $fx ;;  ## NOTE do NOT redirect
-        application/json )   $editor $fx &>/dev/null & ;;
-        application/csv )    $editor $fx &>/dev/null & ;;
-        message/news )       $editor $fx &>/dev/null & ;;
+        application/json )   $editor $fx ;;
+        application/csv )    $editor $fx ;;
+        message/news )       $editor $fx ;;
         */octet-stream )     libreoffice $fx &>/dev/null & ;;
         application/msword ) libreoffice $fx &>/dev/null & ;;
         */*spreadsheet* )    libreoffice $fx &>/dev/null & ;;
@@ -248,7 +248,7 @@ cmd open_with $ {{
                                   q ) exit ;;
                                   * ) lf -remote "send $id open_with_other" ;;
                               esac ;;
-            text/*|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument*|application/json|application/csv|message/news )
+            text/*|application/json|application/csv|message/news|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument* )
                                 read -n 1 -p "$(olive 'open with') $($num_color '1') nano $($num_color '2') gedit $($num_color '3') vim $($num_color '4') vi $($num_color '5') libreoffice $($num_color 'o') vim (in new window) " text_app
                                 printf '\n'
                                 case "$text_app" in
