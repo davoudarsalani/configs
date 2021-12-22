@@ -92,8 +92,7 @@ set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
 set stl+=%#dark#\ L:\ %l/%L
 set stl+=%#lite#\ W:\ %{wordcount().words}  " %p%%
 set stl+=%#IndentLevelColor#\ %{IndentLevel()}
-set stl+=%#lite#\ %{Uptime(2)}
-set stl+=%#TFTBColor#\ %{TFTB()}
+ set stl+=%#TFTBColor#\ %{TFTB()}
 set stl+=%#ModifiedColor#\ %{Modified()}
 set stl+=%#CurrentTagColor#\ %{CurrentTag()}
 set stl+=%#SyntasticColor#\ %{CheckSyntax()}  " or SyntasticStatuslineFlag()
@@ -363,15 +362,15 @@ function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-d
         let l:breaks_count = len(breaks)
 
         if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
-            hi link TFTBColor dark
+            hi link TFTBColor lite
             let l:all = todos_count . " " . fixmes_count . " " . tempos_count . " " . breaks_count
         else
-            hi link TFTBColor dark_i
+            hi link TFTBColor lite_i
             let l:all = "TFTB"
         endif
 
     else
-        hi link TFTBColor dark_i
+        hi link TFTBColor lite_i
         let l:all = "TFTB"
     endif
     return all
@@ -380,9 +379,9 @@ endfunction
 function! Modified() " {{{
     let l:mo_index = &modified
     if mo_index == 0
-        hi link ModifiedColor lite_i
+        hi link ModifiedColor dark_i
     else
-        hi link ModifiedColor lite
+        hi link ModifiedColor dark
     endi
     return "MO"
     " set statusline+=%#ModifiedColor#%{&modified?'\ \ X':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
@@ -391,10 +390,10 @@ endfunction
 function! CurrentTag() " {{{
     let l:text = tagbar#currenttag("%s","","f","scoped-stl")
     if len(text) == 0 || &filetype != "python"
-        hi link CurrentTagColor dark_i
+        hi link CurrentTagColor lite_i
         let l:text = "TA"
     else
-        hi link CurrentTagColor dark
+        hi link CurrentTagColor lite
     endif
     return text
 endfunction
@@ -402,10 +401,10 @@ endfunction
 function! CheckSyntax() " {{{
    let l:error_text = SyntasticStatuslineFlag()
    if len(error_text) == 0
-       hi link SyntasticColor lite_i
+       hi link SyntasticColor dark_i
        let l:text = "ER"
    else
-       hi link SyntasticColor lite
+       hi link SyntasticColor dark
        let l:text = error_text
    endif
    return text
@@ -414,9 +413,9 @@ endfunction
 function! ReadOnly() " {{{
     let l:ro_index = &readonly
     if ro_index == 0
-        hi link ReadonlyColor dark_i
+        hi link ReadonlyColor lite_i
     else
-        hi link ReadonlyColor dark
+        hi link ReadonlyColor lite
     endi
     return "RE"
     " set statusline+=%#ReadonlyColor#%{&readonly?'\ \ LOCKED':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
@@ -866,8 +865,10 @@ hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " winwidth('%')    " 139
 " winheight('%')   " 34
 " winline()        " 12 (12th line from the top of screen)
-"
+
 " let l:cur_column = col(".")
+
+" echo localtime()  ## 1640082085
 
 " substitute (https://github.com/ppwwyyxx/dotvim/blob/master/vimrc)
 " set statusline+=%{substitute(getcwd(),expand(\"$HOME\"),\'+\',\'g\')}
