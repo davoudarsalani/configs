@@ -5,13 +5,13 @@ let mapleader = " "
 " let &showbreak="\u21aa" " Show a left arrow (↪) when wrapping text
 " let &titlestring= $USER . '@' . hostname() . ' : %F %r: VIM %m'
 " set title
-" set updatetime=2000  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
+set updatetime=1000  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
 " set showcmd  " Show partial commands in the last line of the screen
 " set backspace=indent,eol,start  " Allow backspacing over autoindent, line breaks and start of insert action
 " set timeout ttimeout ttimeoutlen=200  " Quickly time out on keycodes, but never time out on mappings
 " set showtabline=2  " always show tab bar
 " set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
-" set signcolumn=yes
+" set signcolumn=yes  " yes means do not turn off when no signs are present
 " set preserveindent
 " set showbreak=â€¦
 " set noexpandtab  " convert spaces to tabs
@@ -72,6 +72,9 @@ hi lite ctermfg=249 ctermbg=none cterm=none
 hi dark_i ctermfg=235 ctermbg=none cterm=none
 hi lite_i ctermfg=235 ctermbg=none cterm=none
 
+hi alert   ctermfg=1 ctermbg=none cterm=none
+hi warning ctermfg=202 ctermbg=none cterm=none
+
 hi normal_mode  ctermfg=10  ctermbg=none
 hi visual_mode  ctermfg=166 ctermbg=none
 hi replace_mode ctermfg=126 ctermbg=none
@@ -91,12 +94,12 @@ set stl+=%#dark#\ %{strpart(getline('.'),col('.')-1,1)}  " https://devhints.io/v
 set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
 set stl+=%#dark#\ L:\ %l/%L
 set stl+=%#lite#\ W:\ %{wordcount().words}  " %p%%
-set stl+=%#IndentLevelColor#\ %{IndentLevel()}
- set stl+=%#TFTBColor#\ %{TFTB()}
+set stl+=%#TFTBColor#\ %{TFTB()}
 set stl+=%#ModifiedColor#\ %{Modified()}
 set stl+=%#CurrentTagColor#\ %{CurrentTag()}
 set stl+=%#SyntasticColor#\ %{CheckSyntax()}  " or SyntasticStatuslineFlag()
 set stl+=%#ReadonlyColor#\ %{ReadOnly()}
+set stl+=%#warning#\ %{SignifyGitStatus()}
 set stl+=%#lite#
 " set stl+=%*  " reset color
 set stl+=%=
@@ -182,14 +185,15 @@ noremap <Leader>c :CountCurrentWord<CR>
 noremap <Leader>e ggg?G``
 noremap <Leader>f :FZF<CR>
 noremap <Leader>h :HighlightLinesToggle<CR>
+noremap <Leader>i :IndentLevel<CR>
+noremap <Leader>q :QuickfixToggle<CR>
+noremap <Leader>r :RenameTmuxWindowToCurrentFile<CR>
 noremap <Leader>s :call SyntaxAttr()<CR>
 noremap <Leader>t :TyperStart FILEPATH
-noremap <Leader>q :QuickfixToggle<CR>
 noremap <Leader>w :WordsFrequency<CR>
-noremap <Leader>r :RenameTmuxWindowToCurrentFile<CR>
 
 " show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
-noremap <silent> K :execute 'help ' . expand('<cword>')<CR>
+noremap <silent> K :exec 'help ' . expand('<cword>')<CR>
 
 noremap ` :ShowMarks<CR>
 
@@ -206,7 +210,7 @@ noremap <C-y> :CopyToClipboard<CR>
 nnoremap <C-o> o<Esc>k
 
 " sudo write (https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/)
-command! SW :execute ':silent w !sudo tee %:p > /dev/null'
+command! SW :exec ':silent w !sudo tee %:p > /dev/null'
 
 " bring the current line to top/middle/bottom of screen
 noremap  TT      zt
@@ -332,15 +336,13 @@ function! CurrentMode() " {{{
 endfunction
 " }}}
 function! IndentLevel() " {{{ https://vim.fandom.com/wiki/Put_the_indentation_level_on_the_status_line
-    if &filetype == "python"
-        let l:TabLevel = (indent(".") / &ts )
-        hi link IndentLevelColor dark
-        return TabLevel
+    if &filetype == 'python'
+        :echo 'Indent level: ' . (indent('.') / &ts )
     else
-        hi link IndentLevelColor dark_i
-        return "0"
+        PrintfWarning 'For python file type only'
     endif
 endfunction
+command! IndentLevel :call IndentLevel()
 " }}}
 function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-display-the-number-of-instances-of-a-string-in-vim-statusline/
     if &filetype != "vim"
@@ -362,15 +364,15 @@ function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-d
         let l:breaks_count = len(breaks)
 
         if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
-            hi link TFTBColor lite
+            hi link TFTBColor dark
             let l:all = todos_count . " " . fixmes_count . " " . tempos_count . " " . breaks_count
         else
-            hi link TFTBColor lite_i
+            hi link TFTBColor dark_i
             let l:all = "TFTB"
         endif
 
     else
-        hi link TFTBColor lite_i
+        hi link TFTBColor dark_i
         let l:all = "TFTB"
     endif
     return all
@@ -379,9 +381,9 @@ endfunction
 function! Modified() " {{{
     let l:mo_index = &modified
     if mo_index == 0
-        hi link ModifiedColor dark_i
+        hi link ModifiedColor lite_i
     else
-        hi link ModifiedColor dark
+        hi link ModifiedColor lite
     endi
     return "MO"
     " set statusline+=%#ModifiedColor#%{&modified?'\ \ X':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
@@ -390,10 +392,10 @@ endfunction
 function! CurrentTag() " {{{
     let l:text = tagbar#currenttag("%s","","f","scoped-stl")
     if len(text) == 0 || &filetype != "python"
-        hi link CurrentTagColor lite_i
+        hi link CurrentTagColor dark_i
         let l:text = "TA"
     else
-        hi link CurrentTagColor lite
+        hi link CurrentTagColor dark
     endif
     return text
 endfunction
@@ -401,10 +403,10 @@ endfunction
 function! CheckSyntax() " {{{
    let l:error_text = SyntasticStatuslineFlag()
    if len(error_text) == 0
-       hi link SyntasticColor dark_i
+       hi link SyntasticColor lite_i
        let l:text = "ER"
    else
-       hi link SyntasticColor dark
+       hi link SyntasticColor alert
        let l:text = error_text
    endif
    return text
@@ -413,12 +415,17 @@ endfunction
 function! ReadOnly() " {{{
     let l:ro_index = &readonly
     if ro_index == 0
-        hi link ReadonlyColor lite_i
+        hi link ReadonlyColor dark_i
+        return "RE"
     else
-        hi link ReadonlyColor lite
+        hi link ReadonlyColor alert
+        return "READONLY"
     endi
-    return "RE"
     " set statusline+=%#ReadonlyColor#%{&readonly?'\ \ LOCKED':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
+endfunction
+" }}}
+function! SignifyGitStatus()  " {{{
+  return sy#repo#get_stats_decorated()
 endfunction
 " }}}
 function! FileSize() " {{{ https://github.com/sd65/MiniVim/blob/master/vimrc
@@ -455,7 +462,7 @@ command! -nargs=1 PrintfWarning :call PrintfWarning(<f-args>)
 " }}}
 
 function! CountCurrentWord() " {{{ https://stackoverflow.com/questions/11492258/find-number-of-occurrences-of-word-under-cursor
-    :execute ":%s@\\<" . expand("<cword>") . "\\>\@&@gn"
+    :exec ":%s@\\<" . expand("<cword>") . "\\>\@&@gn"
 endfunction
 command! CountCurrentWord :call CountCurrentWord()
 " }}}
@@ -505,7 +512,7 @@ function! ShowMarks() " {{{ https://vi.stackexchange.com/questions/8451/is-it-po
 
     " build a string which uses the `normal' command plus the var holding the
     " mark - then eval it.
-    execute "normal! '" . s:mark
+    exec "normal! '" . s:mark
 endfunction
 command! ShowMarks :call ShowMarks()
 " }}}
@@ -516,12 +523,12 @@ function! TyperStart(file) " {{{
     let g:better_whitespace_enabled=0
     :IlluminationDisable
     au InsertLeave * hi CursorLine ctermbg=none
-    execute "Typer " . a:file
+    exec "Typer " . a:file
 endfunction
 command! -nargs=1 TyperStart :call TyperStart(<f-args>)
 " }}}
 function! AscendingNumbers(end) " {{{ https://vim.fandom.com/wiki/Making_a_list_of_numbers
-    execute "put =map(range(1, " . a:end . "), 'printf(''%03d'', v:val)')"
+    exec "put =map(range(1, " . a:end . "), 'printf(''%03d'', v:val)')"
 endfunction
 command! -nargs=1 AscendingNumbers :call AscendingNumbers(<f-args>)
 " }}}
@@ -541,7 +548,7 @@ function! Black() " {{{
         let l:answer = confirm("Apply black? ", "&Yes\n&No")
         if answer == "1"
             " do NOT quote $BLACK
-            execute "!clear; eval $BLACK %:p"
+            exec "!clear; eval $BLACK %:p"
         endif
     else
         PrintfWarning 'For python file type only'
@@ -552,7 +559,7 @@ command! Black :call Black()
 function! BlackDiff() " {{{
     if &filetype == "python"
         " do NOT quote $BLACKDIFF
-        execute "!clear; eval $BLACKDIFF %:p | less \-R"
+        exec "!clear; eval $BLACKDIFF %:p | less \-R"
     else
         PrintfWarning 'For python file type only'
     endif
@@ -560,7 +567,7 @@ endfunction
 command! BlackDiff :call BlackDiff()
 " }}}
 function! Filter(string) " {{{ https://vim.fandom.com/wiki/Redirect_g_search_output
-    let @a='' | execute 'g/' . a:string . '/y A' | new | setlocal bt=nofile | put! a
+    let @a='' | exec 'g/' . a:string . '/y A' | new | setlocal bt=nofile | put! a
 endfunction
 command! -nargs=1 Filter :call Filter(<f-args>)
 " }}}
@@ -644,7 +651,7 @@ function! s:QuickfixToggle()  " ## TODO what doses it do exatly?
     if g:quickfix_is_open
         cclose
         let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
+        exec g:quickfix_return_to_window . "wincmd w"
     else
         let g:quickfix_return_to_window = winnr()
         copen
@@ -785,6 +792,7 @@ set complete=.,w,b,u,t
 " }}}
 " {{{ syntastic
 let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 0  " JUMP_2 signs by signify clobber these so better get disabled
 " let g:syntastic_auto_jump = 1
 hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
 hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
@@ -843,8 +851,104 @@ let g:better_whitespace_ctermcolor = 24
 " {{{ multiple-cursors
 hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " }}}
+" {{{ signify  if you remove this plugin, remember to enable syntastic signs back in JUMP_2
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '_'
+let g:signify_sign_change            = '×'
+let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete_first_line
+
+highlight SignifySignAdd    ctermfg=2   cterm=none
+highlight SignifySignDelete ctermfg=1   cterm=none
+highlight SignifySignChange ctermfg=202 cterm=none
+
+" https://vi.stackexchange.com/questions/2350/how-to-map-alt-key
+exec "set <M-j>=\ej"
+exec "set <M-k>=\ek"
+nmap <silent> <M-j> <plug>(signify-next-hunk)
+nmap <silent> <M-k> <plug>(signify-prev-hunk)
+" nmap <silent> <leader>gJ 9999<leader>gj
+" nmap <silent> <leader>gK 9999<leader>gk
+
+autocmd User SignifyHunk call s:show_current_hunk()
+function! s:show_current_hunk() abort
+  let h = sy#util#get_hunk_stats()
+  if !empty(h)
+    redraw
+    echohl ModeMsg
+    echo printf(' %d/%d', h.current_hunk, h.total_hunks)
+    echohl Identifier
+    echon ' hunk'
+    echohl None
+  endif
+endfunction
+
+exec "set <M-d>=\ed"
+noremap <silent> <A-d> :SignifyDiff<CR>
+
+exec "set <M-h>=\eh"
+noremap <silent> <A-h> :SignifyHunkDiff<CR>
+
+exec "set <M-u>=\eu"
+noremap <silent> <A-u> :SignifyHunkUndo<CR>
+
+exec "set <M-t>=\et"
+noremap <silent> <A-t> :SignifyToggle<CR>
+
+exec "set <M-f>=\ef"
+noremap <silent> <A-f> :SignifyFold<CR>
+
+exec "set <M-r>=\er"
+noremap <silent> <A-r> :SignifyRefresh<CR>
+"}}}
 " }}}
 
+" {{{ GitGutter
+" exec "set <M-j>=\ej"
+" exec "set <M-k>=\ek"
+" nmap <silent> <M-j> :GitGutterPrevHunk<CR>
+" nmap <silent> <M-k> :GitGutterNextHunk<CR>
+
+" exec "set <M-p>=\ep"
+" noremap <silent> <A-p> :GitGutterPreviewHunk<CR>
+
+" exec "set <M-u>=\eu"
+" noremap <silent> <A-u> :GitGutterUndoHunk<CR>
+
+" exec "set <M-t>=\et"
+" noremap <silent> <A-t> :GitGutterToggle<CR>
+
+" exec "set <M-f>=\ef"
+" noremap <silent> <A-f> :GitGutterFold<CR>
+
+" exec "set <M-r>=\er"
+" noremap <silent> <A-r> :GitGutter<CR>
+
+" exec "set <M-s>=\es"
+" noremap <silent> <A-s> :GitGutterStageHunk<CR>
+
+" function! GitGutterStatus()
+"   let [a, m, r] = GitGutterGetHunkSummary()
+"   if a > 0 || m > 0 || r > 0
+"     return printf('+%d -%d ×%d', a, r, m)
+"   else
+"     return ''
+"   endif
+" endfunction
+
+" let g:gitgutter_map_keys = 0
+" let g:gitgutter_sign_allow_clobber = 1
+" let g:gitgutter_sign_added              = '+'
+" let g:gitgutter_sign_modified           = '×'
+" let g:gitgutter_sign_removed            = '-'
+" let g:gitgutter_sign_removed_first_line = '¯'
+" let g:gitgutter_sign_removed_above_and_below = '¯_'
+" let g:gitgutter_sign_modified_removed   = '×-'
+
+" highlight GitGutterAdd    ctermfg=2
+" highlight GitGutterChange ctermfg=202
+" highlight GitGutterDelete ctermfg=1
+" }}}
 
 " {{{ MISC
 " number of windows in the current buffer

@@ -226,6 +226,19 @@ local vim_keys = { -- {{{
              }
     },
     {
+      modifiers = {"Alt"},
+      keys = {
+               d            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] diff"),
+               f            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] fold unchanged lines"),
+               h            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] hunk diff"),
+               k            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] prev hunk"),
+               j            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] next hunk"),
+               r            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] refresh"),
+               t            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] toggle"),
+               u            = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [signify] undo hunk"),
+             }
+    },
+    {
       modifiers = {"Leader"},
       keys = {
                ['0']  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> turn jedi off"),
@@ -243,18 +256,19 @@ local vim_keys = { -- {{{
                b      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> black (in python)"),
                bd     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> black diff (in python)"),
                c      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> count current word"),
+               d      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [jedi] jump to current word's def/class"),
                e      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> toggle encode"),
                f      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> fzf"),
                h      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [HighlightLines] toggle highlight current line"),
+               i      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> indent level"),
                k      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [jedi] show docstring of function/class"),
+               q      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> toggle quickfix"),
+               r      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> rename tmux window to current file name"),
                s      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [SyntaxAttr] show syntax attr of current word"),
                t      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> typer start"),
-               d      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [jedi] jump to current word's def/class"),
                u      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> [jedi] usages of current word"),
                v      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[V]</span> run selection"),
                w      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> words frequency"),
-               q      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> toggle quickfix"),
-               r      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>[N]</span> rename tmux window to current file name"),
              }
     }
   },

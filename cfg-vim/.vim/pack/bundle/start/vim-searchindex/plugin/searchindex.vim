@@ -217,10 +217,8 @@ function! s:PrintMatches()
   " See ":h :echo-redraw".
 
   " by me:
-  " normal zz
-
   redraw
-  echohl MoreMsg
+  echohl ModeMsg
   echo l:msg
   echohl Identifier
   echon l:dir_char . @/

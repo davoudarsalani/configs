@@ -42,6 +42,7 @@ map '"'
 map ';'
 map ','
 map ?
+map <f-1>
 map <enter>
 map <right>
 map <left>
@@ -334,6 +335,19 @@ cmd fzf_cd $ {{
 
     directory="$(choose_directory)" || exit 37
     lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
+}}
+
+
+map gu git_undo
+cmd git_undo $ {{
+    source "$HOME"/scripts/gb
+
+    prompt="$(get_single_input "undo ${f##*/}?")" && printf '\n'
+    case "$prompt" in
+        y ) source "$HOME"/scripts/gb-git
+            git_undo_specific_or_pattern "${f%/*}" "${f##*/}" && \
+            lf -remote "send $id echo \" ${f##*/} undid\"" ;;
+    esac
 }}
 
 ## commands {{{
