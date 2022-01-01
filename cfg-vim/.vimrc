@@ -5,7 +5,6 @@ let mapleader = " "
 " let &showbreak="\u21aa" " Show a left arrow (↪) when wrapping text
 " let &titlestring= $USER . '@' . hostname() . ' : %F %r: VIM %m'
 " set title
-set updatetime=1000  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
 " set showcmd  " Show partial commands in the last line of the screen
 " set backspace=indent,eol,start  " Allow backspacing over autoindent, line breaks and start of insert action
 " set timeout ttimeout ttimeoutlen=200  " Quickly time out on keycodes, but never time out on mappings
@@ -55,6 +54,7 @@ set scrolloff=5
 set sidescroll=1  " scroll sideways 1 chraacter at a time not a whole screen
 set sidescrolloff=10
 set matchpairs+=<:>
+set updatetime=1000  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
 set timeoutlen=500  " to run maps (default 1000)
 set foldmethod=marker
 " set foldmarker=f[[,f]]
@@ -69,8 +69,8 @@ set stl=  " {{{
 hi dark ctermfg=4  ctermbg=none cterm=none
 hi lite ctermfg=249 ctermbg=none cterm=none
 
-hi dark_i ctermfg=235 ctermbg=none cterm=none
-hi lite_i ctermfg=235 ctermbg=none cterm=none
+hi dark_inactive ctermfg=235 ctermbg=none cterm=none
+hi lite_inactive ctermfg=235 ctermbg=none cterm=none
 
 hi alert   ctermfg=1 ctermbg=none cterm=none
 hi warning ctermfg=202 ctermbg=none cterm=none
@@ -95,11 +95,11 @@ set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
 set stl+=%#dark#\ L:\ %l/%L
 set stl+=%#lite#\ W:\ %{wordcount().words}  " %p%%
 set stl+=%#TFTBColor#\ %{TFTB()}
-set stl+=%#ModifiedColor#\ %{Modified()}
 set stl+=%#CurrentTagColor#\ %{CurrentTag()}
 set stl+=%#SyntasticColor#\ %{CheckSyntax()}  " or SyntasticStatuslineFlag()
 set stl+=%#ReadonlyColor#\ %{ReadOnly()}
-set stl+=%#warning#\ %{SignifyGitStatus()}
+set stl+=%#ModifiedColor#\ %{Modified()}
+set stl+=%#GitStatusColor#\ %{SignifyGitStatus()}
 set stl+=%#lite#
 " set stl+=%*  " reset color
 set stl+=%=
@@ -113,22 +113,22 @@ set stl+=%#CurrentModeColor#\ ▮
 " set stl+=%{&ff}  " file format, e.g. unix
 " set stl+=%{v:register}  " active register
 " }}}
-" {{{ abbreviations
+" {{{ abbrev
 iabbrev writedatetime <c-r>=strftime('%Y%m%d%H%M%S')<CR>
 " }}}
 " {{{ maps
 " {{{ F1-10
 " write
-noremap  <F1>      :q!<CR>
-inoremap <F1> <C-o>:q!<CR>
+noremap  <F1>      :qa!<CR>
+inoremap <F1> <C-o>:qa!<CR>
 
 " quit
 noremap  <F2>      :w<CR>
 inoremap <F2> <C-o>:w<CR>
 
 " write+quit
-noremap  <F3>      :wq<CR>
-inoremap <F3> <C-o>:wq<CR>
+noremap  <F3>      :wqa<CR>
+inoremap <F3> <C-o>:wqa<CR>
 
 noremap  <F4>      :Run<CR>
 inoremap <F4> <C-o>:Run<CR>
@@ -149,68 +149,39 @@ vnoremap <F7>      :s#\%V##gc<Left><Left><Left>
 noremap  <F8>      :set cursorcolumn!<CR>
 inoremap <F8> <C-o>:set cursorcolumn!<CR>
 
-" python-mode
-au FileType python noremap  <F9>      :PymodeLint<CR><C-w><Down>
-au FileType python inoremap <F9> <Esc>:PymodeLint<CR><C-w><Down>
+" python-mode JUMP_7
+" '<F9>'
 
-" ultisnips
-let g:UltiSnipsListSnippets = "<F10>"
+" ultisnips JUMP_6
+" '<F10>'
 
 " watch
 noremap  <F12>      :Watch<CR>
 inoremap <F12> <C-o>:Watch<CR>
 " }}}
-" jump to prev/next function (https://vim.fandom.com/wiki/Jumping_to_the_start_and_end_of_a_code_block)
-au FileType python noremap { :silent eval search('^ *def ',      'b')<CR>
-au FileType python noremap } :silent eval search('^ *def '          )<CR>
-au FileType sh     noremap { :silent eval search('^ *function ', 'b')<CR>
-au FileType sh     noremap } :silent eval search('^ *function '     )<CR>
+noremap <Leader>0  :ToggleJedi<CR>
+noremap <Leader>1  :set list!<Bar>set relativenumber!<Bar>set invnumber<CR>
+noremap <Leader>2  :TagbarToggle<CR>
+noremap <Leader>3  :ToggleWhitespace<CR>
+noremap <Leader>4  :UndotreeToggle<CR>
+noremap <Leader>5  :MUcompleteAutoToggle<CR>
+noremap <Leader>6  :SyntasticToggleMode<CR>
+noremap <Leader>7  :SignatureToggleSigns<CR>
+noremap <Leader>8  :IlluminationToggle<CR>
+noremap <Leader>9  :DimInactiveToggle<CR>
+noremap <Leader>10 :HighlightLinesToggle<CR>
 
-noremap <Leader>0 :ToggleJedi<CR>
-noremap <Leader>1 :set list!<Bar>set relativenumber!<Bar>set invnumber<CR>
-noremap <Leader>2 :TagbarToggle<CR>
-noremap <Leader>3 :ToggleWhitespace<CR>
-noremap <Leader>4 :UndotreeToggle<CR>
-noremap <Leader>5 :MUcompleteAutoToggle<CR>
-noremap <Leader>6 :SyntasticToggleMode<CR>
-noremap <Leader>7 :SignatureToggleSigns<CR>
-noremap <Leader>8 :IlluminationToggle<CR>
-noremap <Leader>9 :DimInactiveToggle<CR>
-
-noremap <Leader>a :AscendingNumbers END
+noremap <Leader>a  :AscendingNumbers END
 noremap <Leader>b  :Black<CR>
 noremap <Leader>bd :BlackDiff<CR>
-noremap <Leader>c :CountCurrentWord<CR>
-" toggle encode (https://vim.fandom.com/wiki/How_to_obscure_text_instantaneously):
-noremap <Leader>e ggg?G``
-noremap <Leader>f :FZF<CR>
-noremap <Leader>h :HighlightLinesToggle<CR>
-noremap <Leader>i :IndentLevel<CR>
-noremap <Leader>q :QuickfixToggle<CR>
-noremap <Leader>r :RenameTmuxWindowToCurrentFile<CR>
-noremap <Leader>s :call SyntaxAttr()<CR>
-noremap <Leader>t :TyperStart FILEPATH
-noremap <Leader>w :WordsFrequency<CR>
-
-" show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
-noremap <silent> K :exec 'help ' . expand('<cword>')<CR>
-
-noremap ` :ShowMarks<CR>
-
-" https://vim.fandom.com/wiki/Smart_home
-noremap <expr>   <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
-imap    <silent> <Home> <C-O><Home>
-" noremap <expr>   <End>  (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
-" imap             <End>  <C-o><End>
-" vnoremap <expr>  <End>  (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
-
-noremap <C-y> :CopyToClipboard<CR>
-
-" insert new line below without leaving normal mode (https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode)
-nnoremap <C-o> o<Esc>k
-
-" sudo write (https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/)
-command! SW :exec ':silent w !sudo tee %:p > /dev/null'
+noremap <Leader>c  :CountCurrentWord<CR>
+noremap <Leader>e  :ToggleEncode<CR>
+noremap <Leader>i  :IndentLevel<CR>
+noremap <Leader>q  :QuickfixToggle<CR>
+noremap <Leader>r  :RenameTmuxWindowToCurrentFile<CR>
+noremap <Leader>s  :SyntaxAttribute<CR>
+noremap <Leader>t  :TyperStart PATH
+noremap <Leader>w  :WordsFrequency<CR>
 
 " bring the current line to top/middle/bottom of screen
 noremap  TT      zt
@@ -219,22 +190,6 @@ noremap  BB      zb
 inoremap TT <C-o>zt
 inoremap MM <C-o>zz
 inoremap BB <C-o>zb
-
-" insert single character in normal mode (https://vim.fandom.com/wiki/Insert_a_single_character):
-nnoremap <C-i> :exec "normal i".nr2char(getchar())."\e"<CR>
-" nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
-
-" clear highlighted matches (https://nvie.com/posts/how-i-boosted-my-vim/):
-noremap <silent> <CR> :nohlsearch<CR>
-" toggle highlighting on/off (https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches):
-" noremap <silent> <CR> :set hlsearch! hlsearch?<CR>
-
-" prevent x from screwing-up last yanked string (❗ do NOT change the noremap)
-noremap x "_x
-
-" easymotion
-map f <Plug>(easymotion-bd-w)
-map F <Plug>(easymotion-s2)
 
 " change/delete whole word no matter where the cursor is
 noremap cw caw
@@ -248,28 +203,60 @@ map U <C-r>
 noremap b B
 noremap w W
 
-noremap J J<Home>
+" easymotion JUMP_5
 
 map ; :
+
+" show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
+noremap <silent> K :exec 'help ' . expand('<cword>')<CR>
+
+" https://vim.fandom.com/wiki/Smart_home
+noremap <expr>   <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
+imap    <silent> <Home> <C-O><Home>
+" noremap <expr>   <End>  (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
+" imap             <End>  <C-o><End>
+" vnoremap <expr>  <End>  (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
+
+" clear highlighted matches (https://nvie.com/posts/how-i-boosted-my-vim/):
+noremap <silent> <CR> :nohlsearch<CR>
+" toggle highlighting on/off (https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches):
+" noremap <silent> <CR> :set hlsearch! hlsearch?<CR>
+
+" insert single character in normal mode (https://vim.fandom.com/wiki/Insert_a_single_character):
+nnoremap <C-i> :exec "normal i".nr2char(getchar())."\e"<CR>
+" nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
+
+" insert new line below without leaving normal mode (https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode)
+nnoremap <C-o> o<Esc>k
+
+noremap <C-y> :CopyToClipboard<CR>
+
+command! SudoWrite :call SudoWrite()
+
+" jump to prev/next function (https://vim.fandom.com/wiki/Jumping_to_the_start_and_end_of_a_code_block)
+au FileType python noremap { :silent eval search('^ *def ',      'b')<CR>
+au FileType python noremap } :silent eval search('^ *def '          )<CR>
+au FileType sh     noremap { :silent eval search('^ *function ', 'b')<CR>
+au FileType sh     noremap } :silent eval search('^ *function '     )<CR>
 " }}}
 " {{{ au & hi
 " au VimEnter * :vertical resize +9  " widen main split so undotree split occupies less space
 " vv needed because restore_view.vim opens buffer with current fold open
 au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
-au InsertLeave *  hi CursorLineNr ctermbg=none ctermfg=235 cterm=none
 au InsertEnter *  hi CursorLine   ctermbg=none
-au InsertLeave *  hi CursorLine   ctermbg=233
+" au InsertLeave *  :call CursorLineInNonInsertMode()  " CurrentMode() function does the job, so better be commented
 
-au vimEnter    *  RestoreCursorPosition
 au VimEnter    *  normal zM
 au VimEnter    *  normal zz
 au VimEnter    *  set noshowmode
+au vimEnter    *  RestoreCursorPosition
 au VimEnter    *  UndotreeShow
-au BufWritePre *  :call LastModified()  " :LastModified did not work
+au BufWritePre *  :call LastModified()  " :LastModified command did not work
 au VimEnter    *  :RenameTmuxWindowToCurrentFile
 au BufWinLeave *  :RenameTmuxWindowToVim
 
-au FileType    sh MatchTodoInSh
+au FileType    sh :MatchTodoInSh
+
 " run selection:
 au FileType sh     vnoremap <leader>v :w  !source %:p; bash<CR>
 au FileType python vnoremap <leader>v :w  !source %:p; python<CR>
@@ -278,124 +265,86 @@ au FileType sh      noremap <leader>. :.w !source %:p; bash<CR>
 au FileType python  noremap <leader>. :.w !source %:p; python<CR>
 
 hi Comment      cterm=italic
-hi Search       ctermbg=none cterm=underline
+hi CursorColumn ctermbg=233
+hi LineNr       ctermbg=none ctermfg=235 cterm=none
 hi Normal       ctermbg=none
+hi Search       ctermbg=none cterm=underline
 hi SignColumn   ctermbg=none
 hi StatusLine   ctermbg=none ctermfg=12  cterm=none
 hi StatusLineNC ctermbg=none ctermfg=235 cterm=none
-hi LineNr       ctermbg=none ctermfg=235 cterm=none
-hi CursorColumn ctermbg=233
-hi VertSplit    ctermfg=4
 hi TodoInSh     ctermbg=none ctermfg=246 cterm=italic,bold
+hi VertSplit    ctermfg=4
 
-" jedi
-hi def jediFat       ctermbg=none ctermfg=67   cterm=none
-hi def jediUsage     ctermbg=5    ctermfg=0    cterm=none
-hi def jediFunction  ctermbg=none ctermfg=none cterm=none
-hi def jediFatSymbol ctermbg=202  ctermfg=202  cterm=none
+" jedi JUMP_3
 
-" illuminate
-hi WordUnderCursorTheme ctermbg=235
-hi link illuminatedWord WordUnderCursorTheme
+" illuminate JUMP_4
 " }}}
 " {{{ functions
+" statusline functions:
 function! CurrentMode() " {{{
     let l:currentmode = mode()
-    if currentmode == "i"
+    if currentmode == 'i'
         hi link CurrentModeColor lite
-        return "INSERT"
-    elseif currentmode == "n"
+        return 'INSERT'
+    endif
+
+    call CursorLineInNonInsertMode()
+    if currentmode == 'n'
         hi link CurrentModeColor normal_mode
-        return "NORMAL"
-    elseif currentmode == "v"
+        return 'NORMAL'
+    elseif currentmode == 'v'
         hi link CurrentModeColor visual_mode
-        let l:selected_bytes = wordcount().visual_bytes
-        let l:selected_words = wordcount().visual_words
-        return "VISUAL " . selected_bytes . " " . selected_words
-    elseif currentmode == "r"
+        return 'VISUAL C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words
+    elseif currentmode == 'r'
         hi link CurrentModeColor replace_mode
-        return "REPLACE"
-    elseif currentmode == "c"
+        return 'REPLACE'
+    elseif currentmode == 'c'
         hi link CurrentModeColor command_mode
-        return "COMMAND"
-    elseif currentmode == "t"
+        return 'COMMAND'
+    elseif currentmode == 't'
         hi link CurrentModeColor terminal_mode_color
-        return "TERMINAL"
-    elseif currentmode == "s"
+        return 'TERMINAL'
+    elseif currentmode == 's'
         hi link CurrentModeColor select_mode_color
-        return "SELECT"
-    elseif currentmode == "!"
+        return 'SELECT'
+    elseif currentmode == '!'
         hi link CurrentModeColor shell_mode_color
-        return "SHELL"
-    elseif currentmode == +"v"  " put lower than replace
+        return 'SHELL'
+    elseif currentmode == +'v'  " put lower than replace
         hi link CurrentModeColor visual_mode
-        let l:selected_bytes = wordcount().visual_bytes
-        let l:selected_words = wordcount().visual_words
-        return "VISUAL-BLOCK " . selected_bytes . " " . selected_words
+        return 'VISUAL-BLOCK C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words
     endif
 endfunction
-" }}}
-function! IndentLevel() " {{{ https://vim.fandom.com/wiki/Put_the_indentation_level_on_the_status_line
-    if &filetype == 'python'
-        :echo 'Indent level: ' . (indent('.') / &ts )
-    else
-        PrintfWarning 'For python file type only'
-    endif
-endfunction
-command! IndentLevel :call IndentLevel()
 " }}}
 function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-display-the-number-of-instances-of-a-string-in-vim-statusline/
-    if &filetype != "vim"
-        let l:lines = getline(1, '$')
-        let l:todos = filter(lines, 'v:val =~? "TODO"')
-
-        let l:lines = getline(1, '$')
-        let l:fixmes = filter(lines, 'v:val =~? "FIXME"')
-
-        let l:lines = getline(1, '$')
-        let l:tempos = filter(lines, 'v:val =~? "TEMPORARY"')
-
-        let l:lines = getline(1, '$')
-        let l:breaks = filter(lines, 'v:val =~? "breakpoint()"')
-
-        let l:todos_count  = len(todos)
-        let l:fixmes_count = len(fixmes)
-        let l:tempos_count = len(tempos)
-        let l:breaks_count = len(breaks)
+    if &filetype != 'vim'
+        let l:todos_count  = len(filter(getline(1, '$'), 'v:val =~? "TODO"'))
+        let l:fixmes_count = len(filter(getline(1, '$'), 'v:val =~? "FIXME"'))
+        let l:tempos_count = len(filter(getline(1, '$'), 'v:val =~? "TEMPORARY"'))
+        let l:breaks_count = len(filter(getline(1, '$'), 'v:val =~? "breakpoint()"'))
 
         if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
             hi link TFTBColor dark
-            let l:all = todos_count . " " . fixmes_count . " " . tempos_count . " " . breaks_count
+            let l:all = todos_count . ' ' . fixmes_count . ' ' . tempos_count . ' ' . breaks_count
         else
-            hi link TFTBColor dark_i
-            let l:all = "TFTB"
+            hi link TFTBColor dark_inactive
+            let l:all = 'TFTB'
         endif
 
     else
-        hi link TFTBColor dark_i
-        let l:all = "TFTB"
+        hi link TFTBColor dark_inactive
+        let l:all = 'TFTB'
     endif
     return all
 endfunction
 " }}}
-function! Modified() " {{{
-    let l:mo_index = &modified
-    if mo_index == 0
-        hi link ModifiedColor lite_i
-    else
-        hi link ModifiedColor lite
-    endi
-    return "MO"
-    " set statusline+=%#ModifiedColor#%{&modified?'\ \ X':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
-endfunction
-" }}}
 function! CurrentTag() " {{{
-    let l:text = tagbar#currenttag("%s","","f","scoped-stl")
-    if len(text) == 0 || &filetype != "python"
-        hi link CurrentTagColor dark_i
-        let l:text = "TA"
+    let l:text = tagbar#currenttag('%s','','f','scoped-stl')
+    if len(text) == 0 || &filetype != 'python'
+        hi link CurrentTagColor lite_inactive
+        let l:text = 'TA'
     else
-        hi link CurrentTagColor dark
+        hi link CurrentTagColor lite
     endif
     return text
 endfunction
@@ -403,8 +352,8 @@ endfunction
 function! CheckSyntax() " {{{
    let l:error_text = SyntasticStatuslineFlag()
    if len(error_text) == 0
-       hi link SyntasticColor lite_i
-       let l:text = "ER"
+       hi link SyntasticColor dark_inactive
+       let l:text = 'ER'
    else
        hi link SyntasticColor alert
        let l:text = error_text
@@ -413,19 +362,35 @@ function! CheckSyntax() " {{{
 endfunction
 " }}}
 function! ReadOnly() " {{{
-    let l:ro_index = &readonly
-    if ro_index == 0
-        hi link ReadonlyColor dark_i
-        return "RE"
-    else
+    if &readonly
         hi link ReadonlyColor alert
-        return "READONLY"
+    else
+        hi link ReadonlyColor lite_inactive
     endi
+    return 'RE'
     " set statusline+=%#ReadonlyColor#%{&readonly?'\ \ LOCKED':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
 endfunction
 " }}}
+function! Modified() " {{{
+    let l:mo_index = &modified
+    if &modified
+        hi link ModifiedColor warning
+    else
+        hi link ModifiedColor dark_inactive
+    endi
+    return 'MO'
+    " set statusline+=%#ModifiedColor#%{&modified?'\ \ X':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
+endfunction
+" }}}
 function! SignifyGitStatus()  " {{{
-  return sy#repo#get_stats_decorated()
+  let l:gs = sy#repo#get_stats_decorated()
+  if len(gs) == 0
+    hi link GitStatusColor lite_inactive
+    return 'GI'
+  else
+    hi link GitStatusColor warning
+    return gs
+  endif
 endfunction
 " }}}
 function! FileSize() " {{{ https://github.com/sd65/MiniVim/blob/master/vimrc
@@ -444,104 +409,10 @@ function! FileSize() " {{{ https://github.com/sd65/MiniVim/blob/master/vimrc
 endfunction
 " }}}
 
-function! PrintfMsg(msg)  " {{{
-  echohl Identifier
-  echo a:msg
-  echohl None
-endfunction
-command! -nargs=1 PrintfMsg :call PrintfMsg(<f-args>)
-" }}}
-function! PrintfWarning(msg)  " {{{
-  echohl WarningMsg
-  echo 'Warning '
-  echohl Identifier
-  echon a:msg
-  echohl None
-endfunction
-command! -nargs=1 PrintfWarning :call PrintfWarning(<f-args>)
-" }}}
-
-function! CountCurrentWord() " {{{ https://stackoverflow.com/questions/11492258/find-number-of-occurrences-of-word-under-cursor
-    :exec ":%s@\\<" . expand("<cword>") . "\\>\@&@gn"
-endfunction
-command! CountCurrentWord :call CountCurrentWord()
-" }}}
-function! ToggleJedi() " {{{
-    if g:jedi#show_call_signatures == 2
-        let g:jedi#show_call_signatures = 0
-        PrintfMsg 'jedi is off'
-    else
-        let g:jedi#show_call_signatures = 2  " 2 shows call signatures in the command line instead of a popup window2
-        PrintfMsg 'jedi is on'
-    endif
-endfunction
-command! ToggleJedi :call ToggleJedi()
-" }}}
-function! MyFoldText() " {{{ https://stackoverflow.com/questions/5983396/change-the-text-in-folds
-    let l:lines_count = v:foldend - v:foldstart + 1
-    if     strlen(lines_count) == 1
-        let l:lines_count = '  ' . lines_count
-    elseif strlen(lines_count) == 2
-        let l:lines_count = ' ' . lines_count
-    endif
-    let l:comment = substitute(getline(v:foldstart), "^[^a-zA-Z0-9]* *", "", 1)
-    let l:comment = substitute(comment,              " *[^a-zA-Z0-9)'\\]]* *\{\{\{.*",  "", 1)
-    let l:txt     = lines_count . ' ' . comment                    " ^^ why had to use \\] instead of \] ?
-    return txt
-endfunction
-" }}}
-function! RestoreCursorPosition() " {{{ https://vim.fandom.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-command! RestoreCursorPosition :call RestoreCursorPosition()
-" }}}
-function! ShowMarks() " {{{ https://vi.stackexchange.com/questions/8451/is-it-possible-to-have-vim-show-the-list-of-available-marks-when-using-marks
-    marks
-    PrintfMsg 'Mark: '
-
-    " getchar() - prompts user for a single character and returns the chars
-    " ascii representation
-    " nr2char() - converts ASCII `NUMBER TO CHAR'
-
-    let s:mark = nr2char(getchar())
-    " remove the `press any key prompt'
-    redraw
-
-    " build a string which uses the `normal' command plus the var holding the
-    " mark - then eval it.
-    exec "normal! '" . s:mark
-endfunction
-command! ShowMarks :call ShowMarks()
-" }}}
-function! TyperStart(file) " {{{
-    set wrap  " FIXME does not work
-    set nohlsearch
-    set showtabline=0
-    let g:better_whitespace_enabled=0
-    :IlluminationDisable
-    au InsertLeave * hi CursorLine ctermbg=none
-    exec "Typer " . a:file
-endfunction
-command! -nargs=1 TyperStart :call TyperStart(<f-args>)
-" }}}
 function! AscendingNumbers(end) " {{{ https://vim.fandom.com/wiki/Making_a_list_of_numbers
     exec "put =map(range(1, " . a:end . "), 'printf(''%03d'', v:val)')"
 endfunction
 command! -nargs=1 AscendingNumbers :call AscendingNumbers(<f-args>)
-" }}}
-function! CopyToClipboard() " {{{ copy yanked text to clipboard (https://github.com/ryukinix/dotfiles/blob/master/.vimrc)
-    call system('xclip -selection clipboard', @0)
-    PrintfMsg 'Copied to clipboard'
-endfunction
-command! CopyToClipboard :call CopyToClipboard()
-" }}}
-function! MatchTodoInSh()  " {{{
-    match TodoInSh /\<\(TODO\|TEMPORARY\|FIXME\|NOTE\|JUMP_[0-9]\+\)\>/
-endfunction
-command! MatchTodoInSh :call MatchTodoInSh()
 " }}}
 function! Black() " {{{
     if &filetype == "python"
@@ -566,16 +437,227 @@ function! BlackDiff() " {{{
 endfunction
 command! BlackDiff :call BlackDiff()
 " }}}
+function! CopyToClipboard() " {{{ copy yanked text to clipboard (https://github.com/ryukinix/dotfiles/blob/master/.vimrc)
+    call system('xclip -selection clipboard', @0)
+    PrintfMsg 'Copied to clipboard'
+endfunction
+command! CopyToClipboard :call CopyToClipboard()
+" }}}
+function! CountCurrentWord() " {{{ https://stackoverflow.com/questions/11492258/find-number-of-occurrences-of-word-under-cursor
+    :exec ":%s@\\<" . expand("<cword>") . "\\>\@&@gn"
+endfunction
+command! CountCurrentWord :call CountCurrentWord()
+" }}}
+function! CursorLineInNonInsertMode()  " {{{
+    hi CursorLineNr ctermbg=none ctermfg=235 cterm=none
+    hi CursorLine ctermbg=233
+endfunction
+" }}}
 function! Filter(string) " {{{ https://vim.fandom.com/wiki/Redirect_g_search_output
     let @a='' | exec 'g/' . a:string . '/y A' | new | setlocal bt=nofile | put! a
 endfunction
 command! -nargs=1 Filter :call Filter(<f-args>)
+" }}}
+function! IndentLevel() " {{{ https://vim.fandom.com/wiki/Put_the_indentation_level_on_the_status_line
+    if &filetype == 'python'
+        :echo 'Indent level: ' . (indent('.') / &ts )
+    else
+        PrintfWarning 'For python file type only'
+    endif
+endfunction
+command! IndentLevel :call IndentLevel()
 " }}}
 function! InsertLineNumbers() " {{{ https://vim.fandom.com/wiki/Insert_line_numbers
     :%s/^/\=printf('%-4d', line('.'))/g
     :%s/\([0-9]\+\)\s*$/\1/g
 endfunction
 command! InsertLineNumbers :call InsertLineNumbers()
+" }}}
+function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-make-vim-change-a-date-when-a-section-of-a-file-was-edited
+    if !&modified || &filetype == 'vim' || (&filetype != 'python' && &filetype != 'sh')
+        return
+    endif
+
+    let l:today=system("echo -n $(jdate +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
+    " use date if, for any reason, jdate fails
+    if today !~ '.*day'
+        let l:today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
+    endif
+
+    let l:dest_line_pattern='## @last-modified '
+
+    " save current cursor position
+    let l:lnum = line('.')
+    let l:col  = col('.')
+
+    if search(dest_line_pattern, 'w')
+        let l:line1 = getline('.')
+        if line1 =~ today
+            call cursor(lnum, col)  " restore cursor position
+            return
+        endif
+        let l:line2 = substitute(line1,
+                               \dest_line_pattern . '.*',
+                               \dest_line_pattern . today,
+                               \'')
+        call setline('.', line2)
+    endif
+
+    call cursor(lnum, col)  " restore cursor position
+endfunction
+command! LastModified :call LastModified()
+" }}}
+function! MatchTodoInSh()  " {{{
+    match TodoInSh /\<\(TODO\|TEMPORARY\|FIXME\|NOTE\|JUMP_[0-9]\+\)\>/
+endfunction
+command! MatchTodoInSh :call MatchTodoInSh()
+" }}}
+function! MyFoldText() " {{{ https://stackoverflow.com/questions/5983396/change-the-text-in-folds
+    let l:lines_count = v:foldend - v:foldstart + 1
+    if     strlen(lines_count) == 1
+        let l:lines_count = '  ' . lines_count
+    elseif strlen(lines_count) == 2
+        let l:lines_count = ' ' . lines_count
+    endif
+    let l:comment = substitute(getline(v:foldstart), "^[^a-zA-Z0-9]* *", "", 1)
+    let l:comment = substitute(comment,              " *[^a-zA-Z0-9)'\\]]* *\{\{\{.*",  "", 1)
+    let l:txt     = lines_count . ' ' . comment                    " ^^ why had to use \\] instead of \] ?
+    return txt
+endfunction
+" }}}
+" {{{ function! s:QuickfixToggle()  " https://github.com/nvie/vimrc/blob/master/vimrc
+let g:quickfix_is_open = 0
+function! s:QuickfixToggle()  " ## TODO what doses it do exatly?
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        exec g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+command! QuickfixToggle :call <SID>QuickfixToggle()
+" }}}
+function! RenameTmuxWindowToCurrentFile() " {{{
+
+    if exists('$TMUX')
+        " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
+        " base would be /home/nnnn/scripts/application which is not what we want
+        " so have to do some substitution:
+        let l:base = substitute(expand('%'), ".*/", "", 1)
+
+        call system("tmux rename-window " . base)
+    else
+        PrintfWarning 'in tmux only'
+    endif
+
+endfunction
+command! RenameTmuxWindowToCurrentFile :call RenameTmuxWindowToCurrentFile()
+
+function! RenameTmuxWindowToVim()
+    if exists('$TMUX')
+        call system("tmux rename-window vim")
+    endif
+endfunction
+command! RenameTmuxWindowToVim :call RenameTmuxWindowToVim()
+" }}}
+function! RestoreCursorPosition() " {{{ https://vim.fandom.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
+endfunction
+command! RestoreCursorPosition :call RestoreCursorPosition()
+" }}}
+function! Run() " {{{
+    if &filetype != "python" && &filetype != "sh"
+        PrintfWarning 'Invalid file type'
+        return
+    endif
+
+    if exists('$TMUX')
+        " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
+        call system("tmux split-window -v -p 40")  " open pane below (add -d to prevent from jumping to the pane), -p 40 is pane size
+        call system("sleep .2; tmux send-keys '" . expand('%:p') . "' ENTER")
+    else
+        " in split below:
+        :w | below terminal %
+        " previously:
+        " :w
+        " !clear; sleep .5; %
+    endif
+endfunction
+command! Run :call Run()
+" }}}
+function! SudoWrite()  " {{{ https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/
+    :exec ':silent w !sudo tee %:p >/dev/null'
+endfunction
+" }}}
+function! SyntaxAttribute()  " {{{
+    call SyntaxAttr()
+endfunction
+command! SyntaxAttribute :call SyntaxAttribute()
+" }}}
+function! ToggleEncode()  " {{{ https://vim.fandom.com/wiki/How_to_obscure_text_instantaneously
+    normal! ggg?G``
+endfunction
+command! ToggleEncode :call ToggleEncode()
+" }}}
+function! ToggleJedi()  " {{{ JUMP_3
+    if g:jedi#show_call_signatures == 2
+        let g:jedi#show_call_signatures = 0
+        PrintfMsg 'jedi is off'
+    else
+        let g:jedi#show_call_signatures = 2  " 2 shows call signatures in the command line instead of a popup window2
+        PrintfMsg 'jedi is on'
+    endif
+endfunction
+command! ToggleJedi :call ToggleJedi()
+" }}}
+function! TyperStart(file) " {{{
+    set wrap  " FIXME does not work
+    set nohlsearch
+    set showtabline=0
+    let g:better_whitespace_enabled=0
+    :IlluminationDisable
+    au InsertLeave * hi CursorLine ctermbg=none
+    exec "Typer " . a:file
+endfunction
+command! -nargs=1 TyperStart :call TyperStart(<f-args>)
+" }}}
+function! Watch() " {{{
+    if &filetype != "python" && &filetype != "sh"
+        PrintfWarning 'Invalid file type'
+        return
+    endif
+
+    let l:current_file = expand('%:p')
+    if current_file == '/home/nnnn/scripts/0-test' || current_file == '/home/nnnn/scripts/0-test.py'
+        let l:permission = 'true'
+    else
+        let l:permission = confirm("Not a 0-test{.py} file. Run anyway?", "&Yes\n&No")
+    endif
+
+    let l:if_watch = system("pgrep -a 'watch' | grep '" . current_file . "'")  " -a makes it list all data and not just the pid
+    if if_watch != ''
+        let l:permission = 'false'
+        PrintfWarning 'Watch already running'
+    endif
+
+    if permission == 'true' || permission == '1'
+        if exists('$TMUX')
+            " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
+            call system("tmux split-window -v -d -p 40")  " open pane below (-d prevents from jumping to the pane), -p 40 is pane size
+            call system("tmux send-keys -t 2 'watch --interval 2 --no-title --color " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
+        else
+            " in split below:
+            :w | below terminal echo %:p
+        endif
+    endif
+endfunction
+command! Watch :call Watch()
 " }}}
 " {{{ function! WordsFrequency() (https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file)
 " Sorts numbers in ascending order.
@@ -645,132 +727,28 @@ function! WordsFrequency() range
 endfunction
 command! -range=% WordsFrequency <line1>,<line2>call WordsFrequency()
 " }}}
-" {{{ function! s:QuickfixToggle()  " https://github.com/nvie/vimrc/blob/master/vimrc
-let g:quickfix_is_open = 0
-function! s:QuickfixToggle()  " ## TODO what doses it do exatly?
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        exec g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
+
+function! PrintfMsg(msg)  " {{{
+  echohl Identifier
+  echo a:msg
+  echohl None
 endfunction
-command! QuickfixToggle :call <SID>QuickfixToggle()
+command! -nargs=1 PrintfMsg :call PrintfMsg(<f-args>)
 " }}}
-function! Run() " {{{
-    if &filetype != "python" && &filetype != "sh"
-        PrintfWarning 'Invalid file type'
-        return
-    endif
-
-    if exists('$TMUX')
-        " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
-        call system("tmux split-window -v -p 40")  " open pane below (add -d to prevent from jumping to the pane), -p 40 is pane size
-        call system("sleep .2; tmux send-keys '" . expand('%:p') . "' ENTER")
-    else
-        " in split below:
-        :w | below terminal %
-        " previously:
-        " :w
-        " !clear; sleep .5; %
-    endif
+function! PrintfWarning(msg)  " {{{
+  echohl WarningMsg
+  echo 'Warning '
+  echohl Identifier
+  echon a:msg
+  echohl None
 endfunction
-command! Run :call Run()
-" }}}
-function! Watch() " {{{
-    if &filetype != "python" && &filetype != "sh"
-        PrintfWarning 'Invalid file type'
-        return
-    endif
-
-    let l:current_file = expand('%:p')
-    if current_file == '/home/nnnn/scripts/0-test' || current_file == '/home/nnnn/scripts/0-test.py'
-        let l:permission = 'true'
-    else
-        let l:permission = confirm("Not a 0-test{.py} file. Run anyway?", "&Yes\n&No")
-    endif
-
-    let l:if_watch = system("pgrep -a 'watch' | grep '" . current_file . "'")  " -a makes it list all data and not just the pid
-    if if_watch != ''
-        let l:permission = 'false'
-        PrintfWarning 'Watch already running'
-    endif
-
-    if permission == 'true' || permission == '1'
-        if exists('$TMUX')
-            " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
-            call system("tmux split-window -v -d -p 40")  " open pane below (-d prevents from jumping to the pane), -p 40 is pane size
-            call system("tmux send-keys -t 2 'watch --interval 2 --no-title --color " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
-        else
-            " in split below:
-            :w | below terminal echo %:p
-        endif
-    endif
-endfunction
-command! Watch :call Watch()
-" }}}
-function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-make-vim-change-a-date-when-a-section-of-a-file-was-edited
-    if !&modified || &filetype == 'vim' || (&filetype != 'python' && &filetype != 'sh')
-        return
-    endif
-
-    let l:today=system("echo -n $(jdate +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
-    " use date if, for any reason, jdate fails
-    if today !~ '.*day'
-        let l:today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
-    endif
-
-    let l:dest_line_pattern='## @last-modified '
-
-    " save current cursor position
-    let l:lnum = line('.')
-    let l:col  = col('.')
-
-    if search(dest_line_pattern, 'w')
-        let l:line1 = getline('.')
-        if line1 =~ today
-            call cursor(lnum, col)  " restore cursor position
-            return
-        endif
-        let l:line2 = substitute(line1,
-                               \dest_line_pattern . '.*',
-                               \dest_line_pattern . today,
-                               \'')
-        call setline('.', line2)
-    endif
-
-    call cursor(lnum, col)  " restore cursor position
-endfunction
-command! LastModified :call LastModified()
-" }}}
-function! RenameTmuxWindowToCurrentFile() " {{{
-
-    if exists('$TMUX')
-        " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
-        " base would be /home/nnnn/scripts/application which is not what we want
-        " so have to do some substitution:
-        let l:base = substitute(expand('%'), ".*/", "", 1)
-
-        call system("tmux rename-window " . base)
-    else
-        PrintfWarning 'in tmux only'
-    endif
-
-endfunction
-command! RenameTmuxWindowToCurrentFile :call RenameTmuxWindowToCurrentFile()
-
-function! RenameTmuxWindowToVim()
-    if exists('$TMUX')
-        call system("tmux rename-window vim")
-    endif
-endfunction
-command! RenameTmuxWindowToVim :call RenameTmuxWindowToVim()
+command! -nargs=1 PrintfWarning :call PrintfWarning(<f-args>)
 " }}}
 " }}}
 " {{{ plugins
+" {{{ better-whitespace
+let g:better_whitespace_ctermcolor = 24
+" }}}
 " {{{ commentary
 au FileType php,html         setlocal commentstring=<!--\ %s\ -->
 au FileType css,javascript   setlocal commentstring=/*\ %s\ */
@@ -783,6 +761,51 @@ au FileType mail             setlocal commentstring=>\ %s
 au FileType vim              setlocal commentstring=\"\ %s
 au FileType lua              setlocal commentstring=--\ %s
 " }}}
+" {{{ CtrlXA
+silent! nmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
+silent! nmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
+silent! xmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
+silent! xmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
+silent! xmap <silent> g<C-X> <Plug>(CtrlXA-gCtrlA)
+silent! xmap <silent> g<C-A> <Plug>(CtrlXA-gCtrlX)
+" }}}
+" {{{ easymotion JUMP_5
+map f <Plug>(easymotion-bd-w)
+map F <Plug>(easymotion-s2)
+" }}}
+" {{{ fzf
+noremap `  :Marks<CR>
+noremap :: :History:<CR>
+noremap ;; :History:<CR>
+noremap // :History/<CR>
+
+noremap  <C-l>      :BLines<CR>
+inoremap <C-l> <C-o>:BLines<CR>
+
+noremap  <C-\>      :Maps<CR>
+inoremap <C-\> <C-o>:Maps<CR>
+" }}}
+" {{{ illuminate JUMP_4
+hi WordUnderCursorTheme ctermbg=235
+hi link illuminatedWord WordUnderCursorTheme
+" }}}
+" {{{ jedi JUMP_3
+hi def jediFat       ctermbg=none ctermfg=67   cterm=none
+hi def jediUsage     ctermbg=5    ctermfg=0    cterm=none
+hi def jediFunction  ctermbg=none ctermfg=none cterm=none
+hi def jediFatSymbol ctermbg=202  ctermfg=202  cterm=none
+
+let g:jedi#goto_assignments_command = ""
+let g:jedi#goto_stubs_command = ""
+let g:jedi#call_signatures_command = ""
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#documentation_command = "<Leader>k"
+let g:jedi#rename_command = ""
+let g:jedi#show_call_signatures = 2  " 2 shows call signatures in the command line instead of a popup window
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#popup_on_dot = 0
+let g:pymode_rope = 0
+" }}}
 " {{{ mucomplete
 set completeopt-=preview  " disable doc preview in omnicomplete
 set completeopt+=menuone
@@ -790,12 +813,8 @@ set completeopt+=noinsert
 set complete=.,w,b,u,t
 " set complete+=k~/bgls/words  " use C-n to access suggestions (https://superuser.com/questions/102343/can-i-add-a-set-of-words-to-the-vim-autocomplete-vocabulary)
 " }}}
-" {{{ syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 0  " JUMP_2 signs by signify clobber these so better get disabled
-" let g:syntastic_auto_jump = 1
-hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
-hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
+" {{{ multiple-cursors
+hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
 " }}}
 " {{{ python-mode
 let g:pymode_run = 0
@@ -817,44 +836,15 @@ let g:pymode_lint_ignore = ["E501", "C901", "E252", "E266", "E262"]
 " E252 missing whitespace around parameter equals
 " E266 too many leading '#' for block comment
 " E262 inline comment should start with '# '
-" }}}
-" {{{ jedi
-let g:jedi#goto_assignments_command = ""
-let g:jedi#goto_stubs_command = ""
-let g:jedi#call_signatures_command = ""
-let g:jedi#usages_command = "<leader>u"
-let g:jedi#documentation_command = "<Leader>k"
-let g:jedi#rename_command = ""
-let g:jedi#show_call_signatures = 2  " 2 shows call signatures in the command line instead of a popup window
-let g:jedi#use_tabs_not_buffers = 1
-let g:jedi#popup_on_dot = 0
-let g:pymode_rope = 0
-" }}}
-" {{{ undotree
-let g:undotree_SplitWidth = 11
-let g:undotree_WindowLayout = 3
-let g:undotree_DiffAutoOpen = 0
-let g:undotree_ShortIndicators = 1
-let g:undotree_HighlightChangedText = 0
-" }}}
-" {{{ CtrlXA
-silent! nmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
-silent! nmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
-silent! xmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
-silent! xmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
-silent! xmap <silent> g<C-X> <Plug>(CtrlXA-gCtrlA)
-silent! xmap <silent> g<C-A> <Plug>(CtrlXA-gCtrlX)
-" }}}
-" {{{ better-whitespace
-let g:better_whitespace_ctermcolor = 24
-" }}}
-" {{{ multiple-cursors
-hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
+
+" JUMP_7
+au FileType python noremap  <F9>      :PymodeLint<CR><C-w><Down>
+au FileType python inoremap <F9> <Esc>:PymodeLint<CR><C-w><Down>
 " }}}
 " {{{ signify  if you remove this plugin, remember to enable syntastic signs back in JUMP_2
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
-let g:signify_sign_delete_first_line = '_'
+let g:signify_sign_delete_first_line = '¯'
 let g:signify_sign_change            = '×'
 let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete_first_line
 
@@ -865,44 +855,54 @@ highlight SignifySignChange ctermfg=202 cterm=none
 " https://vi.stackexchange.com/questions/2350/how-to-map-alt-key
 exec "set <M-j>=\ej"
 exec "set <M-k>=\ek"
-nmap <silent> <M-j> <plug>(signify-next-hunk)
-nmap <silent> <M-k> <plug>(signify-prev-hunk)
-" nmap <silent> <leader>gJ 9999<leader>gj
-" nmap <silent> <leader>gK 9999<leader>gk
+exec "set <M-d>=\ed"
+exec "set <M-h>=\eh"
+exec "set <M-u>=\eu"
+exec "set <M-t>=\et"
+exec "set <M-f>=\ef"
+exec "set <M-r>=\er"
+
+nmap    <silent> <M-j> <plug>(signify-next-hunk)
+nmap    <silent> <M-k> <plug>(signify-prev-hunk)
+noremap <silent> <A-d> :SignifyDiff<CR>
+noremap <silent> <A-h> :SignifyHunkDiff<CR>
+noremap <silent> <A-u> :SignifyHunkUndo<CR>
+noremap <silent> <A-t> :SignifyToggle<CR>
+noremap <silent> <A-f> :SignifyFold<CR>
+noremap <silent> <A-r> :SignifyRefresh<CR>
 
 autocmd User SignifyHunk call s:show_current_hunk()
 function! s:show_current_hunk() abort
-  let h = sy#util#get_hunk_stats()
-  if !empty(h)
-    redraw
-    echohl ModeMsg
-    echo printf(' %d/%d', h.current_hunk, h.total_hunks)
-    echohl Identifier
-    echon ' hunk'
-    echohl None
-  endif
+    let l:h = sy#util#get_hunk_stats()
+    if !empty(h)
+        redraw
+        echohl ModeMsg
+        echo printf(' %d/%d', h.current_hunk, h.total_hunks)
+        echohl Identifier
+        echon ' hunk'
+        echohl None
+    endif
 endfunction
 
-exec "set <M-d>=\ed"
-noremap <silent> <A-d> :SignifyDiff<CR>
-
-exec "set <M-h>=\eh"
-noremap <silent> <A-h> :SignifyHunkDiff<CR>
-
-exec "set <M-u>=\eu"
-noremap <silent> <A-u> :SignifyHunkUndo<CR>
-
-exec "set <M-t>=\et"
-noremap <silent> <A-t> :SignifyToggle<CR>
-
-exec "set <M-f>=\ef"
-noremap <silent> <A-f> :SignifyFold<CR>
-
-exec "set <M-r>=\er"
-noremap <silent> <A-r> :SignifyRefresh<CR>
 "}}}
+" {{{ syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_enable_signs = 0  " JUMP_2 signs by signify clobber these so better get disabled
+" let g:syntastic_auto_jump = 1
+hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
+hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
 " }}}
-
+" {{{ ultisnips JUMP_6
+let g:UltiSnipsListSnippets = '<F10>'
+" }}}
+" {{{ undotree
+let g:undotree_SplitWidth = 11
+let g:undotree_WindowLayout = 3
+let g:undotree_DiffAutoOpen = 0
+let g:undotree_ShortIndicators = 1
+let g:undotree_HighlightChangedText = 0
+let g:undotree_HelpLine = 0
+" }}}
 " {{{ GitGutter
 " exec "set <M-j>=\ej"
 " exec "set <M-k>=\ek"
@@ -949,6 +949,8 @@ noremap <silent> <A-r> :SignifyRefresh<CR>
 " highlight GitGutterChange ctermfg=202
 " highlight GitGutterDelete ctermfg=1
 " }}}
+" }}}
+
 
 " {{{ MISC
 " number of windows in the current buffer
@@ -1040,10 +1042,16 @@ noremap <silent> <A-r> :SignifyRefresh<CR>
 " noremap <left>  <Nop>
 " noremap <right> <Nop>
 
+" Identifier
+" WarningMsg
+" ModeMsg
+" MoreMsg
+" ErrorMsg
+
 " function! Paste()  " {{{
 "     let l:pa_index = &paste
 "     if pa_index == 0
-"         hi link PasteColor lite_i
+"         hi link PasteColor lite_inactive
 "     else
 "         hi link PasteColor lite
 "     endi
@@ -1082,7 +1090,7 @@ noremap <silent> <A-r> :SignifyRefresh<CR>
 " function! SyntAttr()  " {{{ https://www.reddit.com/r/vim/comments/e19bu/whats_your_status_line/
 "     let l:name = synIDattr(synID(line('.'),col('.'),1),'name')
 "     if name == ''
-"         hi link SyntAttrColor dark_i
+"         hi link SyntAttrColor dark_inactive
 "         let l:synt_attr = 'SYNT-ATTR'
 "     else
 "         hi link SyntAttrColor dark
@@ -1095,7 +1103,7 @@ noremap <silent> <A-r> :SignifyRefresh<CR>
 "     if search('\s\+$', 'nw') != 0
 "         hi link TrailingWhiteSpaceColor dark
 "     else
-"         hi link TrailingWhiteSpaceColor dark_i
+"         hi link TrailingWhiteSpaceColor dark_inactive
 "     endif
 "     return 'TWS'
 " endfunction
@@ -1120,9 +1128,3 @@ noremap <silent> <A-r> :SignifyRefresh<CR>
 " hi User9 ctermbg=234 ctermfg=black
 " }}}
 " }}}
-
-" Identifier
-" WarningMsg
-" ModeMsg
-" MoreMsg
-" ErrorMsg

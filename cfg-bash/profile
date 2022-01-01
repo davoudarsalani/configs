@@ -650,6 +650,14 @@ export refresh_icon='♻'  ## 
 export editor='vim'
 export terminal='xfce4-terminal'
 
+
+
+
+
+
+
+## news websites
+
 function start_xorg {
     local start_prompt
     [ "$HOSTNAME" == 'sony' ] || [ "$(pgrep 'awesome')" ] && return

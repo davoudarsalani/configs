@@ -354,11 +354,17 @@ cmd git_undo $ {{
 map <c-c> commands
 cmd commands $ {{
     source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+
+    ## turn files into array
+    ## NOTE do NOT quote ${fx}
+    ## replaced space with + to avoid problems in parsing names
+    items=( ${fx// /+} )
+
+    (( "${#items[@]}" == 1 )) && header="${items[@]##*/} selected" || header="${#items[@]} selected: $(printf '%s ' "${items[@]##*/}")"
 
     # FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --header 'commands'"
     items=( 'chattr' 'trash' 'rm' 'mime_type' 'softlink' 'compress_tar' 'compress_zip' 'xtract_tar' 'xtract_zip' 'xtract_rar' 'du' 'mkdir' 'touch' 'bulk_rename' 'rename')
-    item="$(pipe_to_fzf "${items[@]}")" || exit 37
+    item="$(pipe_to_fzf "${items[@]}" "header=$header")" || exit 37
     case "$item" in
         chattr )       "$HOME"/scripts/lf.py chattr    $fx ;;
         trash )        "$HOME"/scripts/lf.py trash     $fx ;;
