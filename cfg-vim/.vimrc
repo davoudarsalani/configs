@@ -161,15 +161,16 @@ inoremap <F12> <C-o>:Watch<CR>
 " }}}
 noremap <Leader>0  :ToggleJedi<CR>
 noremap <Leader>1  :set list!<Bar>set relativenumber!<Bar>set invnumber<CR>
-noremap <Leader>2  :TagbarToggle<CR>
-noremap <Leader>3  :ToggleWhitespace<CR>
-noremap <Leader>4  :UndotreeToggle<CR>
+noremap <Leader>2  :SignifyToggle<CR>
+noremap <Leader>3  :UndotreeToggle<CR>
+noremap <Leader>4  :ToggleWhitespace<CR>
 noremap <Leader>5  :MUcompleteAutoToggle<CR>
 noremap <Leader>6  :SyntasticToggleMode<CR>
 noremap <Leader>7  :SignatureToggleSigns<CR>
 noremap <Leader>8  :IlluminationToggle<CR>
 noremap <Leader>9  :DimInactiveToggle<CR>
 noremap <Leader>10 :HighlightLinesToggle<CR>
+noremap <Leader>11 :TagbarToggle<CR>
 
 noremap <Leader>a  :AscendingNumbers END
 noremap <Leader>b  :Black<CR>
@@ -231,8 +232,6 @@ nnoremap <C-o> o<Esc>k
 
 noremap <C-y> :CopyToClipboard<CR>
 
-command! SudoWrite :call SudoWrite()
-
 " jump to prev/next function (https://vim.fandom.com/wiki/Jumping_to_the_start_and_end_of_a_code_block)
 au FileType python noremap { :silent eval search('^ *def ',      'b')<CR>
 au FileType python noremap } :silent eval search('^ *def '          )<CR>
@@ -255,7 +254,7 @@ au BufWritePre *  :call LastModified()  " :LastModified command did not work
 au VimEnter    *  :RenameTmuxWindowToCurrentFile
 au BufWinLeave *  :RenameTmuxWindowToVim
 
-au FileType    sh :MatchTodoInSh
+au FileType    sh,dockerfile :MatchTodoInSh
 
 " run selection:
 au FileType sh     vnoremap <leader>v :w  !source %:p; bash<CR>
@@ -591,9 +590,15 @@ function! Run() " {{{
 endfunction
 command! Run :call Run()
 " }}}
+function! RemoveCommentsAndEmptyLines()  " {{{
+    :g/ *#/d|g/^$/d
+endfunction
+command! RemoveCommentsAndEmptyLines :call RemoveCommentsAndEmptyLines()
+" }}}
 function! SudoWrite()  " {{{ https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/
     :exec ':silent w !sudo tee %:p >/dev/null'
 endfunction
+command! SudoWrite :call SudoWrite()
 " }}}
 function! SyntaxAttribute()  " {{{
     call SyntaxAttr()

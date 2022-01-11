@@ -2,8 +2,9 @@
 [greenclip]
   blacklisted_applications = []
   static_history = [
-  "vim:ft=sh",
+  "nameserver 178.22.122.100 nameserver 185.51.200.2",
   "get transport obfs4 > bridges@torproject.org",
+  "vim:ft=sh",
   "dm-tool lock"
   ]
   enable_image_support = true

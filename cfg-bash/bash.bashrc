@@ -374,6 +374,66 @@ function command_not_found_handle {
     return 127
 }
 
+function images_containers {
+
+    tmux split-window -v  ## don't know why, but we have to do this first!
+
+    if (( "$(tput cols)" > 136 )); then
+        tmux split-window -v -p 40 -c '#{pane_current_path}'  ## create pane3 down
+        tmux split-window -h -d    -c '#{pane_current_path}'  ## create pane4 right in detached mode
+        tmux select-pane -U  ## move to the top pane
+    else
+        tmux split-window -h -d -p 35 -c '#{pane_current_path}'  ## create pane3 right in detached mode
+        tmux split-window -v -d -p 25 -c '#{pane_current_path}'  ## create pane4 down in detached mode
+    fi
+
+    tmux send-keys -t 3 'watch docker image ls -a' ENTER  ## send command to pane3
+    tmux send-keys -t 4 'watch docker ps -a' ENTER  ## send command to pane4
+
+    exit
+}
+
+function shecan {
+    local file='/etc/resolv.conf'
+    local pattern='shecan$'
+    local is_on="$(grep "$pattern" "$file")"
+
+    case "$1" in
+        start )
+            if [ "$is_on" ]; then
+                printf 'shecan already on\n\n'
+            else
+                ## comment normal
+                sed 's/^\(nameserver\)/# \1/' "$file" | sudo tee "$file" >/dev/null
+
+                ## append shecan
+                printf 'nameserver 178.22.122.100  ## shecan\n' | sudo tee -a "$file" >/dev/null
+                printf 'nameserver 185.51.200.2    ## shecan\n' | sudo tee -a "$file" >/dev/null
+            fi
+        ;;
+        stop )
+            if [ "$is_on" ]; then
+                ## delete shecan
+                sed "/$pattern/d" "$file" | sudo tee "$file" >/dev/null
+
+                ## uncomment normal
+                sed 's/^# *\(nameserver\)/\1/' "$file" | sudo tee "$file" >/dev/null
+            else
+                printf 'shecan already off\n\n'
+            fi
+        ;;
+        status )
+            [ "$is_on" ] && printf 'shecan is started\n\n' || printf 'shecan is stopped\n\n'
+        ;;
+        * ) source "$HOME"/scripts/gb-color
+            red 'valid args: start/stop/status'
+            return
+        ;;
+    esac
+
+    eval "${HIGHLIGHT/--line-numbers}" "$file" 2>/dev/null
+}
+
 function lsl {  ## https://stackoverflow.com/questions/54949060/standardized-docstring-self-documentation-of-bash-scripts
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
