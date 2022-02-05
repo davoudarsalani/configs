@@ -22,16 +22,16 @@ PS1='$(
 xt_stts="$?"
 reset="\[\e[0m\]"
 
-[ "$EUID" -eq 0           ] && ROOT="ROOT "
-[ "$LF_LEVEL"             ] && LF="LF "
-[ "$RANGER_LEVEL"         ] && RANG="RANGER "
-[ ! "$HOSTNAME" == "acer" ] && HOST="${HOSTNAME^^} "
-[ "$SSH_CONNECTION"       ] && SSH="SSH "
-[ "$xt_stts" -gt 0        ] && EXIT="$xt_stts "
-[ \j -gt 0                ] && JOBS="BG=\j "
+[ "$EUID" -eq 0         ] && ROOT="ROOT "
+[ "$LF_LEVEL"           ] && LF="LF "
+[ "$RANGER_LEVEL"       ] && RANG="RANGER "
+[ "$HOSTNAME" == "acer" ] || HOST="${HOSTNAME^^} "
+[ "$SSH_CONNECTION"     ] && SSH="SSH "
+[ "$xt_stts" -gt 0      ] && EXIT="$xt_stts "
+[ \j -gt 0              ] && JOBS="BG=\j "
 HIST="\! "
-[ "$TMUX"                 ] && HERE="" || HERE="\w "
-[ "$VIRTUAL_ENV"          ] && VIRT="${VIRTUAL_ENV##*/} "
+[ "$TMUX"               ] && HERE="" || HERE="\w "
+[ "$VIRTUAL_ENV"        ] && VIRT="${VIRTUAL_ENV##*/} "
 
 echo "\
 \[\e[05;49;031m\]${ROOT}${reset}\
@@ -52,6 +52,7 @@ export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/scripts"
+export LS_FLAGS='-A --color=always --group-directories-first'
 export LC_ALL='en_US.UTF-8'
 export GREP_COLOR='4;49;32'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -71,7 +72,7 @@ export RG="rg $common_rg_flags --sort path --hidden --files-with-matches \
 
 ## fzf {{{
 export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git/*" ! -path "*.cache/*" ! -path "*.venv*/*" ! -path "*kaddy/*"' #' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
-export FZF_DEFAULT_OPTS='--header "Ctrl-j/k:preview down/up; Ctrl-w:toggle preview; Ctrl-a:select all" --no-bold --sort --cycle --border horizontal --no-multi --reverse --inline-info --ansi --pointer ">" --prompt ": " --marker "+" --height 70% --preview-window noborder:right:80%:wrap --bind "ctrl-s:toggle-sort,ctrl-y:execute-silent(echo "{-1}" | xclip -selection clipboard)+abort,backward-eof:abort,ctrl-k:preview-up,ctrl-j:preview-down,ctrl-w:toggle-preview,ctrl-a:select-all" --color 'fg:$silver,fg+:$silver,hl+:2:underline,hl:2:underline,bg:$black,bg+:$grey_dark,preview-bg:$black,border:$grey_dark,gutter:$black,header:$blue''
+export FZF_DEFAULT_OPTS='--header "C-j/k:preview down/up|C-w:toggle preview|C-s:toggle sort|C-y:copy to clipboard" --no-bold --sort --cycle --border horizontal --no-multi --reverse --inline-info --ansi --pointer ">" --prompt ": " --marker "+" --height 70% --preview-window noborder:right:80%:wrap --bind "ctrl-s:toggle-sort,ctrl-y:execute-silent(echo "{-1}" | xclip -selection clipboard)+abort,backward-eof:abort,ctrl-k:preview-up,ctrl-j:preview-down,ctrl-w:toggle-preview" --color 'fg:${silver},fg+:${silver},hl+:2:underline,hl:2:underline,bg:${black},bg+:${grey_dark},preview-bg:${black},border:${grey_dark},gutter:${black},header:${blue}''
 ## conditional preview: --preview "[[ -d {} ]] && tree -C {} | head -200"  ## https://github.com/Bhupesh-V/til/blob/master/Shell/fzf-tips-tricks.md
 
 ## gruvbox theme: --color 'fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f,info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54'
@@ -79,10 +80,8 @@ export FZF_DEFAULT_OPTS='--header "Ctrl-j/k:preview down/up; Ctrl-w:toggle previ
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview 'eval "$HIGHLIGHT" {-1} 2>/dev/null' --header 'select'"
 
-## FIXME can't display preview (neither in bashrc nor in lfrc)
-##       if you do find a solution for that, make sure to remove the --preview-window 'hidden' from FZF_ALT_C_OPTS down below [14000418213615]
 export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND/ -type f / -type d }"
-export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '\ls -A --color=always --group-directories-first {-1} 2>/dev/null' --header 'cd' --color 'fg:$blue,fg+:$blue' --preview-window 'hidden'"  ## FIXME make sure to remove the --preview-window 'hidden' when you find a way to display preview
+export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '$HOME/scripts/fzf-dir-preview {-1}' --header 'cd' --color 'fg:${blue},fg+:${blue}' --preview-window noborder:right:65%:wrap"  # --preview-window 'hidden'
 
 export FZF_CTRL_R_OPTS="--header='history'"
 
@@ -90,6 +89,9 @@ export FZF_CTRL_R_OPTS="--header='history'"
 # export FZF_COMPLETION_OPTS="$FZF_DEFAULT_OPTS"
 
 # export FZF_TMUX_OPTS=''
+
+## these options are also used in ~/scripts/awesome-widgets git option
+export FZF_ALT_C_COMMAND_GIT="$FZF_ALT_C_COMMAND ! -path '*.config/*' ! -path '*.vim/*' ! -path '*go/*' ! -path '*trash/*' -iname '.git' | sed 's#/\.git##' | sort"
 
 
 ## ls colors {{{
@@ -339,7 +341,7 @@ alias s='cd "$HOME"/scripts/'
 alias lf='\lf "$HOME"/downloads/'
 alias lfl='\lf "$HOME"/linux/'
 alias lfs='\lf "$HOME"/scripts/'
-alias ls='\ls -A --color=always --group-directories-first'
+alias ls="\ls $LS_FLAGS"
 alias cp='cp -v'
 alias rm='rm -v --preserve-root'
 alias mv='mv -v'
@@ -394,9 +396,11 @@ function images_containers {
 }
 
 function shecan {
-    local file='/etc/resolv.conf'
-    local pattern='shecan$'
-    local is_on="$(grep "$pattern" "$file")"
+    local file pattern is_on
+
+    file=/etc/resolv.conf
+    pattern='shecan$'
+    is_on="$(\grep "$pattern" "$file")"
 
     case "$1" in
         start )
@@ -438,16 +442,17 @@ function lsl {  ## https://stackoverflow.com/questions/54949060/standardized-doc
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
     shopt -s expand_aliases
+    local first_line ls_command ls_output
 
-    local first_line='PERMISSIONS LINKS OWNER GROUP SIZE YYYYMMDDHHMMSS NAME'
-    alias ls_command='\ls -lbhA --color=always --group-directories-first --time-style=+"%Y%m%d%H%M%S"'
+    first_line='PERMISSIONS LINKS OWNER GROUP SIZE YYYY-MM-DD HH:MM:SS NAME'
+    alias ls_command='\ls $LS_FLAGS -lbh --time-style=+"%Y-%m-%d %H:%M:%S"'
     if [ ! "$1" ] || [ -d "$1" ]; then
-        local x="$(ls_command "${@}" | sed 1d)"
+        ls_output="$(ls_command "${@}" | sed 1d)"
     else
-        local x="$(ls_command "${@}")"
+        ls_output="$(ls_command "${@}")"
     fi
 
-    printf '%s\n\n%s\n' "$(grey "$first_line")" "${x}" | column -t
+    printf '%s\n\n%s\n' "$(grey "$first_line")" "$ls_output" | column -t
     unalias ls_command
 }
 
@@ -494,8 +499,10 @@ function if_tor {  ## https://sylvaindurand.org/use-tor-with-python/
 }
 
 function awesome_tail {  ## https://askubuntu.com/questions/830484/how-to-start-tmux-with-several-panes-open-at-the-same-time
-    local DEST_WIN='awesome_std{out,err}'  ## dest window name
-    local SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
+    local DEST_WIN SESS
+
+    DEST_WIN='awesome_std{out,err}'  ## dest window name
+    SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
 
     ## create window:
     tmux new-window -n "$DEST_WIN"  ## add -d to prevent from jumping to $DEST_WIN (https://unix.stackexchange.com/questions/445307/open-new-tmux-window-with-specific-name-only-if-missing)
@@ -582,3 +589,6 @@ function less {
     LESS_TERMCAP_us=$'\e[32m' \
     command less "$@"
 }
+
+
+if [[ "$PWD" =~ $HOME/api ]]; then source "$HOME"/api/venv/bin/activate; fi

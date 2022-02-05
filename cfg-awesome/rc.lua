@@ -1037,12 +1037,12 @@ awful.rules.rules = {
 
   -- prevent new clients from being urgent by default (https://github.com/awesomeWM/awesome/blob/master/docs/90-FAQ.md):
   client.disconnect_signal('request::activate', awful.ewmh.activate)
-  function awful.ewmh.activate(c)
-      if c:isvisible() then
-          client.focus = c
-          c:raise()
+      function awful.ewmh.activate(c)
+          if c:isvisible() then
+              client.focus = c
+              c:raise()
+          end
       end
-  end
   client.connect_signal('request::activate', awful.ewmh.activate)
 
 -- Signal function to execute when a new client appears.

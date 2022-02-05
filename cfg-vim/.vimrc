@@ -88,7 +88,6 @@ hi command_mode ctermfg=220 ctermbg=none
 "
 " set statusline+=%#warningmsg#
 set stl+=%#CurrentModeColor#\ %{CurrentMode()}
-set stl+=%#dark#
 set stl+=%#dark#\ %{strpart(getline('.'),col('.')-1,1)}  " https://devhints.io/vimscript
 " ^^ PREVIOUSLY: let &stl.="%2.2(%{matchstr(getline('.'), '\\%' . col('.') . 'c.')}%)"  " https://stackoverflow.com/questions/40508385/vim-statusline-show-the-character-itself
 set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
@@ -103,10 +102,9 @@ set stl+=%#GitStatusColor#\ %{SignifyGitStatus()}
 set stl+=%#lite#
 " set stl+=%*  " reset color
 set stl+=%=
-set stl+=%#dark#\ %F  " %t for basename only
-set stl+=%#lite#\ %{strlen(&ft)?&ft:'none'}  " https://github.com/einverne/dotfiles/blob/master/.vimrc OR %{''!=#&filetype?&filetype:'none'}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
-set stl+=%#dark#\ %{FileSize()}
-set stl+=%#lite#\ %{getfperm(expand('%:p'))}
+set stl+=%#lite#\ %F  " %t for basename only
+set stl+=%#dark#\ %{strlen(&ft)?&ft:'none'}  " https://github.com/einverne/dotfiles/blob/master/.vimrc OR %{''!=#&filetype?&filetype:'none'}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
+" set stl+=%#dark#\ %{getfperm(expand('%:p'))}  " rw-r--r--
 set stl+=%#CurrentModeColor#\ ▮
 " set stl+=%{&fileencoding?&fileencoding:&encoding}
 " set stl+=\ ascii:%03b\ hex:0x%04B
@@ -179,7 +177,6 @@ noremap <Leader>c  :CountCurrentWord<CR>
 noremap <Leader>e  :ToggleEncode<CR>
 noremap <Leader>i  :IndentLevel<CR>
 noremap <Leader>q  :QuickfixToggle<CR>
-noremap <Leader>r  :RenameTmuxWindowToCurrentFile<CR>
 noremap <Leader>s  :SyntaxAttribute<CR>
 noremap <Leader>t  :TyperStart PATH
 noremap <Leader>w  :WordsFrequency<CR>
@@ -237,31 +234,47 @@ au FileType python noremap { :silent eval search('^ *def ',      'b')<CR>
 au FileType python noremap } :silent eval search('^ *def '          )<CR>
 au FileType sh     noremap { :silent eval search('^ *function ', 'b')<CR>
 au FileType sh     noremap } :silent eval search('^ *function '     )<CR>
-" }}}
-" {{{ au & hi
-" au VimEnter * :vertical resize +9  " widen main split so undotree split occupies less space
-" vv needed because restore_view.vim opens buffer with current fold open
-au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
-au InsertEnter *  hi CursorLine   ctermbg=none
-" au InsertLeave *  :call CursorLineInNonInsertMode()  " CurrentMode() function does the job, so better be commented
 
-au VimEnter    *  normal zM
-au VimEnter    *  normal zz
-au VimEnter    *  set noshowmode
-au vimEnter    *  RestoreCursorPosition
-au VimEnter    *  UndotreeShow
-au BufWritePre *  :call LastModified()  " :LastModified command did not work
-au VimEnter    *  :RenameTmuxWindowToCurrentFile
-au BufWinLeave *  :RenameTmuxWindowToVim
-
-au FileType    sh,dockerfile :MatchTodoInSh
+" run current line:
+au FileType sh      noremap <leader>. :.w !source %:p; bash<CR>
+au FileType python  noremap <leader>. :.w !source %:p; python<CR>
 
 " run selection:
 au FileType sh     vnoremap <leader>v :w  !source %:p; bash<CR>
 au FileType python vnoremap <leader>v :w  !source %:p; python<CR>
-" run current line:
-au FileType sh      noremap <leader>. :.w !source %:p; bash<CR>
-au FileType python  noremap <leader>. :.w !source %:p; python<CR>
+
+" }}}
+" {{{ au & hi
+" au VimEnter * :vertical resize +9  " widen main split so undotree split occupies less space
+" au InsertLeave *  :call CursorLineInNonInsertMode()  " CurrentMode() function does the job, so better be commented
+au InsertEnter *  hi CursorLineNr ctermbg=none ctermfg=4  cterm=none
+au InsertEnter *  hi CursorLine   ctermbg=none
+
+" vv needed because restore_view.vim opens buffer with current fold open
+au VimEnter    *  normal zM
+au VimEnter    *  set noshowmode
+au vimEnter    *  RestoreCursorPosition
+au VimEnter    *  normal zz
+au VimEnter    *  UndotreeShow
+au BufWritePre *  :call LastModified()  " :LastModified command did not work
+
+" https://vi.stackexchange.com/questions/3897/how-to-label-tmux-tabs-with-the-name-of-the-file-edited-in-vim
+if exists('$TMUX')
+
+    " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
+    " base would be /home/nnnn/scripts/application if we use expand("%:t") - which is not what we want.
+    " so have to do some substitution:
+    let base = substitute(expand('%'), ".*/", "", 1)
+
+    let orig_win_name = system("tmux display-message -p '#W'")
+
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . base)
+    autocmd VimLeave *                                     call system("tmux rename-window " . orig_win_name)
+
+endif
+
+au FileType sh,dockerfile,html* :MatchTodoInSh
+au BufRead,BufNewFile *.htm,*.html*,*.php setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 hi Comment      cterm=italic
 hi CursorColumn ctermbg=233
@@ -293,7 +306,7 @@ function! CurrentMode() " {{{
         return 'NORMAL'
     elseif currentmode == 'v'
         hi link CurrentModeColor visual_mode
-        return 'VISUAL C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words
+        return 'VISUAL [C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words . ']'
     elseif currentmode == 'r'
         hi link CurrentModeColor replace_mode
         return 'REPLACE'
@@ -311,7 +324,7 @@ function! CurrentMode() " {{{
         return 'SHELL'
     elseif currentmode == +'v'  " put lower than replace
         hi link CurrentModeColor visual_mode
-        return 'VISUAL-BLOCK C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words
+        return 'VISUAL-BLOCK [C: ' . wordcount().visual_bytes . ' W: ' . wordcount().visual_words . ']'
     endif
 endfunction
 " }}}
@@ -390,21 +403,6 @@ function! SignifyGitStatus()  " {{{
     hi link GitStatusColor warning
     return gs
   endif
-endfunction
-" }}}
-function! FileSize() " {{{ https://github.com/sd65/MiniVim/blob/master/vimrc
-    let l:bytes = getfsize(expand('%:p'))
-    if bytes <= 0
-        return '0B'
-    elseif bytes >= 1024000000
-       return (bytes / 1024000000) . 'GB'
-    elseif bytes >= 1024000
-       return (bytes / 10241000) . 'MB'
-    elseif bytes >= 1024
-       return (bytes / 1024) . 'KB'
-    else
-       return bytes . 'B'
-    endif
 endfunction
 " }}}
 
@@ -539,29 +537,6 @@ function! s:QuickfixToggle()  " ## TODO what doses it do exatly?
 endfunction
 command! QuickfixToggle :call <SID>QuickfixToggle()
 " }}}
-function! RenameTmuxWindowToCurrentFile() " {{{
-
-    if exists('$TMUX')
-        " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
-        " base would be /home/nnnn/scripts/application which is not what we want
-        " so have to do some substitution:
-        let l:base = substitute(expand('%'), ".*/", "", 1)
-
-        call system("tmux rename-window " . base)
-    else
-        PrintfWarning 'in tmux only'
-    endif
-
-endfunction
-command! RenameTmuxWindowToCurrentFile :call RenameTmuxWindowToCurrentFile()
-
-function! RenameTmuxWindowToVim()
-    if exists('$TMUX')
-        call system("tmux rename-window vim")
-    endif
-endfunction
-command! RenameTmuxWindowToVim :call RenameTmuxWindowToVim()
-" }}}
 function! RestoreCursorPosition() " {{{ https://vim.fandom.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
     if line("'\"") <= line("$")
         normal! g`"
@@ -591,7 +566,7 @@ endfunction
 command! Run :call Run()
 " }}}
 function! RemoveCommentsAndEmptyLines()  " {{{
-    :g/ *#/d|g/^$/d
+    :g/^ *#/d|g/^$/d
 endfunction
 command! RemoveCommentsAndEmptyLines :call RemoveCommentsAndEmptyLines()
 " }}}
@@ -777,6 +752,9 @@ silent! xmap <silent> g<C-A> <Plug>(CtrlXA-gCtrlX)
 " {{{ easymotion JUMP_5
 map f <Plug>(easymotion-bd-w)
 map F <Plug>(easymotion-s2)
+let g:EasyMotion_keys = 'hklyuiopnmqwertzxcvbasdgjf'
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 0
 " }}}
 " {{{ fzf
 noremap `  :Marks<CR>
@@ -846,6 +824,10 @@ let g:pymode_lint_ignore = ["E501", "C901", "E252", "E266", "E262"]
 au FileType python noremap  <F9>      :PymodeLint<CR><C-w><Down>
 au FileType python inoremap <F9> <Esc>:PymodeLint<CR><C-w><Down>
 " }}}
+" {{{ python-syntax
+let g:python_highlight_all = 1
+let g:python_highlight_file_headers_as_comments = 1
+" }}}
 " {{{ signify  if you remove this plugin, remember to enable syntastic signs back in JUMP_2
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
@@ -890,9 +872,17 @@ function! s:show_current_hunk() abort
 endfunction
 
 "}}}
+" {{{ sparkup
+let g:sparkupExecuteMapping = '<S-Tab>'
+" }}}
 " {{{ syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_enable_signs = 0  " JUMP_2 signs by signify clobber these so better get disabled
+let g:syntastic_error_symbol = 'ER'
+let g:syntastic_style_error_symbol = 'SE'
+let g:syntastic_warning_symbol = 'WE'
+let g:syntastic_style_warning_symbol = 'SW'
+let g:syntastic_stl_format = 'SYNTAX:L%F[%t]'
 " let g:syntastic_auto_jump = 1
 hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
 hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none

@@ -139,7 +139,7 @@ let s:gb.faded_purple   = ['#8f3f71', 96]      " 143-63-113
 let s:gb.faded_aqua     = ['#427b58', 66]      " 66-123-88
 let s:gb.faded_orange   = ['#af3a03', 130]     " 175-58-3
 
-let s:gb.cream_yellow   = ['#1d2021', 186]  " by me. Suggested: 186
+let s:gb.cream_yellow   = ['#1d2021', 185]  " by me. Suggested: 186
 " }}}
 " Setup Emphasis: {{{
 
@@ -678,20 +678,20 @@ hi! link Typedef GruvboxYellow
 " }}}
 " Completion Menu: {{{
 
-let s:gb.pmenu_fg     = ['#000000', 244]
+let s:gb.pmenu_fg     = ['#000000', 248]
 let s:gb.pmenu_bg     = ['#000000', 234]
 
-let s:gb.pmenu_sel_fg = ['#000000', 4]  " 142
-let s:gb.pmenu_sel_bg = s:gb.pmenu_bg
+let s:gb.pmenu_sel_fg = ['#000000', 113]
+let s:gb.pmenu_sel_bg = ['#000000', 233]
 
-let s:gb.pmenu_scr_fg = ['#000000', 234]
+let s:gb.pmenu_scr_fg = s:gb.pmenu_fg
 let s:gb.pmenu_scr_bg = s:gb.pmenu_bg
 
 if version >= 700
   " Popup menu: normal item
   call s:HL('Pmenu', s:gb.pmenu_fg, s:gb.pmenu_bg)
   " Popup menu: selected item
-  call s:HL('PmenuSel', s:gb.pmenu_sel_fg, s:gb.pmenu_bg) " original: call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
+  call s:HL('PmenuSel', s:gb.pmenu_sel_fg, s:gb.pmenu_sel_bg)  " original: call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
   " Popup menu: scrollbar
   call s:HL('PmenuSbar', s:none, s:gb.pmenu_scr_bg)
   " Popup menu: scrollbar thumb

@@ -1,7 +1,7 @@
 ## b flag prevents snippets when in the middle of the line
 ###############################################
 snippet pr "print()" b
-print($1)
+print($0)
 endsnippet
 ###############################################
 snippet ex "exit()" b
@@ -13,49 +13,45 @@ breakpoint()
 endsnippet
 ###############################################
 snippet li "list" b
-$1 = ['$2', '$3', '$4']
+$1 = ['$2', '$3', '$0']
 endsnippet
 ###############################################
 snippet tu "tuple" b
-$1 = ('$2', '$3', '$4')
+$1 = ('$2', '$3', '$0')
 endsnippet
 ###############################################
 snippet se "set" b
-$1 = {'$2', '$3', '$4'}
+$1 = {'$2', '$3', '$0'}
 endsnippet
 ###############################################
 snippet di "dictionary" b
-$1 = {'$2': '$3', '$4': '$5', '$6': '$7'}
+$1 = {'$2': '$3', '$4': '$5', '$6': '$0'}
 endsnippet
 ###############################################
 snippet de "def" b
-def $1($2: $3=$4, $5: $6=$7) -> $8:
+def $1($2: $3=$4, $5: $6=$7) -> $0:
 	pass
 endsnippet
 ###############################################
 snippet cl "class" b
 class $1:
-	def __init__(self, $2: $3=$4, $5: $6=$7, $8: $9=$10):
+	def __init__(self, $2: $3=$4, $5: $6=$7):
 		self.$2 = $2
 		self.$5 = $5
-		self.$8 = $8
 
-	def __repr__(self):
-		pass
-
-	def $11(self) -> $12:
+	def $8(self) -> $0:
 		pass
 endsnippet
 ###############################################
 snippet f "fstring"
-f'{$1!r}'
+f'{$0!r}'
 endsnippet
 ###############################################
 snippet re "requests" b
 from requests import Session
 from bs4 import BeautifulSoup
 creds = {'username': username, 'password': password}
-url   = '$1'
+url   = '$0'
 s     = Session()
 hdrs  = get_headers()
 try:
@@ -75,8 +71,12 @@ endsnippet
 ###############################################
 snippet tr "try" b
 try:
-	$1
+	$0
 except Exception as exc:
 	print(f'{exc!r}')
+endsnippet
+###############################################
+snippet fr "from" b
+from $1 import $0
 endsnippet
 ###############################################

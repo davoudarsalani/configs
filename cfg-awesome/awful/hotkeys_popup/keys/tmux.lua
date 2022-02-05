@@ -156,7 +156,7 @@ local vim_keys = { -- {{{
                F7                       = create_description(vim_kb_fg, "replace"),
                F8                       = create_description(vim_kb_fg, "toggle cursorcolumn"),
                F9                       = create_description(vim_kb_fg,    "pymodelint (in python)"),
-               F10                      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> ultisnips"),
+               F10                      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> ultisnips snippets"),
                F12                      = create_description(vim_kb_fg, "watch"),
                K                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> show help/doc on current word in preview window"),
                TT                       = create_description(vim_kb_fg, "move current line to top screen"),
@@ -212,6 +212,8 @@ local vim_keys = { -- {{{
                [':read ! COAMMAND']     = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>C</span> insert output of bash command in next line"),
                [':retab']               = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>C</span> turn tabs into spaces"),
                [':Filter STRING']       = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>C</span> display lines containing STRING in a split"),
+               ['STRING+<Tab>']         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> ultisnips expand snippet"),
+               ['STRING+<S-Tab>']       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> sparkup expand snippet"),
              }
     },
     {
@@ -247,7 +249,7 @@ local vim_keys = { -- {{{
       modifiers = {'Leader'},
       keys = {
                ['0']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> turn jedi off"),
-               ['1']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle line number"),
+               ['1']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle nerdtree"),
                ['2']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle signify"),
                ['3']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle undotree"),
                ['4']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle better whitespace"),
@@ -258,6 +260,7 @@ local vim_keys = { -- {{{
                ['9']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle diminactive"),
                ['10'] = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle highlightlines"),
                ['11'] = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle tagbar"),
+               ['12'] = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle line number"),
                ['.']  = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> run current line"),
                a      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> ascending numbers"),
                b      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> black (in python)"),
@@ -268,7 +271,6 @@ local vim_keys = { -- {{{
                i      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> indent level"),
                k      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[jedi]</span> show docstring of function/class"),
                q      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> toggle quickfix"),
-               r      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> rename tmux window to current file name"),
                s      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[SyntaxAttr]</span> show syntax attr of current word"),
                t      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> typer start"),
                u      = create_description(vim_kb_fg, "<span    color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[jedi]</span> usages of current word"),

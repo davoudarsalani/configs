@@ -1,69 +1,72 @@
 ## b flag prevents snippets when in the middle of the line
 ###############################################
 snippet if "if" b
-if [ '$1' == '$2' ]; then
+if [ "$$1" == '$2' ]; then
 	$3
-elif [ '$4' == '$5' ]; then
+elif [ "$$4" == '$5' ]; then
 	$6
 else
-	$7
+	$0
 fi
+endsnippet
+###############################################
+snippet [] "if"
+[ "$$1" == '$2' ] && $3 || $0
 endsnippet
 ###############################################
 snippet fo "for (())" b
 for (($1=$2; $1<=$3; $1++)); {
-	$4
+	$0
 }
 endsnippet
 ###############################################
 snippet fo "for _ in _" b
 for $1 in "${$2[@]}"; {
-	$3
+	$0
 }
 endsnippet
 ###############################################
 snippet ca "case" b
-case "$1" in
-	$2 ) $3 ;;
-	$4 ) $5 ;;
-	* ) $6 ;;
+case "$$1" in
+	$2 )
+		$3 ;;
+	$4 )
+		$5 ;;
+	* )
+		$0 ;;
 esac
 endsnippet
 ###############################################
 snippet wh "while" b
 while $1; do
-	$2
+	$0
 done
 endsnippet
 ###############################################
 snippet fu "function" b
 function $1 {
-	$2
+	$0
 }
 endsnippet
 ###############################################
-snippet [] "if"
-[ '$1' == '$2' ] && $3 || $4
-endsnippet
-###############################################
 snippet {} "${[@]}"
-"${$1[@]}"
+"${$0[@]}"
 endsnippet
 ###############################################
 snippet fi "find"
-readarray -t $1 < <(find $2 -mindepth 1 -maxdepth 1 -type f -o -type d ! -path '*.git*' ! -path '*.venv*' -iname '*.jpg' -o -iname "*${var}*" ! -iname '*.srt' ! -iname '*for*' | sort)
+readarray -t $1 < <(find $0 -mindepth 1 -maxdepth 1 -type f -o -type d ! -path '*.git*' ! -path '*.venv*' -iname '*.jpg' -o -iname "*${var}*" ! -iname '*.srt' ! -iname '*for*' | sort)
 endsnippet
 ###############################################
 snippet sp "span"
-"<span background=\"#f3f300\"><span color=\"${$1}\">$2</span></span>"
+"<span background=\"#f3f300\"><span color=\"${$1}\">$0</span></span>"
 endsnippet
 ###############################################
 snippet pr "printf"
-printf '%s\n' '$1'
+printf '%s\n' "$$0"
 endsnippet
 ###############################################
 snippet () "array" b
-$1=( '$2' '$3' '$4' )
+$1=( '$2' '$3' '$0' )
 endsnippet
 ###############################################
 snippet ge "getopt" b
@@ -74,12 +77,22 @@ function get_opts {
 	eval set -- "$options"
 	while true; do
 		case "\$1" in
-			-h|--help ) display_help ;;
-			-$3|-- ) shift; ="\$1" ;;
-			-$4|-- ) shift; ="\$1" ;;
-			-$5|-- ) shift; ="\$1" ;;
-			-$6|-- ) shift; ="\$1" ;;
-			-- ) break ;;
+			-h|--help )
+				display_help ;;
+			-$3|-- )
+				shift
+				="\$1" ;;
+			-$4|-- )
+				shift
+				="\$1" ;;
+			-$5|-- )
+				shift
+				="\$1" ;;
+			-$0|-- )
+				shift
+				="\$1" ;;
+			-- )
+				break ;;
 		esac
 		shift
 	done
@@ -89,14 +102,6 @@ get_opts "$@"
 endsnippet
 ###############################################
 snippet > ">"
->/dev/null
-endsnippet
-###############################################
-snippet 2> ">"
-2>/dev/null
-endsnippet
-###############################################
-snippet &> ">"
-&>/dev/null
+$0>/dev/null
 endsnippet
 ###############################################

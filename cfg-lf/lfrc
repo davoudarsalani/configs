@@ -7,7 +7,7 @@ set icons true
 set number true
 set relativenumber true
 set incsearch true
-set timefmt "20060202150405"  ## ORIG: "Mon Jan _2 15:04:05 2006"
+set timefmt "2006-02-02 15:04:05 Mon"  ## ORIG: "Mon Jan _2 15:04:05 2006"
 set errorfmt "\033[0;49;31m%s\033[0m"    ## --,--> NOTE do NOT replace \033 and " with \e and ' respectively
 set promptfmt "\033[0;49;90m %f\033[0m"  ## --'
 set wrapscroll true
@@ -324,7 +324,7 @@ map <c-t> fzf_select
 cmd fzf_select $ {{
     source "$HOME"/scripts/gb
 
-    file="$(choose_file)" || exit 37
+    file="$(select_file)" || exit 37
     lf -remote "send $id load"$'\n'"send $id select \"$file\""
 }}
 
@@ -333,20 +333,20 @@ map <a-c> fzf_cd
 cmd fzf_cd $ {{
     source "$HOME"/scripts/gb
 
-    directory="$(choose_directory)" || exit 37
+    directory="$(select_directory)" || exit 37
     lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
 }}
 
 
-map gu git_undo
-cmd git_undo $ {{
+map gr git_restore
+cmd git_restore $ {{
     source "$HOME"/scripts/gb
 
-    prompt="$(get_single_input "undo ${f##*/}?")" && printf '\n'
+    prompt="$(get_single_input "restore ${f##*/}?")" && printf '\n'
     case "$prompt" in
         y ) source "$HOME"/scripts/gb-git
-            git_undo_specific_or_pattern "${f%/*}" "${f##*/}" && \
-            lf -remote "send $id echo \" ${f##*/} undid\"" ;;
+            git_restore_specific_or_pattern "${f%/*}" "${f##*/}" && \
+            lf -remote "send $id echo \" ${f##*/} restored\"" ;;
     esac
 }}
 

@@ -660,9 +660,10 @@ export terminal='xfce4-terminal'
 
 function start_xorg {
     local start_prompt
+
     [ "$HOSTNAME" == 'sony' ] || [ "$(pgrep 'awesome')" ] && return
 
-    read -p 'Start xorg? ' -n 1 start_prompt
-    [ "$start_prompt" == 'y' ] && startx # $HOME/.xinitrc
+    read -p 'Start xorg? ' -n 1 start_prompt && printf '\n'
+    [ "$start_prompt" == 'y' ] && startx  # $HOME/.xinitrc
 }
 start_xorg

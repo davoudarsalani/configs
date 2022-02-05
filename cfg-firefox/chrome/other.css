@@ -10,6 +10,7 @@
 }
 
 .tab-background[selected="true"] {
+    border: none !important;
     border-top: 2px solid var(--top_border) !important;
 }
 

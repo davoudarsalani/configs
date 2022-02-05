@@ -1,18 +1,10 @@
 ## b flag prevents snippets when in the middle of the line
 ###############################################
 snippet pr "printf"
-printf '%s\n' '$1'
+printf '%s\n' "$$0"
 endsnippet
 ###############################################
 snippet > ">"
->/dev/null
-endsnippet
-###############################################
-snippet 2> ">"
-2>/dev/null
-endsnippet
-###############################################
-snippet &> ">"
-&>/dev/null
+$0>/dev/null
 endsnippet
 ###############################################
