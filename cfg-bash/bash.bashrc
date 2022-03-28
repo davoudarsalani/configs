@@ -48,7 +48,7 @@ echo "\
 
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='d:l:s:lf:lfl:lfs:ls:q'
+export HISTIGNORE='d:l:s:w:lf:lfl:lfs:lfw:ls:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/scripts"
@@ -338,9 +338,11 @@ bind -m vi-insert 'Control-l: clear-screen'
 alias d='cd "$HOME"/downloads/'
 alias l='cd "$HOME"/linux/'
 alias s='cd "$HOME"/scripts/'
+alias w='cd "$HOME"/website/'
 alias lf='\lf "$HOME"/downloads/'
 alias lfl='\lf "$HOME"/linux/'
 alias lfs='\lf "$HOME"/scripts/'
+alias lfw='\lf "$HOME"/website/'
 alias ls="\ls $LS_FLAGS"
 alias cp='cp -v'
 alias rm='rm -v --preserve-root'
@@ -523,47 +525,44 @@ function vc {
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    if [ "$1" ]; then
-        [ -d "$1" ] && {
-            red "$1 already exists"
-            return
-        }
+    local dirname
+    dirname="${1:-venv}"
 
-        python3 -m venv "$1"
-        accomplished "$1 created"
-    else
-        red 'arg required'
-    fi
+    [ -d "$dirname" ] && {
+        red "$dirname already exists"
+        return
+    }
+
+    python3 -m venv "$dirname"
+    accomplished "$dirname created"
 }
 
 function va {
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    if [ "$1" ]; then
-        [ -d "$1" ] || {
-            red 'no such dir'
-            return
-        }
-        . "$1"/bin/activate
-    else
-        red 'arg required'
-    fi
+    local dirname
+    dirname="${1:-venv}"
+
+    [ -d "$dirname" ] || {
+        red "no such dir as $dirname"
+        return
+    }
+    source "$dirname"/bin/activate
 }
 
 function vu {
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
-    if [ "$1" ]; then
-        [ -d "$1" ] || {
-            red 'no such dir'
-            return
-        }
-        python3 -m venv --upgrade "$1" && accomplished "$1 updated"
-    else
-        red 'arg required'
-    fi
+    local dirname
+    dirname="${1:-venv}"
+
+    [ -d "$dirname" ] || {
+        red "no such dir as $dirname"
+        return
+    }
+    python3 -m venv --upgrade "$dirname" && accomplished "$dirname updated"
 }
 
 function vd {
@@ -591,4 +590,6 @@ function less {
 }
 
 
-if [[ "$PWD" =~ $HOME/api ]]; then source "$HOME"/api/venv/bin/activate; fi
+if [[ "$PWD" =~ $HOME/website ]]; then
+    va "$HOME"/website/venv  ## exceptionally passing full dir path because we may be way inside ~/website and therefore 'va' won't work
+fi

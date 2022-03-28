@@ -273,8 +273,8 @@ if exists('$TMUX')
 
 endif
 
-au FileType sh,dockerfile,html* :MatchTodoInSh
-au BufRead,BufNewFile *.htm,*.html*,*.php setlocal tabstop=2 shiftwidth=2 softtabstop=2
+au FileType sh,dockerfile,javascript,css,html* :MatchTodoInSh
+au BufRead,BufNewFile *.htm,*.html*,*.php,*.css,*.js setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 hi Comment      cterm=italic
 hi CursorColumn ctermbg=233
@@ -630,7 +630,7 @@ function! Watch() " {{{
         if exists('$TMUX')
             " in tmux pane below (https://stackoverflow.com/questions/15123477/tmux-tabs-with-name-of-file-open-in-vim)
             call system("tmux split-window -v -d -p 40")  " open pane below (-d prevents from jumping to the pane), -p 40 is pane size
-            call system("tmux send-keys -t 2 'watch --interval 2 --no-title --color " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
+            call system("tmux send-keys -t 2 'watch " . expand('%:p') . "' ENTER")  " -t 2 means pane 2
         else
             " in split below:
             :w | below terminal echo %:p
@@ -809,6 +809,16 @@ let g:pymode_trim_whitespaces = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_warning = 0
 let g:pymode_indent = 0
+" newly added:
+let g:pymode_virtualenv = 0
+let g:pymode_motion = 0
+let g:pymode_doc = 0
+let g:pymode_breakpoint = 0
+let g:pymode_lint_unmodified = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_cwindow = 0
+let g:pymode_rope = 0
+let g:pymode_folding = 0
 let g:pymode_lint_ignore = ["E501", "C901", "E252", "E266", "E262"]
 " ^^ for example ['W', 'E271'] (Skip all Warnings and the Errors starting with E271)
 " E271 multiple spaces after keyword (e.g. after if)
@@ -891,8 +901,8 @@ hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
 let g:UltiSnipsListSnippets = '<F10>'
 " }}}
 " {{{ undotree
-let g:undotree_SplitWidth = 11
-let g:undotree_WindowLayout = 3
+let g:undotree_SplitWidth = 12
+let g:undotree_WindowLayout = 1
 let g:undotree_DiffAutoOpen = 0
 let g:undotree_ShortIndicators = 1
 let g:undotree_HighlightChangedText = 0

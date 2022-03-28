@@ -12,6 +12,18 @@ snippet bl "block" b
 {% endblock $1 %}
 endsnippet
 ###############################################
+snippet wi "with" b
+{% with $1=$2 %}
+	$0
+{% endwith %}
+endsnippet
+###############################################
+snippet co "comment" b
+{% comment "$1" %}
+	$0
+{% endcomment %}
+endsnippet
+###############################################
 snippet if "if"
 {% if $1 %}
 	$2

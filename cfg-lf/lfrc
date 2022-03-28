@@ -78,7 +78,7 @@ map F
 
 ## highlight {{{
 map i $ {{
-    eval "$HIGHLIGHT" $f 2>/dev/null | less -R  ## do NOT replace 2 with &
+    eval "${HIGHLIGHT/--line-range=* }" $f 2>/dev/null | less -R  ## do NOT replace 2 with &
 }}
 
 ## quit {{{

@@ -375,8 +375,10 @@ processes_wch   = create_watch('processes', 10)
 idle            = create_textbox('')
 idle_wch        = create_watch('idle', 10)
 reputation      = create_textbox('')
-reputation_wch  = create_watch('reputation', 600)
-youtube        = create_textbox('YO')
+reputation_wch  = create_watch('reputation', 1800)
+visits          = create_textbox('')
+visits_wch      = create_watch('visits', 600)
+youtube         = create_textbox('YO')
 mbl_umbl        = create_textbox('')
 mbl_umbl_wch    = create_watch('mbl_umbl', 10)
 firewall        = create_textbox('')
@@ -442,24 +444,25 @@ pkg_count_ct       = create_container(pkg_count, fg_l)
 processes_ct       = create_container(processes, fg_d)
 idle_ct            = create_container(idle, fg_l)
 reputation_ct      = create_container(reputation, fg_d)
-youtube_ct         = create_container(youtube, fg_l)
-mbl_umbl_ct        = create_container(mbl_umbl, fg_d)
-firewall_ct        = create_container(firewall, fg_l)
-bluetooth_ct       = create_container(bluetooth, fg_d)
-ymail_ct           = create_container(ymail, fg_l)
-gmail_ct           = create_container(gmail, fg_l)
-sec_rem_ct         = create_container(sec_rem, fg_d)
-webcam_ct          = create_container(webcam, fg_l)
-git_ct             = create_container(git, fg_d)
-clipboard_ct       = create_container(clipboard, fg_l)
-record_ct          = create_container(record, fg_d)
-keylogger_ct       = create_container(keylogger, fg_l)
-established_ct     = create_container(established, fg_d)
-open_ports_ct      = create_container(open_ports, fg_l)
-tor_ct             = create_container(tor, fg_d)
-network_ct         = create_container(network, fg_l)
-audacious_ct       = create_container(audacious, fg_d)
-audacious_bar_v_ct = create_container(audacious_bar_v, fg_d)
+visits_ct          = create_container(visits, fg_l)
+youtube_ct         = create_container(youtube, fg_d)
+mbl_umbl_ct        = create_container(mbl_umbl, fg_l)
+firewall_ct        = create_container(firewall, fg_d)
+bluetooth_ct       = create_container(bluetooth, fg_l)
+ymail_ct           = create_container(ymail, fg_d)
+gmail_ct           = create_container(gmail, fg_d)
+sec_rem_ct         = create_container(sec_rem, fg_l)
+webcam_ct          = create_container(webcam, fg_d)
+git_ct             = create_container(git, fg_l)
+clipboard_ct       = create_container(clipboard, fg_d)
+record_ct          = create_container(record, fg_l)
+keylogger_ct       = create_container(keylogger, fg_d)
+established_ct     = create_container(established, fg_l)
+open_ports_ct      = create_container(open_ports, fg_d)
+tor_ct             = create_container(tor, fg_l)
+network_ct         = create_container(network, fg_d)
+audacious_ct       = create_container(audacious, fg_l)
+audacious_bar_v_ct = create_container(audacious_bar_v, fg_l)
 -- }}}
 -- buttons {{{
 local taglist_buttons = gears.table.join( awful.button({   }, 1, function(t) t:view_only() end),
@@ -486,6 +489,8 @@ memory_cpu_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_scri
 harddisk_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'harddisk', 'partitions') end) ))
 
 reputation_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'reputation') end) ))
+
+visits_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'visits') end) ))
 
 youtube_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'youtube') end) ))
 
@@ -570,6 +575,7 @@ awful.screen.connect_for_each_screen( function(s)
           separator, processes_ct,
           separator, idle_ct,
           separator, reputation_ct,
+          separator, visits_ct,
           separator, youtube_ct,
           separator, mbl_umbl_ct,
           separator, firewall_ct,
