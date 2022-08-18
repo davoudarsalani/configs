@@ -387,8 +387,8 @@ ymail           = create_textbox('')
 ymail_wch       = create_watch('ymail', 1800)
 gmail           = create_textbox('')
 gmail_wch       = create_watch('gmail', 1800)
-sec_rem         = create_textbox('')
-sec_rem_wch     = create_watch('security_remote', 600)
+status          = create_textbox('')
+status_wch      = create_watch('status', 600)
 webcam          = create_textbox('')
 webcam_wch      = create_watch('webcam', 5)
 git             = create_textbox('')
@@ -451,7 +451,7 @@ firewall_ct        = create_container(firewall, fg_d)
 bluetooth_ct       = create_container(bluetooth, fg_l)
 ymail_ct           = create_container(ymail, fg_d)
 gmail_ct           = create_container(gmail, fg_d)
-sec_rem_ct         = create_container(sec_rem, fg_l)
+status_ct          = create_container(status, fg_l)
 webcam_ct          = create_container(webcam, fg_d)
 git_ct             = create_container(git, fg_l)
 clipboard_ct       = create_container(clipboard, fg_d)
@@ -506,7 +506,7 @@ ymail_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('a
 
 gmail_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'gmail') end) ))
 
-sec_rem_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'security_remote') end) ))
+status_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'status') end) ))
 
 git_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'git') end) ))
 
@@ -554,7 +554,7 @@ awful.screen.connect_for_each_screen( function(s)
     awful.tag({'1', '2', '3', '4', '5'}, s, awful.layout.layouts[1])  -- ➀➁➂➃➄➅➆➇➈➉ ➊➋➌➍➎➏➐➑➒➓ ⓵⓶⓷⓸⓹⓺⓻⓼⓽⓾ ⓿❶❷❸❹❺❻❼❽❾❿ ⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳ ０１２３４５６７８９ Ⅰ Ⅱ Ⅲ ⅰ ⅱ ⅲ
     s.mytaglist = awful.widget.taglist { screen = s, filter = awful.widget.taglist.filter.noempty, buttons = taglist_buttons }  -- noempty/selected/all
 
-    s.topwibox = awful.wibar({ position = 'top', screen = s, bg = bg, fg = grey_dark })
+    s.topwibox = awful.wibar({ position = 'top', ontop = true, screen = s, bg = bg, fg = grey_dark })
     s.topwibox:setup {
         layout = wibox.layout.align.horizontal,
         { layout = wibox.layout.fixed.horizontal,
@@ -582,7 +582,7 @@ awful.screen.connect_for_each_screen( function(s)
           separator, bluetooth_ct,
           separator, ymail_ct,
           separator, gmail_ct,
-          separator, sec_rem_ct,
+          separator, status_ct,
           separator, webcam_ct,
           separator, git_ct,
           separator, clipboard_ct,
@@ -702,7 +702,7 @@ globalkeys = gears.table.join(
    awful.key({ M       }, '-',           function() end, create_description('', '--')),
    awful.key({ M       }, '=',           function() end, create_description('', '--')),
    awful.key({ M       }, 'BackSpace',   function() wibox.widget.systray().visible = not wibox.widget.systray().visible end, create_description('', 'systray')),  -- (https://pavelmakhov.com/2018/01/hide-systray-in-awesome/):
-   awful.key({ M       }, 'Insert',      function() run_in_shell('touch /tmp/security-remote-proof') end, create_description('touch proof', 'security remote')),  -- 0xff63
+   awful.key({ M       }, 'Insert',      function() run_in_shell('touch /tmp/status-proof') end, create_description('touch proof', 'status')),  -- 0xff63
    awful.key({ M       }, 'Delete',      function() run_script('awesome-widgets', 'turn_off_scr_3') end, create_description('turn off screen 3', 'screen/tag')),  -- 0xffff
    awful.key({ M       }, 'Home',        function() run_script('awesome-widgets', 'memory_cpu', 'intensives') end, create_description('', 'memory/cpu intensives')),
    awful.key({ M       }, 'End',         function() run_script('off') end, create_description('', 'off')),  -- 0xff57
@@ -718,7 +718,7 @@ globalkeys = gears.table.join(
    awful.key({ M       }, 'r',           function() run_script('fingil') end, create_description('', 'fingil')),
    awful.key({ M       }, 't',           function() run_script('0-test') end, create_description('0-test', '0-test{,.py}')),
    awful.key({ M, S    }, 't',           function() run_script('0-test.py') end, create_description('0-test.py', '0-test{,.py}')),
-   awful.key({ M       }, 'y',           function() end, create_description('', '--')),
+   awful.key({ M       }, 'y',           function() run_script('awesome-widgets', 'visits') end, create_description('', 'visits')),
    awful.key({ M       }, 'u',           function() run_script('awesome-widgets', 'established', 'message') end, create_description('', 'established')),
    awful.key({ M       }, 'i',           function() run_script('awesome-widgets', 'ymail') end, create_description('ymail', 'e-mail')),
    awful.key({ M, S    }, 'i',           function() run_script('awesome-widgets', 'gmail') end, create_description('gmail', 'e-mail')),

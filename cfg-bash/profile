@@ -619,6 +619,8 @@ export chartreuse_4='#458b00'
 export cyan='#00ffff'
 export cyan_dark='#009999'
 export green='#00cd00'
+export green_dark='#009a00'
+export green_darker='#006700'
 export grey='#707070'
 export grey_dark='#474747'
 export grey_very_dark='#121212'  ## equivalnt to 233
@@ -645,10 +647,13 @@ export dmenufn='play-12'
 export dmenufn2='monospace-12'
 export dmenulines=35
 
+export byte_size=1024
+
 export QT_QPA_PLATFORMTHEME=gtk2  ## https://www.linuxuprising.com/2018/05/get-qt5-apps-to-use-native-gtk-style-in.html
 export refresh_icon='♻'  ## 
 export editor='vim'
 export terminal='xfce4-terminal'
+
 
 
 

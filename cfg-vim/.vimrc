@@ -522,6 +522,11 @@ function! MyFoldText() " {{{ https://stackoverflow.com/questions/5983396/change-
     return txt
 endfunction
 " }}}
+function! Prettify()  " {{{
+    :exec ':%!jq'
+endfunction
+command! Prettify :call Prettify()
+" }}}
 " {{{ function! s:QuickfixToggle()  " https://github.com/nvie/vimrc/blob/master/vimrc
 let g:quickfix_is_open = 0
 function! s:QuickfixToggle()  " ## TODO what doses it do exatly?

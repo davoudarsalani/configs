@@ -378,6 +378,95 @@ function command_not_found_handle {
     return 127
 }
 
+function gifify {
+    source "$HOME"/scripts/gb-color
+
+    local new_name mp4_reg webm_reg
+
+    [ "$1" ] || {
+        red "arg(s) needed"
+        red "USAGE: $FUNCNAME ~/downloads/cars.webm [5]"
+        return
+    }
+
+    [ -f "$1" ] || {
+        red "$1 does not exist"
+        return
+    }
+
+    mp4_reg='.*mp4$'
+    webm_reg='.*webm$'
+    if [[ "$1" =~ $mp4_reg ]]; then
+        new_name="${1/.mp4/.gif}"
+    elif [[ "$1" =~ $webm_reg ]]; then
+        new_name="${1/.webm/.gif}"
+    else
+        red 'invalid suffix. only webm and mp4 files supported'
+        return
+    fi
+
+    ## https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality
+    ffmpeg -i "$1" -ss "${2:-0}" -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "$new_name"
+}
+
+function mp4ify {
+    source "$HOME"/scripts/gb-color
+
+    local new_name webm_reg
+
+    [ "$1" ] || {
+        red "arg needed"
+        red "USAGE: $FUNCNAME ~/downloads/cars.webm"
+        return
+    }
+
+    [ -f "$1" ] || {
+        red "$1 does not exist"
+        return
+    }
+
+    webm_reg='.*webm$'
+    if [[ "$1" =~ $webm_reg ]]; then
+        new_name="${1/.webm/.mp4}"
+    else
+        red 'invalid suffix. only mp4 files supported'
+        return
+    fi
+
+    ffmpeg -i "$1" "$new_name"
+}
+
+function jpgify {
+    source "$HOME"/scripts/gb-color
+
+    local new_name webp_reg
+
+    [ "$1" ] || {
+        red "arg needed"
+        red "USAGE: $FUNCNAME ~/downloads/cars.webp"
+        return
+    }
+
+    [ -f "$1" ] || {
+        red "$1 does not exist"
+        return
+    }
+
+    webp_reg='.*webp$'
+    if [[ "$1" =~ $webp_reg ]]; then
+        new_name="${1/.webp/.jpg}"
+    else
+        red 'invalid suffix. only webp files supported'
+        return
+    fi
+
+    ffmpeg -i "$1" "$new_name"
+}
+
+function reset_bash_history {
+    cp -v ~/linux/cfg-bash/.bash_history "$HOME"/.bash_history
+}
+
 function images_containers {
 
     tmux split-window -v  ## don't know why, but we have to do this first!
@@ -586,7 +675,8 @@ function less {
     LESS_TERMCAP_so=$'\e[7;40;33m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[32m' \
-    command less "$@"
+    eval "${HIGHLIGHT/--line-range=* }" "$@" 2>/dev/null | command less -R
+    # command less "$@"
 }
 
 
