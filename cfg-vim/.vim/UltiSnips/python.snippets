@@ -52,11 +52,11 @@ from requests import Session
 from bs4 import BeautifulSoup
 creds = {'username': username, 'password': password}
 url   = '$0'
-s     = Session()
+Ses   = Session()
 hdrs  = get_headers()
 try:
-	response = s.post(url, headers=hdrs, data=creds, timeout=20)
-	response = s.get(url, headers=hdrs, timeout=20)
+	response = Ses.post(url, headers=hdrs, data=creds, timeout=20)
+	response = Ses.get(url, headers=hdrs, timeout=20)
 	souped = BeautifulSoup(response.content, 'html.parser')
 	usage = souped.find('div', attrs={'class': 'loaded'}).text
 	# OR:

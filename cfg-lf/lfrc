@@ -8,8 +8,12 @@ set number true
 set relativenumber true
 set incsearch true
 set timefmt "2006-01-02 15:04:05 -0700 Mon"  ## ORIG: "Mon Jan _2 15:04:05 2006"
-set errorfmt "\033[0;49;31m%s\033[0m"    ## --,--> NOTE do NOT replace \033 and " with \e and ' respectively
-set promptfmt "\033[0;49;90m %f\033[0m"  ## --'
+set errorfmt "\033[0;49;31m%s\033[0m"    ## NOTE JUMP_2 do NOT replace \033 and " with \e and ' respectively
+set promptfmt " 
+\033[38;5;247m\033[48;5;237m %u@%h \033[38;5;237m\033[48;5;235m
+\033[38;5;247m\033[48;5;235m %w/%f \033[0m\033[38;5;235m\033[0m
+"  ## JUMP_2 https://github.com/rafi/.config/blob/master/lf/lfrc
+## previously: set promptfmt "\033[0;49;90m %f\033[0m"  ## JUMP_2
 set wrapscroll true
 set scrolloff 5
 set dircounts true
@@ -33,7 +37,7 @@ set ratios 1:2
 % {{
     [ $LF_LEVEL -eq 1 ] || lf -remote "send $id echoerr 'WARNING: You are in a nested lf instance!'"
 }}
-
+## }}}
 ## unmap {{{
 map '~'
 map '`'
@@ -75,12 +79,12 @@ map x
 # map y
 map z
 map F
-
+## }}}
 ## highlight {{{
 map i $ {{
     eval "${HIGHLIGHT/--line-range=* }" $f 2>/dev/null | less -R  ## do NOT replace 2 with &
 }}
-
+## }}}
 ## quit {{{
 map q % {{
     > /tmp/lf_preview_status
@@ -89,7 +93,7 @@ map q % {{
     lf -remote "send $id reload"
     lf -remote "send $id quit"
 }}
-
+## }}}
 ## toggle preview {{{
 map w % {{  ## JUMP_1
     lf_preview_status_file=/tmp/lf_preview_status
@@ -108,7 +112,7 @@ map w % {{  ## JUMP_1
 map W % {{  ## JUMP_1
     > /tmp/lf_preview_status
 }}
-
+## }}}
 ## mkdir, touch, rm, trash {{{
 ## mkdir
 ## 1:
@@ -119,13 +123,13 @@ map W % {{  ## JUMP_1
 #   read dirname
 #   mkdir -p "$dirname"
 #   sleep 1
-#   lf -remote "send $id load"$'\n'"send $id select \"$dirname\""
+#   lf -remote "send $id select \"$dirname\""
 # }}
 # map m mkdir
 ## 3:
 cmd mkdir $ {{
     mkdir "$@"
-    lf -remote "send $id load"$'\n'"send $id select \"$@\""
+    lf -remote "send $id select \"$@\""
 }}
 ## touch
 ## 1:
@@ -134,13 +138,13 @@ cmd mkdir $ {{
 # cmd touch $ {{
 #   echo -ne '\e[38;5;64m file name \e[0m ' ; read filename
 #   touch "$filename"
-#   lf -remote "send $id load"$'\n'"send $id select \"$filename\""
+#   lf -remote "send $id select \"$filename\""
 # }}
 # map t touch
 ## 3:
 cmd touch $ {{
     touch "$@"
-    lf -remote "send $id load"$'\n'"send $id select \"$@\""
+    lf -remote "send $id select \"$@\""
 }}
 ## rm
 ## 1:
@@ -171,7 +175,7 @@ cmd touch $ {{
 #     esac
 # }}
 # map ~ trash # ~ is Shift+Delete
-
+## }}}
 ## bulk_rename {{{
 cmd bulk_rename $ {{
     old=$(mktemp)
@@ -191,12 +195,14 @@ cmd bulk_rename $ {{
     rm $old $new
     lf -remote "send $id unselect"
 }}
-
+## }}}
 ## du {{{
 cmd du $ {{
-    du -h --max-depth=1 --apparent-size | sort -rh | less -R  ## do NOT add s to -h because it conflicts with --max-depth=1
+    du -hsx * | sort -rh | less -R  ## https://github.com/rafi/.config/blob/master/lf/lfrc
+    ## previously:
+    ##   du -h --max-depth=1 --apparent-size | sort -rh | less -R  ## do NOT add s to -h because it conflicts with --max-depth=1
 }}
-
+## }}}
 ## open {{{
 cmd open $ {{
     case $f in
@@ -204,7 +210,8 @@ cmd open $ {{
     esac
 
     case "$(file --mime-type $f -bL)" in
-        audio/* )            if [ ! "$HOSTNAME" == 'sony' ]; then
+        audio/* )            ## [CHECKING_HOST]
+                             if [ "$HOSTNAME" == 'acer' ]; then
                                  audacious $fx &>/dev/null &
                              else
                                  vlc -f --play-and-exit -- $fx &>/dev/null &
@@ -230,7 +237,7 @@ cmd open $ {{
         # * ) for f in $fx; do setsid $OPENER $f &>/dev/null & done ;;
     esac
 }}
-
+## }}}
 ## open_with {{{
 map o open_with
 cmd open_with $ {{
@@ -306,7 +313,7 @@ cmd open_with $ {{
         esac
     fi
 }}
-
+## }}}
 ## open_with_other {{{
 cmd open_with_other $ {{
     source "$HOME"/scripts/gb-color
@@ -318,26 +325,49 @@ cmd open_with_other $ {{
         * ) "$other_app" $fx ;;  ## NOTE do NOT add &>/dev/null &
     esac
 }}
-
+## }}}
 ## fzf_select {{{
 map <c-t> fzf_select
 cmd fzf_select $ {{
     source "$HOME"/scripts/gb
 
     file="$(select_file)" || exit 37
-    lf -remote "send $id load"$'\n'"send $id select \"$file\""
+    lf -remote "send $id select \"$file\"" && \
+    lf -remote "send $id save_pwd_as_recent_directory"
 }}
-
+## }}}
 ## fzf_cd {{{
 map <a-c> fzf_cd
 cmd fzf_cd $ {{
     source "$HOME"/scripts/gb
 
     directory="$(select_directory)" || exit 37
-    lf -remote "send $id load"$'\n'"send $id cd \"$directory\""
+    lf -remote "send $id cd \"$directory\"" && \
+    lf -remote "send $id save_pwd_as_recent_directory"
 }}
+## }}}
+## fzf_recent_directories {{{
+map <a-r> fzf_recent_directories
+cmd fzf_recent_directories $ {{
+    source "$HOME"/scripts/gb
 
+    recent_dirs_file=/tmp/lf_recent_directories  ## JUMP_3
 
+    if [ -f "$recent_dirs_file" ]; then
+
+        ## '1!G;h;$!d' to reverse lines
+        ## NOTE <--,-- do NOT replace quotes in '1!G;h;$!d' and "s|$HOME|\~|g"
+        ##         '-- do NOT replace | with / in "s|$HOME|\~|g"
+        readarray -t recent_dirs < <(sed -e '1!G;h;$!d' -e "s|$HOME|\~|g" "$recent_dirs_file" )
+
+        directory="$(pipe_to_fzf "${recent_dirs[@]}" "header=recent directories")" || exit 37
+        lf -remote "send $id cd \"$directory\""
+    else
+        lf -remote "send $id echoerr ' no recent directories'"
+    fi
+}}
+## }}}
+## {{{ git_restore
 map gr git_restore
 cmd git_restore $ {{
     source "$HOME"/scripts/gb
@@ -349,21 +379,35 @@ cmd git_restore $ {{
             lf -remote "send $id echo \" ${f##*/} restored\"" ;;
     esac
 }}
+## }}}
+cmd save_pwd_as_recent_directory $ {{  ## {{{
+    source "$HOME"/scripts/gb
+    recent_dirs_file=/tmp/lf_recent_directories  ## JUMP_3
 
+    \grep -q "$PWD" "$recent_dirs_file" 2>/dev/null ||
+    printf '%s\n' "$PWD" >> "$recent_dirs_file"
+}}
+## }}}
 ## commands {{{
 map <c-c> commands
 cmd commands $ {{
     source "$HOME"/scripts/gb
+    source "$HOME"/scripts/gb-color
 
-    ## turn files into array
-    ## NOTE do NOT quote ${fx}
-    ## replaced space with + to avoid problems in parsing names
-    items=( ${fx// /+} )
+    files_dirs=( ${fx// /+} )  ## <--,-- NOTE do NOT quote ${fx}
+                               ##    '-- replace space with + to avoid problems in parsing names
 
-    (( "${#items[@]}" == 1 )) && header="${items[@]##*/} selected" || header="${#items[@]} selected: $(printf '%s ' "${items[@]##*/}")"
+    files_dirs=( "${files_dirs[@]##*/}" )
+    files_color='brown'
 
-    # FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --header 'commands'"
-    items=( 'chattr' 'trash' 'rm' 'mime_type' 'softlink' 'compress_tar' 'compress_zip' 'xtract_tar' 'xtract_zip' 'xtract_rar' 'du' 'mkdir' 'touch' 'bulk_rename' 'rename')
+    if (( "${#files_dirs[@]}" == 1 )); then
+        header="selected: $($files_color ${files_dirs[@]##*/})"
+    else
+        files_dirs=( "${#files_dirs[@]} selected:" ' ' "${files_dirs[@]}" )  ## ' ' to use it as separator when printing file names in JUMP_2
+        header="$(printf '%s\n' "${files_dirs[0]}")$($files_color $(printf '%s\n' "${files_dirs[@]:1}"))"  ## JUMP_2
+    fi
+
+    items=( 'chattr' 'trash' 'rm' 'mime_type' 'softlink' 'compress_tar' 'compress_gz' 'compress_zip' 'compress_rar' 'xtract_tar' 'xtract_gz' 'xtract_zip' 'xtract_rar' 'du' 'mkdir' 'touch' 'bulk_rename' 'rename')
     item="$(pipe_to_fzf "${items[@]}" "header=$header")" || exit 37
     case "$item" in
         chattr )       "$HOME"/scripts/lf.py chattr    $fx ;;
@@ -372,8 +416,11 @@ cmd commands $ {{
         mime_type )    "$HOME"/scripts/lf.py mime_type $fx ;;
         softlink )     "$HOME"/scripts/lf.py softlink  $fx ;;
         compress_tar ) "$HOME"/scripts/lf.py tar       $fx ;;
-        xtract_tar )   "$HOME"/scripts/lf.py untar     $fx ;;
+        compress_gz )  "$HOME"/scripts/lf.py gz        $fx ;;
         compress_zip ) "$HOME"/scripts/lf.py zip       $fx ;;
+        compress_rar ) "$HOME"/scripts/lf.py rar       $fx ;;
+        xtract_tar )   "$HOME"/scripts/lf.py untar     $fx ;;
+        xtract_gz )    "$HOME"/scripts/lf.py ungz      $fx ;;
         xtract_zip )   "$HOME"/scripts/lf.py unzip     $fx ;;
         xtract_rar )   "$HOME"/scripts/lf.py unrar     $fx ;;
         du )           lf -remote "send $id du"                 ;;
@@ -383,12 +430,17 @@ cmd commands $ {{
         rename )       lf -remote "send $id rename"             ;;
     esac
 }}
-
+## }}}
 ## map {{{
 map <tab>   :clear ; unselect ; reload
-map <enter> :open  ; unselect
-map <right> :open  ; unselect
+map <enter> :open  ; unselect ; save_pwd_as_recent_directory
+map <right> :open  ; unselect ; save_pwd_as_recent_directory
 map <left>  :updir ; unselect
 map .       :set hidden!
-map '`'     mark-load
+map '`'     mark-load  ## FIXME add save_pwd_as_recent_directory here too
 map ';'     read
+
+## https://github.com/rafi/.config/blob/master/lf/lfrc
+map r<right> &tmux split-window -h \lf  ## replicate horizontally
+map r<down>  &tmux split-window -v \lf  ## replicate vertically
+## }}}

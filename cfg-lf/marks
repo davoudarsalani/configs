@@ -1,12 +1,12 @@
 ':~/downloads
-c:~/.config
+c:~/cpanel-logs
 d:~/downloads
 e:~/e-book
-g:~/public/github/
 i:~/e-book/ielts
+k:~/kaddy
 l:~/linux
 m:~/movie
-p:~/python
+p:~/public
 s:~/scripts
 t:~/trash
 v:~/.vim/pack/bundle/start

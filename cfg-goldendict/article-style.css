@@ -2,24 +2,24 @@
 /*
 :lang(fa)
 {
-    text-align: right;
-    text-direction: rtl;
-
+  text-align: right;
+  text-direction: rtl;
 }
 */
 
-body{
-font-size: 13px;
-line-height: 25px;
+body {
+  font-size: 13px;
+  line-height: 25px;
 }
 
 body, font {
-font-family: Play, Vazir;
+  font-family: Play, Vazir;
 }
 
-.bglrtl{
-white-space: pre-wrap !important;
+.bglrtl {
+  white-space: pre-wrap !important;
 }
-.bglrtl b{
-white-space: initial !important;
+
+.bglrtl b {
+  white-space: initial !important;
 }

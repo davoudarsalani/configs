@@ -18,6 +18,7 @@ esac
 
 ## PS1 {{{
 # PS1='[\u@\h \W]\$ '
+## [CHECKING_HOST]
 PS1='$(
 xt_stts="$?"
 reset="\[\e[0m\]"
@@ -45,33 +46,38 @@ echo "\
 \[\e[38;05;004m\]${HERE}${reset}\
 \[\e[38;05;005m\]${VIRT}${reset}"
 )'
-
+## }}}
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='d:l:s:w:lf:lfl:lfs:lfw:ls:q'
+export HISTIGNORE='d:l:s:w:lf:lfc:lfd:lfk:lfl:lfp:lfs:lfw:ls:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/scripts"
 export LS_FLAGS='-A --color=always --group-directories-first'
 export LC_ALL='en_US.UTF-8'
-export GREP_COLOR='4;49;32'
+export GREP_COLORS='4;49;32'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export PYTHONPATH="$HOME"/scripts
 export PYTHONDONTWRITEBYTECODE=1
 export RANGER_LOAD_DEFAULT_RC='FALSE'  ## to avoid loading rc.conf twice
 export HIGHLIGHT='highlight --config-file=$HOME/.config/highlight/anotherdark.theme -O xterm256 --line-numbers --line-range=1-50 --force'  ## NOTE do NOT replace $HOME with ~
+[ "$(command -v apt)" ] && export HIGHLIGHT="${HIGHLIGHT/--line-range=* }"  ## NOTE [CHECKING_HOST] there is no such option as --line-range on mint
 export BLACK='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization'
 export BLACKDIFF='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
 common_rg_flags='--smart-case --color=always'
 export RG_MATCH_FLAGS="$common_rg_flags --colors 'match:bg:0' --colors 'match:fg:2' --colors 'match:style:underline'"
-export RG="rg $common_rg_flags --sort path --hidden --files-with-matches \
-           --no-messages --glob '!{.git,.cache,*.venv*,kaddy}/*'"
+export RG="\rg $common_rg_flags --sort path --hidden --files-with-matches \
+           --no-messages --glob '!{.git,.cache,.venv*,kaddy,trash}/*'"
            ## keep ignored paths synced with JUMP_1
            ## --files-with-matches prints the paths with at least one match and suppress match contents
            ## --multiline prints the total number of matches instead of the total number of lines
 
 ## fzf {{{
-export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git/*" ! -path "*.cache/*" ! -path "*.venv*/*" ! -path "*kaddy/*"' #' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
+export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git/*" ! -path "*.cache/*" ! -path "*.venv*/*" ! -path "*kaddy/*" ! -path "*trash/*" 2>/dev/null'  ##  <--,-- # ' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
+                                                                                                                                                               ##     |-- ! -path flags also used in git option in ~/scripts/awesome-widgets
+                                                                                                                                                               ##     '-- 2>/dev/null to ignore the error:
+                                                                                                                                                               ##         find: '/home/nnnn/kaddy/lost+found': Permission denied.
+                                                                                                                                                               ##         FIXME although ! -path "*kaddy/*" is added, find keeps looking inside kaddy
 export FZF_DEFAULT_OPTS='--header "C-j/k:preview down/up|C-w:toggle preview|C-s:toggle sort|C-y:copy to clipboard" --no-bold --sort --cycle --border horizontal --no-multi --reverse --inline-info --ansi --pointer ">" --prompt ": " --marker "+" --height 70% --preview-window noborder:right:80%:wrap --bind "ctrl-s:toggle-sort,ctrl-y:execute-silent(echo "{-1}" | xclip -selection clipboard)+abort,backward-eof:abort,ctrl-k:preview-up,ctrl-j:preview-down,ctrl-w:toggle-preview" --color 'fg:${silver},fg+:${silver},hl+:2:underline,hl:2:underline,bg:${black},bg+:${grey_dark},preview-bg:${black},border:${grey_dark},gutter:${black},header:${blue}''
 ## conditional preview: --preview "[[ -d {} ]] && tree -C {} | head -200"  ## https://github.com/Bhupesh-V/til/blob/master/Shell/fzf-tips-tricks.md
 
@@ -90,10 +96,10 @@ export FZF_CTRL_R_OPTS="--header='history'"
 
 # export FZF_TMUX_OPTS=''
 
-## these options are also used in ~/scripts/awesome-widgets git option
+## ! -path flags also used in git option in ~/scripts/awesome-widgets
 export FZF_ALT_C_COMMAND_GIT="$FZF_ALT_C_COMMAND ! -path '*.config/*' ! -path '*.vim/*' ! -path '*go/*' ! -path '*trash/*' -iname '.git' | sed 's#/\.git##' | sort"
-
-
+## }}}
+## }}}
 ## ls colors {{{
 ## (https://linuxhint.com/ls_colors_bash/)
 ## Command to get extensions: dircolors --print-database
@@ -102,7 +108,7 @@ export LS_COLORS="no=2;37:di=0;34:fi=0;37:ex=0;32:ln=0;36:\
 *.jpg=0;33:*.jpeg=0;33:*.mjpg=0;33:*.mjpeg=0;33:*.gif=0;33:*.webp=0;33:*.bmp=0;33:*.pbm=0;33:*.pgm=0;33:*.ppm=0;33:*.tga=0;33:*.xbm=0;33:*.xpm=0;33:*.tif=0;33:*.tiff=0;33:*.png=0;33:*.svg=0;33:*.svgz=0;33:*.mng=0;33:*.pcx=0;33:*.qt=0;33:*.nuv=0;33:*.gl=0;33:*.dl=0;33:*.xcf=0;33:*.xwd=0;33:*.yuv=0;33:*.cgm=0;33:*.emf=0;33:\
 *.mov=0;35:*.mpg=0;35:*.mpeg=0;35:*.m2v=0;35:*.mkv=0;35:*.webm=0;35:*.ogm=0;35:*.mp4=0;35:*.m4v=0;35:*.mp4v=0;35:*.vob=0;35:*.wmv=0;35:*.asf=0;35:*.rm=0;35:*.rmvb=0;35:*.flc=0;35:*.avi=0;35:*.fli=0;35:*.flv=0;35:\
 *.aac=0;35:*.au=0;35:*.flac=0;35:*.m4a=0;35:*.mid=0;35:*.midi=0;35:*.mka=0;35:*.mp3=0;35:*.wma=0;35:*.mpc=0;35:*.ogg=0;35:*.oga=0;35:*.ra=0;35:*.wav=0;35:*.opus=0;35"
-
+## }}}
 ## lf icons {{{
 ## https://github.com/gokcehan/lf/wiki/Icons
 export LF_ICONS="\
@@ -307,8 +313,8 @@ ex=:\
 ## su = (SETUID)   File that is setuid (u+s)
 ## tw = (STICKY_OTHER_WRITABLE)    Directory that is sticky and other-writable (+t,o+w)
 ## *.extension =   Every file using this extension e.g. *.rpm = files with the ending .rpm
-
-## set and shopt {{{
+## }}}
+## set, shopt and bind {{{
 shopt -s globstar
 # shopt -s autocd # autocd
 # shopt -s dirspell # correct minor spelling errors when tab-completing names
@@ -333,14 +339,24 @@ set -o vi  ## turn on vi mode
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
-
+bind '"\eg":"g -d ."'  ## alt+g
+bind '"\er":"r -d ."'  ## alt+r
+bind '"\ek":"kaddyify -s"'  ## alt+k
+## }}}
 ## aliases {{{
+alias c='cd "$HOME"/cpanel-logs/'
 alias d='cd "$HOME"/downloads/'
+alias k='cd "$HOME"/kaddy/'
 alias l='cd "$HOME"/linux/'
+alias p='cd "$HOME"/public/'
 alias s='cd "$HOME"/scripts/'
 alias w='cd "$HOME"/website/'
 alias lf='\lf "$HOME"/downloads/'
+alias lfc='\lf "$HOME"/cpanel-logs/'
+alias lfd='\lf "$HOME"/downloads/'
+alias lfk='\lf "$HOME"/kaddy/'
 alias lfl='\lf "$HOME"/linux/'
+alias lfp='\lf "$HOME"/public/'
 alias lfs='\lf "$HOME"/scripts/'
 alias lfw='\lf "$HOME"/website/'
 alias ls="\ls $LS_FLAGS"
@@ -368,17 +384,17 @@ alias mega='mega-cmd'
 alias watch='watch --interval 2 --no-title --color'
 alias journalctl='journalctl -exfu'
 alias q='exit'
-
+## }}}
 ## functions {{{
-function command_not_found_handle {
+function command_not_found_handle {  ## {{{
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
     red "not found: $1"
     return 127
 }
-
-function gifify {
+## }}}
+function gifify {  ## {{{
     source "$HOME"/scripts/gb-color
 
     local new_name mp4_reg webm_reg
@@ -408,8 +424,8 @@ function gifify {
     ## https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality
     ffmpeg -i "$1" -ss "${2:-0}" -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "$new_name"
 }
-
-function mp4ify {
+## }}}
+function mp4ify {  ## {{{
     source "$HOME"/scripts/gb-color
 
     local new_name webm_reg
@@ -429,14 +445,14 @@ function mp4ify {
     if [[ "$1" =~ $webm_reg ]]; then
         new_name="${1/.webm/.mp4}"
     else
-        red 'invalid suffix. only mp4 files supported'
+        red 'invalid suffix. only webm files supported'
         return
     fi
 
     ffmpeg -i "$1" "$new_name"
 }
-
-function jpgify {
+## }}}
+function jpgify {  ## {{{
     source "$HOME"/scripts/gb-color
 
     local new_name webp_reg
@@ -462,12 +478,45 @@ function jpgify {
 
     ffmpeg -i "$1" "$new_name"
 }
+## }}}
+function webpify {  ## {{{
+    source "$HOME"/scripts/gb-color
 
-function reset_bash_history {
+    local new_name jpg_reg jpeg_reg png_reg
+
+    [ "$1" ] || {
+        red "arg needed"
+        red "USAGE: $FUNCNAME ~/downloads/cars.jpg"
+        return
+    }
+
+    [ -f "$1" ] || {
+        red "$1 does not exist"
+        return
+    }
+
+    jpg_reg='.*jpg$'
+    jpeg_reg='.*jpeg$'
+    png_reg='.*png$'
+    if [[ "$1" =~ $jpg_reg ]]; then
+        new_name="${1/.jpg/.webp}"
+    elif [[ "$1" =~ $jpeg_reg ]]; then
+        new_name="${1/.jpeg/.webp}"
+    elif [[ "$1" =~ $png_reg ]]; then
+        new_name="${1/.png/.webp}"
+    else
+        red 'invalid suffix. only jpg/jpeg/png files supported'
+        return
+    fi
+
+    ffmpeg -i "$1" "$new_name"
+}
+## }}}
+function reset_bash_history {  ## {{{
     cp -v ~/linux/cfg-bash/.bash_history "$HOME"/.bash_history
 }
-
-function images_containers {
+## }}}
+function images_containers {  ## {{{
 
     tmux split-window -v  ## don't know why, but we have to do this first!
 
@@ -485,8 +534,8 @@ function images_containers {
 
     exit
 }
-
-function shecan {
+## }}}
+function shecan {  ## {{{
     local file pattern is_on
 
     file=/etc/resolv.conf
@@ -528,8 +577,8 @@ function shecan {
 
     eval "${HIGHLIGHT/--line-numbers}" "$file" 2>/dev/null
 }
-
-function lsl {  ## https://stackoverflow.com/questions/54949060/standardized-docstring-self-documentation-of-bash-scripts
+## }}}
+function lsl {  ## {{{ https://stackoverflow.com/questions/54949060/standardized-docstring-self-documentation-of-bash-scripts
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
     shopt -s expand_aliases
@@ -546,8 +595,8 @@ function lsl {  ## https://stackoverflow.com/questions/54949060/standardized-doc
     printf '%s\n\n%s\n' "$(grey "$first_line")" "$ls_output" | column -t
     unalias ls_command
 }
-
-function b {  ## black
+## }}}
+function b {  ## {{{ black
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -558,8 +607,8 @@ function b {  ## black
 
     eval "$BLACK" "$1"
 }
-
-function bd {  ## black diff
+## }}}
+function bd {  ## {{{ black diff
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -570,8 +619,8 @@ function bd {  ## black diff
 
     eval "$BLACKDIFF" "$1" | less -R
 }
-
-function rvj {  ## remove vim junk (i.e. tmp files and swap files)
+## }}}
+function rvj {  ## {{{ remove vim junk (i.e. tmp files and swap files)
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -583,13 +632,8 @@ function rvj {  ## remove vim junk (i.e. tmp files and swap files)
     rm "$HOME"/.*tmp             2>/dev/null || printf '%s\n' 'no temp files'  ## do NOT change .*tmp
     rm "$HOME"/.cache/vim/swap/* 2>/dev/null || printf '%s\n' 'no swap files'
 }
-
-function if_tor {  ## https://sylvaindurand.org/use-tor-with-python/
-    curl --socks5 localhost:9050 --socks5-hostname localhost:9050 -s https://check.torproject.org/ | \
-    cat | \grep -m 1 Congratulations | xargs
-}
-
-function awesome_tail {  ## https://askubuntu.com/questions/830484/how-to-start-tmux-with-several-panes-open-at-the-same-time
+## }}}
+function awesome_tail {  ## {{{ https://askubuntu.com/questions/830484/how-to-start-tmux-with-several-panes-open-at-the-same-time
     local DEST_WIN SESS
 
     DEST_WIN='awesome_std{out,err}'  ## dest window name
@@ -609,8 +653,8 @@ function awesome_tail {  ## https://askubuntu.com/questions/830484/how-to-start-
     tmux send-keys -t ${SESS}:${DEST_WIN}.2 "tail -f ${HOME}/.awesome_stderr" Enter
 }
 
-## create/activate/deactivate a virtual environmant
-function vc {
+## }}}## create/activate/deactivate a virtual environmant
+function vc {  ## {{{
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -622,11 +666,11 @@ function vc {
         return
     }
 
-    python3 -m venv "$dirname"
+    python3 -m venv "$dirname" && \
     accomplished "$dirname created"
 }
-
-function va {
+## }}}
+function va {  ## {{{
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -637,10 +681,11 @@ function va {
         red "no such dir as $dirname"
         return
     }
+
     source "$dirname"/bin/activate
 }
-
-function vu {
+## }}}
+function vu {  ## {{{
     source "$HOME"/scripts/gb
     source "$HOME"/scripts/gb-color
 
@@ -651,14 +696,16 @@ function vu {
         red "no such dir as $dirname"
         return
     }
-    python3 -m venv --upgrade "$dirname" && accomplished "$dirname updated"
-}
 
-function vd {
+    python3 -m venv --upgrade "$dirname" && \
+    accomplished "$dirname updated"
+}
+## }}}
+function vd {  ## {{{
     deactivate
 }
-
-function man {
+## }}}
+function man {  ## {{{
     LESS_TERMCAP_md=$'\e[95m' \
     LESS_TERMCAP_me=$'\e[0m' \
     LESS_TERMCAP_se=$'\e[0m' \
@@ -667,8 +714,8 @@ function man {
     LESS_TERMCAP_us=$'\e[32m' \
     command man "$@"
 }
-
-function less {
+## }}}
+function less {  ## {{{
     LESS_TERMCAP_md=$'\e[95m' \
     LESS_TERMCAP_me=$'\e[0m' \
     LESS_TERMCAP_se=$'\e[0m' \
@@ -678,8 +725,90 @@ function less {
     eval "${HIGHLIGHT/--line-range=* }" "$@" 2>/dev/null | command less -R
     # command less "$@"
 }
+## }}}
+# function kaddyify {  ## {{{
+#     source "$HOME"/scripts/gb
+#     source "$HOME"/scripts/gb-color
+#
+#     local src dest relative_path_reg_1 relative_path_reg_2 relative_path_reg_3 home_reg absolute_path_reg parent_reg
+#
+#     [ "$1" ] || {
+#         red 'arg needed'
+#         red "USAGE: $FUNCNAME ~/scripts"
+#         red "       $FUNCNAME ~/scripts/application"
+#         return
+#     }
+#
+#     src="$1"
+#
+#     ## NOTE taking two steps to make sure screw-ups are avoided in JUMP_2
+#     ##      where the path of destination directory in kaddy is obtained,
+#     ##      otherwise, we will end up removing the source file/directory:
+#     ##        STEP 1. (JUMP_3) turn src into an absolute path, if it is a relative one (e.g. ., ./, ./scripts, scripts, etc)
+#     ##        STEP 2. (JUMP_4) return if:
+#     ##                           a. src is still a relative path
+#     ##                           b. src is .. or ../
+#     ##
+#     ##      What's more, and just to be on the safe side, a final check is done
+#     ##      where it returns in case src and dest end up the same (JUMP_5)
+#
+#     ## JUMP_3 STEP 1: turn relative path into absolute
+#     relative_path_reg_1='^\.\/?$'        ## . or ./
+#     relative_path_reg_2='^\.\/.+$'       ## ./scripts
+#     relative_path_reg_3='^[^\/\.\~\$]+'  ## scripts
+#     if   [[ "$src" =~ $relative_path_reg_1 ]]; then src="$(sed "s|^\./\?|$PWD|" <<< "$src")"  ## . -> /home/nnnn  OR  ./ -> /home/nnnn
+#     elif [[ "$src" =~ $relative_path_reg_2 ]]; then src="$(sed "s|^\.|$PWD|" <<< "$src")"     ## ./scripts -> /home/nnnn/scripts
+#     elif [[ "$src" =~ $relative_path_reg_3 ]]; then src="$PWD"/"$src"                         ## scripts -> /home/nnnn/scripts
+#     fi
+#
+#     ## return if src is home itself
+#     home_reg="^$HOME/?$"
+#     [[ "$src" =~ $home_reg ]] && {
+#         red 'home itself cannot be used'
+#         return
+#     }
+#
+#     ## JUMP_4 STEP 2: return if:
+#     ##                  a. src is still a relative path
+#     ##                  b. src is .. or ../
+#     absolute_path_reg="^$HOME.*$"  ## /home/nnnn or /home/nnnn/ or /home/nnnn/scripts or $HOME/scripts or ~/scripts
+#     parent_reg='^\.{2}.*$'  ## .. or ../
+#     if [[ ! "$src" =~ $absolute_path_reg ]] || [[ "$src" =~ $parent_reg ]]; then
+#         red "wrong arg. $src is not valid"
+#         red 'valid choices:'
+#         red "  $FUNCNAME ."
+#         red "  $FUNCNAME ./scripts"
+#         red "  $FUNCNAME scripts"
+#         red "  $FUNCNAME $HOME/scripts"
+#         red "  $FUNCNAME \$HOME/scripts"
+#         red "  $FUNCNAME ~/scripts"  ## this line should print literal ~
+#         return
+#     fi
+#
+#     dest="$(get_kaddy_counterpart "$src")"  ## JUMP_2
+#
+#     ## JUMP_5
+#     [ "$src" == "$dest" ] && {
+#         red 'source and destination file/directory are the same'
+#         return
+#     }
+#
+#     if [ ! -d "$src" ] && [ ! -f "$src" ]; then
+#         red "${src/$HOME/\~} does not exist"
+#         return
+#     fi
+#
+#     action_now "removing ${dest/$HOME/\~}"
+#     \rm -rf "$dest"
+#
+#     action_now "copying "${src/$HOME/\~}" to ${dest/$HOME/\~}"
+#     \cp -r "$src" "$dest" && \
+#     accomplished
+# }
+## }}}
+## }}}
 
 
-if [[ "$PWD" =~ $HOME/website ]]; then
-    va "$HOME"/website/venv  ## exceptionally passing full dir path because we may be way inside ~/website and therefore 'va' won't work
-fi
+# if [[ "$PWD" =~ $HOME/website ]]; then
+#     va "$HOME"/website/venv  ## exceptionally passing full dir path because we may be way inside ~/website and therefore 'va' won't work
+# fi

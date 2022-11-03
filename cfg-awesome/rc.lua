@@ -405,6 +405,8 @@ open_ports_wch  = create_watch('open_ports', 10)
 tor             = create_textbox('')
 network         = create_textbox('')
 network_wch     = create_watch('network', 'usage', 1)
+ping            = create_textbox('')
+ping_wch        = create_watch('ping', 20)
 
 audacious       = create_textbox('')
 audacious_bar   = wibox.widget { max_value        = 1,
@@ -461,6 +463,7 @@ established_ct     = create_container(established, fg_l)
 open_ports_ct      = create_container(open_ports, fg_d)
 tor_ct             = create_container(tor, fg_l)
 network_ct         = create_container(network, fg_d)
+ping_ct            = create_container(ping, fg_l)
 audacious_ct       = create_container(audacious, fg_l)
 audacious_bar_v_ct = create_container(audacious_bar_v, fg_l)
 -- }}}
@@ -521,6 +524,8 @@ open_ports_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_scri
 tor_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'tor', 'start') end),
                                  awful.button({ }, 3, function() run_script('awesome-widgets', 'tor', 'stop' ) end)
                               ))
+
+ping_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'ping') end) ))
 
 audacious_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'audacious', 'play_pause') end),
                                        awful.button({ }, 3, function() run_script('awesome-widgets', 'audacious', 'next'      ) end),
@@ -592,6 +597,8 @@ awful.screen.connect_for_each_screen( function(s)
           separator, open_ports_ct,
           separator, tor_ct,
           separator, network_ct,
+          separator, ping_ct,
+          separator,
         },
           separator,
         { layout = wibox.layout.fixed.horizontal,
@@ -763,6 +770,7 @@ globalkeys = gears.table.join(
    awful.key({ M       }, 'v',           function() run_script('awesome-widgets', 'tor', 'start') end, create_description('start', 'tor')),
    awful.key({ M, S    }, 'v',           function() run_script('awesome-widgets', 'tor', 'stop') end, create_description('stop', 'tor')),
    awful.key({ M, C    }, 'v',           function() run_script('awesome-widgets', 'tor', 'restart') end, create_description('restart', 'tor')),
+   awful.key({ M, A    }, 'v',           function() run_script('awesome-widgets', 'tor', 'is-tor') end, create_description('is-tor', 'tor')),
    awful.key({ M       }, 'b',           function() run_script('awesome-widgets', 'open_ports', 'message') end, create_description('', 'open ports')),
    awful.key({ M, S    }, 'n',           function() local c = awful.client.restore() if c then client.focus = c c:raise() end end, create_description('unminimize', 'client'))  -- do NOT put comma at th end
 )

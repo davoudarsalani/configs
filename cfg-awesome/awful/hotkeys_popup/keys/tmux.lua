@@ -42,7 +42,7 @@ function tmux.add_rules_for_terminal(rule)
     end
 end
 
-local tmux_keys = { -- {{{
+local tmux_keys = {  -- {{{
 -- tmux {{{
   ['tmux'] = {
     {
@@ -142,7 +142,7 @@ local tmux_keys = { -- {{{
 -- }}}
 }
 -- }}}
-local vim_keys = { -- {{{
+local vim_keys = {  -- {{{
   ['z  vim'] = {
     {
       modifiers = {},
@@ -281,7 +281,7 @@ local vim_keys = { -- {{{
   },
 }
 -- }}}
-local lf_keys = { -- {{{
+local lf_keys = {  -- {{{
   ['lf'] = {
     {
       modifiers = {'Ctrl'},
@@ -289,7 +289,6 @@ local lf_keys = { -- {{{
                c = create_description(lf_kb_fg, "commands"),
                p = create_description(lf_kb_fg, "prev command"),
                n = create_description(lf_kb_fg, "next command"),
-               o = create_description(lf_kb_fg, "open"),
                t = create_description(lf_kb_fg, "fzf select"),
              }
     },
@@ -297,18 +296,28 @@ local lf_keys = { -- {{{
       modifiers = {'Alt'},
       keys = {
                c = create_description(lf_kb_fg, "fzf cd"),
+               r = create_description(lf_kb_fg, "fzf recent directories"),
+             }
+    },
+    {
+      modifiers = {'r'},
+      keys = {
+               ['Right'] = create_description(lf_kb_fg, "replicate horizontally"),
+               ['Down']  = create_description(lf_kb_fg, "replicate vertically"),
              }
     },
     {
       modifiers = {},
       keys = {
+               ["'"]    = create_description(lf_kb_fg, "marks"),
+               ['o']    = create_description(lf_kb_fg, "open"),
                ['w/W']  = create_description(lf_kb_fg, "toggle preview"),
              }
     },
   },
 }
 -- }}}
-local fzf_keys = { -- {{{
+local fzf_keys = {  -- {{{
   ['fzf'] = {
     {
       modifiers = {},
@@ -338,7 +347,7 @@ local fzf_keys = { -- {{{
   },
 }
 -- }}}
-local simplescreenrecorder_keys = { -- {{{
+local simplescreenrecorder_keys = {  -- {{{
   ['simplescreenrecorder'] = {
     {
       modifiers = {'Ctrl+Shift+Super'},
@@ -349,7 +358,7 @@ local simplescreenrecorder_keys = { -- {{{
   },
 }
 -- }}}
-local qutebrowser_keys = { -- {{{
+local qutebrowser_keys = {  -- {{{
   ['qutebrowser'] = {
     {
       modifiers = {},
