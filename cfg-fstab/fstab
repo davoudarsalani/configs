@@ -2,17 +2,23 @@
 # See fstab(5) for details.
 
 ## <file system> <dir> <type> <options> <dump> <pass>
-## /dev/sda1
-UUID=c9c0d29e-039d-4548-a3e2-b7e1f31ae949   /                   ext4    rw,relatime     0   1
 
-## /dev/sda3
-UUID=30b01b4f-eb73-4182-ac72-f2c124180a24   /home               ext4    rw,relatime     0   2
+## nvme0n1p2
+UUID=98dd2bab-a0eb-455b-bc1f-2972dd0712de none swap defaults 0 0
 
-## /dev/sda2
-UUID=cc934b1d-4964-4cd6-9bb3-deb36c5d472b   none                swap    defaults        0   0
+## nvme0n1p3
+UUID=c68133a3-82bd-4cfe-bd66-1696693f67c8 / ext4 rw,relatime 0 1
 
-## /dev/sdb1
-UUID=59c90428-4a45-488b-a23c-4965ec7a95f1   /home/nnnn/kaddy    ext4    rw,relatime     0   0
+## nvme0n1p4
+UUID=a5f12802-43e9-46d9-b913-91c3f92a9a39 /home ext4 rw,relatime 0 2
+
+
+## sda3
+UUID=30b01b4f-eb73-4182-ac72-f2c124180a24 /home/nnnn/main ext4 rw,relatime 0 0
+
+# sdb1
+UUID=54e0bc52-ce14-4213-a9e8-3a42ff9dd411 /home/nnnn/kaddy ext4 rw,relatime 0 0
+
 
 # UUID=1db0d597-d7d1-4aa7-834e-f2b9e3fa568d  /home/nnnn/mount/ext4-1     ext4        nofail,rw,auto,user,exec        0   0
 

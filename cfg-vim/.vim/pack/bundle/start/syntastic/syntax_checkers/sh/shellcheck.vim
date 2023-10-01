@@ -3,10 +3,6 @@
 "Description: Shell script syntax/style checking plugin for syntastic
 "============================================================================
 
-" by me:
-finish
-
-
 if exists('g:loaded_syntastic_sh_shellcheck_checker')
     finish
 endif

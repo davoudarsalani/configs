@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 """Choices are enumeration values you can choose, by selecting index number.
@@ -13,6 +13,7 @@ from UltiSnips.snippet.parsing.lexer import ChoicesToken
 
 class Choices(TabStop):
     """See module docstring."""
+
     def __init__(self, parent, token: ChoicesToken):
         self._number = token.number  # for TabStop property 'number'
         self._initial_text = token.initial_text
@@ -68,7 +69,7 @@ class Choices(TabStop):
             self._input_chars.append(cmd_text)
         elif ctype == "D":
             line_text = vim_helper.buf[cursor_line - 1]
-            self._input_chars = list(line_text[self._start.col: col])
+            self._input_chars = list(line_text[self._start.col : col])
 
         inputted_text = "".join(self._input_chars)
 
@@ -78,20 +79,35 @@ class Choices(TabStop):
         # if there are more than 9 selection candidates,
         # may need to wait for 2 inputs to determine selection number
         is_all_digits = True
+        has_selection_terminator = False
 
-        for s in self._input_chars:
-            if not s.isdigit():
+        # input string sub string of pure digits
+        inputted_text_for_num = inputted_text
+        for [i, s] in enumerate(self._input_chars):
+            if s == " ":  # treat space as a terminator for selection
+                has_selection_terminator = True
+                inputted_text_for_num = inputted_text[0:i]
+            elif not s.isdigit():
                 is_all_digits = False
 
         should_continue_input = False
-        index_strs = [str(index) for index in list(range(1, len(self._choice_list) + 1))]
-        if is_all_digits:
-            matched_index_strs = list(filter(lambda s: s.startswith(inputted_text), index_strs))
+        if is_all_digits or has_selection_terminator:
+            index_strs = [
+                str(index) for index in list(range(1, len(self._choice_list) + 1))
+            ]
+            matched_index_strs = list(
+                filter(lambda s: s.startswith(inputted_text_for_num), index_strs)
+            )
+            remained_choice_list = []
             if len(matched_index_strs) == 0:
                 remained_choice_list = []
+            elif has_selection_terminator:
+                if inputted_text_for_num:
+                    num = int(inputted_text_for_num)
+                    remained_choice_list = list(self._choice_list)[num - 1 : num]
             elif len(matched_index_strs) == 1:
-                num = int(inputted_text)
-                remained_choice_list = list(self._choice_list)[num - 1: num]
+                num = int(inputted_text_for_num)
+                remained_choice_list = list(self._choice_list)[num - 1 : num]
             else:
                 should_continue_input = True
         else:
@@ -104,7 +120,7 @@ class Choices(TabStop):
         buf = vim_helper.buf
         if len(remained_choice_list) == 0:
             # no matched choice, should quit selection and go on with inputted text
-            overwrite_text = inputted_text
+            overwrite_text = inputted_text_for_num
             self._done = True
         elif len(remained_choice_list) == 1:
             # only one match
@@ -124,12 +140,15 @@ class Choices(TabStop):
             pivot = Position(line, old_end_col)
             diff_col = displayed_text_end_col - old_end_col
             self._parent._child_has_moved(
-                self._parent.children.index(self),
-                pivot,
-                Position(0, diff_col)
+                self._parent.children.index(self), pivot, Position(0, diff_col)
             )
 
             vim_helper.set_cursor_from_pos([buf_num, cursor_line, self._end.col + 1])
 
     def __repr__(self):
-        return "Choices(%s,%r->%r,%r)" % (self._number, self._start, self._end, self._initial_text)
+        return "Choices(%s,%r->%r,%r)" % (
+            self._number,
+            self._start,
+            self._end,
+            self._initial_text,
+        )

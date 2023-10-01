@@ -195,7 +195,8 @@ function! s:PrintMatches()
     " If there are no matches, search fails before we get here. The only way
     " we could see zero results is on 'g/' (but that's a reasonable result).
     let [l:current, l:total] = searchindex#MatchCounts()
-    let l:msg = ' ' . l:current . '/' . l:total . ' '
+    let l:msg = '[' . l:current . '/' . l:total . ']  ' . l:dir_char . @/
+    " ^^ ORIG: let l:msg = ' ' . l:current . '/' . l:total . ' '
   endif
 
   " foldopen+=search causes search commands to open folds in the matched line

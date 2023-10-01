@@ -1,4 +1,0 @@
-" By me. Paste to .vimrc:
-
-hi CurrenttagColor ctermbg=NONE ctermfg=109
-set statusline+=%#CurrenttagColor#%{tagbar#currenttag('\ %s\ ','','f','scoped-stl')}

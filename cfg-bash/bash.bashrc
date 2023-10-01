@@ -13,7 +13,7 @@ esac
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-# [ $UID -ne 0 ] && cd "$HOME"/downloads/
+# [ $UID -ne 0 ] && cd "$HOME"/main/downloads/
 # tmux &>/dev/null
 
 ## PS1 {{{
@@ -49,21 +49,21 @@ echo "\
 ## }}}
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='d:l:s:w:lf:lfc:lfd:lfk:lfl:lfp:lfs:lfw:ls:q'
+export HISTIGNORE='a:c:d:e:j:k:l:p:r:s:w:l:s:w:lf:lfa:lfc:lfd:lfe:lfg:lfj:lfk:lfl:lfp:lfr:lfs:lfw:ls:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
-export PATH="${PATH}:${HOME}/scripts"
+export PATH="${PATH}:${HOME}/main/scripts"
 export LS_FLAGS='-A --color=always --group-directories-first'
 export LC_ALL='en_US.UTF-8'
 export GREP_COLORS='4;49;32'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PYTHONPATH="$HOME"/scripts
+export PYTHONPATH="$HOME"/main/scripts
 export PYTHONDONTWRITEBYTECODE=1
 export RANGER_LOAD_DEFAULT_RC='FALSE'  ## to avoid loading rc.conf twice
 export HIGHLIGHT='highlight --config-file=$HOME/.config/highlight/anotherdark.theme -O xterm256 --line-numbers --line-range=1-50 --force'  ## NOTE do NOT replace $HOME with ~
 [ "$(command -v apt)" ] && export HIGHLIGHT="${HIGHLIGHT/--line-range=* }"  ## NOTE [CHECKING_HOST] there is no such option as --line-range on mint
-export BLACK='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization'
-export BLACKDIFF='$HOME/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
+export BLACK='$HOME/main/scripts/.venv/bin/black --line-length 170 --skip-string-normalization'
+export BLACKDIFF='$HOME/main/scripts/.venv/bin/black --line-length 170 --skip-string-normalization --diff --color'
 common_rg_flags='--smart-case --color=always'
 export RG_MATCH_FLAGS="$common_rg_flags --colors 'match:bg:0' --colors 'match:fg:2' --colors 'match:style:underline'"
 export RG="\rg $common_rg_flags --sort path --hidden --files-with-matches \
@@ -74,7 +74,7 @@ export RG="\rg $common_rg_flags --sort path --hidden --files-with-matches \
 
 ## fzf {{{
 export FZF_DEFAULT_COMMAND='find "$HOME" -type f ! -path "*.git/*" ! -path "*.cache/*" ! -path "*.venv*/*" ! -path "*kaddy/*" ! -path "*trash/*" 2>/dev/null'  ##  <--,-- # ' | sed 's#$HOME#~#''  ## keep ignored paths synced with JUMP_1
-                                                                                                                                                               ##     |-- ! -path flags also used in git option in ~/scripts/awesome-widgets
+                                                                                                                                                               ##     |-- ! -path flags also used in git option in ~/main/scripts/awesome-widgets
                                                                                                                                                                ##     '-- 2>/dev/null to ignore the error:
                                                                                                                                                                ##         find: '/home/nnnn/kaddy/lost+found': Permission denied.
                                                                                                                                                                ##         FIXME although ! -path "*kaddy/*" is added, find keeps looking inside kaddy
@@ -87,7 +87,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="$FZF_DEFAULT_OPTS --preview 'eval "$HIGHLIGHT" {-1} 2>/dev/null' --header 'select'"
 
 export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND/ -type f / -type d }"
-export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '$HOME/scripts/fzf-dir-preview {-1}' --header 'cd' --color 'fg:${blue},fg+:${blue}' --preview-window noborder:right:65%:wrap"  # --preview-window 'hidden'
+export FZF_ALT_C_OPTS="$FZF_DEFAULT_OPTS --preview '$HOME/main/scripts/fzf-dir-preview {-1}' --header 'cd' --color 'fg:${blue},fg+:${blue}' --preview-window noborder:right:65%:wrap"  # --preview-window 'hidden'
 
 export FZF_CTRL_R_OPTS="--header='history'"
 
@@ -96,7 +96,7 @@ export FZF_CTRL_R_OPTS="--header='history'"
 
 # export FZF_TMUX_OPTS=''
 
-## ! -path flags also used in git option in ~/scripts/awesome-widgets
+## ! -path flags also used in git option in ~/main/scripts/awesome-widgets
 export FZF_ALT_C_COMMAND_GIT="$FZF_ALT_C_COMMAND ! -path '*.config/*' ! -path '*.vim/*' ! -path '*go/*' ! -path '*trash/*' -iname '.git' | sed 's#/\.git##' | sort"
 ## }}}
 ## }}}
@@ -233,6 +233,7 @@ ex=:\
 *.oga=:\
 *.otf=:\
 *.pdf=:\
+*.pem=:\
 *.php=:\
 *.pl=:\
 *.pm=:\
@@ -262,6 +263,7 @@ ex=:\
 *.slim=:\
 *.sln=:\
 *.sql=:\
+*.sqlite3=:\
 *.srt=:\
 *.styl=:\
 *.suo=:\
@@ -339,26 +341,36 @@ set -o vi  ## turn on vi mode
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
-bind '"\eg":"g -d ."'  ## alt+g
-bind '"\er":"r -d ."'  ## alt+r
-bind '"\ek":"kaddyify -s"'  ## alt+k
+bind '"\eg":"git_ -d ."'  ## alt+g
+bind '"\er":"rg_ -d ."'  ## alt+r
+bind '"\ek":"kaddyify -s -d ."'  ## alt+k
 ## }}}
 ## aliases {{{
-alias c='cd "$HOME"/cpanel-logs/'
-alias d='cd "$HOME"/downloads/'
+alias a='cd "$HOME"/main/ariel/'
+alias c='cd "$HOME"/main/cpanel-logs/'
+alias d='cd "$HOME"/main/downloads/'
+alias e='cd "$HOME"/main/eterna/'
+alias g='cd "$HOME"/main/globaldaily/'
+alias j='cd "$HOME"/main/journal/'
 alias k='cd "$HOME"/kaddy/'
-alias l='cd "$HOME"/linux/'
-alias p='cd "$HOME"/public/'
-alias s='cd "$HOME"/scripts/'
-alias w='cd "$HOME"/website/'
-alias lf='\lf "$HOME"/downloads/'
-alias lfc='\lf "$HOME"/cpanel-logs/'
-alias lfd='\lf "$HOME"/downloads/'
+alias l='cd "$HOME"/main/linux/'
+alias p='cd "$HOME"/main/public/'
+alias r='cd "$HOME"/main/rcc/'
+alias s='cd "$HOME"/main/scripts/'
+alias w='cd "$HOME"/main/website/'
+alias lf='\lf "$HOME"/main/downloads/'
+alias lfa='\lf "$HOME"/main/ariel/'
+alias lfg='\lf "$HOME"/main/globaldaily'
+alias lfj='\lf "$HOME"/main/journal'
+alias lfc='\lf "$HOME"/main/cpanel-logs/'
+alias lfd='\lf "$HOME"/main/downloads/'
+alias lfe='\lf "$HOME"/main/eterna/'
 alias lfk='\lf "$HOME"/kaddy/'
-alias lfl='\lf "$HOME"/linux/'
-alias lfp='\lf "$HOME"/public/'
-alias lfs='\lf "$HOME"/scripts/'
-alias lfw='\lf "$HOME"/website/'
+alias lfl='\lf "$HOME"/main/linux/'
+alias lfp='\lf "$HOME"/main/public/'
+alias lfr='\lf "$HOME"/main/rcc/'
+alias lfs='\lf "$HOME"/main/scripts/'
+alias lfw='\lf "$HOME"/main/website/'
 alias ls="\ls $LS_FLAGS"
 alias cp='cp -v'
 alias rm='rm -v --preserve-root'
@@ -367,7 +379,8 @@ alias mkdir='mkdir -v'
 alias ln='ln -v'
 alias chown='chown -v --preserve-root'
 alias chmod='chmod -v --preserve-root'
-alias ftp='cd ${HOME}/website && ftp --passive ftp.davoudarsalani.ir && cd - >/dev/null'
+alias sshalive='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15'
+# alias ftp='cd ${HOME}/main/website && ftp --passive ftp.davoudarsalani.ir && cd - >/dev/null'
 alias grep='grep --color=always -n -i'
 alias diff='\diff --color=always'
 alias diff2='\diff --color=always -y --suppress-common-lines'  ## -y prints in columns; --suppress-common-lines removes common lines
@@ -381,27 +394,27 @@ alias jmonth='jcal -p'
 alias jseason='jcal -3'
 alias jyear='jcal -y'
 alias mega='mega-cmd'
-alias watch='watch --interval 2 --no-title --color'
+alias watch='watch --interval 2 --no-title --color'  ## --interval 2 --no-title --color also used in ~/.config/sublime/Packages/User/watch.sublime-build
 alias journalctl='journalctl -exfu'
 alias q='exit'
 ## }}}
 ## functions {{{
 function command_not_found_handle {  ## {{{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     red "not found: $1"
     return 127
 }
 ## }}}
 function gifify {  ## {{{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
 
     local new_name mp4_reg webm_reg
 
     [ "$1" ] || {
         red "arg(s) needed"
-        red "USAGE: $FUNCNAME ~/downloads/cars.webm [5]"
+        red "USAGE: $FUNCNAME ~/main/downloads/cars.webm [5]"
         return
     }
 
@@ -426,13 +439,13 @@ function gifify {  ## {{{
 }
 ## }}}
 function mp4ify {  ## {{{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
 
     local new_name webm_reg
 
     [ "$1" ] || {
         red "arg needed"
-        red "USAGE: $FUNCNAME ~/downloads/cars.webm"
+        red "USAGE: $FUNCNAME ~/main/downloads/cars.webm"
         return
     }
 
@@ -453,13 +466,13 @@ function mp4ify {  ## {{{
 }
 ## }}}
 function jpgify {  ## {{{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
 
     local new_name webp_reg
 
     [ "$1" ] || {
-        red "arg needed"
-        red "USAGE: $FUNCNAME ~/downloads/cars.webp"
+        red 'arg needed'
+        red "USAGE: $FUNCNAME ~/main/downloads/cars.webp"
         return
     }
 
@@ -480,13 +493,13 @@ function jpgify {  ## {{{
 }
 ## }}}
 function webpify {  ## {{{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
 
     local new_name jpg_reg jpeg_reg png_reg
 
     [ "$1" ] || {
         red "arg needed"
-        red "USAGE: $FUNCNAME ~/downloads/cars.jpg"
+        red "USAGE: $FUNCNAME ~/main/downloads/cars.jpg"
         return
     }
 
@@ -513,7 +526,20 @@ function webpify {  ## {{{
 }
 ## }}}
 function reset_bash_history {  ## {{{
-    cp -v ~/linux/cfg-bash/.bash_history "$HOME"/.bash_history
+    \cp -v ~/main/linux/cfg-bash/.bash_history "$HOME"/.bash_history
+}
+## }}}
+function reset_sublime_configs {  ## {{{
+    source "$HOME"/main/scripts/gb-color
+
+    [ "$(pgrep 'sublime')" ] && {
+        red 'sublime already running'
+        return
+    }
+
+    \rm -rf "$HOME"/.config/sublime-text/ && \
+    \cp -r "$HOME"/main/linux/cfg-sublime/ "$HOME"/.config/sublime-text/ && \
+    \rm "$HOME"/.config/sublime-text/0-path.txt
 }
 ## }}}
 function images_containers {  ## {{{
@@ -569,7 +595,7 @@ function shecan {  ## {{{
         status )
             [ "$is_on" ] && printf 'shecan is started\n\n' || printf 'shecan is stopped\n\n'
         ;;
-        * ) source "$HOME"/scripts/gb-color
+        * ) source "$HOME"/main/scripts/gb-color
             red 'valid args: start/stop/status'
             return
         ;;
@@ -579,8 +605,8 @@ function shecan {  ## {{{
 }
 ## }}}
 function lsl {  ## {{{ https://stackoverflow.com/questions/54949060/standardized-docstring-self-documentation-of-bash-scripts
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
     shopt -s expand_aliases
     local first_line ls_command ls_output
 
@@ -597,8 +623,8 @@ function lsl {  ## {{{ https://stackoverflow.com/questions/54949060/standardized
 }
 ## }}}
 function b {  ## {{{ black
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     [ "$1" ] || {
         red 'arg required'
@@ -609,8 +635,8 @@ function b {  ## {{{ black
 }
 ## }}}
 function bd {  ## {{{ black diff
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     [ "$1" ] || {
         red 'arg required'
@@ -621,8 +647,8 @@ function bd {  ## {{{ black diff
 }
 ## }}}
 function rvj {  ## {{{ remove vim junk (i.e. tmp files and swap files)
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     [ "$(pgrep 'vim')" ] && {
         red 'vim is running'
@@ -655,8 +681,8 @@ function awesome_tail {  ## {{{ https://askubuntu.com/questions/830484/how-to-st
 
 ## }}}## create/activate/deactivate a virtual environmant
 function vc {  ## {{{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     local dirname
     dirname="${1:-venv}"
@@ -671,11 +697,17 @@ function vc {  ## {{{
 }
 ## }}}
 function va {  ## {{{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     local dirname
     dirname="${1:-venv}"
+
+    ## return if another virtual env is already acticated
+    [ "$VIRTUAL_ENV" ] && {
+        red "another virtual env is already acticated: (${VIRTUAL_ENV})"
+        return
+    }
 
     [ -d "$dirname" ] || {
         red "no such dir as $dirname"
@@ -686,8 +718,8 @@ function va {  ## {{{
 }
 ## }}}
 function vu {  ## {{{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     local dirname
     dirname="${1:-venv}"
@@ -703,6 +735,17 @@ function vu {  ## {{{
 ## }}}
 function vd {  ## {{{
     deactivate
+}
+## }}}
+function pip_upgrade {  ## {{{ https://dougie.io/answers/pip-update-all-packages/
+    source "$HOME"/main/scripts/gb-color
+
+    [ "$VIRTUAL_ENV" ] || {
+        red 'virtual env not activated'
+        return
+    }
+
+    pip freeze | cut -d'=' -f 1 | xargs -n 1 pip install -U
 }
 ## }}}
 function man {  ## {{{
@@ -727,15 +770,15 @@ function less {  ## {{{
 }
 ## }}}
 # function kaddyify {  ## {{{
-#     source "$HOME"/scripts/gb
-#     source "$HOME"/scripts/gb-color
+#     source "$HOME"/main/scripts/gb
+#     source "$HOME"/main/scripts/gb-color
 #
 #     local src dest relative_path_reg_1 relative_path_reg_2 relative_path_reg_3 home_reg absolute_path_reg parent_reg
 #
 #     [ "$1" ] || {
 #         red 'arg needed'
-#         red "USAGE: $FUNCNAME ~/scripts"
-#         red "       $FUNCNAME ~/scripts/application"
+#         red "USAGE: $FUNCNAME ~/main/scripts"
+#         red "       $FUNCNAME ~/main/scripts/application"
 #         return
 #     }
 #
@@ -757,8 +800,8 @@ function less {  ## {{{
 #     relative_path_reg_2='^\.\/.+$'       ## ./scripts
 #     relative_path_reg_3='^[^\/\.\~\$]+'  ## scripts
 #     if   [[ "$src" =~ $relative_path_reg_1 ]]; then src="$(sed "s|^\./\?|$PWD|" <<< "$src")"  ## . -> /home/nnnn  OR  ./ -> /home/nnnn
-#     elif [[ "$src" =~ $relative_path_reg_2 ]]; then src="$(sed "s|^\.|$PWD|" <<< "$src")"     ## ./scripts -> /home/nnnn/scripts
-#     elif [[ "$src" =~ $relative_path_reg_3 ]]; then src="$PWD"/"$src"                         ## scripts -> /home/nnnn/scripts
+#     elif [[ "$src" =~ $relative_path_reg_2 ]]; then src="$(sed "s|^\.|$PWD|" <<< "$src")"     ## ./main/scripts -> /home/nnnn/main/scripts
+#     elif [[ "$src" =~ $relative_path_reg_3 ]]; then src="$PWD"/"$src"                         ## main/scripts -> /home/nnnn/main/scripts
 #     fi
 #
 #     ## return if src is home itself
@@ -771,7 +814,7 @@ function less {  ## {{{
 #     ## JUMP_4 STEP 2: return if:
 #     ##                  a. src is still a relative path
 #     ##                  b. src is .. or ../
-#     absolute_path_reg="^$HOME.*$"  ## /home/nnnn or /home/nnnn/ or /home/nnnn/scripts or $HOME/scripts or ~/scripts
+#     absolute_path_reg="^$HOME.*$"  ## /home/nnnn or /home/nnnn/ or /home/nnnn/main/scripts or $HOME/main/scripts or ~/main/scripts
 #     parent_reg='^\.{2}.*$'  ## .. or ../
 #     if [[ ! "$src" =~ $absolute_path_reg ]] || [[ "$src" =~ $parent_reg ]]; then
 #         red "wrong arg. $src is not valid"
@@ -779,9 +822,9 @@ function less {  ## {{{
 #         red "  $FUNCNAME ."
 #         red "  $FUNCNAME ./scripts"
 #         red "  $FUNCNAME scripts"
-#         red "  $FUNCNAME $HOME/scripts"
-#         red "  $FUNCNAME \$HOME/scripts"
-#         red "  $FUNCNAME ~/scripts"  ## this line should print literal ~
+#         red "  $FUNCNAME $HOME/main/scripts"
+#         red "  $FUNCNAME \$HOME/main/scripts"
+#         red "  $FUNCNAME ~/main/scripts"  ## this line should print literal ~
 #         return
 #     fi
 #
@@ -809,6 +852,6 @@ function less {  ## {{{
 ## }}}
 
 
-# if [[ "$PWD" =~ $HOME/website ]]; then
-#     va "$HOME"/website/venv  ## exceptionally passing full dir path because we may be way inside ~/website and therefore 'va' won't work
+# if [[ "$PWD" =~ $HOME/main/website ]]; then
+#     va "$HOME"/main/website/venv  ## exceptionally passing full dir path because we may be way inside ~/main/website and therefore 'va' won't work
 # fi

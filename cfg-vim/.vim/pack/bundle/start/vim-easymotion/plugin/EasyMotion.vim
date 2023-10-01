@@ -23,13 +23,13 @@ set cpo&vim
 " == Default configuration {{{
 " -- Option ------------------------------ {{{
 let g:EasyMotion_keys               = get(g:,
-    \ 'EasyMotion_keys', 'asdghklqwertyuiopzxcvbnmfj') " originally  \ 'EasyMotion_keys', 'asdghklqwertyuiopzxcvbnmfj;')
+    \ 'EasyMotion_keys', 'asdghklqwertyuiopzxcvbnmfj;')
     " \ 'EasyMotion_keys', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-let g:EasyMotion_do_mapping         = get(g: , 'EasyMotion_do_mapping'         , 0)
+let g:EasyMotion_do_mapping         = get(g: , 'EasyMotion_do_mapping'         , 1)
 let g:EasyMotion_do_shade           = get(g: , 'EasyMotion_do_shade'           , 1)
 let g:EasyMotion_grouping           = get(g: , 'EasyMotion_grouping'           , 1)
 let g:EasyMotion_startofline        = get(g: , 'EasyMotion_startofline'        , 1)
-let g:EasyMotion_smartcase          = get(g: , 'EasyMotion_smartcase'          , 1)
+let g:EasyMotion_smartcase          = get(g: , 'EasyMotion_smartcase'          , 0)
 let g:EasyMotion_skipfoldedline     = get(g: , 'EasyMotion_skipfoldedline'     , 1)
 let g:EasyMotion_use_migemo         = get(g: , 'EasyMotion_use_migemo'         , 0)
 let g:EasyMotion_use_upper          = get(g: , 'EasyMotion_use_upper'          , 0)

@@ -36,7 +36,7 @@ main_menu_font = 'play 12'
 border_width   = 0.5
 terminal       = os.getenv('terminal')
 home           = os.getenv('HOME')
-hns            = home .. '/scripts'
+hns            = home .. '/main/scripts'
 awe_path       = home .. '/.config/awesome'
 M              = 'Mod4'
 S              = 'Shift'
@@ -82,7 +82,7 @@ A              = 'Mod1'
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title  = 'Startup Error',
-                     icon   = home .. '/linux/themes/alert-w.png',
+                     icon   = home .. '/main/linux/themes/alert-w.png',
                      text   = awesome.startup_errors })
 end
 
@@ -96,7 +96,7 @@ do
 
         naughty.notify({ preset = naughty.config.presets.critical,
                          title  = 'Error',
-                         icon   = home .. '/linux/themes/alert-w.png',
+                         icon   = home .. '/main/linux/themes/alert-w.png',
                          text   = tostring(err) })
         in_error = false
     end)
@@ -131,13 +131,17 @@ function create_watch(arg1, arg2, arg3)  -- {{{
     -- ORIG (before being put in function):
     -- awful.widget.watch('bash -c ' .. hns .. '"/awesome-widgets audacious"', 10)
 
-    if arg3 == nil then
+    if arg1 == 'network' then
+        command = 'bash -c ' .. hns .. '"/awesome-widgets-network "' .. arg2
+        interval = arg3
+    elseif arg3 == nil then
         command = 'bash -c ' .. hns .. '"/awesome-widgets "' .. arg1
         interval = arg2
     else
         command = 'bash -c ' .. hns .. '"/awesome-widgets "' .. arg1 .. '" "' .. arg2
         interval = arg3
     end
+
     awful.widget.watch(command, interval)
 end
 -- }}}
@@ -213,6 +217,7 @@ function sccc(cur_cli_class)  -- {{{ set current client class
     elseif string.match(cur_cli_class, '^Blueman.*$')     then abbr = 'BL'
     elseif string.match(cur_cli_class, '^Nm.*$')          then abbr = 'NE'
     elseif cur_cli_class == 'ffplay'                      then abbr = 'FF'
+    elseif cur_cli_class == 'Sublime_text'                then abbr = 'SU'
     else                                                       abbr = '--'
     end
     cur_cli_cls:set_markup(abbr)
@@ -303,6 +308,7 @@ app = {
         { 'qutebrowser',          function() run_script('/awesome-app-off', 'qutebrowser'         ) end},
         { 'ranger',               function() run_script('/awesome-app-off', 'ranger'              ) end},
         { 'simplescreenrecorder', function() run_script('/awesome-app-off', 'simplescreenrecorder') end},
+        { 'sublime',              function() run_script('/awesome-app-off', 'sublime'             ) end},
         { 'terminal',             function() run_script('/awesome-app-off', 'terminal'            ) end},
         { 'terminal + tmux',      function() run_script('/awesome-app-off', 'terminal_tmux'       ) end},
         { 'terminal + torsocks',  function() run_script('/awesome-app-off', 'terminal_torsocks'   ) end},
@@ -368,16 +374,18 @@ memory_cpu      = create_textbox('')
 memory_cpu_wch  = create_watch('memory_cpu', 'usage', 5)
 harddisk        = create_textbox('')
 harddisk_wch    = create_watch('harddisk', 'usage', 60)
-pkg_count       = create_textbox('')
-pkg_count_wch   = create_watch('pkg_count', 600)
+-- pkg_count       = create_textbox('')
+-- pkg_count_wch   = create_watch('pkg_count', 600)
 processes       = create_textbox('')
 processes_wch   = create_watch('processes', 10)
-idle            = create_textbox('')
-idle_wch        = create_watch('idle', 10)
-reputation      = create_textbox('')
-reputation_wch  = create_watch('reputation', 1800)
+-- idle            = create_textbox('')
+-- idle_wch        = create_watch('idle', 10)
+-- reputation      = create_textbox('')
+-- reputation_wch  = create_watch('reputation', 1800)
 visits          = create_textbox('')
 visits_wch      = create_watch('visits', 600)
+status          = create_textbox('')
+status_wch      = create_watch('status', 600)
 youtube         = create_textbox('YO')
 mbl_umbl        = create_textbox('')
 mbl_umbl_wch    = create_watch('mbl_umbl', 10)
@@ -387,8 +395,6 @@ ymail           = create_textbox('')
 ymail_wch       = create_watch('ymail', 1800)
 gmail           = create_textbox('')
 gmail_wch       = create_watch('gmail', 1800)
-status          = create_textbox('')
-status_wch      = create_watch('status', 600)
 webcam          = create_textbox('')
 webcam_wch      = create_watch('webcam', 5)
 git             = create_textbox('')
@@ -396,8 +402,8 @@ git_wch         = create_watch('git', 60)
 clipboard       = create_textbox('')
 clipboard_wch   = create_watch('clipboard', 5)
 record          = create_textbox('RE')
-keylogger       = create_textbox('')
-keylogger_wch   = create_watch('klgr', 60)
+-- keylogger       = create_textbox('')
+-- keylogger_wch   = create_watch('klgr', 60)
 established     = create_textbox('')
 established_wch = create_watch('established', 10)
 open_ports      = create_textbox('')
@@ -442,30 +448,30 @@ audio_ct           = create_container(audio, fg_l)
 battery_ct         = create_container(battery, fg_d)
 memory_cpu_ct      = create_container(memory_cpu, fg_l)
 harddisk_ct        = create_container(harddisk, fg_d)
-pkg_count_ct       = create_container(pkg_count, fg_l)
-processes_ct       = create_container(processes, fg_d)
-idle_ct            = create_container(idle, fg_l)
-reputation_ct      = create_container(reputation, fg_d)
-visits_ct          = create_container(visits, fg_l)
+-- pkg_count_ct       = create_container(pkg_count, fg_l)
+processes_ct       = create_container(processes, fg_l)
+-- idle_ct            = create_container(idle, fg_l)
+-- reputation_ct      = create_container(reputation, fg_d)
+visits_ct          = create_container(visits, fg_d)
+status_ct          = create_container(status, fg_l)
 youtube_ct         = create_container(youtube, fg_d)
 mbl_umbl_ct        = create_container(mbl_umbl, fg_l)
 firewall_ct        = create_container(firewall, fg_d)
 bluetooth_ct       = create_container(bluetooth, fg_l)
 ymail_ct           = create_container(ymail, fg_d)
 gmail_ct           = create_container(gmail, fg_d)
-status_ct          = create_container(status, fg_l)
-webcam_ct          = create_container(webcam, fg_d)
-git_ct             = create_container(git, fg_l)
-clipboard_ct       = create_container(clipboard, fg_d)
-record_ct          = create_container(record, fg_l)
-keylogger_ct       = create_container(keylogger, fg_d)
+webcam_ct          = create_container(webcam, fg_l)
+git_ct             = create_container(git, fg_d)
+clipboard_ct       = create_container(clipboard, fg_l)
+record_ct          = create_container(record, fg_d)
+-- keylogger_ct       = create_container(keylogger, fg_d)
 established_ct     = create_container(established, fg_l)
 open_ports_ct      = create_container(open_ports, fg_d)
 tor_ct             = create_container(tor, fg_l)
 network_ct         = create_container(network, fg_d)
 ping_ct            = create_container(ping, fg_l)
-audacious_ct       = create_container(audacious, fg_l)
-audacious_bar_v_ct = create_container(audacious_bar_v, fg_l)
+audacious_ct       = create_container(audacious, fg_d)
+audacious_bar_v_ct = create_container(audacious_bar_v, fg_d)
 -- }}}
 -- buttons {{{
 local taglist_buttons = gears.table.join( awful.button({   }, 1, function(t) t:view_only() end),
@@ -491,9 +497,11 @@ memory_cpu_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_scri
 
 harddisk_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'harddisk', 'partitions') end) ))
 
-reputation_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'reputation') end) ))
+-- reputation_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'reputation') end) ))
 
 visits_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'visits') end) ))
+
+status_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'status') end) ))
 
 youtube_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'youtube') end) ))
 
@@ -508,8 +516,6 @@ bluetooth_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_scrip
 ymail_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'ymail') end) ))
 
 gmail_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'gmail') end) ))
-
-status_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'status') end) ))
 
 git_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'git') end) ))
 
@@ -576,23 +582,23 @@ awful.screen.connect_for_each_screen( function(s)
           separator, battery_ct,
           separator, memory_cpu_ct,
           separator, harddisk_ct,
-          separator, pkg_count_ct,
+          -- separator, pkg_count_ct,
           separator, processes_ct,
-          separator, idle_ct,
-          separator, reputation_ct,
+          -- separator, idle_ct,
+          -- separator, reputation_ct,
           separator, visits_ct,
+          separator, status_ct,
           separator, youtube_ct,
           separator, mbl_umbl_ct,
           separator, firewall_ct,
           separator, bluetooth_ct,
           separator, ymail_ct,
           separator, gmail_ct,
-          separator, status_ct,
           separator, webcam_ct,
           separator, git_ct,
           separator, clipboard_ct,
           separator, record_ct,
-          separator, keylogger_ct,
+          -- separator, keylogger_ct,
           separator, established_ct,
           separator, open_ports_ct,
           separator, tor_ct,
@@ -670,7 +676,7 @@ globalkeys = gears.table.join(
    awful.key({ M       }, 'space',       function() awful.layout.inc( 1) end, create_description('next', 'layout')),
    awful.key({ M, S    }, 'space',       function() awful.layout.inc(-1) end, create_description('prev', 'layout')),
    awful.key({ M       }, 'Tab',         function() awful.menu.menu_keys.down = { 'Down', 'Tab' } awful.menu.clients({ keygrabber = true, coords = { x = 4, y = 24 }}) end, create_description('cycle through', 'client')),
-   awful.key({ M       }, 'Caps_Lock',   function() end, create_description('', '--')),  -- 0xffe5
+   -- awful.key({         }, 'Caps_Lock',   function() end, create_description('', '--')),  -- 0xffe5
    awful.key({ M       }, 'period',      function() resize_gap(1) end, create_description('decrease', 'gap')),  -- 0x2e
    awful.key({ M       }, 'comma',       function() resize_gap(-1) end, create_description('increase', 'gap')),  -- 0x2c
    awful.key({         }, 'KP_Insert',   function() run_script('awesome-widgets', 'audio', 'vol_30') end, create_description('volume 30', 'audio')),  -- 0xff9e
@@ -679,6 +685,7 @@ globalkeys = gears.table.join(
    awful.key({ S       }, 'KP_Down',     function() run_script('awesome-widgets', 'audio', 'vol_100') end, create_description('volume 100', 'audio')),  -- 0xff99
    awful.key({ S       }, 'KP_End',      function() run_script('awesome-widgets', 'audio', 'vol_0') end, create_description('volume 0', 'audio')),  -- 0xff9c
    awful.key({         }, 'KP_Next',     function() run_script('awesome-widgets', 'audio', 'toggle_vol') end, create_description('toggle vol', 'audio')),  -- 0xff9b
+   awful.key({         }, '0x1008ff12',  function() run_script('awesome-widgets', 'audio', 'toggle_vol') end, create_description('toggle vol', 'audio')),  -- JUMP_2 in GREEN keyboard
    awful.key({         }, 'KP_Begin',    function() run_script('awesome-widgets', 'audio', 'mic_up') end, create_description('increase mic', 'audio')),  -- 0xff9d
    awful.key({         }, 'KP_Left',     function() run_script('awesome-widgets', 'audio', 'mic_down') end, create_description('decrease mic', 'audio')),  -- 0xff96
    awful.key({ S       }, 'KP_Begin',    function() run_script('awesome-widgets', 'audio', 'mic_100') end, create_description('mic 100', 'audio')),  -- 0xff9d
@@ -690,31 +697,32 @@ globalkeys = gears.table.join(
    awful.key({ S       }, 'KP_Home',     function() run_script('awesome-widgets', 'audio', 'mon_0') end, create_description('mon 0', 'audio')),  -- 0xff95
    awful.key({         }, 'KP_Prior',    function() run_script('awesome-widgets', 'audio', 'toggle_mon') end, create_description('toggle mon', 'audio')),  -- 0xff9a
    awful.key({         }, 'KP_Delete',   function() run_script('awesome-widgets', 'audio', 'full_info') end, create_description('full info', 'audio')),  -- 0xff90
-   awful.key({         }, 'KP_Add',      function() run_script('awesome-widgets', 'audio', 'connect_to_headset') end, create_description('connect to headset', 'audio')),  -- 0xffab
-   awful.key({         }, '0x1008ff8e',  function() run_script('awesome-widgets', 'audacious', 'play_pause') end, create_description('play/pause', 'audacious')),
-   awful.key({ M       }, '0x1008ff8e',  function() run_script('awesome-widgets', 'audacious', 'songs') end, create_description('songs', 'audacious')),
-   awful.key({         }, '0x1008ff2e',  function() run_script('awesome-widgets', 'audacious', 'prev') end, create_description('prev', 'audacious')),
-   awful.key({         }, '0x1008ff4a',  function() run_script('awesome-widgets', 'audacious', 'next') end, create_description('next', 'audacious')),
-   awful.key({         }, '0x1008ff41',  function() run_script('awesome-widgets', 'audacious', '+60') end, create_description('+60', 'audacious')),
-   awful.key({         }, '0x1008ff19',  function() run_script('awesome-widgets', 'audacious', '-60') end, create_description('-60', 'audacious')),
-   awful.key({         }, '0x1008ff2d',  function() run_script('awesome-widgets', 'audacious', 'tog_shuff') end, create_description('toggle shuffle', 'audacious')),
-   awful.key({         }, 'Print',       function() run_script('awesome-widgets', 'audacious', 'forward') end, create_description('forward', 'audacious')),  -- 0xff61
-   awful.key({         }, 'Scroll_Lock', function() run_script('awesome-widgets', 'audacious', 'resume') end, create_description('resume', 'audacious')),  -- 0xff14
-   awful.key({         }, 'Pause',       function() end, create_description('', '--')),  -- 0xff13
+-- awful.key({         }, 'KP_Add',      function() run_script('awesome-widgets', 'audio', 'connect_to_headset') end, create_description('connect to headset', 'audio')),  -- 0xffab
+   awful.key({         }, '0x1008ff30',  function() run_script('awesome-app-off', 'sublime') end, create_description('', 'sublime')),  -- JUMP_2 in GREEN keyboard (key with the sun-like symbol)
+   awful.key({         }, '0x1008ff14',  function() run_script('awesome-widgets', 'audacious', 'play_pause') end, create_description('play/pause', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({ M       }, '0x1008ff14',  function() run_script('awesome-widgets', 'audacious', 'songs') end, create_description('songs', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({         }, '0x1008ff16',  function() run_script('awesome-widgets', 'audacious', 'prev') end, create_description('prev', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({         }, '0x1008ff17',  function() run_script('awesome-widgets', 'audacious', 'next') end, create_description('next', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({ S       }, '0x1008ff16',  function() run_script('awesome-widgets', 'audacious', '-60') end, create_description('-60', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({ S       }, '0x1008ff17',  function() run_script('awesome-widgets', 'audacious', '+60') end, create_description('+60', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   awful.key({         }, '0x1008ff15',  function() run_script('awesome-widgets', 'audacious', 'tog_shuff') end, create_description('toggle shuffle', 'audacious')),  -- JUMP_2 in GREEN keyboard
+   -- awful.key({         }, 'Print',       function() end, create_description('', '--')),  -- 0xff61
+   -- awful.key({         }, 'Scroll_Lock', function() end, create_description('', '--')),  -- 0xff14
+   -- awful.key({         }, 'Pause',       function() end, create_description('', '--')),  -- 0xff13
    awful.key({         }, 'KP_Enter',    function() run_script('awesome-widgets', 'audacious', 'main_window') end, create_description('main window', 'audacious')),  -- 0xff8d
 -- awful.key({ M       }, 'Print',       function() local cur_scr_index = awful.screen.focused().index if cur_scr_index == 1 then run_script('awesome-widgets', 'youtube', 'screen_1') else run_script('awesome-widgets', 'youtube', 'screen_2') end end, create_description('', 'youtube')),  -- 0xff61
    awful.key({ M       }, 'Print',       function() run_script('awesome-widgets', 'youtube') end, create_description('', 'youtube')),  -- 0xff61
    awful.key({ M       }, 'Scroll_Lock', function() mouse.screen.topwibox.ontop = not mouse.screen.topwibox.ontop end, create_description('toggle ontop', 'topwibox')),  -- 0xff14
    awful.key({ M       }, 'Pause',       function() mouse.screen.topwibox.visible = not mouse.screen.topwibox.visible end, create_description('toggle visibility', 'topwibox')),  -- OR: awful.key({ M }, '=', function() awful.screen.focused().topwibox.visible = not awful.screen.focused().topwibox.visible end) (https://wiki.archlinux.org/index.php/awesome) :-- 0xff13
-   awful.key({ M       }, '-',           function() end, create_description('', '--')),
-   awful.key({ M       }, '=',           function() end, create_description('', '--')),
+   -- awful.key({         }, '-',           function() end, create_description('', '--')),
+   -- awful.key({         }, '=',           function() end, create_description('', '--')),
    awful.key({ M       }, 'BackSpace',   function() wibox.widget.systray().visible = not wibox.widget.systray().visible end, create_description('', 'systray')),  -- (https://pavelmakhov.com/2018/01/hide-systray-in-awesome/):
    awful.key({ M       }, 'Insert',      function() run_in_shell('touch /tmp/status-proof') end, create_description('touch proof', 'status')),  -- 0xff63
    awful.key({ M       }, 'Delete',      function() run_script('awesome-widgets', 'turn_off_scr_3') end, create_description('turn off screen 3', 'screen/tag')),  -- 0xffff
    awful.key({ M       }, 'Home',        function() run_script('awesome-widgets', 'memory_cpu', 'intensives') end, create_description('', 'memory/cpu intensives')),
    awful.key({ M       }, 'End',         function() run_script('off') end, create_description('', 'off')),  -- 0xff57
-   awful.key({ M       }, 'Prior',       function() end, create_description('', '--')),  -- 0xff55 (page up key)
-   awful.key({ M       }, 'Next',        function() end, create_description('', '--')),  -- 0xff56 (page down key)
+   -- awful.key({         }, 'Prior',       function() end, create_description('', '--')),  -- 0xff55 (Page Up key)
+   -- awful.key({         }, 'Next',        function() end, create_description('', '--')),  -- 0xff56 (Page Down key)
    awful.key({ M       }, 'Menu',        hotkeys_popup.show_help, create_description('', 'keybindings')),  -- 0xff67
    awful.key({ M       }, '\\',          function() run_script('awesome-widgets', 'harddisk', 'partitions') end, create_description('', 'partitions')),
    awful.key({ M       }, '/',           function() run_script('reminder.py') end, create_description('', 'reminder')),
@@ -749,8 +757,8 @@ globalkeys = gears.table.join(
    awful.key({ M, S    }, 'd',           function() local tags = awful.screen.focused().tags for i = 1, 2 do tags[i].selected = true end end, create_description('unshow', 'desktop')),  -- <--'
    awful.key({ M       }, 'f',           function() run_script('awesome-widgets', 'bluetooth', 'turn_on') end, create_description('turn on', 'bluetooth')),
    awful.key({ M, S    }, 'f',           function() run_script('awesome-widgets', 'bluetooth', 'turn_off') end, create_description('turn off', 'bluetooth')),
-   awful.key({ M       }, 'g',           function() run_script('awesome-widgets', 'network', 'turn_on_wifi') end, create_description('turn on wifi', 'network')),
-   awful.key({ M, S    }, 'g',           function() run_script('awesome-widgets', 'network', 'turn_off_wifi') end, create_description('turn off wifi', 'network')),
+   awful.key({ M       }, 'g',           function() run_script('awesome-widgets-network', 'turn_on_wifi') end, create_description('turn on wifi', 'network')),
+   awful.key({ M, S    }, 'g',           function() run_script('awesome-widgets-network', 'turn_off_wifi') end, create_description('turn off wifi', 'network')),
    awful.key({ M       }, 'h',           function() awful.tag.incmwfact(-0.01) end, create_description('decrease master width', 'client')),
    awful.key({ M       }, 'l',           function() awful.tag.incmwfact(0.01) end, create_description('increase master width', 'client')),
    awful.key({ M, S    }, 'h',           function() awful.client.incwfact(-0.01) end, create_description('decrease non-master width', 'client')),  -- (https://stackoverflow.com/questions/17705888/resizing-window-vertically)

@@ -19,7 +19,7 @@ if has('reltime')
     lockvar! g:_SYNTASTIC_START
 endif
 
-let g:_SYNTASTIC_VERSION = '3.10.0-22'
+let g:_SYNTASTIC_VERSION = '3.10.0-36'
 lockvar g:_SYNTASTIC_VERSION
 
 " Sanity checks {{{1
@@ -97,7 +97,7 @@ let g:_SYNTASTIC_DEFAULTS = {
         \ 'enable_balloons':          1,
         \ 'enable_highlighting':      1,
         \ 'enable_signs':             1,
-        \ 'error_symbol':             'E',
+        \ 'error_symbol':             '>>',
         \ 'exit_checks':              !(s:_running_windows && syntastic#util#var('shell', &shell) =~? '\m\<cmd\.exe$'),
         \ 'filetype_map':             {},
         \ 'full_redraws':             !(has('gui_running') || has('gui_macvim')),
@@ -110,10 +110,10 @@ let g:_SYNTASTIC_DEFAULTS = {
         \ 'reuse_loc_lists':          1,
         \ 'shell':                    &shell,
         \ 'sort_aggregated_errors':   1,
-        \ 'stl_format':               'SYNTAX:L%F[%t]',
-        \ 'style_error_symbol':       'SE',
-        \ 'style_warning_symbol':     'SW',
-        \ 'warning_symbol':           'W'
+        \ 'stl_format':               '[Syntax: line:%F (%t)]',
+        \ 'style_error_symbol':       'S>',
+        \ 'style_warning_symbol':     'S>',
+        \ 'warning_symbol':           '>>'
     \ }
 lockvar! g:_SYNTASTIC_DEFAULTS
 

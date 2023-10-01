@@ -1,4 +1,4 @@
-*mucomplete.txt*	For Vim version 7.2	Last change: 2019 Mar 20
+*mucomplete.txt*	For Vim version 7.2	Last change: 2020 Nov 15
 
 			|\/|| | _ _ ._ _ ._ | __|_ _                      ~
 			|  ||_|(_(_)| | ||_)|(/_|_(/_                     ~
@@ -7,7 +7,7 @@
 Welcome to the world of fallback completion!
 
 Author:  Lifepillar <https://github.com/lifepillar>
-License: Public Domain
+License: MIT
 
 ==============================================================================
 CONTENTS				*mucomplete-contents*
@@ -179,24 +179,51 @@ active inside certain syntax items in specified filetypes. These are called
 chains may be used. For example:
 >
 	let g:mucomplete#chains = {
-	    \ 'vim': { 'vimString': [],
-	    \          'vimLineComment': ['uspl'],
-	    \          'default': ['path', 'cmd', 'keyn'] }
+	    \ 'vim'  : { 'vimString': [],
+	    \            'vimLineComment': ['uspl'],
+	    \            'default': ['path', 'cmd', 'keyn'] },
+	    \ 'rust' : {
+	    \           'default' : ['omni', 'nsnp'],
+	    \           'rustString.*' : [],
+	    \           'rustComment.*' : ['spel'] }
 	    \ }
 <
 The assignment above defines the following behaviour in Vim buffers: no
 completion inside strings; only spelling suggestions inside comments; path
 completion, Vim commands completion and keyword completion in all other
-places. For all other filetypes, the global default chain is used (a global
-default chain is automatically defined by MUcomplete if it is not provided by
-the user).
+places. It also define the following in rust buffers: a default chain using
+omni completion and neosnippets, no completion inside strings, and spelling
+completion inside comments (either line or block). For all other filetypes,
+the global default chain is used (a global default chain is automatically
+defined by MUcomplete if it is not provided by the user).
 
-The keys of a scoped chain should be names of filetype-specific highlight
-groups or the `'default'` key. The associated values are standard completion
-chains (i.e., Lists of completion methods). If the `'default'` key is not
-present in a scoped chain, MUcomplete falls back to using the global
-completion chain (that is, the value of |g:mucomplete#chains|`['default']`) if
-necessary.
+The global default chain may also be "scoped". This allows you to tweak your
+completion strategy in some nice ways. For instance:
+>
+	let g:mucomplete#chains = {
+	    \ 'default': { 'default': ['keyn'],
+	    \              '.*string.*': [],
+	    \              '.*comment.*': ['uspl']
+	    \            }
+	    \ }
+<
+The above setting will suppress completion inside any region matching a string
+highlight group and will enable only spell checking inside comments. Note that
+the `default` key in the `default` dictionary is mandatory!
+
+The keys of a scoped chain can be:
+
+  - names of filetype-specific highlight groups,
+  - regular expressions matching highlight groups,
+  - the `'default'` key.
+
+The associated values are standard completion chains (i.e., Lists of
+completion methods). If the `'default'` key is not present in a scoped chain,
+MUcomplete falls back to using the global completion chain if necessary.
+
+Note: if a highlight group is matched by multiple keys, one is chosen
+non-deterministically. If you use regular expressions as keys for scoped
+chains, make sure that they match disjoint sets of strings!
 
 ==============================================================================
 6. Path completion			*mucomplete-path-complete*
@@ -518,11 +545,11 @@ completion chains. For example:
 					*'g:mucomplete#completion_delay'*
 Set to a positive value if you want autocompletion to be triggered only when
 you pause typing (autocompletion must be on for this to work). When set to 0,
-no delay occurs. If this is set to 1, or it is set to a positive value but Vim
-does not have the |+timers| feature, then |'updatetime'| is used for the delay
-(see also |CursorHoldI|). If Vim is built with |+timers| and this is set to
-a value greater than 1 then the value is interpreted as the number of
-milliseconds to wait before triggering auto-completion.
+no delay occurs. If this is set to 1, or it is set to a positive integer value
+but Vim does not have the |+timers| feature, then |'updatetime'| is used for
+the delay (see also |CursorHoldI|). If Vim is built with |+timers| and this is
+set to an integer value greater than 1 then the value is interpreted as the
+number of milliseconds to wait before triggering auto-completion.
 >
 	let g:mucomplete#completion_delay = 0
 <
@@ -1323,7 +1350,11 @@ mapping. Since recently, there was no way in Vim to check that. So, the idea
 was to use a key sequence that (1) exits CTRL-X sub-mode when Vim is in CTRL-X
 submode, and (2) does nothing when typed out of CTRL-X mode. There are a few
 such key sequences, and eventually MUcomplete settled to use <c-g><c-g>, as it
-is one of the simplest.
+is one of the simplest. A possible side effect of that sequence is that it may
+trigger a beep, but that can be suppressed by adding `ctrlg` to |belloff|.
+
+As of Vim 8.2.3389, Vim provides <c-x><c-z> to stop insert mode completion
+without side effects. MUcomplete uses <c-x><c-z> if possible.
 
 What's the purpose of computing an empty string in the value returned by ~
 s:next_method()? ~

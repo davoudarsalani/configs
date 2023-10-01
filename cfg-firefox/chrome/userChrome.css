@@ -17,9 +17,19 @@
 /* @import url(./vertical_bookmarks_toolbar.css); */
 @import url(./window_control_placeholder_support.css);  /* JUMP_1 recommended to be used with navbar_tabs_oneliner_tabs_on_left.css */
 
+/* https://www.reddit.com/r/FirefoxCSS/comments/nwkck2/private_mode_only_theme/ */
+:root[privatebrowsingmode="temporary"] {
+    --selected_tab_bg: purple !important;
+    --bg: purple !important;
+    --top_border: magenta !important;
+    /* --lwt-toolbarbutton-icon-fill: magenta !important; */
+    /* --toolbarbutton-icon-fill: magenta !important; */
+}
+
 :root {
+    --selected_tab_bg: black !important;
     --bg: black !important;
-    --top_border: #00608a !important;
+    --top_border: greenyellow !important;  /* #00608a */
     --lwt-toolbarbutton-icon-fill: white !important;
     --toolbarbutton-icon-fill: white !important;
 }

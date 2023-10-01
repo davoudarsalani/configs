@@ -1,7 +1,7 @@
 ## set {{{
 set ifs "\n"  ## NOTE do NOT replace " with '
 set shell bash
-set previewer ~/scripts/previewer  ## do NOT replace ~ with $HOME
+set previewer ~/main/scripts/previewer  ## do NOT replace ~ with $HOME
 set info size
 set icons true
 set number true
@@ -170,7 +170,7 @@ cmd touch $ {{
 #   echo -ne '\e[38;5;64m Trash? \e[0m ' ; read -n 1 trash_prompt ; printf '\n'
 #   printf '\n'
 #     case "$trash_prompt" in
-#       y|$RETURN ) ~/scripts/lf.py trash $fx ;;
+#       y|$RETURN ) ~/main/scripts/lf.py trash $fx ;;
 #       * )         exit ;;
 #     esac
 # }}
@@ -225,6 +225,7 @@ cmd open $ {{
         application/msword ) libreoffice $fx &>/dev/null & ;;
         */*spreadsheet* )    libreoffice $fx &>/dev/null & ;;
         */*officedocument* ) libreoffice $fx &>/dev/null & ;;
+        */*opendocument*   ) libreoffice $fx &>/dev/null & ;;
         */pdf )              xreader $fx &>/dev/null & ;;
         image/* )            gpicview $fx &>/dev/null & ;;
         */*tar )             exit ;;
@@ -241,7 +242,7 @@ cmd open $ {{
 ## open_with {{{
 map o open_with
 cmd open_with $ {{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
     num_color='blue'
 
     if [ -f "$f" ]; then
@@ -256,15 +257,16 @@ cmd open_with $ {{
                                   q ) exit ;;
                                   * ) lf -remote "send $id open_with_other" ;;
                               esac ;;
-            text/*|application/json|application/csv|message/news|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument* )
-                                read -n 1 -p "$(olive 'open with') $($num_color '1') nano $($num_color '2') gedit $($num_color '3') vim $($num_color '4') vi $($num_color '5') libreoffice $($num_color 'o') vim (in new window) " text_app
+            text/*|application/json|application/csv|message/news|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument*|*/*opendocument* )
+                                read -n 1 -p "$(olive 'open with') $($num_color '1') sublime $($num_color '2') gedit $($num_color '3') nano $($num_color '4') vim $($num_color '5') vi $($num_color '6') libreoffice $($num_color 'o') vim (in new window) " text_app
                                 printf '\n'
                                 case "$text_app" in
-                                    1 ) nano $fx ;;  ## NOTE do NOT redirect
+                                    1 ) subl $fx &>/dev/null & ;;
                                     2 ) gedit $fx &>/dev/null & ;;
-                                    3 ) vim $fx ;;  ## NOTE do NOT redirect
-                                    4 ) vi $fx ;;  ## NOTE do NOT redirect
-                                    5 ) libreoffice $fx &>/dev/null & ;;
+                                    3 ) nano $fx ;;  ## NOTE do NOT redirect
+                                    4 ) vim $fx ;;  ## NOTE do NOT redirect
+                                    5 ) vi $fx ;;  ## NOTE do NOT redirect
+                                    6 ) libreoffice $fx &>/dev/null & ;;
                                     o ) SESS="$(tmux display-message -p '#S')"  ## current seesion name, e.g. 1, etc
                                         DEST_WIN='XXX'  ## <--,-- no need to find base for name of new window
                                                         ##    '-- because vim is told to automaticcally rename tmux window upon opening files
@@ -316,7 +318,7 @@ cmd open_with $ {{
 ## }}}
 ## open_with_other {{{
 cmd open_with_other $ {{
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb-color
     # num_color='blue'
 
     read -p "$(olive 'open with') " other_app
@@ -329,7 +331,7 @@ cmd open_with_other $ {{
 ## fzf_select {{{
 map <c-t> fzf_select
 cmd fzf_select $ {{
-    source "$HOME"/scripts/gb
+    source "$HOME"/main/scripts/gb
 
     file="$(select_file)" || exit 37
     lf -remote "send $id select \"$file\"" && \
@@ -339,7 +341,7 @@ cmd fzf_select $ {{
 ## fzf_cd {{{
 map <a-c> fzf_cd
 cmd fzf_cd $ {{
-    source "$HOME"/scripts/gb
+    source "$HOME"/main/scripts/gb
 
     directory="$(select_directory)" || exit 37
     lf -remote "send $id cd \"$directory\"" && \
@@ -349,7 +351,7 @@ cmd fzf_cd $ {{
 ## fzf_recent_directories {{{
 map <a-r> fzf_recent_directories
 cmd fzf_recent_directories $ {{
-    source "$HOME"/scripts/gb
+    source "$HOME"/main/scripts/gb
 
     recent_dirs_file=/tmp/lf_recent_directories  ## JUMP_3
 
@@ -370,18 +372,18 @@ cmd fzf_recent_directories $ {{
 ## {{{ git_restore
 map gr git_restore
 cmd git_restore $ {{
-    source "$HOME"/scripts/gb
+    source "$HOME"/main/scripts/gb
 
     prompt="$(get_single_input "restore ${f##*/}?")" && printf '\n'
     case "$prompt" in
-        y ) source "$HOME"/scripts/gb-git
+        y ) source "$HOME"/main/scripts/gb-git
             git_restore_specific_or_pattern "${f%/*}" "${f##*/}" && \
             lf -remote "send $id echo \" ${f##*/} restored\"" ;;
     esac
 }}
 ## }}}
 cmd save_pwd_as_recent_directory $ {{  ## {{{
-    source "$HOME"/scripts/gb
+    source "$HOME"/main/scripts/gb
     recent_dirs_file=/tmp/lf_recent_directories  ## JUMP_3
 
     \grep -q "$PWD" "$recent_dirs_file" 2>/dev/null ||
@@ -391,8 +393,8 @@ cmd save_pwd_as_recent_directory $ {{  ## {{{
 ## commands {{{
 map <c-c> commands
 cmd commands $ {{
-    source "$HOME"/scripts/gb
-    source "$HOME"/scripts/gb-color
+    source "$HOME"/main/scripts/gb
+    source "$HOME"/main/scripts/gb-color
 
     files_dirs=( ${fx// /+} )  ## <--,-- NOTE do NOT quote ${fx}
                                ##    '-- replace space with + to avoid problems in parsing names
@@ -410,19 +412,19 @@ cmd commands $ {{
     items=( 'chattr' 'trash' 'rm' 'mime_type' 'softlink' 'compress_tar' 'compress_gz' 'compress_zip' 'compress_rar' 'xtract_tar' 'xtract_gz' 'xtract_zip' 'xtract_rar' 'du' 'mkdir' 'touch' 'bulk_rename' 'rename')
     item="$(pipe_to_fzf "${items[@]}" "header=$header")" || exit 37
     case "$item" in
-        chattr )       "$HOME"/scripts/lf.py chattr    $fx ;;
-        trash )        "$HOME"/scripts/lf.py trash     $fx ;;
-        rm )           "$HOME"/scripts/lf.py rm        $fx ;;
-        mime_type )    "$HOME"/scripts/lf.py mime_type $fx ;;
-        softlink )     "$HOME"/scripts/lf.py softlink  $fx ;;
-        compress_tar ) "$HOME"/scripts/lf.py tar       $fx ;;
-        compress_gz )  "$HOME"/scripts/lf.py gz        $fx ;;
-        compress_zip ) "$HOME"/scripts/lf.py zip       $fx ;;
-        compress_rar ) "$HOME"/scripts/lf.py rar       $fx ;;
-        xtract_tar )   "$HOME"/scripts/lf.py untar     $fx ;;
-        xtract_gz )    "$HOME"/scripts/lf.py ungz      $fx ;;
-        xtract_zip )   "$HOME"/scripts/lf.py unzip     $fx ;;
-        xtract_rar )   "$HOME"/scripts/lf.py unrar     $fx ;;
+        chattr )       "$HOME"/main/scripts/lf.py chattr    $fx ;;
+        trash )        "$HOME"/main/scripts/lf.py trash     $fx ;;
+        rm )           "$HOME"/main/scripts/lf.py rm        $fx ;;
+        mime_type )    "$HOME"/main/scripts/lf.py mime_type $fx ;;
+        softlink )     "$HOME"/main/scripts/lf.py softlink  $fx ;;
+        compress_tar ) "$HOME"/main/scripts/lf.py tar       $fx ;;
+        compress_gz )  "$HOME"/main/scripts/lf.py gz        $fx ;;
+        compress_zip ) "$HOME"/main/scripts/lf.py zip       $fx ;;
+        compress_rar ) "$HOME"/main/scripts/lf.py rar       $fx ;;
+        xtract_tar )   "$HOME"/main/scripts/lf.py untar     $fx ;;
+        xtract_gz )    "$HOME"/main/scripts/lf.py ungz      $fx ;;
+        xtract_zip )   "$HOME"/main/scripts/lf.py unzip     $fx ;;
+        xtract_rar )   "$HOME"/main/scripts/lf.py unrar     $fx ;;
         du )           lf -remote "send $id du"                 ;;
         mkdir )        lf -remote "send $id push :mkdir<space>" ;;  ## <--,-- used push for the cmd to read my input
         touch )        lf -remote "send $id push :touch<space>" ;;  ## <--'

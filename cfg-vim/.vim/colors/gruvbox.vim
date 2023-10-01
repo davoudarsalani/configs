@@ -584,7 +584,7 @@ call s:HL('LineNr', s:bg4, s:number_column)
 " Column where signs are displayed
 call s:HL('SignColumn', s:none, s:sign_column)
 
-let s:gb.fold_fg     = ['#7c6f64', 236]
+let s:gb.fold_fg     = ['#7c6f64', 238]
 let s:gb.fold_bg     = ['#7c6f64', 233]
 
 " Line used for closed folds
@@ -678,11 +678,11 @@ hi! link Typedef GruvboxYellow
 " }}}
 " Completion Menu: {{{
 
-let s:gb.pmenu_fg     = ['#000000', 248]
-let s:gb.pmenu_bg     = ['#000000', 234]
+let s:gb.pmenu_fg     = ['#000000', 255]
+let s:gb.pmenu_bg     = ['#000000', 23]
 
-let s:gb.pmenu_sel_fg = ['#000000', 113]
-let s:gb.pmenu_sel_bg = ['#000000', 233]
+let s:gb.pmenu_sel_fg = ['#000000', 255]
+let s:gb.pmenu_sel_bg = ['#000000', 30]
 
 let s:gb.pmenu_scr_fg = s:gb.pmenu_fg
 let s:gb.pmenu_scr_bg = s:gb.pmenu_bg

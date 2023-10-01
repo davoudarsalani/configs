@@ -7,7 +7,7 @@ let mapleader = " "
 " set title
 " set showcmd  " Show partial commands in the last line of the screen
 " set backspace=indent,eol,start  " Allow backspacing over autoindent, line breaks and start of insert action
-" set timeout ttimeout ttimeoutlen=200  " Quickly time out on keycodes, but never time out on mappings
+set timeout ttimeout ttimeoutlen=100  " Quickly time out on keycodes, but never time out on mappings
 " set showtabline=2  " always show tab bar
 " set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
 " set signcolumn=yes  " yes means do not turn off when no signs are present
@@ -54,7 +54,7 @@ set scrolloff=5
 set sidescroll=1  " scroll sideways 1 chraacter at a time not a whole screen
 set sidescrolloff=10
 set matchpairs+=<:>
-set updatetime=1000  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
+set updatetime=100  " Write swap files to disk and trigger CursorHold event faster (default is after 4000 ms of inactivity)
 set timeoutlen=500  " to run maps (default 1000)
 set foldmethod=marker
 " set foldmarker=f[[,f]]
@@ -66,14 +66,19 @@ set fileformat=unix
 " set dictionary=~/.vim/words.txt
 " }}}
 set stl=  " {{{
-hi dark ctermfg=4  ctermbg=none cterm=none
+hi dark ctermfg=4   ctermbg=none cterm=none
 hi lite ctermfg=249 ctermbg=none cterm=none
 
-hi dark_inactive ctermfg=235 ctermbg=none cterm=none
-hi lite_inactive ctermfg=235 ctermbg=none cterm=none
+hi dark_inactive ctermfg=238 ctermbg=none cterm=none
+hi lite_inactive ctermfg=238 ctermbg=none cterm=none
 
-hi alert   ctermfg=1 ctermbg=none cterm=none
+hi alert   ctermfg=1   ctermbg=none cterm=none
 hi warning ctermfg=202 ctermbg=none cterm=none
+
+" JUMP_8
+hi gitadded    ctermfg=2   ctermbg=none cterm=none
+hi gitmodified ctermfg=202 ctermbg=none cterm=none
+hi gitremoved  ctermfg=1   ctermbg=none cterm=none
 
 hi normal_mode  ctermfg=10  ctermbg=none
 hi visual_mode  ctermfg=166 ctermbg=none
@@ -88,17 +93,18 @@ hi command_mode ctermfg=220 ctermbg=none
 "
 " set statusline+=%#warningmsg#
 set stl+=%#CurrentModeColor#\ %{CurrentMode()}
-set stl+=%#dark#\ %{strpart(getline('.'),col('.')-1,1)}  " https://devhints.io/vimscript
-" ^^ PREVIOUSLY: let &stl.="%2.2(%{matchstr(getline('.'), '\\%' . col('.') . 'c.')}%)"  " https://stackoverflow.com/questions/40508385/vim-statusline-show-the-character-itself
-set stl+=%#lite#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}
-set stl+=%#dark#\ L:\ %l/%L
-set stl+=%#lite#\ W:\ %{wordcount().words}  " %p%%
-set stl+=%#TFTBColor#\ %{TFTB()}
+set stl+=%#dark#\ C\ %v/%{strlen(getline('.'))}   " C 2/80
+" ^^ PREVIOUSLY: set stl+=%#dark#\ C:\ %v/%{strlen(getline('.'))}\ %o/%{line2byte(line('$')+1)-1}   " C: 2/80 3897/40741
+set stl+=%#dark#\ W\ %{wordcount().words}  " %p%%
+set stl+=%#dark#\ L\ %l/%L
+" set stl+=%#TFTBColor#\ %{TFTB()}
 set stl+=%#CurrentTagColor#\ %{CurrentTag()}
 set stl+=%#SyntasticColor#\ %{CheckSyntax()}  " or SyntasticStatuslineFlag()
 set stl+=%#ReadonlyColor#\ %{ReadOnly()}
-set stl+=%#ModifiedColor#\ %{Modified()}
-set stl+=%#GitStatusColor#\ %{SignifyGitStatus()}
+" set stl+=%#ModifiedColor#\ %{Modified()}
+set stl+=%#GitAddedColor#\ %{SignifyGitAdded()}
+set stl+=%#GitRemovedColor#\ %{SignifyGitRemoved()}
+set stl+=%#GitModifiedColor#\ %{SignifyGitModified()}
 set stl+=%#lite#
 " set stl+=%*  " reset color
 set stl+=%=
@@ -112,7 +118,7 @@ set stl+=%#CurrentModeColor#\ ▮
 " set stl+=%{v:register}  " active register
 " }}}
 " {{{ abbrev
-iabbrev writedatetime <c-r>=strftime('%Y%m%d%H%M%S')<CR>
+" iabbrev writedatetime <c-r>=strftime('%Y%m%d%H%M%S')<CR>
 " }}}
 " {{{ maps
 " {{{ F1-10
@@ -131,13 +137,12 @@ inoremap <F3> <C-o>:wqa<CR>
 noremap  <F4>      :Run<CR>
 inoremap <F4> <C-o>:Run<CR>
 
-" SurroundWord
-noremap  <F5>      :SurroundWord {}
-inoremap <F5> <C-o>:SurroundWord {}
+" watch
+noremap  <F5>      :Watch<CR>
+inoremap <F5> <C-o>:Watch<CR>
 
-" SurroundSelection
-noremap  <F6>      :SurroundSelection {}
-inoremap <F6> <C-o>:SurroundSelection {}
+" ultisnips JUMP_6
+" '<F6>'
 
 " replace
 noremap  <F7>      :%s#\<<C-r>=expand("<cword>")<CR>\>##gc<Left><Left><Left>
@@ -149,37 +154,22 @@ inoremap <F8> <C-o>:set cursorcolumn!<CR>
 
 " python-mode JUMP_7
 " '<F9>'
-
-" ultisnips JUMP_6
-" '<F10>'
-
-" watch
-noremap  <F12>      :Watch<CR>
-inoremap <F12> <C-o>:Watch<CR>
 " }}}
-noremap <Leader>0  :ToggleJedi<CR>
-noremap <Leader>1  :set list!<Bar>set relativenumber!<Bar>set invnumber<CR>
-noremap <Leader>2  :SignifyToggle<CR>
-noremap <Leader>3  :UndotreeToggle<CR>
-noremap <Leader>4  :ToggleWhitespace<CR>
-noremap <Leader>5  :MUcompleteAutoToggle<CR>
-noremap <Leader>6  :SyntasticToggleMode<CR>
-noremap <Leader>7  :SignatureToggleSigns<CR>
-noremap <Leader>8  :IlluminationToggle<CR>
-noremap <Leader>9  :DimInactiveToggle<CR>
-noremap <Leader>10 :HighlightLinesToggle<CR>
-noremap <Leader>11 :TagbarToggle<CR>
+noremap <Leader>0 :ToggleJedi<CR>
+noremap <Leader>1 :set list!<Bar>set relativenumber!<Bar>set invnumber<CR>
+noremap <Leader>2 :SignifyToggle<CR>
+noremap <Leader>3 :UndotreeToggle<CR>
+noremap <Leader>4 :ToggleWhitespace<CR>
+noremap <Leader>5 :MUcompleteAutoToggle<CR>
+noremap <Leader>6 :SyntasticToggleMode<CR>
+noremap <Leader>7 :IlluminationToggle<CR>
+noremap <Leader>8 :TagbarToggle<CR>
+noremap <Leader>9 :ColorToggle<CR>
 
 noremap <Leader>a  :AscendingNumbers END
 noremap <Leader>b  :Black<CR>
 noremap <Leader>bd :BlackDiff<CR>
-noremap <Leader>c  :CountCurrentWord<CR>
-noremap <Leader>e  :ToggleEncode<CR>
-noremap <Leader>i  :IndentLevel<CR>
 noremap <Leader>q  :QuickfixToggle<CR>
-noremap <Leader>s  :SyntaxAttribute<CR>
-noremap <Leader>t  :TyperStart PATH
-noremap <Leader>w  :WordsFrequency<CR>
 
 " bring the current line to top/middle/bottom of screen
 noremap  TT      zt
@@ -205,24 +195,10 @@ noremap w W
 
 map ; :
 
-" show help on current word in preview window (https://github.com/llh911001/vimrc/blob/master/.vimrc)
-noremap <silent> K :exec 'help ' . expand('<cword>')<CR>
-
-" https://vim.fandom.com/wiki/Smart_home
-noremap <expr>   <Home> (col('.') == matchend(getline('.'), '^\s*')+1 ? '0' : '^')
-imap    <silent> <Home> <C-O><Home>
-" noremap <expr>   <End>  (col('.') == match(getline('.'), '\s*$') ? '$' : 'g_')
-" imap             <End>  <C-o><End>
-" vnoremap <expr>  <End>  (col('.') == match(getline('.'), '\s*$') ? '$h' : 'g_')
-
 " clear highlighted matches (https://nvie.com/posts/how-i-boosted-my-vim/):
 noremap <silent> <CR> :nohlsearch<CR>
 " toggle highlighting on/off (https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches):
 " noremap <silent> <CR> :set hlsearch! hlsearch?<CR>
-
-" insert single character in normal mode (https://vim.fandom.com/wiki/Insert_a_single_character):
-nnoremap <C-i> :exec "normal i".nr2char(getchar())."\e"<CR>
-" nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
 
 " insert new line below without leaving normal mode (https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode)
 nnoremap <C-o> o<Esc>k
@@ -234,14 +210,6 @@ au FileType python noremap { :silent eval search('^ *def ',      'b')<CR>
 au FileType python noremap } :silent eval search('^ *def '          )<CR>
 au FileType sh     noremap { :silent eval search('^ *function ', 'b')<CR>
 au FileType sh     noremap } :silent eval search('^ *function '     )<CR>
-
-" run current line:
-au FileType sh      noremap <leader>. :.w !source %:p; bash<CR>
-au FileType python  noremap <leader>. :.w !source %:p; python<CR>
-
-" run selection:
-au FileType sh     vnoremap <leader>v :w  !source %:p; bash<CR>
-au FileType python vnoremap <leader>v :w  !source %:p; python<CR>
 
 " }}}
 " {{{ au & hi
@@ -256,13 +224,13 @@ au VimEnter    *  set noshowmode
 au vimEnter    *  RestoreCursorPosition
 au VimEnter    *  normal zz
 au VimEnter    *  UndotreeShow
-au BufWritePre *  :call LastModified()  " :LastModified command did not work
+au VimEnter    *  ColorClear  " to disable colorizer on startup
 
 " https://vi.stackexchange.com/questions/3897/how-to-label-tmux-tabs-with-the-name-of-the-file-edited-in-vim
 if exists('$TMUX')
 
-    " sometime, for example when we open file with the command vim ~/scripts/application instead of opening it from lf,
-    " base would be /home/nnnn/scripts/application if we use expand("%:t") - which is not what we want.
+    " sometime, for example when we open file with the command vim ~/main/scripts/application instead of opening it from lf,
+    " base would be /home/nnnn/main/scripts/application if we use expand("%:t") - which is not what we want.
     " so have to do some substitution:
     let base = substitute(expand('%'), ".*/", "", 1)
 
@@ -278,12 +246,12 @@ au BufRead,BufNewFile *.htm,*.html*,*.php,*.css,*.js setlocal tabstop=2 shiftwid
 
 hi Comment      cterm=italic
 hi CursorColumn ctermbg=233
-hi LineNr       ctermbg=none ctermfg=235 cterm=none
+hi LineNr       ctermbg=none ctermfg=238 cterm=none
 hi Normal       ctermbg=none
 hi Search       ctermbg=none cterm=underline
 hi SignColumn   ctermbg=none
 hi StatusLine   ctermbg=none ctermfg=12  cterm=none
-hi StatusLineNC ctermbg=none ctermfg=235 cterm=none
+hi StatusLineNC ctermbg=none ctermfg=238 cterm=none
 hi TodoInSh     ctermbg=none ctermfg=246 cterm=italic,bold
 hi VertSplit    ctermfg=4
 
@@ -328,27 +296,27 @@ function! CurrentMode() " {{{
     endif
 endfunction
 " }}}
-function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-display-the-number-of-instances-of-a-string-in-vim-statusline/
-    if &filetype != 'vim'
-        let l:todos_count  = len(filter(getline(1, '$'), 'v:val =~? "TODO"'))
-        let l:fixmes_count = len(filter(getline(1, '$'), 'v:val =~? "FIXME"'))
-        let l:tempos_count = len(filter(getline(1, '$'), 'v:val =~? "TEMPORARY"'))
-        let l:breaks_count = len(filter(getline(1, '$'), 'v:val =~? "breakpoint()"'))
-
-        if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
-            hi link TFTBColor dark
-            let l:all = todos_count . ' ' . fixmes_count . ' ' . tempos_count . ' ' . breaks_count
-        else
-            hi link TFTBColor dark_inactive
-            let l:all = 'TFTB'
-        endif
-
-    else
-        hi link TFTBColor dark_inactive
-        let l:all = 'TFTB'
-    endif
-    return all
-endfunction
+" function! TFTB() " {{{ https://stackoverflow.com/questions/66051261/how-to-the-display-the-number-of-instances-of-a-string-in-vim-statusline/
+"     if &filetype != 'vim'
+"         let l:todos_count  = len(filter(getline(1, '$'), 'v:val =~? "TODO"'))
+"         let l:fixmes_count = len(filter(getline(1, '$'), 'v:val =~? "FIXME"'))
+"         let l:tempos_count = len(filter(getline(1, '$'), 'v:val =~? "TEMPORARY"'))
+"         let l:breaks_count = len(filter(getline(1, '$'), 'v:val =~? "breakpoint()"'))
+"
+"         if todos_count > 0 || fixmes_count > 0 || tempos_count > 0 || breaks_count > 0
+"             hi link TFTBColor dark
+"             let l:all = todos_count . ' ' . fixmes_count . ' ' . tempos_count . ' ' . breaks_count
+"         else
+"             hi link TFTBColor dark_inactive
+"             let l:all = 'TFTB'
+"         endif
+"
+"     else
+"         hi link TFTBColor dark_inactive
+"         let l:all = 'TFTB'
+"     endif
+"     return all
+" endfunction
 " }}}
 function! CurrentTag() " {{{
     let l:text = tagbar#currenttag('%s','','f','scoped-stl')
@@ -394,15 +362,43 @@ function! Modified() " {{{
     " set statusline+=%#ModifiedColor#%{&modified?'\ \ X':''}  " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/?st=jc4oipo5&sh=d41a21b1
 endfunction
 " }}}
-function! SignifyGitStatus()  " {{{
-  let l:gs = sy#repo#get_stats_decorated()
-  if len(gs) == 0
-    hi link GitStatusColor lite_inactive
-    return 'GI'
+function! SignifyGitAdded()  " {{{
+  let l:added = split(sy#repo#get_stats_decorated())[0]
+
+  if added == '+0' || added == '+-1'
+    hi link GitAddedColor lite_inactive
+    return '+0'
   else
-    hi link GitStatusColor warning
-    return gs
+    hi link GitAddedColor gitadded
+    return added
   endif
+
+endfunction
+" }}}
+function! SignifyGitRemoved()  " {{{
+  let l:removed = split(sy#repo#get_stats_decorated())[1]
+
+  if removed == '-0' || removed == '--1'
+    hi link GitRemovedColor lite_inactive
+    return '-0'
+  else
+    hi link GitRemovedColor gitremoved
+    return removed
+  endif
+
+endfunction
+" }}}
+function! SignifyGitModified()  " {{{
+  let l:modified = split(sy#repo#get_stats_decorated())[2]
+
+  if modified == '~0' || modified == '~-1'
+    hi link GitModifiedColor lite_inactive
+    return '×0'
+  else
+    hi link GitModifiedColor gitmodified
+    return modified
+  endif
+
 endfunction
 " }}}
 
@@ -440,13 +436,8 @@ function! CopyToClipboard() " {{{ copy yanked text to clipboard (https://github.
 endfunction
 command! CopyToClipboard :call CopyToClipboard()
 " }}}
-function! CountCurrentWord() " {{{ https://stackoverflow.com/questions/11492258/find-number-of-occurrences-of-word-under-cursor
-    :exec ":%s@\\<" . expand("<cword>") . "\\>\@&@gn"
-endfunction
-command! CountCurrentWord :call CountCurrentWord()
-" }}}
 function! CursorLineInNonInsertMode()  " {{{
-    hi CursorLineNr ctermbg=none ctermfg=235 cterm=none
+    hi CursorLineNr ctermbg=none ctermfg=238 cterm=none
     hi CursorLine ctermbg=233
 endfunction
 " }}}
@@ -454,55 +445,6 @@ function! Filter(string) " {{{ https://vim.fandom.com/wiki/Redirect_g_search_out
     let @a='' | exec 'g/' . a:string . '/y A' | new | setlocal bt=nofile | put! a
 endfunction
 command! -nargs=1 Filter :call Filter(<f-args>)
-" }}}
-function! IndentLevel() " {{{ https://vim.fandom.com/wiki/Put_the_indentation_level_on_the_status_line
-    if &filetype == 'python'
-        :echo 'Indent level: ' . (indent('.') / &ts )
-    else
-        PrintfWarning 'For python file type only'
-    endif
-endfunction
-command! IndentLevel :call IndentLevel()
-" }}}
-function! InsertLineNumbers() " {{{ https://vim.fandom.com/wiki/Insert_line_numbers
-    :%s/^/\=printf('%-4d', line('.'))/g
-    :%s/\([0-9]\+\)\s*$/\1/g
-endfunction
-command! InsertLineNumbers :call InsertLineNumbers()
-" }}}
-function! LastModified()  " {{{ https://superuser.com/questions/504733/how-to-make-vim-change-a-date-when-a-section-of-a-file-was-edited
-    if !&modified || &filetype == 'vim' || (&filetype != 'python' && &filetype != 'sh')
-        return
-    endif
-
-    let l:today=system("echo -n $(jdate +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
-    " use date if, for any reason, jdate fails
-    if today !~ '.*day'
-        let l:today=system("echo -n $(date +'%Y-%m-%d %H:%M:%S %Z %A') 2>/dev/null")  " JUMP_1 -n is needed to get rid of the annoying trailing ^@
-    endif
-
-    let l:dest_line_pattern='## @last-modified '
-
-    " save current cursor position
-    let l:lnum = line('.')
-    let l:col  = col('.')
-
-    if search(dest_line_pattern, 'w')
-        let l:line1 = getline('.')
-        if line1 =~ today
-            call cursor(lnum, col)  " restore cursor position
-            return
-        endif
-        let l:line2 = substitute(line1,
-                               \dest_line_pattern . '.*',
-                               \dest_line_pattern . today,
-                               \'')
-        call setline('.', line2)
-    endif
-
-    call cursor(lnum, col)  " restore cursor position
-endfunction
-command! LastModified :call LastModified()
 " }}}
 function! MatchTodoInSh()  " {{{
     match TodoInSh /\<\(TODO\|TEMPORARY\|FIXME\|NOTE\|JUMP_[0-9]\+\)\>/
@@ -521,11 +463,6 @@ function! MyFoldText() " {{{ https://stackoverflow.com/questions/5983396/change-
     let l:txt     = lines_count . ' ' . comment                    " ^^ why had to use \\] instead of \] ?
     return txt
 endfunction
-" }}}
-function! Prettify()  " {{{
-    :exec ':%!jq'
-endfunction
-command! Prettify :call Prettify()
 " }}}
 " {{{ function! s:QuickfixToggle()  " https://github.com/nvie/vimrc/blob/master/vimrc
 let g:quickfix_is_open = 0
@@ -570,47 +507,21 @@ function! Run() " {{{
 endfunction
 command! Run :call Run()
 " }}}
-function! RemoveCommentsAndEmptyLines()  " {{{
-    :g/^ *#/d|g/^$/d
-endfunction
-command! RemoveCommentsAndEmptyLines :call RemoveCommentsAndEmptyLines()
-" }}}
 function! SudoWrite()  " {{{ https://www.cyberciti.biz/faq/vim-vi-text-editor-save-file-without-root-permission/
     :exec ':silent w !sudo tee %:p >/dev/null'
 endfunction
 command! SudoWrite :call SudoWrite()
 " }}}
-function! SyntaxAttribute()  " {{{
-    call SyntaxAttr()
-endfunction
-command! SyntaxAttribute :call SyntaxAttribute()
-" }}}
-function! ToggleEncode()  " {{{ https://vim.fandom.com/wiki/How_to_obscure_text_instantaneously
-    normal! ggg?G``
-endfunction
-command! ToggleEncode :call ToggleEncode()
-" }}}
 function! ToggleJedi()  " {{{ JUMP_3
     if g:jedi#show_call_signatures == 2
         let g:jedi#show_call_signatures = 0
-        PrintfMsg 'jedi is off'
+        PrintfMsg 'turned off jedi'
     else
         let g:jedi#show_call_signatures = 2  " 2 shows call signatures in the command line instead of a popup window2
-        PrintfMsg 'jedi is on'
+        PrintfMsg 'turned on jedi'
     endif
 endfunction
 command! ToggleJedi :call ToggleJedi()
-" }}}
-function! TyperStart(file) " {{{
-    set wrap  " FIXME does not work
-    set nohlsearch
-    set showtabline=0
-    let g:better_whitespace_enabled=0
-    :IlluminationDisable
-    au InsertLeave * hi CursorLine ctermbg=none
-    exec "Typer " . a:file
-endfunction
-command! -nargs=1 TyperStart :call TyperStart(<f-args>)
 " }}}
 function! Watch() " {{{
     if &filetype != "python" && &filetype != "sh"
@@ -619,7 +530,7 @@ function! Watch() " {{{
     endif
 
     let l:current_file = expand('%:p')
-    if current_file == '/home/nnnn/scripts/0-test' || current_file == '/home/nnnn/scripts/0-test.py'
+    if current_file == '/home/nnnn/main/scripts/0-test' || current_file == '/home/nnnn/main/scripts/0-test.py'
         let l:permission = 'true'
     else
         let l:permission = confirm("Not a 0-test{.py} file. Run anyway?", "&Yes\n&No")
@@ -643,74 +554,6 @@ function! Watch() " {{{
     endif
 endfunction
 command! Watch :call Watch()
-" }}}
-" {{{ function! WordsFrequency() (https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file)
-" Sorts numbers in ascending order.
-" Examples:
-" [2, 3, 1, 11, 2] --> [1, 2, 2, 3, 11]
-" ['2', '1', '10','-1'] --> [-1, 1, 2, 10]
-function! Sorted(list)
-    " Make sure the list consists of numbers (and not strings)
-    " This also ensures that the original list is not modified
-    let nrs = ToNrs(a:list)
-    let sortedList = sort(nrs, "NaturalOrder")
-    " echo sortedList
-    return sortedList
-endfunction
-
-" Comparator function for natural ordering of numbers
-function! NaturalOrder(firstNr, secondNr)
-    if a:firstNr < a:secondNr
-        return -1
-    elseif a:firstNr > a:secondNr
-        return 1
-    else
-        return 0
-    endif
-endfunction
-
-" Coerces every element of a list to a number. Returns a new list without modifying the original list.
-function! ToNrs(list)
-    let nrs = []
-    for elem in a:list
-        let nr = 0 + elem
-        call add(nrs, nr)
-    endfor
-    return nrs
-endfunction
-
-function! WordsFrequency() range
-    " Words are separated by whitespace or punctuation characters
-    let l:wordSeparators = '[[:blank:][:punct:]]\+'
-    let l:allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
-    let l:wordToCount = {}
-    for word in allWords
-        let l:wordToCount[word] = get(wordToCount, word, 0) + 1
-    endfor
-
-    let l:countToWords = {}
-    for [word,cnt] in items(wordToCount)
-        let l:words = get(countToWords,cnt,"")
-        " Append this word to the other words that occur as many times in the text
-        let l:countToWords[cnt] = words . " " . word
-    endfor
-
-    " Create a new buffer to show the results in
-    new
-    setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
-
-    " List of word counts in ascending order
-    let l:sortedWordCounts = Sorted(keys(countToWords))
-
-    call append("$", "count    words")
-    call append("$", "--------------")
-    " Show the most frequent words first -> Descending order
-    for cnt in reverse(sortedWordCounts)
-        let l:words = countToWords[cnt]
-        call append("$", cnt . "    " . words)
-    endfor
-endfunction
-command! -range=% WordsFrequency <line1>,<line2>call WordsFrequency()
 " }}}
 
 function! PrintfMsg(msg)  " {{{
@@ -746,32 +589,12 @@ au FileType mail             setlocal commentstring=>\ %s
 au FileType vim              setlocal commentstring=\"\ %s
 au FileType lua              setlocal commentstring=--\ %s
 " }}}
-" {{{ CtrlXA
-silent! nmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
-silent! nmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
-silent! xmap <unique>  <C-X> <Plug>(CtrlXA-CtrlA)
-silent! xmap <unique>  <C-A> <Plug>(CtrlXA-CtrlX)
-silent! xmap <silent> g<C-X> <Plug>(CtrlXA-gCtrlA)
-silent! xmap <silent> g<C-A> <Plug>(CtrlXA-gCtrlX)
-" }}}
 " {{{ easymotion JUMP_5
 map f <Plug>(easymotion-bd-w)
 map F <Plug>(easymotion-s2)
 let g:EasyMotion_keys = 'hklyuiopnmqwertzxcvbasdgjf'
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 0
-" }}}
-" {{{ fzf
-noremap `  :Marks<CR>
-noremap :: :History:<CR>
-noremap ;; :History:<CR>
-noremap // :History/<CR>
-
-noremap  <C-l>      :BLines<CR>
-inoremap <C-l> <C-o>:BLines<CR>
-
-noremap  <C-\>      :Maps<CR>
-inoremap <C-\> <C-o>:Maps<CR>
 " }}}
 " {{{ illuminate JUMP_4
 hi WordUnderCursorTheme ctermbg=235
@@ -800,6 +623,7 @@ set completeopt+=menuone
 set completeopt+=noinsert
 set complete=.,w,b,u,t
 " set complete+=k~/bgls/words  " use C-n to access suggestions (https://superuser.com/questions/102343/can-i-add-a-set-of-words-to-the-vim-autocomplete-vocabulary)
+let g:mucomplete#enable_auto_at_startup = 1
 " }}}
 " {{{ multiple-cursors
 hi multiple_cursors_cursor term=reverse ctermfg=0 ctermbg=yellow
@@ -848,30 +672,17 @@ let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
 let g:signify_sign_delete_first_line = '¯'
 let g:signify_sign_change            = '×'
-let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete_first_line
+let g:signify_sign_change_delete     = g:signify_sign_change . g:signify_sign_delete
 
-highlight SignifySignAdd    ctermfg=2   cterm=none
-highlight SignifySignDelete ctermfg=1   cterm=none
-highlight SignifySignChange ctermfg=202 cterm=none
+" JUMP_8
+hi SignifySignAdd    ctermfg=2   cterm=none
+hi SignifySignChange ctermfg=202 cterm=none
+hi SignifySignDelete ctermfg=1   cterm=none
 
-" https://vi.stackexchange.com/questions/2350/how-to-map-alt-key
-exec "set <M-j>=\ej"
-exec "set <M-k>=\ek"
-exec "set <M-d>=\ed"
-exec "set <M-h>=\eh"
-exec "set <M-u>=\eu"
-exec "set <M-t>=\et"
-exec "set <M-f>=\ef"
-exec "set <M-r>=\er"
-
-nmap    <silent> <M-j> <plug>(signify-next-hunk)
-nmap    <silent> <M-k> <plug>(signify-prev-hunk)
-noremap <silent> <A-d> :SignifyDiff<CR>
-noremap <silent> <A-h> :SignifyHunkDiff<CR>
-noremap <silent> <A-u> :SignifyHunkUndo<CR>
-noremap <silent> <A-t> :SignifyToggle<CR>
-noremap <silent> <A-f> :SignifyFold<CR>
-noremap <silent> <A-r> :SignifyRefresh<CR>
+nmap    <silent> <C-j> <plug>(signify-next-hunk)
+nmap    <silent> <C-k> <plug>(signify-prev-hunk)
+noremap <silent> <C-h> :SignifyHunkDiff<CR>
+noremap <silent> <C-u> :SignifyHunkUndo<CR>
 
 autocmd User SignifyHunk call s:show_current_hunk()
 function! s:show_current_hunk() abort
@@ -903,7 +714,7 @@ hi SyntasticErrorSign ctermfg=1 ctermbg=none cterm=none
 hi SyntasticError     ctermfg=0 ctermbg=1    cterm=none
 " }}}
 " {{{ ultisnips JUMP_6
-let g:UltiSnipsListSnippets = '<F10>'
+let g:UltiSnipsListSnippets = '<F6>'
 " }}}
 " {{{ undotree
 let g:undotree_SplitWidth = 12
@@ -963,6 +774,18 @@ let g:undotree_HelpLine = 0
 
 
 " {{{ MISC
+" function! TyperStart(file) " {{{
+"     set wrap  " FIXME does not work
+"     set nohlsearch
+"     set showtabline=0
+"     let g:better_whitespace_enabled=0
+"     :IlluminationDisable
+"     au InsertLeave * hi CursorLine ctermbg=none
+"     exec 'Typer ' . a:file
+" endfunction
+" command! -nargs=1 TyperStart :call TyperStart(<f-args>)
+" }}}
+"
 " number of windows in the current buffer
 " winnr("$")
 

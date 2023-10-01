@@ -1,13 +1,17 @@
 " Chained completion that works as I want!
 " Maintainer: Lifepillar <lifepillar@lifepillar.me>
-" License: This file is placed in the public domain
+" License: MIT
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 imap     <silent> <expr> <plug>(MUcompleteTry) <sid>try_completion()
 imap     <silent> <expr> <plug>(MUcompleteVerify) <sid>verify_completion()
-inoremap <silent>        <plug>(MUcompleteOut) <c-g><c-g>
+if has("patch-8.2.3389")
+  inoremap <silent>      <plug>(MUcompleteOut) <c-x><c-z>
+else
+  inoremap <silent>      <plug>(MUcompleteOut) <c-g><c-g>
+endif
 inoremap <silent>        <plug>(MUcompleteTab) <tab>
 inoremap <silent>        <plug>(MUcompleteCtd) <c-d>
 inoremap <silent>        <plug>(MUcompleteCte) <c-e>
@@ -140,7 +144,7 @@ if has('lambda')
         \     'keyn': s:fm(s:is_keyword),
         \     'keyp': s:fm(s:is_keyword),
         \     'line': s:fm(s:is_keyword),
-        \     'list': s:fm({ t -> t =~# '\m\S\{'.get(g:, 'mucomplete#minimum_prefix_length', 1).'\}$'
+        \     'list': s:fm({ t -> t =~# '\m\S\{'.get(g:, 'mucomplete#minimum_prefix_length', 2).'\}$'
         \              || (g:mucomplete_with_key && (s:complete_empty_text || t =~# '\m\S$')) }),
         \     'omni': s:fm({ t -> strlen(&l:omnifunc) > 0 && s:is_keyword(t) }),
         \     'path': s:fm({ t -> t =~# '\m\%(\%(\f\&[^/\\]\)'.s:pathsep.'\|\%(^\|\s\|\f\|["'']\)'.s:pathsep.'\%(\f\&[^/\\]\|\s\)\+\)$'
@@ -311,14 +315,28 @@ fun! mucomplete#cycle_or_select(dir)
         \ : (get(s:select_dir(), s:compl_methods[s:i], 1) * a:dir > 0 ? "\<c-n>" : "\<c-p>")
 endf
 
+fun! s:match_scoped_item(chain, syn)
+  for l:regex in keys(a:chain)
+    if a:syn =~? l:regex
+      return a:chain[l:regex]
+    endif
+  endfor
+  return has_key(a:chain, 'default')
+        \ ? a:chain['default']
+        \ : s:scope_chain(g:mucomplete#chains['default'])
+endf
+
+fun! s:get_scoped_item(chain, syn)
+  return has_key(a:chain, a:syn) ? a:chain[a:syn] : s:match_scoped_item(a:chain, a:syn)
+endf
+
 " If the argument is a completion chain (type() returns v:t_list), return it;
 " otherwise, get the completion chain for the current syntax item.
 fun! s:scope_chain(c)
   return type(a:c) == 3
         \ ? a:c
-        \ : get(a:c, synIDattr(synID('.', col('.') - 1, 0), 'name'),
-        \       get(a:c, 'default', g:mucomplete#chains['default']))
-endf
+        \ : s:get_scoped_item(a:c, synIDattr(synID('.', col('.') - 1, 0), 'name'))
+endfun
 
 " Precondition: pumvisible() is false.
 fun! mucomplete#init(dir, tab_completion) " Initialize/reset internal state
@@ -372,3 +390,4 @@ endf
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
+" vim: et ts=2 sts=2 sw=2

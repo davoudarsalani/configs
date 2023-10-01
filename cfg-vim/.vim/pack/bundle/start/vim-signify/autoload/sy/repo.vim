@@ -7,6 +7,7 @@ function! sy#repo#detect(bufnr) abort
   let sy = getbufvar(a:bufnr, 'sy')
   for vcs in s:vcs_list
     let sy.detecting += 1
+    let g:signify_detecting += 1
     call sy#repo#get_diff(a:bufnr, vcs, function('sy#sign#set_signs'))
   endfor
 endfunction
@@ -130,6 +131,7 @@ function! s:handle_diff(options, exitval) abort
     call sy#verbose(printf('Signs already got updated by %s.', sy.updated_by), a:options.vcs)
     return
   elseif empty(sy.vcs)
+    let g:signify_detecting -= 1
     let sy.detecting -= 1
   endif
 
@@ -238,10 +240,8 @@ endfunction
 function! sy#repo#get_stats_decorated(...)
   let bufnr = a:0 ? a:1 : bufnr('')
   let [added, modified, removed] = sy#repo#get_stats(bufnr)
-  let symbols = ['+', '×', '-']
-  " ^^ ORIG: let symbols = ['+', '-', '~']
-  let stats = [added, modified, removed]  " reorder
-  " ^^ ORIG: let stats = [added, removed, modified]  " reorder
+  let symbols = ['+', '-', '~']
+  let stats = [added, removed, modified]  " reorder
   let statline = ''
 
   for i in range(3)
@@ -251,10 +251,11 @@ function! sy#repo#get_stats_decorated(...)
   endfor
 
   if !empty(statline)
-    let statline = printf('%s', statline[:-2])
+    let statline = printf('[%s]', statline[:-2])
   endif
 
-  return statline
+  return printf('%s%s %s%s %s%s', symbols[0], stats[0], symbols[1], stats[1], symbols[2], stats[2])
+  " ^^ ORIG: return statline
 endfunction
 
 " #debug_detection {{{1

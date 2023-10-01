@@ -1,6 +1,6 @@
 " Chained completion that works as I want!
 " Maintainer: Lifepillar <lifepillar@lifepillar.me>
-" License: This file is placed in the public domain
+" License: MIT
 
 if exists("g:loaded_mucomplete")
   finish
@@ -23,18 +23,14 @@ endif
 
 if !get(g:, 'mucomplete#no_mappings', get(g:, 'no_plugin_maps', 0))
   if !hasmapto('<plug>(MUcompleteFwd)', 'i')
-    " imap <unique> <tab> <plug>(MUcompleteFwd)
-    imap <unique> <M-j> <plug>(MUcompleteFwd)
+    " imap <unique> <tab> <plug>(MUcompleteFwd)  " commented by me
   endif
   if !hasmapto('<plug>(MUcompleteBwd)', 'i')
-    " imap <unique> <s-tab> <plug>(MUcompleteBwd)
-    imap <unique> <M-k> <plug>(MUcompleteBwd)
+    imap <unique> <s-tab> <plug>(MUcompleteBwd)
   endif
 endif
 
 command -bar -nargs=1 MUcompleteNotify call mucomplete#msg#set_notifications(<args>)
-
-let g:mucomplete#enable_auto_at_startup = 1
 
 if has('patch-7.4.143') || (v:version == 704 && has("patch143")) " TextChangedI started to work there
   command -bar -nargs=0 MUcompleteAutoOn call mucomplete#auto#enable()

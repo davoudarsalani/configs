@@ -4,6 +4,10 @@ snippet pr "print()" b
 print($0)
 endsnippet
 ###############################################
+snippet pr> "print(f'>>>>>>>>>> {$0}')" b
+print(f'>>>>>>>>>> {$0}')
+endsnippet
+###############################################
 snippet ex "exit()" b
 exit()
 endsnippet
@@ -88,5 +92,9 @@ endsnippet
 snippet fo "for" b
 for $1 in $2:
 	$0
+endsnippet
+###############################################
+snippet co "continue" b
+continue
 endsnippet
 ###############################################

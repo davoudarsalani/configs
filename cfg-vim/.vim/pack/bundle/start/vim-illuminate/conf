@@ -1,9 +1,0 @@
-" By me. Paste to .vimrc:
-
-noremap <Leader>8 :IlluminationToggle<CR>
-
-hi WordUnderCursorTheme cterm=bold
-hi link illuminatedWord WordUnderCursorTheme
-
-:IlluminationDisable  " add to TyperStart() function
-

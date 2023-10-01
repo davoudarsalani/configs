@@ -116,10 +116,12 @@ bit_format = 16bit
 # background must also be defined in hex  or remain commented out. 1 = on, 0 = off.
 # You can define as many as 8 different colors. They range from bottom to top of screen
 gradient = 1
-gradient_count = 3
-gradient_color_1 = '#001a1a'
-gradient_color_2 = '#001a1a'
-gradient_color_3 = '#000000'
+gradient_count = 5
+gradient_color_5 = '#ff0000'
+gradient_color_4 = '#ff8000'
+gradient_color_3 = '#00608a'
+gradient_color_2 = '#00608a'
+gradient_color_1 = '#00608a'
 
 [smoothing]
 

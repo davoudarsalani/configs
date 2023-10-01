@@ -6,9 +6,6 @@ elseif exists('b:current_syntax')
     finish
 endif
 
-let g:python_highlight_all = 1
-let g:python_highlight_file_headers_as_comments = 1
-
 "
 " Commands
 "

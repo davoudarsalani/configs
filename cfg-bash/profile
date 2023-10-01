@@ -649,8 +649,16 @@ export dmenulines=35
 
 export byte_size=1024  ## NOTE also used in ~/public/github/davoudarsalani/.github/workflows/update-readme.yml (and some other scripts).
                        ##      make sure to apply changes there too
+export K="$byte_size"        ## 1K
+export K_400=$(( K * 400 ))  ## 400K
+export K_700=$(( K * 700 ))  ## 700K
+export M=$(( K ** 2 ))       ## 1M
+export M_400=$(( M * 400 ))  ## 400M
+export M_700=$(( M * 700 ))  ## 700M
+export G=$(( K ** 3 ))       ## 1G
 
-export QT_QPA_PLATFORMTHEME=gtk2  ## https://www.linuxuprising.com/2018/05/get-qt5-apps-to-use-native-gtk-style-in.html
+
+#export QT_QPA_PLATFORMTHEME=gtk2  ## https://www.linuxuprising.com/2018/05/get-qt5-apps-to-use-native-gtk-style-in.html
 export refresh_icon='♻'  ## 
 export editor='vim'
 export terminal='xfce4-terminal'

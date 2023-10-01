@@ -1,3 +1,7 @@
+" Chained completion that works as I want!
+" Maintainer: Lifepillar <lifepillar@lifepillar.me>
+" License: MIT
+
 " To run the tests:
 "
 " 1. vim -u ../troubleshooting_vimrc.vim test_mucomplete.vim
@@ -7,9 +11,9 @@
 "
 " TODO: use option_save() and option_restore() when implemented
 
-if !has('patch-8.0.1806')
+if !has('patch-8.2.2638')
   echohl WarningMsg
-  echomsg "[MUcomplete Test] Vim 8.0.1806 or later is needed to run the tests successfully"
+  echomsg "[MUcomplete Test] Vim 8.2.2638 or later is needed to run the tests successfully"
   echohl None
 endif
 
@@ -152,7 +156,7 @@ fun! Test_MU_cmd_completion()
   call feedkeys("aech", "tx")
   call feedkeys("a", "t!")
   call feedkeys("\<tab>\<tab>\<esc>", "tx")
-  call assert_equal("echoerr", getline(1))
+  call assert_equal("echoconsole", getline(1))
   bwipe!
   set completeopt&
 endf
@@ -775,6 +779,24 @@ fun! Test_MU_scoped_completion()
   set filetype=vim
   set spell spelllang=en
   let b:mucomplete_chain = { 'vimLineComment': ['uspl'], 'vimString': [], 'default': ['cmd', 'keyp'] }
+  call setline(1, ['" Vim rulez', 'let x = "rocks roc"', 'wh'])
+  let l:expected = ['" Vim rules', 'let x = "rocks roc"', 'while']
+  call cursor(1,1)
+  call feedkeys("A\<tab>\<tab>\<c-y>\<esc>", 'tx')
+  call feedkeys("+2fca\<tab>\<c-y>\<esc>", 'tx') " No completion here
+  call feedkeys("+A\<tab>\<c-y>\<esc>", 'tx')
+  call assert_equal(l:expected, getline(1, '$'))
+
+  set completeopt&
+  bwipe!
+endf
+
+fun! Test_MU_scoped_completion_with_regexp()
+  new
+  set completeopt=menuone,noselect
+  set filetype=vim
+  set spell spelllang=en
+  let b:mucomplete_chain = { '^.*Comment$': ['uspl'], 'vimStr.*': [], 'default': ['cmd', 'keyp'] }
   call setline(1, ['" Vim rulez', 'let x = "rocks roc"', 'wh'])
   let l:expected = ['" Vim rules', 'let x = "rocks roc"', 'while']
   call cursor(1,1)

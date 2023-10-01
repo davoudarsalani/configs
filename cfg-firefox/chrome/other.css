@@ -1,5 +1,4 @@
 /* https://github.com/lbcat06/duskfox/blob/master/linux/userChrome.css */
-.tabbrowser-tab[selected="true"] .tab-background,
 #TabsToolbar,
 #PersonalToolbar,
 #urlbar,
@@ -7,6 +6,10 @@
 #urlbar-background,
 #main-window {
 	background: black !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+	background: var(--selected_tab_bg) !important;
 }
 
 .tab-background[selected="true"] {
