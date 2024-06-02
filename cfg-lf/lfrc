@@ -216,25 +216,26 @@ cmd open $ {{
                              else
                                  vlc -f --play-and-exit -- $fx &>/dev/null &
                              fi ;;
-        video/* )            vlc -f --play-and-exit -- $fx &>/dev/null & ;;
-        text/* )             $editor $fx ;;  ## NOTE do NOT redirect
-        application/json )   $editor $fx ;;
-        application/csv )    $editor $fx ;;
-        message/news )       $editor $fx ;;
-        */octet-stream )     libreoffice $fx &>/dev/null & ;;
-        application/msword ) libreoffice $fx &>/dev/null & ;;
-        */*spreadsheet* )    libreoffice $fx &>/dev/null & ;;
-        */*officedocument* ) libreoffice $fx &>/dev/null & ;;
-        */*opendocument*   ) libreoffice $fx &>/dev/null & ;;
-        */pdf )              xreader $fx &>/dev/null & ;;
-        image/* )            gpicview $fx &>/dev/null & ;;
-        */*tar )             exit ;;
-        */gzip )             exit ;;
-        *bzip2 )             exit ;;
-        */zip )              exit ;;
-        */*rar )             exit ;;
-        */*iso*image )       exit ;;
-        * )                  lf -remote "send $id open_with" ;;
+        video/* )                vlc -f --play-and-exit -- $fx &>/dev/null & ;;
+        text/* )                 $editor $fx ;;  ## NOTE do NOT redirect
+        application/json )       $editor $fx ;;
+        application/javascript ) $editor $fx ;;
+        application/csv )        $editor $fx ;;
+        message/news )           $editor $fx ;;
+        */octet-stream )         libreoffice $fx &>/dev/null & ;;
+        application/msword )     libreoffice $fx &>/dev/null & ;;
+        */*spreadsheet* )        libreoffice $fx &>/dev/null & ;;
+        */*officedocument* )     libreoffice $fx &>/dev/null & ;;
+        */*opendocument*   )     libreoffice $fx &>/dev/null & ;;
+        */pdf )                  xreader $fx &>/dev/null & ;;
+        image/* )                gpicview $fx &>/dev/null & ;;
+        */*tar )                 exit ;;
+        */gzip )                 exit ;;
+        *bzip2 )                 exit ;;
+        */zip )                  exit ;;
+        */*rar )                 exit ;;
+        */*iso*image )           exit ;;
+        * )                      lf -remote "send $id open_with" ;;
         # * ) for f in $fx; do setsid $OPENER $f &>/dev/null & done ;;
     esac
 }}
@@ -257,7 +258,7 @@ cmd open_with $ {{
                                   q ) exit ;;
                                   * ) lf -remote "send $id open_with_other" ;;
                               esac ;;
-            text/*|application/json|application/csv|message/news|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument*|*/*opendocument* )
+            text/*|application/json|application/javascript|application/csv|message/news|*/octet-stream|application/msword|*/*spreadsheet*|*/*officedocument*|*/*opendocument* )
                                 read -n 1 -p "$(olive 'open with') $($num_color '1') sublime $($num_color '2') gedit $($num_color '3') nano $($num_color '4') vim $($num_color '5') vi $($num_color '6') libreoffice $($num_color 'o') vim (in new window) " text_app
                                 printf '\n'
                                 case "$text_app" in

@@ -37,6 +37,7 @@ function tmux.add_rules_for_terminal(rule)
         ['fzf']                                           = rule,
         ['simplescreenrecorder']                          = rule,
         ['qutebrowser']                                   = rule,
+        ['sublime']                                       = rule,
     }) do
         hotkeys_popup.add_group_rules(group_name, group_data)
     end
@@ -369,6 +370,7 @@ local sublime_keys = {  -- {{{
                ['Ctrl+Shift+k']            = create_description(sublime_kb_fg, "delete line"),
                ['Ctrl+Shift+j']            = create_description(sublime_kb_fg, "join lines"),
                ['Ctrl+[/]']                = create_description(sublime_kb_fg, "indent/unindent"),
+               ['Ctrl+;']                  = create_description(sublime_kb_fg, "find word"),
                ['Ctrl+Shift+[/]']          = create_description(sublime_kb_fg, "fold/unfold"),
                ['Ctrl+k Ctrl+1']           = create_description(sublime_kb_fg, "fold all"),
                ['Ctrl+k Ctrl+j']           = create_description(sublime_kb_fg, "unfold all"),
@@ -407,16 +409,29 @@ local sublime_keys = {  -- {{{
                ['Ctrl+g']                  = create_description(sublime_kb_fg, "go to line"),
                ['Ctrl+.']                  = create_description(sublime_kb_fg, "next modification"),
                ['Ctrl+,']                  = create_description(sublime_kb_fg, "previous modification"),
-               ['Ctrl+F2']                 = create_description(sublime_kb_fg, "toggle bookmark"),
                ['F2']                      = create_description(sublime_kb_fg, "next bookmark"),
                ['Shift+F2']                = create_description(sublime_kb_fg, "previous bookmark"),
+               ['Ctrl+F2']                 = create_description(sublime_kb_fg, "toggle bookmark"),
                ['Ctrl+Shift+F2']           = create_description(sublime_kb_fg, "clear bookmarks"),
                ['Alt+F2']                  = create_description(sublime_kb_fg, "select all bookmarks"),
+               ['F9']                      = create_description(sublime_kb_fg, "sort lines"),
+               ['Ctrl+F9']                 = create_description(sublime_kb_fg, "sort lines (case sensitive)"),
                ['Ctrl+m']                  = create_description(sublime_kb_fg, "jump to matching bracket"),
                ['Ctrl+r']                  = create_description(sublime_kb_fg, "go to symbol"),
+               ['Ctrl+e']                  = create_description(sublime_kb_fg, "copy find string from buffer"),
                ['Ctrl+Shift+p']            = create_description(sublime_kb_fg, "command palette"),
                ['Ctrl+Alt+p']              = create_description(sublime_kb_fg, "quick switch project"),
                ['Ctrl+Alt+Shift+c Ctrl+d'] = create_description(sublime_kb_fg, "show diff popup"),
+
+               -- by me
+
+               ['Ctrl+&lt;Tab&gt;']        = create_description(sublime_kb_fg, "next tab"),
+               ['Ctrl+Shift+&lt;Tab&gt;']  = create_description(sublime_kb_fg, "previous tab"),
+               -- for ~/.config/sublime-text/Packages/User/my-module--move-cursor-to-top-or-bottom-of-screen.py
+               ['Alt+UP']                  = create_description(sublime_kb_fg, "move cursor to top of page"),
+               ['Alt+DOWN']                = create_description(sublime_kb_fg, "move cursor to bottom of page"),
+               -- for SublimeGit
+               ['Alt+g']                   = create_description(sublime_kb_fg, "git status"),
              }
     },
   },

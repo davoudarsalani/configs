@@ -218,6 +218,7 @@ function sccc(cur_cli_class)  -- {{{ set current client class
     elseif string.match(cur_cli_class, '^Nm.*$')          then abbr = 'NE'
     elseif cur_cli_class == 'ffplay'                      then abbr = 'FF'
     elseif cur_cli_class == 'Sublime_text'                then abbr = 'SU'
+    elseif cur_cli_class == 'dbgate'                      then abbr = 'DB'
     else                                                       abbr = '--'
     end
     cur_cli_cls:set_markup(abbr)
@@ -292,6 +293,7 @@ app = {
         { 'blueman manager',      function() run_script('/awesome-app-off', 'blueman_manager'     ) end},
         { 'calculator',           function() run_script('/awesome-app-off', 'calculator'          ) end},
         { 'chromium',             function() run_script('/awesome-app-off', 'chromium'            ) end},
+        { 'dbgate',               function() run_script('/awesome-app-off', 'dbgate'              ) end},
         { 'disks',                function() run_script('/awesome-app-off', 'disks'               ) end},
         { 'firefox',              function() run_script('/awesome-app-off', 'firefox'             ) end},
         { 'gedit',                function() run_script('/awesome-app-off', 'gedit'               ) end},
@@ -356,20 +358,20 @@ menubar.utils.terminal = terminal
 -- }}}
 -- topwibox {{{
 -- widgets & watches {{{
-rand_wall_wch   = create_watch('rand_wall', 600)
-jadi_wch        = create_watch('jadi', 600)
+rand_wall_wch   = create_watch('rand_wall', 3600)
+jadi_wch        = create_watch('jadi', 3600)
 
 separator       = create_textbox(' ')
 cur_scr_idx     = create_textbox('1')
 cur_cli_cls     = create_textbox('')
-clock           = wibox.widget.textclock('%I:%M', 30)  -- 30 is refresh interval in seconds
+clock           = wibox.widget.textclock('%I:%M', 45)  -- 30 is refresh interval in seconds
 weather         = create_textbox('')
-weather_wch     = create_watch('weather', 'update', 600)
+weather_wch     = create_watch('weather', 'update', 3600)
 kb_layout       = keyboardlayout()
 audio           = create_textbox('')
 audio_wch       = create_watch('audio', 5)
-battery         = create_textbox('')
-battery_wch     = create_watch('battery', 30)
+battery         = create_textbox('BA')
+battery_wch     = create_watch('battery', 600)
 memory_cpu      = create_textbox('')
 memory_cpu_wch  = create_watch('memory_cpu', 'usage', 5)
 harddisk        = create_textbox('')
@@ -377,18 +379,16 @@ harddisk_wch    = create_watch('harddisk', 'usage', 60)
 -- pkg_count       = create_textbox('')
 -- pkg_count_wch   = create_watch('pkg_count', 600)
 processes       = create_textbox('')
-processes_wch   = create_watch('processes', 10)
+processes_wch   = create_watch('processes', 60)
 -- idle            = create_textbox('')
 -- idle_wch        = create_watch('idle', 10)
 -- reputation      = create_textbox('')
 -- reputation_wch  = create_watch('reputation', 1800)
-visits          = create_textbox('')
-visits_wch      = create_watch('visits', 600)
 status          = create_textbox('')
 status_wch      = create_watch('status', 600)
 youtube         = create_textbox('YO')
 mbl_umbl        = create_textbox('')
-mbl_umbl_wch    = create_watch('mbl_umbl', 10)
+mbl_umbl_wch    = create_watch('mbl_umbl', 30)
 firewall        = create_textbox('')
 bluetooth       = create_textbox('')
 ymail           = create_textbox('')
@@ -396,11 +396,11 @@ ymail_wch       = create_watch('ymail', 1800)
 gmail           = create_textbox('')
 gmail_wch       = create_watch('gmail', 1800)
 webcam          = create_textbox('')
-webcam_wch      = create_watch('webcam', 5)
+webcam_wch      = create_watch('webcam', 10)
 git             = create_textbox('')
 git_wch         = create_watch('git', 60)
 clipboard       = create_textbox('')
-clipboard_wch   = create_watch('clipboard', 5)
+clipboard_wch   = create_watch('clipboard', 10)
 record          = create_textbox('RE')
 -- keylogger       = create_textbox('')
 -- keylogger_wch   = create_watch('klgr', 60)
@@ -412,7 +412,7 @@ tor             = create_textbox('')
 network         = create_textbox('')
 network_wch     = create_watch('network', 'usage', 1)
 ping            = create_textbox('')
-ping_wch        = create_watch('ping', 20)
+ping_wch        = create_watch('ping', 30)
 
 audacious       = create_textbox('')
 audacious_bar   = wibox.widget { max_value        = 1,
@@ -452,26 +452,25 @@ harddisk_ct        = create_container(harddisk, fg_d)
 processes_ct       = create_container(processes, fg_l)
 -- idle_ct            = create_container(idle, fg_l)
 -- reputation_ct      = create_container(reputation, fg_d)
-visits_ct          = create_container(visits, fg_d)
-status_ct          = create_container(status, fg_l)
-youtube_ct         = create_container(youtube, fg_d)
-mbl_umbl_ct        = create_container(mbl_umbl, fg_l)
-firewall_ct        = create_container(firewall, fg_d)
-bluetooth_ct       = create_container(bluetooth, fg_l)
-ymail_ct           = create_container(ymail, fg_d)
-gmail_ct           = create_container(gmail, fg_d)
-webcam_ct          = create_container(webcam, fg_l)
-git_ct             = create_container(git, fg_d)
-clipboard_ct       = create_container(clipboard, fg_l)
-record_ct          = create_container(record, fg_d)
--- keylogger_ct       = create_container(keylogger, fg_d)
-established_ct     = create_container(established, fg_l)
-open_ports_ct      = create_container(open_ports, fg_d)
-tor_ct             = create_container(tor, fg_l)
-network_ct         = create_container(network, fg_d)
-ping_ct            = create_container(ping, fg_l)
-audacious_ct       = create_container(audacious, fg_d)
-audacious_bar_v_ct = create_container(audacious_bar_v, fg_d)
+status_ct          = create_container(status, fg_d)
+youtube_ct         = create_container(youtube, fg_l)
+mbl_umbl_ct        = create_container(mbl_umbl, fg_d)
+firewall_ct        = create_container(firewall, fg_l)
+bluetooth_ct       = create_container(bluetooth, fg_d)
+ymail_ct           = create_container(ymail, fg_l)
+gmail_ct           = create_container(gmail, fg_l)
+webcam_ct          = create_container(webcam, fg_d)
+git_ct             = create_container(git, fg_l)
+clipboard_ct       = create_container(clipboard, fg_d)
+record_ct          = create_container(record, fg_l)
+-- keylogger_ct       = create_container(keylogger, fg_l)
+established_ct     = create_container(established, fg_d)
+open_ports_ct      = create_container(open_ports, fg_l)
+tor_ct             = create_container(tor, fg_d)
+network_ct         = create_container(network, fg_l)
+ping_ct            = create_container(ping, fg_d)
+audacious_ct       = create_container(audacious, fg_l)
+audacious_bar_v_ct = create_container(audacious_bar_v, fg_l)
 -- }}}
 -- buttons {{{
 local taglist_buttons = gears.table.join( awful.button({   }, 1, function(t) t:view_only() end),
@@ -498,8 +497,6 @@ memory_cpu_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_scri
 harddisk_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'harddisk', 'partitions') end) ))
 
 -- reputation_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'reputation') end) ))
-
-visits_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'visits') end) ))
 
 status_ct:buttons(gears.table.join( awful.button({ }, 1, function() run_script('awesome-widgets', 'status') end) ))
 
@@ -586,7 +583,6 @@ awful.screen.connect_for_each_screen( function(s)
           separator, processes_ct,
           -- separator, idle_ct,
           -- separator, reputation_ct,
-          separator, visits_ct,
           separator, status_ct,
           separator, youtube_ct,
           separator, mbl_umbl_ct,
@@ -699,6 +695,7 @@ globalkeys = gears.table.join(
    awful.key({         }, 'KP_Delete',   function() run_script('awesome-widgets', 'audio', 'full_info') end, create_description('full info', 'audio')),  -- 0xff90
 -- awful.key({         }, 'KP_Add',      function() run_script('awesome-widgets', 'audio', 'connect_to_headset') end, create_description('connect to headset', 'audio')),  -- 0xffab
    awful.key({         }, '0x1008ff30',  function() run_script('awesome-app-off', 'sublime') end, create_description('', 'sublime')),  -- JUMP_2 in GREEN keyboard (key with the sun-like symbol)
+   awful.key({         }, '0x1008ff1b',  function() run_script('awesome-app-off', 'dbgate') end, create_description('', 'dbgate')),  -- JUMP_2 in GREEN keyboard (key with the search symbol)
    awful.key({         }, '0x1008ff14',  function() run_script('awesome-widgets', 'audacious', 'play_pause') end, create_description('play/pause', 'audacious')),  -- JUMP_2 in GREEN keyboard
    awful.key({ M       }, '0x1008ff14',  function() run_script('awesome-widgets', 'audacious', 'songs') end, create_description('songs', 'audacious')),  -- JUMP_2 in GREEN keyboard
    awful.key({         }, '0x1008ff16',  function() run_script('awesome-widgets', 'audacious', 'prev') end, create_description('prev', 'audacious')),  -- JUMP_2 in GREEN keyboard
@@ -730,10 +727,9 @@ globalkeys = gears.table.join(
    awful.key({ M, S    }, 'q',           function() run_script('awesome-widgets', 'clipboard', 'stop') end, create_description('stop', 'clipboard')),
    awful.key({ M       }, 'w',           function() run_script('screenshot.py') end, create_description('', 'screenshot')),
    awful.key({ M       }, 'e',           function() run_script('todo') end, create_description('', 'todo')),
-   awful.key({ M       }, 'r',           function() run_script('fingil') end, create_description('', 'fingil')),
+   awful.key({ M       }, 'r',           function() end, create_description('', '--')),
    awful.key({ M       }, 't',           function() run_script('0-test') end, create_description('0-test', '0-test{,.py}')),
    awful.key({ M, S    }, 't',           function() run_script('0-test.py') end, create_description('0-test.py', '0-test{,.py}')),
-   awful.key({ M       }, 'y',           function() run_script('awesome-widgets', 'visits') end, create_description('', 'visits')),
    awful.key({ M       }, 'u',           function() run_script('awesome-widgets', 'established', 'message') end, create_description('', 'established')),
    awful.key({ M       }, 'i',           function() run_script('awesome-widgets', 'ymail') end, create_description('ymail', 'e-mail')),
    awful.key({ M, S    }, 'i',           function() run_script('awesome-widgets', 'gmail') end, create_description('gmail', 'e-mail')),

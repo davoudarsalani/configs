@@ -49,7 +49,7 @@ echo "\
 ## }}}
 ## export {{{
 HISTSIZE=  HISTFILESIZE=  ## infinite history
-export HISTIGNORE='a:c:d:e:j:k:l:p:r:s:w:l:s:w:lf:lfa:lfc:lfd:lfe:lfg:lfj:lfk:lfl:lfp:lfr:lfs:lfw:ls:q'
+export HISTIGNORE='a:c:d:e:j:k:n:p:r:s:t:v:w:lf:lfa:lfc:lfd:lfe:lfj:lfk:lfn:lfp:lfr:lfs:lft:lfv:lfw:q'
 export HISTCONTROL=erasedups:ignoredups:ignorespace
 export HISTTIMEFORMAT='%Y%m%d%H%M%S '
 export PATH="${PATH}:${HOME}/main/scripts"
@@ -341,35 +341,39 @@ set -o vi  ## turn on vi mode
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
+bind '"\ed":"django"'  ## alt+d
+bind '"\ef":"find . -mindepth 1 -type f -iname "*.json""'  ## alt+f
 bind '"\eg":"git_ -d ."'  ## alt+g
-bind '"\er":"rg_ -d ."'  ## alt+r
 bind '"\ek":"kaddyify -s -d ."'  ## alt+k
+bind '"\er":"rg_ -d ."'  ## alt+r
 ## }}}
 ## aliases {{{
 alias a='cd "$HOME"/main/ariel/'
-alias c='cd "$HOME"/main/cpanel-logs/'
+alias c='cd "$HOME"/main/configs/'
 alias d='cd "$HOME"/main/downloads/'
 alias e='cd "$HOME"/main/eterna/'
-alias g='cd "$HOME"/main/globaldaily/'
 alias j='cd "$HOME"/main/journal/'
 alias k='cd "$HOME"/kaddy/'
-alias l='cd "$HOME"/main/linux/'
-alias p='cd "$HOME"/main/public/'
+alias n='cd "$HOME"/main/nova/'
+alias p='cd "$HOME"/main/packages-and-modules/'
 alias r='cd "$HOME"/main/rcc/'
 alias s='cd "$HOME"/main/scripts/'
+alias t='cd "$HOME"/main/trash/'
+alias v='cd "$HOME"/main/venvs/'
 alias w='cd "$HOME"/main/website/'
 alias lf='\lf "$HOME"/main/downloads/'
 alias lfa='\lf "$HOME"/main/ariel/'
-alias lfg='\lf "$HOME"/main/globaldaily'
-alias lfj='\lf "$HOME"/main/journal'
-alias lfc='\lf "$HOME"/main/cpanel-logs/'
+alias lfc='\lf "$HOME"/main/configs/'
 alias lfd='\lf "$HOME"/main/downloads/'
 alias lfe='\lf "$HOME"/main/eterna/'
+alias lfj='\lf "$HOME"/main/journal'
 alias lfk='\lf "$HOME"/kaddy/'
-alias lfl='\lf "$HOME"/main/linux/'
-alias lfp='\lf "$HOME"/main/public/'
+alias lfn='\lf "$HOME"/main/nova/'
+alias lfp='\lf "$HOME"/main/packages-and-modules/'
 alias lfr='\lf "$HOME"/main/rcc/'
 alias lfs='\lf "$HOME"/main/scripts/'
+alias lft='\lf "$HOME"/main/trash/'
+alias lfv='\lf "$HOME"/main/venvs/'
 alias lfw='\lf "$HOME"/main/website/'
 alias ls="\ls $LS_FLAGS"
 alias cp='cp -v'
@@ -526,7 +530,7 @@ function webpify {  ## {{{
 }
 ## }}}
 function reset_bash_history {  ## {{{
-    \cp -v ~/main/linux/cfg-bash/.bash_history "$HOME"/.bash_history
+    \cp -v ~/main/configs/cfg-bash/.bash_history "$HOME"/.bash_history
 }
 ## }}}
 function reset_sublime_configs {  ## {{{
@@ -537,8 +541,9 @@ function reset_sublime_configs {  ## {{{
         return
     }
 
+    \rm -rf "$HOME"/.cache/sublime-text/ && \
     \rm -rf "$HOME"/.config/sublime-text/ && \
-    \cp -r "$HOME"/main/linux/cfg-sublime/ "$HOME"/.config/sublime-text/ && \
+    \cp -r "$HOME"/main/configs/cfg-sublime/ "$HOME"/.config/sublime-text/ && \
     \rm "$HOME"/.config/sublime-text/0-path.txt
 }
 ## }}}
@@ -705,7 +710,7 @@ function va {  ## {{{
 
     ## return if another virtual env is already acticated
     [ "$VIRTUAL_ENV" ] && {
-        red "another virtual env is already acticated: (${VIRTUAL_ENV})"
+        red "another virtual env is already activated: (${VIRTUAL_ENV})"
         return
     }
 
@@ -850,7 +855,6 @@ function less {  ## {{{
 # }
 ## }}}
 ## }}}
-
 
 # if [[ "$PWD" =~ $HOME/main/website ]]; then
 #     va "$HOME"/main/website/venv  ## exceptionally passing full dir path because we may be way inside ~/main/website and therefore 'va' won't work

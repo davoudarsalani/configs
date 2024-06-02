@@ -1,6 +1,0 @@
-logging-not-lazy:10::Use lazy % formatting in logging functions
-logging-not-lazy:11::Use lazy % formatting in logging functions
-logging-not-lazy:12::Use lazy % formatting in logging functions
-logging-not-lazy:13::Use lazy % formatting in logging functions
-logging-not-lazy:14::Use lazy % formatting in logging functions
-logging-not-lazy:15::Use lazy % formatting in logging functions
