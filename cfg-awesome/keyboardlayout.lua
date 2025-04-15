@@ -15,7 +15,7 @@ local gdebug = require("gears.debug")
 --- Keyboard Layout widget.
 -- awful.widget.keyboardlayout
 local keyboardlayout = { mt = {} }
-local red = os.getenv("red")
+local gruvbox_red = os.getenv("gruvbox_red")
 
 -- As to the country-code-like symbols below, refer to the names of XKB's
 -- data files in /.../xkb/symbols/*.
@@ -126,7 +126,7 @@ local function update_status (self)
 
         if name then
             if     name == "us" then text = "EN"
-            elseif name == "ir" then text = "<span color=\"" .. red .. "\">FA</span>"
+            elseif name == "ir" then text = "<span color=\"" .. gruvbox_red .. "\">FA</span>"
             else                     text = name
             end
         end

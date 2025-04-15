@@ -2,12 +2,11 @@
 [greenclip]
   blacklisted_applications = []
   static_history = [
-  "nameserver 178.22.122.100 nameserver 185.51.200.2",
-  "get transport obfs4 > bridges@torproject.org",
-  "dm-tool lock"
+    "get transport obfs4 > bridges@torproject.org",
+    "dm-tool lock"
   ]
   enable_image_support = false
-  history_file = "/home/nnnn/.cache/greenclip.history"
+  history_file = "/tmp/greenclip.history"
   image_cache_directory = "/tmp/greenclip"
   max_history_length = 50
   max_selection_size_bytes = 0

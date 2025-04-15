@@ -1,0 +1,99 @@
+[manager]
+ratio    = [ 0, 3, 5 ]
+linemode = "size"
+
+[opener]
+edit = [
+	{ run = 'vim         "$1"',               desc = "vim",                for = "unix", block = true  },
+	{ run = 'code        "$@" &>/dev/null &', desc = "visual studio code", for = "unix", orphan = true },
+	{ run = 'subl        "$@" &>/dev/null &', desc = "sublime",            for = "unix", orphan = true },
+	{ run = 'gedit       "$@" &>/dev/null &', desc = "gedit",              for = "unix", orphan = true },
+	{ run = 'libreoffice "$@" &>/dev/null &', desc = "libreoffice",        for = "unix" },
+	{ run = 'more        "$1"',               desc = "less",               for = "unix", block = true },
+	{ run = 'less        "$1"',               desc = "more",               for = "unix", block = true },
+
+	## do NOT "$HOME" -> ~
+	{ run = 'highlight --config-file="$HOME"/.config/highlight/anotherdark.theme -O xterm256 --line-numbers --force "$1" | less -R', desc = "highlight", for = "unix", block = true },
+]
+open = [
+	{ run = 'xdg-open "$1"',                                           desc = "OPEN",            for = "unix" },
+]
+reveal = [
+	{ run = 'thunar "$@" &>/dev/null &', desc = "thunar", for = "unix" },
+
+	## Info
+	{ run = '''
+	  file --mime-type "$1" -bL;
+	  echo "-------------------------";
+	  file "$1";
+	  echo "-------------------------";
+	  [ -f "$1" ] && mediainfo "$1" && echo "-------------------------";
+	  echo -e "\nPress enter to exit"; read _''', desc = "Info", for = "unix", block = true },
+]
+# extract = [
+# ]
+play = [
+	{ run = 'vlc -f --play-and-exit -- "$@" &>/dev/null &', desc = "vlc",       for = "unix", orphan = true },
+	{ run = 'audacious "$@" &>/dev/null &',                 desc = "audacious", for = "unix", orphan = true },
+]
+
+[open]
+rules = [
+	# Folder
+	{ name = "*/", use = [ "reveal" ] },
+
+	# Media
+	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
+
+	# Text
+	{ mime = "application/*xml*",         use = [ "edit", "reveal" ] },
+	{ mime = "application/*html*",        use = [ "edit", "reveal" ] },
+	{ mime = "application/{json,ndjson}", use = [ "edit", "reveal" ] },
+	{ mime = "application/csv",           use = [ "edit", "reveal" ] },
+	{ mime = "application/msword",        use = [ "edit", "reveal" ] },
+	{ mime = "application/rtf",           use = [ "edit", "reveal" ] },
+	{ mime = "application/x-csh",         use = [ "edit", "reveal" ] },
+	{ mime = "application/x-sh",          use = [ "edit", "reveal" ] },
+	{ mime = "message/news",              use = [ "edit", "reveal" ] },
+	{ mime = "text/*",                    use = [ "edit", "reveal" ] },
+	{ mime = "*/*officedocument*",        use = [ "edit", "reveal" ] },
+	{ mime = "*/*opendocument*",          use = [ "edit", "reveal" ] },
+	{ mime = "*/*spreadsheet*",           use = [ "edit", "reveal" ] },
+	{ mime = "*/javascript",              use = [ "edit", "reveal" ] },
+	{ mime = "*/octet-stream",            use = [ "edit", "reveal" ] },
+
+	# Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = [ "extract", "reveal" ] },
+	{ mime = "application/{*bzip*,*iso*image}", use = [ "extract", "reveal" ] },
+
+	# Empty file
+	{ mime = "inode/empty", use = [ "edit", "reveal" ] },
+
+    # Fallback
+	{ name = "*", use = [ "open", "reveal" ] },
+]
+
+[plugin]
+preloaders = []
+prepend_previewers = [
+    { name = "*00-note", run = "preview-head" },
+
+    { name = "*.mkv",    run = "preview-mediainfo" },
+    { name = "*.mp4",    run = "preview-mediainfo" },
+    { name = "*.mp3",    run = "preview-mediainfo" },
+    { name = "*.ogg",    run = "preview-mediainfo" },
+
+    { name = "*.apng",    run = "preview-mediainfo" },
+    { name = "*.avif",    run = "preview-mediainfo" },
+    { name = "*.bmp",     run = "preview-mediainfo" },
+    { name = "*.gif",     run = "preview-mediainfo" },
+    { name = "*.jpeg",    run = "preview-mediainfo" },
+    { name = "*.jpg",     run = "preview-mediainfo" },
+    { name = "*.png",     run = "preview-mediainfo" },
+    { name = "*.svg",     run = "preview-mediainfo" },
+    { name = "*.svg+xml", run = "preview-mediainfo" },
+    { name = "*.tiff",    run = "preview-mediainfo" },
+    { name = "*.webp",    run = "preview-mediainfo" },
+
+    { name = "*.pdf",    run = "preview-mediainfo" },
+]

@@ -1,0 +1,23 @@
+[manager]
+prepend_keymap = [
+    { on = [ "`", "a" ], run = "cd ~/main/project0/",     desc = "cd ~/main/project0" },
+    { on = [ "`", "b" ], run = "cd ~/main/project1/",   desc = "cd ~/main/project1" },
+    { on = [ "`", "c" ], run = "cd ~/main/configs/",   desc = "cd ~/main/configs" },
+    { on = [ "`", "d" ], run = "cd ~/main/downloads/", desc = "cd ~/main/downloads" },
+    { on = [ "`", "e" ], run = "cd ~/main/project2/",    desc = "cd ~/main/project2" },
+    { on = [ "`", "h" ], run = "cd ~/",                desc = "cd ~" },
+    { on = [ "`", "k" ], run = "cd ~/kaddy/",          desc = "cd ~/kaddy" },
+    { on = [ "`", "n" ], run = "cd ~/main/project3/",      desc = "cd ~/main/project3" },
+    { on = [ "`", "p" ], run = "cd ~/main/pypi/",      desc = "cd ~/main/pypi" },
+    { on = [ "`", "r" ], run = "cd ~/main/project4/",       desc = "cd ~/main/project4" },
+    { on = [ "`", "s" ], run = "cd ~/main/scripts/",   desc = "cd ~/main/scripts" },
+    { on = [ "`", "t" ], run = "cd ~/main/trash/",     desc = "cd ~/main/trash" },
+    { on = [ "`", "v" ], run = "cd ~/main/venvs/",     desc = "cd ~/main/venvs" },
+    { on = [ "`", "w" ], run = "cd ~/main/project5/",   desc = "cd ~/main/project5" },
+
+    { on = "<Home>", run = "arrow top", desc = "Top" },
+    { on = "<End>",  run = "arrow bot", desc = "Bottom" },
+
+    ## for toggle-pane plugin
+    { on = "T",  run = "plugin toggle-pane min-preview", desc = "toggle pane" },
+]

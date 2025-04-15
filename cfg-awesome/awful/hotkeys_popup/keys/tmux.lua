@@ -12,440 +12,375 @@
 -- @tparam table rule Rules to match a window containing a tmux session.
 
 local hotkeys_popup = require('awful.hotkeys_popup.widget')
-local tmux          = {}
-local mode_fg       = os.getenv('blue')
-local plugin_fg     = os.getenv('grey')
-local tmux_kb_fg    = os.getenv('olive')
-local vim_kb_fg     = os.getenv('orange')
-local lf_kb_fg      = os.getenv('yellow')
-local fzf_kb_fg     = os.getenv('cyan')
-local sublime_kb_fg = os.getenv('brown')
-local simplescreenrecorder_kb_fg = os.getenv('purple')
-local qutebrowser_kb_fg = os.getenv('pink')
+local tmux = {}
 
-function create_description(frgrnd, dscrptn)
-    return "   <span color='" .. frgrnd .. "'>" .. dscrptn .. "</span>"
+local kb_fg__fzf     = os.getenv('gruvbox_purple')
+local kb_fg__sublime = os.getenv('gruvbox_orange')
+local kb_fg__tmux    = os.getenv('gruvbox_aqua')
+local kb_fg__vscode  = os.getenv('gruvbox_green')
+local kb_fg__yazi    = os.getenv('gruvbox_yellow')
+
+-- shares structure with create_description function is rc.lua
+function create_description(kb_fg, desc)
+  return '  <span color="' .. kb_fg .. '">' .. desc .. '</span>'
 end
 
 function tmux.add_rules_for_terminal(rule)
     for group_name, group_data in pairs({
-        ['tmux']                                          = rule,
-        ['tmux: prev/next pane/window, resize pane, etc'] = rule,
-        ['tmux: copy']                                    = rule,
-        ['vim']                                           = rule,
-        ['lf']                                            = rule,
-        ['fzf']                                           = rule,
-        ['simplescreenrecorder']                          = rule,
-        ['qutebrowser']                                   = rule,
-        ['sublime']                                       = rule,
+        ['fzf']     = rule,
+        ['sublime'] = rule,
+        ['tmux']    = rule,
+        ['vscode']  = rule,
+        ['yazi']    = rule,
     }) do
         hotkeys_popup.add_group_rules(group_name, group_data)
     end
 end
 
-local tmux_keys = {  -- {{{
--- tmux {{{
-  ['tmux'] = {
-    {
-      modifiers = {'Prefix'},
-      keys = {
-               s                         = create_description(tmux_kb_fg, "display sessions tree"),
-               w                         = create_description(tmux_kb_fg, "display windows, sessions and panes tree"),
-               p                         = create_description(tmux_kb_fg, "display panes numbers"),
-               q                         = create_description(tmux_kb_fg, "display panes numbers"),
-               r                         = create_description(tmux_kb_fg, "source config and reload"),
-               m                         = create_description(tmux_kb_fg, "toggle mouse"),
-               [',']                     = create_description(tmux_kb_fg, "rename window"),
-               c                         = create_description(tmux_kb_fg, "new window"),
-               f                         = create_description(tmux_kb_fg, "find window"),
-               i                         = create_description(tmux_kb_fg, "display window information"),
-               k                         = create_description(tmux_kb_fg, "kill server"),
-               l                         = create_description(tmux_kb_fg, "go to last window"),
-               ['&amp;']                 = create_description(tmux_kb_fg, "kill window"),
-               ['$']                     = create_description(tmux_kb_fg, "rename session"),
-               ['!']                     = create_description(tmux_kb_fg, "turn pane into window"),
-               n                         = create_description(tmux_kb_fg, "new session"),
-               o                         = create_description(tmux_kb_fg, "kill other sessions"),
-               ['Right']                 = create_description(tmux_kb_fg, "new pane right"),
-               ['Down']                  = create_description(tmux_kb_fg, "new pane down"),
-               x                         = create_description(tmux_kb_fg, "kill pane"),
-               [':']                     = create_description(tmux_kb_fg, "enter command mode"),
-               t                         = create_description(tmux_kb_fg, "display clock"),
-               ['(']                     = create_description(tmux_kb_fg, "previous session"),
-               [')']                     = create_description(tmux_kb_fg, "next session"),
-               d                         = create_description(tmux_kb_fg, "detach session"),
-               l                         = create_description(tmux_kb_fg, "go to last previously-used window"),
-               z                         = create_description(tmux_kb_fg, "zoom/unzoom pane"),
-               ['~']                     = create_description(tmux_kb_fg, "display messages"),
-               ['Shift+,']               = create_description(tmux_kb_fg, "display window options"),
-               ['Shift+.']               = create_description(tmux_kb_fg, "display pane options"),
-               ['Ctrl+x']                = create_description(tmux_kb_fg, "toggle synchronized panes"),
-               ['Space']                 = create_description(tmux_kb_fg, "change layout"),
-               ['Ctrl+s']                = create_description(tmux_kb_fg, "<span color='" .. plugin_fg .. "'>[resurrect]</span> save environment"),
-               ['Ctrl+r']                = create_description(tmux_kb_fg, "<span color='" .. plugin_fg .. "'>[resurrect]</span> restore environment"),
-               [':move-window NUM']      = create_description(tmux_kb_fg, "move window to index NUM"),
-               [':kill-server']          = create_description(tmux_kb_fg, "kill tmux"),
-               [':list-sessions']        = create_description(tmux_kb_fg, "list sessions"),
-               [':new']                  = create_description(tmux_kb_fg, "new session"),
-               [':new -s NAME']          = create_description(tmux_kb_fg, "new session with a name"),
-               [':detach']               = create_description(tmux_kb_fg, "detach session"),
-               [':kill-session']         = create_description(tmux_kb_fg, "kill session"),
-               [':kill-session -a']      = create_description(tmux_kb_fg, "kill other sessions"),
-               [':kill-session -t NAME'] = create_description(tmux_kb_fg, "kill NAME session"),
-               [':new-window']           = create_description(tmux_kb_fg, "new window"),
-               [':new-window -n NAME']   = create_description(tmux_kb_fg, "new window"),
-               [':new-window -a']        = create_description(tmux_kb_fg, "open new window here"),
-               [':swap-window -t NUM']   = create_description(tmux_kb_fg, "swap current window with window NUM"),
-               [':swap-window -t -1']    = create_description(tmux_kb_fg, "swap current window with prev window"),
-               [':swap-window -t +1']    = create_description(tmux_kb_fg, "swap current window with next window"),
-               [':select-pane -T NAME']  = create_description(tmux_kb_fg, "rename current pane"),
-               [':swap-pane -t NUM']     = create_description(tmux_kb_fg, "swap current pane with pane NUM"),
-               [':swap-pane -t -1']      = create_description(tmux_kb_fg, "swap current pane with prev pane"),
-               [':swap-pane -t +1']      = create_description(tmux_kb_fg, "swap current pane with next pane"),
-             }
-    }
-  },
--- }}}
--- tmux: prev/next pane/window, resize pane, etc {{{
-  ['tmux: prev/next pane/window, resize pane, etc'] = {
-    {
-      modifiers = {'Ctrl'},
-      keys = {
-               d               = create_description(tmux_kb_fg, "kill window"),
-               ['Left']        = create_description(tmux_kb_fg, "previous window"),
-               ['Right']       = create_description(tmux_kb_fg, "next window"),
-               ['Shift+Left']  = create_description(tmux_kb_fg, "pane left"),
-               ['Shift+Right'] = create_description(tmux_kb_fg, "pane right"),
-               ['Shift+Up']    = create_description(tmux_kb_fg, "pane up"),
-               ['Shift+Down']  = create_description(tmux_kb_fg, "pane down"),
-               ['Alt+Left']    = create_description(tmux_kb_fg, "resize pane to left"),
-               ['Alt+Right']   = create_description(tmux_kb_fg, "resize pane to right"),
-               ['Alt+Up']      = create_description(tmux_kb_fg, "resize pane to up"),
-               ['Alt+Down']    = create_description(tmux_kb_fg, "resizepane to down"),
-             }
-    }
-  },
--- }}}
--- tmux: copy {{{
-  ['tmux: copy'] = {
-    {
-      modifiers = {},
-      keys = {
-               ['1  Prefix+[']                = create_description(tmux_kb_fg, "enter copy mode"),
-               ['2  arrowkeys']               = create_description(tmux_kb_fg, "<span color='" .. mode_fg .. "'>C</span> navigate to the position"),
-               ['3a  v+arrowkeys']            = create_description(tmux_kb_fg, "<span color='" .. mode_fg .. "'>C</span> start selecting text"),
-               ['3b  Ctrl+v+space+arrowkeys'] = create_description(tmux_kb_fg, "<span color='" .. mode_fg .. "'>C</span> start selecting block"),
-               ['4  Ctrl+y']                  = create_description(tmux_kb_fg, "<span color='" .. mode_fg .. "'>C</span> copy selected text to clipboard"),
-               ['5  Prefix+]']                = create_description(tmux_kb_fg, "paste")
-             }
-    }
-  },
--- }}}
-}
--- }}}
-
-local vim_keys = {  -- {{{
-  ['vim'] = {
-    {
-      modifiers = {},
-      keys = {
-               F1                       = create_description(vim_kb_fg, "quit"),
-               F2                       = create_description(vim_kb_fg, "save"),
-               F3                       = create_description(vim_kb_fg, "save and quit"),
-               F4                       = create_description(vim_kb_fg, "run"),
-               F5                       = create_description(vim_kb_fg, "watch"),
-               F6                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> <span color='" .. plugin_fg .. "'>[ultisnips]</span> snippets"),
-               F7                       = create_description(vim_kb_fg, "replace"),
-               F8                       = create_description(vim_kb_fg, "toggle cursorcolumn"),
-               F9                       = create_description(vim_kb_fg, "pymodelint (in python)"),
-               K                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> show help/doc on current word in preview window"),
-               TT                       = create_description(vim_kb_fg, "move current line to top screen"),
-               MM                       = create_description(vim_kb_fg, "move current line to middle of screen"),
-               BB                       = create_description(vim_kb_fg, "move current line to bottom of screen"),
-               f                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[easymotion]</span>"),
-               o                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>V</span> move to other end of selection"),
-               F                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[easymotion (2 chars)]</span>"),
-               gcc                      = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> comment/uncomment"),
-               gT                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> prev tab"),
-               gt                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> next tab"),
-               gd                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> go to definition(i.e. first occurrence) of the current word"),
-               gv                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> go to the previously selected text"),
-               J                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N/V</span> join lines putting one space between them"),
-               gJ                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N/V</span> join lines putting no space between them"),
-               u                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> undo"),
-               U                        = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> redo"),
-               zR                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> open all folds"),
-               zM                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> close all folds"),
-               zf                       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> fold selection"),
-               ['Return']               = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle seach highlighting"),
-               ['g&amp;']               = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> apply last substitute on all lines"),
-               ['&amp;']                = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> repeat last substitute on all current line"),
-               ['"+LETTER+p']           = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> paste register LETTER"),
-               ['@+LETTER+p']           = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> paste register LETTER"),
-               ['m+LETTER']             = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> create/delete LETTER mark"),
-               ['`+LETTER']             = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump to LETTER mark position"),
-               ["'+LETTER"]             = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump to LETTER mark line"),
-               ['m+leader']             = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> delete all marks"),
-               ['`+`']                  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump between last two used lines"),
-               ['`+.']                  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump to last modified position"),
-               ["'+."]                  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump to last modified line"),
-               ['{/}']                  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> jump to prev/next bash/python function"),
-               ['~']                    = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> invert case of current character"),
-               ['q+/']                  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> display prev searches (navigate then Ctrl+c to paste in search bar)"),
-               [':g/STRING/d']          = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> delete lines containing STRING"),
-               [':g!/STRING/d']         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> delete lines not containing STRING"),
-               [':r!COMMAND']           = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> print command output into buffer"),
-               [':r FILEPATH']          = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> import a file's content"),
-               [':%s/STRING/SUB/gc']    = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> interactive substitution (y:yes, n:no, a:all, q:quit)"),
-               [':+(C-d)']              = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> displays a list of commands"),
-               [':11,25s/STRING/SUB/g'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> replace only on lines 11 to 25"),
-               [':.,25s/STRING/SUB/g']  = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> replace only on current line to 25"),
-               [':.,.+5s/STRING/SUB/g'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> replace only on current line to 5 lines after that"),
-               [':.,$s/STRING/SUB/g']   = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> replace only on current line to end of document"),
-               [':reg']                 = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> show registers"),
-               ['!sort']                = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>V</span> sort selected lines"),
-               [':read ! COAMMAND']     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> insert output of bash command in next line"),
-               [':retab']               = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> turn tabs into spaces"),
-               [':Filter STRING']       = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>C</span> display lines containing STRING in a split"),
-               ['STRING+&lt;Tab&gt;']   = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> <span color='" .. plugin_fg .. "'>[ultisnips]</span> expand snippet"),  -- NOTE do NOT use < and > instead of &lt; and &gt;
-               ['STRING+&lt;S-Tab&gt;'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> sparkup expand snippet"),
-             }
-    },
-    {
-      modifiers = {'Ctrl'},
-      keys = {
-               d         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> unindent"),
-               h         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[signify]</span> hunk diff"),
-               j         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> <span color='" .. plugin_fg .. "'>[ultisnips]</span> jump forward  <span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[signify]</span> next hunk"),
-               k         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> <span color='" .. plugin_fg .. "'>[ultisnips]</span> jump backward  <span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[signify]</span> prev hunk"),
-               n         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N/V</span> <span color='" .. plugin_fg .. "'>[multicursor]</span> select current word/selection, <span color='" .. mode_fg .. "'>I</span> mucomplete"),
-               o         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> insert new line without leaving normal mode"),
-               p         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[multicursor]</span> go to previous match"),
-               t         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> indent"),
-               u         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[signify]</span> undo hunk"),
-               y         = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> copy yanked text to clipboard"),
-               ['Space'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>I</span> jedi omnicomplition"),
-             }
-    },
-    {
-      modifiers = {'Leader'},
-      keys = {
-               ['0'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> turn jedi off"),
-               ['1'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle line number"),
-               ['2'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle signify"),
-               ['3'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle undotree"),
-               ['4'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle better whitespace"),
-               ['5'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle mucomplete"),
-               ['6'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle syntactic"),
-               ['7'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle illuminate"),
-               ['8'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle tagbar"),
-               ['9'] = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle colorizer"),
-               a     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> ascending numbers"),
-               b     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> black (in python)"),
-               bd    = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> black diff (in python)"),
-               d     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[jedi]</span> jump to current word's def/class"),
-               k     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[jedi]</span> show docstring of function/class"),
-               q     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> toggle quickfix"),
-               u     = create_description(vim_kb_fg, "<span color='" .. mode_fg .. "'>N</span> <span color='" .. plugin_fg .. "'>[jedi]</span> usages of current word"),
-             }
-    }
-  },
-}
--- }}}
-
-local lf_keys = {  -- {{{
-  ['lf'] = {
-    {
-      modifiers = {'Ctrl'},
-      keys = {
-               c = create_description(lf_kb_fg, "commands"),
-               p = create_description(lf_kb_fg, "prev command"),
-               n = create_description(lf_kb_fg, "next command"),
-               t = create_description(lf_kb_fg, "fzf select"),
-             }
-    },
-    {
-      modifiers = {'Alt'},
-      keys = {
-               c = create_description(lf_kb_fg, "fzf cd"),
-               r = create_description(lf_kb_fg, "fzf recent directories"),
-             }
-    },
-    {
-      modifiers = {'r'},
-      keys = {
-               ['Right'] = create_description(lf_kb_fg, "replicate horizontally"),
-               ['Down']  = create_description(lf_kb_fg, "replicate vertically"),
-             }
-    },
-    {
-      modifiers = {},
-      keys = {
-               ["'"]    = create_description(lf_kb_fg, "marks"),
-               ['o']    = create_description(lf_kb_fg, "open"),
-               ['w/W']  = create_description(lf_kb_fg, "toggle preview"),
-             }
-    },
-  },
-}
--- }}}
-
-local fzf_keys = {  -- {{{
+local fzf_keys = {
   ['fzf'] = {
     {
       modifiers = {},
       keys = {
-               ['Tab'] = create_description(fzf_kb_fg, "select/unselect"),
+               ['Tab'] = create_description(kb_fg__fzf, 'select/unselect'),
              }
     },
     {
       modifiers = {'Ctrl'},
       keys = {
-               a = create_description(fzf_kb_fg, "select all"),
-               j = create_description(fzf_kb_fg, "scroll down preview"),
-               k = create_description(fzf_kb_fg, "scroll up preview"),
-               s = create_description(fzf_kb_fg, "toggle sort"),
-               t = create_description(fzf_kb_fg, "select"),
-               v = create_description(fzf_kb_fg, "paste  selected item preceded with vim"),
-               w = create_description(fzf_kb_fg, "toggle preview"),
-               y = create_description(fzf_kb_fg, "copy path to clipboard"),
+               a = create_description(kb_fg__fzf, 'select all'),
+               j = create_description(kb_fg__fzf, 'scroll down preview'),
+               k = create_description(kb_fg__fzf, 'scroll up preview'),
+               s = create_description(kb_fg__fzf, 'toggle sort'),
+               t = create_description(kb_fg__fzf, 'select'),
+               v = create_description(kb_fg__fzf, 'paste  selected item preceded with vim'),
+               w = create_description(kb_fg__fzf, 'toggle preview'),
+               y = create_description(kb_fg__fzf, 'copy path to clipboard'),
              }
     },
     {
     modifiers = {'Alt'},
     keys = {
-             c = create_description(fzf_kb_fg, "cd"),
+             c = create_description(kb_fg__fzf, 'cd'),
            }
     },
   },
 }
--- }}}
 
-local simplescreenrecorder_keys = {  -- {{{
-  ['simplescreenrecorder'] = {
-    {
-      modifiers = {'Ctrl', 'Shift', 'Super'},
-      keys = {
-               ['s'] = create_description(simplescreenrecorder_kb_fg, "start/stop recording"),
-             }
-    },
-  },
-}
--- }}}
-
-local qutebrowser_keys = {  -- {{{
-  ['qutebrowser'] = {
-    {
-      modifiers = {},
-      keys = {
-               ['b'] =  create_description(qutebrowser_kb_fg, "quickmarks"),
-               ['xd'] = create_description(qutebrowser_kb_fg, "download hint url"),
-               ['xp'] = create_description(qutebrowser_kb_fg, "play hint url"),
-               ['xs'] = create_description(qutebrowser_kb_fg, "toggle status bar and tabs"),
-             }
-    },
-    {
-      modifiers = {'Alt'},
-      keys = {
-               ['m'] = create_description(qutebrowser_kb_fg, "mute/unmute"),
-             }
-    },
-  },
-}
--- }}}
-
-local sublime_keys = {  -- {{{
+-- exceptionally all modifiers written in one place
+local sublime_keys = {
   ['sublime'] = {
     {
       modifiers = {},
       keys = {
-               ['Alt+Shift+↕']             = create_description(sublime_kb_fg, "multiple cursors"),
-               ['Ctrl+Shift+l']            = create_description(sublime_kb_fg, "multiple cursors in selection"),
-               ['Ctrl+d']                  = create_description(sublime_kb_fg, "select similar words/selection one by one"),
-               ['Alt+F3']                  = create_description(sublime_kb_fg, "select similar words/selection at once"),
-               ['Ctrl+k Ctrl+d']           = create_description(sublime_kb_fg, "skip when selecting similar words/selection"),
-               ['Ctrl+k Ctrl+b']           = create_description(sublime_kb_fg, "toggle sidebar"),
-               ['Ctrl+Shift+↕']            = create_description(sublime_kb_fg, "move line ↕"),
-               ['Ctrl+Shift+d']            = create_description(sublime_kb_fg, "duplicate line/selection"),
-               ['Ctrl+Shift+k']            = create_description(sublime_kb_fg, "delete line"),
-               ['Ctrl+Shift+j']            = create_description(sublime_kb_fg, "join lines"),
-               ['Ctrl+[/]']                = create_description(sublime_kb_fg, "indent/unindent"),
-               ['Ctrl+;']                  = create_description(sublime_kb_fg, "find word"),
-               ['Ctrl+Shift+[/]']          = create_description(sublime_kb_fg, "fold/unfold"),
-               ['Ctrl+k Ctrl+1']           = create_description(sublime_kb_fg, "fold all"),
-               ['Ctrl+k Ctrl+j']           = create_description(sublime_kb_fg, "unfold all"),
-               ['Ctrl+k Ctrl+k']           = create_description(sublime_kb_fg, "delete to end line"),
-               ['Ctrl+k Ctrl+Backspace']   = create_description(sublime_kb_fg, "delete to beginning of line"),
-               ['Ctrl+p']                  = create_description(sublime_kb_fg, "jump to (with: @, # and :)"),
-               ['Ctrl+t']                  = create_description(sublime_kb_fg, "transpose"),
-               ['Ctrl+↕']                  = create_description(sublime_kb_fg, "move screen ↕ (in css: ↕ number)"),
-               ['Alt+↕']                   = create_description(sublime_kb_fg, "(in css: ↕ number by .1)"),
-               ['Ctrl+Alt+Shift+p']        = create_description(sublime_kb_fg, "show scope for current file"),
-               ['Ctrl+Shift+v']            = create_description(sublime_kb_fg, "smart paste"),
-               ['Ctrl+Alt+d']              = create_description(sublime_kb_fg, "<span color='" .. plugin_fg .. "'>[anaconda]</span> get documentation"),
-               ['Ctrl+k Ctrl+v']           = create_description(sublime_kb_fg, "paste from history"),
-               ['Ctrl+/']                  = create_description(sublime_kb_fg, "toggle comment"),
-               ['Ctrl+Shift+/']            = create_description(sublime_kb_fg, "toggle block comment"),
-               ['Ctrl+Enter']              = create_description(sublime_kb_fg, "insert line after"),
-               ['Ctrl+Shift+Enter']        = create_description(sublime_kb_fg, "insert line before"),
-               ['Ctrl+Backspace']          = create_description(sublime_kb_fg, "delete word backward"),
-               ['Ctrl+Delete']             = create_description(sublime_kb_fg, "delete word foreward"),
-               ['Alt+.']                   = create_description(sublime_kb_fg, "close tag"),
-               ['Ctrl+Shift+a']            = create_description(sublime_kb_fg, "select inside tag/quote"),
-               ['Ctrl+Shift+m']            = create_description(sublime_kb_fg, "select inside brackets"),
-               ['Ctrl+Shift+Space']        = create_description(sublime_kb_fg, "select current word"),
-               ['Alt+Shift+w']             = create_description(sublime_kb_fg, "wrap selection with tag"),
-               ['Ctrl+l']                  = create_description(sublime_kb_fg, "select line"),
-               ['Ctrl+F3']                 = create_description(sublime_kb_fg, "quick find current word/selection"),
-               ['Alt+Shift+1/2/3/4']       = create_description(sublime_kb_fg, "1/2/3/4 columns"),
-               ['Alt+Shift+g']             = create_description(sublime_kb_fg, "grid"),
-               ['Alt+Shift+8/9']           = create_description(sublime_kb_fg, "2/3 rows"),
-               ['Alt+1/...']               = create_description(sublime_kb_fg, "tab 1/..."),
-               ['Ctrl+1/...']              = create_description(sublime_kb_fg, "group 1/..."),
-               ['Ctrl+k Ctrl+Shift+UP']    = create_description(sublime_kb_fg, "new group"),
-               ['Ctrl+k Ctrl+DOWN']        = create_description(sublime_kb_fg, "close group"),
-               ['Ctrl+F12']                = create_description(sublime_kb_fg, "go to definition"),
-               ['Ctrl+Shift+F12']          = create_description(sublime_kb_fg, "go to reference"),
-               ['Ctrl+g']                  = create_description(sublime_kb_fg, "go to line"),
-               ['Ctrl+.']                  = create_description(sublime_kb_fg, "next modification"),
-               ['Ctrl+,']                  = create_description(sublime_kb_fg, "previous modification"),
-               ['F2']                      = create_description(sublime_kb_fg, "next bookmark"),
-               ['Shift+F2']                = create_description(sublime_kb_fg, "previous bookmark"),
-               ['Ctrl+F2']                 = create_description(sublime_kb_fg, "toggle bookmark"),
-               ['Ctrl+Shift+F2']           = create_description(sublime_kb_fg, "clear bookmarks"),
-               ['Alt+F2']                  = create_description(sublime_kb_fg, "select all bookmarks"),
-               ['F9']                      = create_description(sublime_kb_fg, "sort lines"),
-               ['Ctrl+F9']                 = create_description(sublime_kb_fg, "sort lines (case sensitive)"),
-               ['Ctrl+m']                  = create_description(sublime_kb_fg, "jump to matching bracket"),
-               ['Ctrl+r']                  = create_description(sublime_kb_fg, "go to symbol"),
-               ['Ctrl+e']                  = create_description(sublime_kb_fg, "copy find string from buffer"),
-               ['Ctrl+Shift+p']            = create_description(sublime_kb_fg, "command palette"),
-               ['Ctrl+Alt+p']              = create_description(sublime_kb_fg, "quick switch project"),
-               ['Ctrl+Alt+Shift+c Ctrl+d'] = create_description(sublime_kb_fg, "show diff popup"),
+               ['Alt+Shift+↕']             = create_description(kb_fg__sublime, 'multiple cursors'),
+               ['Ctrl+Shift+l']            = create_description(kb_fg__sublime, 'multiple cursors in selection'),
+               ['Ctrl+d']                  = create_description(kb_fg__sublime, 'select similar words/selection one by one'),
+               ['Alt+F3']                  = create_description(kb_fg__sublime, 'select similar words/selection at once'),
+               ['Ctrl+k Ctrl+d']           = create_description(kb_fg__sublime, 'skip when selecting similar words/selection'),
+               ['Ctrl+k Ctrl+b']           = create_description(kb_fg__sublime, 'toggle sidebar'),
+               ['Ctrl+Shift+↕']            = create_description(kb_fg__sublime, 'move line ↕'),
+               ['Ctrl+Shift+d']            = create_description(kb_fg__sublime, 'duplicate line/selection'),
+               ['Ctrl+Shift+k']            = create_description(kb_fg__sublime, 'delete line'),
+               ['Ctrl+Shift+j']            = create_description(kb_fg__sublime, 'join lines'),
+               ['Ctrl+[/]']                = create_description(kb_fg__sublime, 'indent/unindent'),
+               ['Ctrl+;']                  = create_description(kb_fg__sublime, 'find word'),
+               ['Ctrl+Shift+[/]']          = create_description(kb_fg__sublime, 'fold/unfold'),
+               ['Ctrl+k Ctrl+1']           = create_description(kb_fg__sublime, 'fold all'),
+               ['Ctrl+k Ctrl+j']           = create_description(kb_fg__sublime, 'unfold all'),
+               ['Ctrl+k Ctrl+k']           = create_description(kb_fg__sublime, 'delete to end line'),
+               ['Ctrl+k Ctrl+Backspace']   = create_description(kb_fg__sublime, 'delete to beginning of line'),
+               ['Ctrl+p']                  = create_description(kb_fg__sublime, 'jump to (with: @, # and :)'),
+               ['Ctrl+t']                  = create_description(kb_fg__sublime, 'transpose'),
+               ['Ctrl+↕']                  = create_description(kb_fg__sublime, 'move screen ↕ (in css: ↕ number)'),
+               ['Alt+↕']                   = create_description(kb_fg__sublime, '(in css: ↕ number by .1)'),
+               ['Ctrl+Alt+Shift+p']        = create_description(kb_fg__sublime, 'show scope for current file'),
+               ['Ctrl+Shift+v']            = create_description(kb_fg__sublime, 'smart paste'),
+               ['Ctrl+k Ctrl+v']           = create_description(kb_fg__sublime, 'paste from history'),
+               ['Ctrl+/']                  = create_description(kb_fg__sublime, 'toggle comment'),
+               ['Ctrl+Shift+/']            = create_description(kb_fg__sublime, 'toggle block comment'),
+               ['Ctrl+Enter']              = create_description(kb_fg__sublime, 'insert line after'),
+               ['Ctrl+Shift+Enter']        = create_description(kb_fg__sublime, 'insert line before'),
+               ['Ctrl+Backspace']          = create_description(kb_fg__sublime, 'delete word backward'),
+               ['Ctrl+Delete']             = create_description(kb_fg__sublime, 'delete word foreward'),
+               ['Alt+.']                   = create_description(kb_fg__sublime, 'close tag'),
+               ['Ctrl+Shift+a']            = create_description(kb_fg__sublime, 'select inside tag/quote'),
+               ['Ctrl+Shift+m']            = create_description(kb_fg__sublime, 'select inside brackets'),
+               ['Ctrl+Shift+Space']        = create_description(kb_fg__sublime, 'select current word'),
+               ['Alt+Shift+w']             = create_description(kb_fg__sublime, 'wrap selection with tag'),
+               ['Ctrl+l']                  = create_description(kb_fg__sublime, 'select line'),
+               ['Ctrl+F3']                 = create_description(kb_fg__sublime, 'quick find current word/selection'),
+               ['Alt+Shift+1/2/3/4']       = create_description(kb_fg__sublime, '1/2/3/4 columns'),
+               ['Alt+Shift+g']             = create_description(kb_fg__sublime, 'grid'),
+               ['Alt+Shift+8/9']           = create_description(kb_fg__sublime, '2/3 rows'),
+               ['Alt+1/...']               = create_description(kb_fg__sublime, 'tab 1/...'),
+               ['Ctrl+1/...']              = create_description(kb_fg__sublime, 'group 1/...'),
+               ['Ctrl+k Ctrl+Shift+UP']    = create_description(kb_fg__sublime, 'new group'),
+               ['Ctrl+k Ctrl+DOWN']        = create_description(kb_fg__sublime, 'close group'),
+               ['Ctrl+F12']                = create_description(kb_fg__sublime, 'go to definition'),
+               ['Ctrl+Shift+F12']          = create_description(kb_fg__sublime, 'go to reference'),
+               ['Ctrl+g']                  = create_description(kb_fg__sublime, 'go to line'),
+               ['Ctrl+.']                  = create_description(kb_fg__sublime, 'next modification'),
+               ['Ctrl+,']                  = create_description(kb_fg__sublime, 'previous modification'),
+               ['F2']                      = create_description(kb_fg__sublime, 'next bookmark'),
+               ['Shift+F2']                = create_description(kb_fg__sublime, 'previous bookmark'),
+               ['Ctrl+F2']                 = create_description(kb_fg__sublime, 'toggle bookmark'),
+               ['Ctrl+Shift+F2']           = create_description(kb_fg__sublime, 'clear bookmarks'),
+               ['Alt+F2']                  = create_description(kb_fg__sublime, 'select all bookmarks'),
+               ['F9']                      = create_description(kb_fg__sublime, 'sort lines'),
+               ['Ctrl+F9']                 = create_description(kb_fg__sublime, 'sort lines (case sensitive)'),
+               ['Ctrl+m']                  = create_description(kb_fg__sublime, 'jump to matching bracket'),
+               ['Ctrl+r']                  = create_description(kb_fg__sublime, 'go to symbol'),
+               ['Ctrl+e']                  = create_description(kb_fg__sublime, 'copy find string from buffer'),
+               ['Ctrl+Shift+p']            = create_description(kb_fg__sublime, 'command palette'),
+               ['Ctrl+Alt+p']              = create_description(kb_fg__sublime, 'quick switch project'),
+               ['Ctrl+Alt+Shift+c Ctrl+d'] = create_description(kb_fg__sublime, 'show diff popup'),
 
                -- by me
 
-               ['Ctrl+&lt;Tab&gt;']        = create_description(sublime_kb_fg, "next tab"),
-               ['Ctrl+Shift+&lt;Tab&gt;']  = create_description(sublime_kb_fg, "previous tab"),
+               ['Ctrl+&lt;Tab&gt;']        = create_description(kb_fg__sublime, 'next tab'),
+               ['Ctrl+Shift+&lt;Tab&gt;']  = create_description(kb_fg__sublime, 'previous tab'),
+
                -- for ~/.config/sublime-text/Packages/User/my-module--move-cursor-to-top-or-bottom-of-screen.py
-               ['Alt+UP']                  = create_description(sublime_kb_fg, "move cursor to top of page"),
-               ['Alt+DOWN']                = create_description(sublime_kb_fg, "move cursor to bottom of page"),
+               ['Alt+UP']                  = create_description(kb_fg__sublime, 'move cursor to top of page'),
+               ['Alt+DOWN']                = create_description(kb_fg__sublime, 'move cursor to bottom of page'),
+
                -- for SublimeGit
-               ['Alt+g']                   = create_description(sublime_kb_fg, "git status"),
+               ['Alt+g']                   = create_description(kb_fg__sublime, 'git status'),
              }
     },
   },
 }
--- }}}
 
-hotkeys_popup.add_hotkeys(tmux_keys)
-hotkeys_popup.add_hotkeys(vim_keys)
-hotkeys_popup.add_hotkeys(lf_keys)
+local tmux_keys = {
+  ['tmux'] = {
+    {
+      modifiers = {'Prefix'},
+      keys = {
+        -- from tmux help (Prefix + ?)
+        ['Space']       = create_description(kb_fg__tmux, 'Select next layout'),
+        ['!']           = create_description(kb_fg__tmux, 'Break pane to a new window'),
+        ['"']           = create_description(kb_fg__tmux, 'Split window vertically'),
+        ['#']           = create_description(kb_fg__tmux, 'List all paste buffers'),
+        ['$']           = create_description(kb_fg__tmux, 'Rename current session'),
+        ['%']           = create_description(kb_fg__tmux, 'Split window horizontally'),
+        ['&amp;']       = create_description(kb_fg__tmux, 'Kill current window'),
+        ["'"]           = create_description(kb_fg__tmux, 'Prompt for window index to select'),
+        ['(']           = create_description(kb_fg__tmux, 'Switch to previous client'),
+        [')']           = create_description(kb_fg__tmux, 'Switch to next client'),
+        [',']           = create_description(kb_fg__tmux, 'Rename current window'),
+        ['-']           = create_description(kb_fg__tmux, 'Delete the most recent paste buffer'),
+        ['.']           = create_description(kb_fg__tmux, 'Move the current window'),
+        ['/']           = create_description(kb_fg__tmux, 'Describe key binding'),
+        ['&lt;INT&gt;'] = create_description(kb_fg__tmux, 'Select window &lt;INT&gt;'),
+        [':']           = create_description(kb_fg__tmux, 'Prompt for a command'),
+        [';']           = create_description(kb_fg__tmux, 'Move to the previously active pane'),
+        ['=']           = create_description(kb_fg__tmux, 'Choose a paste buffer from a list'),
+        ['?']           = create_description(kb_fg__tmux, 'List key bindings'),
+        ['[']           = create_description(kb_fg__tmux, 'Enter copy mode'),
+        [']']           = create_description(kb_fg__tmux, 'Paste the most recent paste buffer'),
+        ['{']           = create_description(kb_fg__tmux, 'Swap the active pane with the pane above'),
+        ['}']           = create_description(kb_fg__tmux, 'Swap the active pane with the pane below'),
+        ['~']           = create_description(kb_fg__tmux, 'Show messages'),
+        ['C']           = create_description(kb_fg__tmux, 'Customize options'),
+        ['D']           = create_description(kb_fg__tmux, 'Choose and detach a client from a list'),
+        ['E']           = create_description(kb_fg__tmux, 'Spread panes out evenly'),
+        ['L']           = create_description(kb_fg__tmux, 'Switch to the last client'),
+        ['M']           = create_description(kb_fg__tmux, 'Clear the marked pane'),
+        ['c']           = create_description(kb_fg__tmux, 'Create a new window'),
+        ['d']           = create_description(kb_fg__tmux, 'Detach the current client'),
+        ['f']           = create_description(kb_fg__tmux, 'Search for a pane'),
+        ['i']           = create_description(kb_fg__tmux, 'Display window information'),
+        ['l']           = create_description(kb_fg__tmux, 'Select the previously current window'),
+        ['m']           = create_description(kb_fg__tmux, 'Toggle the marked pane'),
+        ['n']           = create_description(kb_fg__tmux, 'Select the next window'),
+        ['o']           = create_description(kb_fg__tmux, 'Select the next pane'),
+        ['p']           = create_description(kb_fg__tmux, 'Select the previous window'),
+        ['q']           = create_description(kb_fg__tmux, 'Display pane numbers'),
+        ['r']           = create_description(kb_fg__tmux, 'Redraw the current client'),
+        ['s']           = create_description(kb_fg__tmux, 'Choose a session from a list'),
+        ['t']           = create_description(kb_fg__tmux, 'Show a clock'),
+        ['w']           = create_description(kb_fg__tmux, 'Choose a window from a list'),
+        ['x']           = create_description(kb_fg__tmux, 'Kill the active pane'),
+        ['z']           = create_description(kb_fg__tmux, 'Zoom the active pane'),
+        ['DC']          = create_description(kb_fg__tmux, 'Reset so the visible part of the window follows the cursor'),
+        ['PPage']       = create_description(kb_fg__tmux, 'Enter copy mode and scroll up'),
+        ['Up']          = create_description(kb_fg__tmux, 'Select the pane above the active pane'),
+        ['Down']        = create_description(kb_fg__tmux, 'Select the pane below the active pane'),
+        ['Left']        = create_description(kb_fg__tmux, 'Select the pane to the left of the active pane'),
+        ['Right']       = create_description(kb_fg__tmux, 'Select the pane to the right of the active pane'),
+        ['M-1']         = create_description(kb_fg__tmux, 'Set the even-horizontal layout'),
+        ['M-2']         = create_description(kb_fg__tmux, 'Set the even-vertical layout'),
+        ['M-3']         = create_description(kb_fg__tmux, 'Set the main-horizontal layout'),
+        ['M-4']         = create_description(kb_fg__tmux, 'Set the main-vertical layout'),
+        ['M-5']         = create_description(kb_fg__tmux, 'Select the tiled layout'),
+        ['M-6']         = create_description(kb_fg__tmux, 'Set the main-horizontal-mirrored layout'),
+        ['M-7']         = create_description(kb_fg__tmux, 'Set the main-vertical-mirrored layout'),
+        ['M-n']         = create_description(kb_fg__tmux, 'Select the next window with an alert'),
+        ['M-o']         = create_description(kb_fg__tmux, 'Rotate through the panes in reverse'),
+        ['M-p']         = create_description(kb_fg__tmux, 'Select the previous window with an alert'),
+        ['M-Up']        = create_description(kb_fg__tmux, 'Resize the pane up by 5'),
+        ['M-Down']      = create_description(kb_fg__tmux, 'Resize the pane down by 5'),
+        ['M-Left']      = create_description(kb_fg__tmux, 'Resize the pane left by 5'),
+        ['M-Right']     = create_description(kb_fg__tmux, 'Resize the pane right by 5'),
+        ['C-o']         = create_description(kb_fg__tmux, 'Rotate through the panes'),
+        ['C-z']         = create_description(kb_fg__tmux, 'Suspend the current client'),
+        ['C-Up']        = create_description(kb_fg__tmux, 'Resize the pane up'),
+        ['C-Down']      = create_description(kb_fg__tmux, 'Resize the pane down'),
+        ['C-Left']      = create_description(kb_fg__tmux, 'Resize the pane left'),
+        ['C-Right']     = create_description(kb_fg__tmux, 'Resize the pane right'),
+        ['S-Up']        = create_description(kb_fg__tmux, 'Move the visible part of the window up'),
+        ['S-Down']      = create_description(kb_fg__tmux, 'Move the visible part of the window down'),
+        ['S-Left']      = create_description(kb_fg__tmux, 'Move the visible part of the window left'),
+        ['S-Right']     = create_description(kb_fg__tmux, 'Move the visible part of the window right'),
+
+        -- be me
+        ['Shift+,']                       = create_description(kb_fg__tmux, 'display window options'),
+        ['Shift+.']                       = create_description(kb_fg__tmux, 'display pane options'),
+        [':move-window &lt;INT&gt;']      = create_description(kb_fg__tmux, 'move window to index &lt;INT&gt;'),
+        [':kill-server']                  = create_description(kb_fg__tmux, 'kill tmux'),
+        [':list-sessions']                = create_description(kb_fg__tmux, 'list sessions'),
+        [':new']                          = create_description(kb_fg__tmux, 'new session'),
+        [':new -s &lt;NAME&gt;']          = create_description(kb_fg__tmux, 'new session with a name'),
+        [':detach']                       = create_description(kb_fg__tmux, 'detach session'),
+        [':kill-session']                 = create_description(kb_fg__tmux, 'kill session'),
+        [':kill-session -a']              = create_description(kb_fg__tmux, 'kill other sessions'),
+        [':kill-session -t &lt;NAME&gt;'] = create_description(kb_fg__tmux, 'kill session with a &lt;NAME&gt;'),
+        [':new-window']                   = create_description(kb_fg__tmux, 'new window'),
+        [':new-window -n &lt;NAME&gt;']   = create_description(kb_fg__tmux, 'new window with a name'),
+        [':new-window -a']                = create_description(kb_fg__tmux, 'open new window here'),
+        [':swap-window -t &lt;INT&gt;']   = create_description(kb_fg__tmux, 'swap current window with window &lt;INT&gt;'),
+        [':swap-window -t -1']            = create_description(kb_fg__tmux, 'swap current window with previous window'),
+        [':swap-window -t +1']            = create_description(kb_fg__tmux, 'swap current window with next window'),
+        [':select-pane -T &lt;NAME&gt;']  = create_description(kb_fg__tmux, 'rename current pane'),
+        [':swap-pane -t &lt;INT&gt;']     = create_description(kb_fg__tmux, 'swap current pane with pane &lt;INT&gt;'),
+        [':swap-pane -t -1']              = create_description(kb_fg__tmux, 'swap current pane with previous pane'),
+        [':swap-pane -t +1']              = create_description(kb_fg__tmux, 'swap current pane with next pane'),
+      }
+    }
+  },
+}
+
+-- exceptionally all modifiers written in one place
+local vscode_keys = {
+  ['vscode'] = {
+    {
+      modifiers = {},
+      keys = {
+        ['Ctrl+K Ctrl+S']          = create_description(kb_fg__vscode, 'keyboard shortcut'),
+        ['Ctrl+Shift+G']           = create_description(kb_fg__vscode, 'source control'),
+        ['Ctrl+B']                 = create_description(kb_fg__vscode, 'toggle sidebar'),
+        ['Ctrl+J']                 = create_description(kb_fg__vscode, 'toggle panel'),
+        ['Ctrl+,']                 = create_description(kb_fg__vscode, 'settings'),
+        ['Ctrl+K Z']               = create_description(kb_fg__vscode, 'zen mode'),
+        ['Ctrl+Shift+M']           = create_description(kb_fg__vscode, 'errors and warnings'),
+        ['Alt+Shift+F3']           = create_description(kb_fg__vscode, 'previous change'),
+        ['Alt+F3']                 = create_description(kb_fg__vscode, 'next change'),
+        ['Shift+F8']               = create_description(kb_fg__vscode, 'previous error'),
+        ['F8']                     = create_description(kb_fg__vscode, 'next error'),
+        ['Ctrl+P']                 = create_description(kb_fg__vscode, 'quick open (press right arrow to open multiple files)'),
+        ['Ctrl+R']                 = create_description(kb_fg__vscode, 'open a recent file'),
+        ['Ctrl+\\']                = create_description(kb_fg__vscode, 'side by side editing'),
+        ['Alt+Shift+Up/Down']      = create_description(kb_fg__vscode, 'add cursor above/below'),
+        ['Alt+Shift+drag mouse']   = create_description(kb_fg__vscode, 'column (box) selection'),
+        ['Alt+mouse scroll']       = create_description(kb_fg__vscode, 'fast scroll'),
+        ['Ctrl+Up/Down']           = create_description(kb_fg__vscode, 'up/down one line without moving cursor'),
+        ['Alt+Page Up/Down']       = create_description(kb_fg__vscode, 'up/down one page without moving cursor'),
+        ['Ctrl+Alt+Shift+Up/Down'] = create_description(kb_fg__vscode, 'duplicate line up/down'),
+        ['Ctrl+Shift+K']           = create_description(kb_fg__vscode, 'delete line'),
+        ['Alt+Shift+I']            = create_description(kb_fg__vscode, 'insert cursor at end of each line selected'),
+        ['Ctrl+Shift+\\']          = create_description(kb_fg__vscode, 'jump to matching bracket'),
+        ['Alt+Up/Down']            = create_description(kb_fg__vscode, 'move line up/down'),
+        ['Ctrl+Shift+O']           = create_description(kb_fg__vscode, 'go to symbol in file'),
+        ['Ctrl+T']                 = create_description(kb_fg__vscode, 'go to symbol in workspace'),
+        ['Ctrl+G']                 = create_description(kb_fg__vscode, 'go to line'),
+        ['Ctrl+Shift+[/]']         = create_description(kb_fg__vscode, 'fold/unfold'),
+        ['Ctrl+K Ctrl+L']          = create_description(kb_fg__vscode, 'fold/unfold'),
+        ['Ctrl+K Ctrl+0']          = create_description(kb_fg__vscode, 'fold all regions in the editor'),
+        ['Ctrl+K Ctrl+J']          = create_description(kb_fg__vscode, 'unfold all regions in the editor'),
+        ['Ctrl+L']                 = create_description(kb_fg__vscode, 'select line'),
+        ['Ctrl+K V']               = create_description(kb_fg__vscode, 'open markdown preview (side by side)'),
+        ['Ctrl+Shift+V']           = create_description(kb_fg__vscode, 'open markdown preview (in new tab)'),
+        ['Ctrl+F2']                = create_description(kb_fg__vscode, 'select all occurrences of current word'),
+        ['Ctrl+Shift+L']           = create_description(kb_fg__vscode, 'select all occurrences of current selection'),
+        ['Ctrl+K %']               = create_description(kb_fg__vscode, '(by me) two columns'),
+        ['Ctrl+K "']               = create_description(kb_fg__vscode, '(by me) two rows'),
+        ['Ctrl+D']                 = create_description(kb_fg__vscode, 'select next occurrence of the selection'),
+        ['Ctrl+.']                 = create_description(kb_fg__vscode, 'quick fix'),
+
+        -- peek/go definition/implementations/references
+        ['Ctrl+Shift+F10']         = create_description(kb_fg__vscode, 'peek definition'),
+        ['Ctrl+Shift+F12']         = create_description(kb_fg__vscode, 'peek implementations'),
+        ['F12']                    = create_description(kb_fg__vscode, 'go to definition'),
+        ['Shift+F12']              = create_description(kb_fg__vscode, 'go to references'),
+        ['Ctrl+F12']               = create_description(kb_fg__vscode, 'go to implementations'),
+        ['Alt+Shift+F12']          = create_description(kb_fg__vscode, 'view all references'),
+      }
+    },
+    -- {
+    --   modifiers = {'Alt'},
+    --   keys = {
+    --            ['m'] = create_description(kb_fg__vscode, '...'),
+    --          }
+    -- },
+  },
+}
+
+local yazi_keys = {
+  ['yazi'] = {
+    {
+      modifiers = {'Ctrl'},
+      keys = {
+               a = create_description(kb_fg__yazi, 'select all'),
+               r = create_description(kb_fg__yazi, 'Inverse selection of all'),
+               s = create_description(kb_fg__yazi, 'Cancel the ongoing search'),
+               c = create_description(kb_fg__yazi, 'close current tab'),
+             }
+    },
+    {
+      modifiers = {},
+      keys = {
+              o =               create_description(kb_fg__yazi, 'open'),
+              O =               create_description(kb_fg__yazi, 'open interactively'),
+              y =               create_description(kb_fg__yazi, 'copy'),
+              x =               create_description(kb_fg__yazi, 'cut'),
+              p =               create_description(kb_fg__yazi, 'paste'),
+              P =               create_description(kb_fg__yazi, 'paste and override'),
+              ['Y/X'] =         create_description(kb_fg__yazi, 'cancel copy/cut'),
+              d =               create_description(kb_fg__yazi, 'trash'),
+              D =               create_description(kb_fg__yazi, 'delete permanently'),
+              a =               create_description(kb_fg__yazi, 'Create a file (ends with / for directories)'),
+              r =               create_description(kb_fg__yazi, 'rename'),
+              f =               create_description(kb_fg__yazi, 'filter'),
+              s =               create_description(kb_fg__yazi, 'search (using fd)'),
+              S =               create_description(kb_fg__yazi, 'search (using ripgrep)'),
+              w =               create_description(kb_fg__yazi, 'show/close task manager'),
+              z =               create_description(kb_fg__yazi, 'Jump to a file/directory via fzf'),
+              Z =               create_description(kb_fg__yazi, 'Jump to a directory via zoxide'),
+              T =               create_description(kb_fg__yazi, 'toggle pane'),
+              ['g+c'] =         create_description(kb_fg__yazi, 'Goto ~/.config'),
+              ['~/F1'] =        create_description(kb_fg__yazi, 'help'),
+              ['g+Space'] =     create_description(kb_fg__yazi, 'Jump interactively'),
+              ['m+...'] =       create_description(kb_fg__yazi, 'Linemode: ...'),
+              ['c+...'] =       create_description(kb_fg__yazi, 'Copy ...'),
+              [',+...'] =       create_description(kb_fg__yazi, 'Sort by ...'),
+              [';'] =           create_description(kb_fg__yazi, 'Run a shell command'),
+              [':'] =           create_description(kb_fg__yazi, 'Run a shell command (block until finishes)'),
+              t =               create_description(kb_fg__yazi, 'new tab'),
+              ['&lt;int&gt;'] = create_description(kb_fg__yazi, 'switch to nth tab'),
+              ['[/]'] =         create_description(kb_fg__yazi, 'switch to previous/next tab'),
+              ['{/}'] =         create_description(kb_fg__yazi, 'Swap current tab with previous/next tab'),
+              ['Tab'] =         create_description(kb_fg__yazi, 'Show the file information'),
+            }
+    },
+  },
+}
+
+
 hotkeys_popup.add_hotkeys(fzf_keys)
-hotkeys_popup.add_hotkeys(simplescreenrecorder_keys)
-hotkeys_popup.add_hotkeys(qutebrowser_keys)
 hotkeys_popup.add_hotkeys(sublime_keys)
+hotkeys_popup.add_hotkeys(tmux_keys)
+hotkeys_popup.add_hotkeys(vscode_keys)
+hotkeys_popup.add_hotkeys(yazi_keys)
 
 return tmux
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
