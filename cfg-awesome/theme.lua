@@ -94,7 +94,7 @@ theme.useless_gap = dpi(1)
 -- do NOT remove this line
 theme.notification_bg = bg
 
-theme.menu_submenu_icon = hni .. '/ePapirus-Dark/16x16/actions/pan-end.svg'  -- awe_path .. '/submenu.png'
+theme.menu_submenu_icon = awe_path .. '/submenu-icons/chevron-right-1.png'
 theme.menu_height       = dpi(20)
 theme.menu_width        = dpi(220)
 theme.menu_bg_normal    = bg
@@ -167,5 +167,3 @@ theme.awesome_icon = theme_assets.awesome_icon(
 theme.icon_theme = nil
 
 return theme
-
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

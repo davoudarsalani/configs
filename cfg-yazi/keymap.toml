@@ -1,5 +1,9 @@
 [manager]
 prepend_keymap = [
+    ## override original ones
+    { on = "q", run = "close", desc = "Close the current tab, or quit if it's last" },
+    { on = "Q", run = "close", desc = "Close the current tab, or quit if it's last" },
+
     { on = [ "`", "a" ], run = "cd ~/main/project0/",     desc = "cd ~/main/project0" },
     { on = [ "`", "b" ], run = "cd ~/main/project1/",   desc = "cd ~/main/project1" },
     { on = [ "`", "c" ], run = "cd ~/main/configs/",   desc = "cd ~/main/configs" },

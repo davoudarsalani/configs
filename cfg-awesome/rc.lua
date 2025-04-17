@@ -323,40 +323,40 @@ awful.layout.layouts = {
 -- Menu
 
 apps_options = {
-  { ' Audacious',            function() run_script('awesome-menu.sh', 'audacious'           ) end, hni .. '/ePapirus-Dark/16x16/apps/audacious.svg'},
-  { ' Blueman Applet',       function() run_script('awesome-menu.sh', 'blueman_applet'      ) end, hni .. '/ePapirus-Dark/16x16/apps/preferences-system-bluetooth.svg'},
-  { ' Blueman Manager',      function() run_script('awesome-menu.sh', 'blueman_manager'     ) end, hni .. '/ePapirus-Dark/16x16/apps/preferences-system-bluetooth.svg'},
-  { ' Chromium',             function() run_script('awesome-menu.sh', 'chromium'            ) end, hni .. '/ePapirus-Dark/16x16/apps/chromium-browser.svg'},
-  { ' DbGate',               function() run_script('awesome-menu.sh', 'dbgate'              ) end, hni .. '/ePapirus-Dark/16x16/apps/mysql-workbench.svg'},
-  { ' Firefox',              function() run_script('awesome-menu.sh', 'firefox'             ) end, hni .. '/ePapirus-Dark/16x16/apps/firefox.svg'},
-  { ' Gedit',                function() run_script('awesome-menu.sh', 'gedit'               ) end, hni .. '/ePapirus-Dark/16x16/apps/gedit.svg'},
-  { ' GIMP',                 function() run_script('awesome-menu.sh', 'gimp'                ) end, hni .. '/ePapirus-Dark/16x16/apps/gimp.svg'},
-  { ' GoldenDict',           function() run_script('awesome-menu.sh', 'goldendict'          ) end, hni .. '/ePapirus-Dark/16x16/apps/accessories-dictionary.svg'},
-  { ' GParted',              function() run_script('awesome-menu.sh', 'gparted'             ) end, hni .. '/ePapirus-Dark/16x16/apps/gparted.svg'},
-  { ' KeePass',              function() run_script('awesome-menu.sh', 'keepass'             ) end, hni .. '/ePapirus-Dark/16x16/apps/keepass.svg'},
-  { ' LibreOffice',          function() run_script('awesome-menu.sh', 'libreoffice'         ) end, hni .. '/ePapirus-Dark/16x16/apps/libreoffice-base.svg'},
-  { ' simplescreenrecorder', function() run_script('awesome-menu.sh', 'simplescreenrecorder') end, hni .. '/ePapirus-Dark/16x16/apps/simplescreenrecorder.svg'},
-  { ' Sublime',              function() run_script('awesome-menu.sh', 'sublime'             ) end, hni .. '/ePapirus-Dark/16x16/apps/sublime-text.svg'},
-  { ' Terminal',             function() run_script('awesome-menu.sh', 'terminal'            ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
-  { ' Terminal + Tmux',      function() run_script('awesome-menu.sh', 'terminal_tmux'       ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
-  { ' Terminal + Torsocks',  function() run_script('awesome-menu.sh', 'terminal_torsocks'   ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
-  { ' Thunar',               function() run_script('awesome-menu.sh', 'thunar'              ) end, hni .. '/ePapirus-Dark/16x16/apps/thunar.svg'},
-  { ' uGet',                 function() run_script('awesome-menu.sh', 'uget'                ) end, hni .. '/ePapirus-Dark/16x16/apps/uget.svg'},
-  { ' Visual Studio Code',   function() run_script('awesome-menu.sh', 'visual-studio-code'  ) end, hni .. '/ePapirus-Dark/16x16/apps/visual-studio-code.svg'},
-  { ' vlc',                  function() run_script('awesome-menu.sh', 'vlc'                 ) end, hni .. '/ePapirus-Dark/16x16/apps/vlc.svg'},
-  { ' xreader',              function() run_script('awesome-menu.sh', 'xreader'             ) end, hni .. '/ePapirus-Dark/16x16/apps/document-viewer.svg'},
+  { ' Audacious',            function() run_script('awesome-apps.sh', 'audacious'           ) end, hni .. '/ePapirus-Dark/16x16/apps/audacious.svg'},
+  { ' Blueman Applet',       function() run_script('awesome-apps.sh', 'blueman_applet'      ) end, hni .. '/ePapirus-Dark/16x16/apps/preferences-system-bluetooth.svg'},
+  { ' Blueman Manager',      function() run_script('awesome-apps.sh', 'blueman_manager'     ) end, hni .. '/ePapirus-Dark/16x16/apps/preferences-system-bluetooth.svg'},
+  { ' Chromium',             function() run_script('awesome-apps.sh', 'chromium'            ) end, hni .. '/ePapirus-Dark/16x16/apps/chromium-browser.svg'},
+  { ' DbGate',               function() run_script('awesome-apps.sh', 'dbgate'              ) end, hni .. '/ePapirus-Dark/16x16/apps/mysql-workbench.svg'},
+  { ' Firefox',              function() run_script('awesome-apps.sh', 'firefox'             ) end, hni .. '/ePapirus-Dark/16x16/apps/firefox.svg'},
+  { ' Gedit',                function() run_script('awesome-apps.sh', 'gedit'               ) end, hni .. '/ePapirus-Dark/16x16/apps/gedit.svg'},
+  { ' GIMP',                 function() run_script('awesome-apps.sh', 'gimp'                ) end, hni .. '/ePapirus-Dark/16x16/apps/gimp.svg'},
+  { ' GoldenDict',           function() run_script('awesome-apps.sh', 'goldendict'          ) end, hni .. '/ePapirus-Dark/16x16/apps/accessories-dictionary.svg'},
+  { ' GParted',              function() run_script('awesome-apps.sh', 'gparted'             ) end, hni .. '/ePapirus-Dark/16x16/apps/gparted.svg'},
+  { ' KeePass',              function() run_script('awesome-apps.sh', 'keepass'             ) end, hni .. '/ePapirus-Dark/16x16/apps/keepass.svg'},
+  { ' LibreOffice',          function() run_script('awesome-apps.sh', 'libreoffice'         ) end, hni .. '/ePapirus-Dark/16x16/apps/libreoffice-base.svg'},
+  { ' simplescreenrecorder', function() run_script('awesome-apps.sh', 'simplescreenrecorder') end, hni .. '/ePapirus-Dark/16x16/apps/simplescreenrecorder.svg'},
+  { ' Sublime',              function() run_script('awesome-apps.sh', 'sublime'             ) end, hni .. '/ePapirus-Dark/16x16/apps/sublime-text.svg'},
+  { ' Terminal',             function() run_script('awesome-apps.sh', 'terminal'            ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
+  { ' Terminal + Tmux',      function() run_script('awesome-apps.sh', 'terminal_tmux'       ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
+  { ' Terminal + Torsocks',  function() run_script('awesome-apps.sh', 'terminal_torsocks'   ) end, hni .. '/ePapirus-Dark/16x16/apps/utilities-terminal.svg'},
+  { ' Thunar',               function() run_script('awesome-apps.sh', 'thunar'              ) end, hni .. '/ePapirus-Dark/16x16/apps/thunar.svg'},
+  { ' uGet',                 function() run_script('awesome-apps.sh', 'uget'                ) end, hni .. '/ePapirus-Dark/16x16/apps/uget.svg'},
+  { ' Visual Studio Code',   function() run_script('awesome-apps.sh', 'visual-studio-code'  ) end, hni .. '/ePapirus-Dark/16x16/apps/visual-studio-code.svg'},
+  { ' vlc',                  function() run_script('awesome-apps.sh', 'vlc'                 ) end, hni .. '/ePapirus-Dark/16x16/apps/vlc.svg'},
+  { ' xreader',              function() run_script('awesome-apps.sh', 'xreader'             ) end, hni .. '/ePapirus-Dark/16x16/apps/document-viewer.svg'},
 }
 
 power_options = {
-  { ' Shutdown',                       function() run_script('awesome-menu.sh', 'shutdown'                        ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
-  { ' Shutdown + Clear Clipboard',     function() run_script('awesome-menu.sh', '"shutdown + clear clipboard"'    ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
-  { ' Reboot',                         function() run_script('awesome-menu.sh', 'reboot'                          ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
-  { ' Reboot + Clear Clipboard',       function() run_script('awesome-menu.sh', '"reboot + clear clipboard"'      ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
-  { ' Lock',                           function() run_script('awesome-menu.sh', 'lock'                            ) end, hni .. '/ePapirus-Dark/16x16/actions/database-lock.svg'},
-  { ' Screen Off',                     function() run_script('awesome-menu.sh', '"screen off"'                    ) end, hni .. '/ePapirus-Dark/16x16/actions/contrast.svg'},
-  { ' Quit Awesome',                   function() run_script('awesome-menu.sh', '"quit awesome"'                  ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
-  { ' Quit Awesome + Clear Clipboard', function() run_script('awesome-menu.sh', '"quit awesome + clear clipboard"') end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
-  { ' Restart Awesome',                function() run_script('awesome-menu.sh', '"restart awesome"'               ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
+  { ' Shutdown',                       function() run_script('awesome-power.sh', 'shutdown'                        ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
+  { ' Shutdown + Clear Clipboard',     function() run_script('awesome-power.sh', '"shutdown + clear clipboard"'    ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
+  { ' Reboot',                         function() run_script('awesome-power.sh', 'reboot'                          ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
+  { ' Reboot + Clear Clipboard',       function() run_script('awesome-power.sh', '"reboot + clear clipboard"'      ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
+  { ' Lock',                           function() run_script('awesome-power.sh', 'lock'                            ) end, hni .. '/ePapirus-Dark/16x16/actions/database-lock.svg'},
+  { ' Screen Off',                     function() run_script('awesome-power.sh', '"screen off"'                    ) end, hni .. '/ePapirus-Dark/16x16/actions/contrast.svg'},
+  { ' Quit Awesome',                   function() run_script('awesome-power.sh', '"quit awesome"'                  ) end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
+  { ' Quit Awesome + Clear Clipboard', function() run_script('awesome-power.sh', '"quit awesome + clear clipboard"') end, hni .. '/ePapirus-Dark/16x16/actions/action-unavailable.svg'},
+  { ' Restart Awesome',                function() run_script('awesome-power.sh', '"restart awesome"'               ) end, hni .. '/ePapirus-Dark/16x16/actions/view-refresh.svg'},
 }
 
 mymainmenu = awful.menu({
@@ -596,7 +596,7 @@ audacious_bar_v_ct:buttons(gears.table.join(
 
 local function set_wallpaper(s)
   gears.wallpaper.maximized(
-    '/usr/share/wallpapers/startup_background.jpg',
+    awe_path .. '/wallpaper.png',
     s,
     true
   )
@@ -838,11 +838,11 @@ globalkeys = gears.table.join(
   -- awful.key({ M    }, '-',           function() end, create_description(kb_fg__awesome, '', '--')),
   -- awful.key({ M    }, '=',           function() end, create_description(kb_fg__awesome, '', '--')),
 
-  -- exceptionally using awesome-menu.sh script
+  -- exceptionally using awesome-apps.sh script
   -- instead of using run_in_shell function only for consistency
-  awful.key({ M,      }, 'Return',      function() run_script('awesome-menu.sh', 'terminal'         ) end, create_description(kb_fg__awesome, '',           'terminal')),
-  awful.key({ M, C    }, 'Return',      function() run_script('awesome-menu.sh', 'terminal_tmux'    ) end, create_description(kb_fg__awesome, '+ tmux',     'terminal')),
-  awful.key({ M, S    }, 'Return',      function() run_script('awesome-menu.sh', 'terminal_torsocks') end, create_description(kb_fg__awesome, '+ torsocks', 'terminal')),
+  awful.key({ M,      }, 'Return',      function() run_script('awesome-apps.sh', 'terminal'         ) end, create_description(kb_fg__awesome, '',           'terminal')),
+  awful.key({ M, C    }, 'Return',      function() run_script('awesome-apps.sh', 'terminal_tmux'    ) end, create_description(kb_fg__awesome, '+ tmux',     'terminal')),
+  awful.key({ M, S    }, 'Return',      function() run_script('awesome-apps.sh', 'terminal_torsocks') end, create_description(kb_fg__awesome, '+ torsocks', 'terminal')),
    
   -- awful.key({      }, 'Caps_Lock',   -- set for keyboardlayout
   -- awful.key({ M    }, 'Tab',         function() end, create_description(kb_fg__awesome, '', '--')),
@@ -863,20 +863,20 @@ globalkeys = gears.table.join(
   awful.key({ M       }, 'q',           function() run_script('awesome-widgets.sh', 'clipboard', 'start') end, create_description(kb_fg__awesome, 'start', 'clipboard')),
   awful.key({ M, S    }, 'q',           function() run_script('awesome-widgets.sh', 'clipboard', 'stop') end, create_description(kb_fg__awesome, 'stop', 'clipboard')),
   awful.key({ M       }, 'w',           function() run_script('screenshot.py') end, create_description(kb_fg__awesome, '', 'screenshot')),
-  awful.key({ M       }, 'e',           function() run_script('awesome-menu.sh', 'dbgate') end, create_description(kb_fg__awesome, '', 'dbgate')),
-  awful.key({ M       }, 'r',           function() run_script('awesome-menu.sh', 'visual-studio-code') end, create_description(kb_fg__awesome, '', 'visual-studio-code')),
+  awful.key({ M       }, 'e',           function() run_script('awesome-apps.sh', 'dbgate') end, create_description(kb_fg__awesome, '', 'dbgate')),
+  awful.key({ M       }, 'r',           function() run_script('awesome-apps.sh', 'visual-studio-code') end, create_description(kb_fg__awesome, '', 'visual-studio-code')),
   awful.key({ M       }, 't',           function() run_script('awesome-widgets.sh', 'memory_cpu', 'intensives') end, create_description(kb_fg__awesome, '', 'memory/cpu intensives')),
   awful.key({ M       }, 'y',           function() run_script('browser.sh', 'firefox') end, create_description(kb_fg__awesome, 'firefox', 'browser')),
   awful.key({ M, S    }, 'y',           function() run_script('browser.sh', 'chromium') end, create_description(kb_fg__awesome, 'chromium', 'browser')),
   awful.key({ M       }, 'u',           function() run_script('awesome-widgets.sh', 'established', 'message') end, create_description(kb_fg__awesome, '', 'established')),
   awful.key({ M       }, 'i',           function() run_script('awesome-widgets.sh', 'ymail') end, create_description(kb_fg__awesome, 'ymail', 'e-mail')),
   awful.key({ M, S    }, 'i',           function() run_script('awesome-widgets.sh', 'gmail') end, create_description(kb_fg__awesome, 'gmail', 'e-mail')),
-  awful.key({ M       }, 'o',           function() run_script('awesome-menu.sh', 'thunar') end, create_description(kb_fg__awesome, 'thunar', 'file manager')),
+  awful.key({ M       }, 'o',           function() run_script('awesome-apps.sh', 'thunar') end, create_description(kb_fg__awesome, 'thunar', 'file manager')),
   awful.key({ M       }, 'p',           function() run_script('launcher.sh', 'rofi') end, create_description(kb_fg__awesome, 'rofi', 'launcher')),
   awful.key({ M, S    }, 'p',           function() run_script('launcher.sh', 'dmenu') end, create_description(kb_fg__awesome, 'dmenu', 'launcher')),
   awful.key({ M, C    }, 'p',           function() mymainmenu:toggle({coords = {x = 20, y = 26}}) end, create_description(kb_fg__awesome, 'main menu', 'launcher')),
   awful.key({ M, A    }, 'p',           function() awful.screen.focused().mypromptbox:run() end, create_description(kb_fg__awesome, 'prompt box', 'launcher')),
-  awful.key({ M       }, 'a',           function() run_script('awesome-menu.sh', 'goldendict') end, create_description(kb_fg__awesome, '', 'goldendict')),
+  awful.key({ M       }, 'a',           function() run_script('awesome-apps.sh', 'goldendict') end, create_description(kb_fg__awesome, '', 'goldendict')),
   awful.key({ M       }, 's',           function() run_script('awesome-widgets.sh', 'firewall', 'turn_on') end, create_description(kb_fg__awesome, 'turn on', 'firewall')),
   awful.key({ M, S    }, 's',           function() run_script('awesome-widgets.sh', 'firewall', 'turn_off') end, create_description(kb_fg__awesome, 'turn off', 'firewall')),
   awful.key({ M       }, 'd',           function() run_script('openvpn.sh') end, create_description(kb_fg__awesome, '', 'openvpn')),
